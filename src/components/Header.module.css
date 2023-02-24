@@ -1,0 +1,12 @@
+.headerWrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logoImage {
+    width: 300px;
+}
+
+.logoArea {
+    margin: 40px 0 0 40px;
+}

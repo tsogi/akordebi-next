@@ -1,0 +1,8 @@
+.footerWrapper {
+    padding: 120px 0;
+}
+
+.topGeWrapper{
+    display: flex;
+    justify-content: center;
+}

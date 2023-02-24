@@ -1,0 +1,48 @@
+
+
+.songsList {
+    margin: 0 auto;
+    margin-top: 80px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.authors {
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 15px;
+}
+
+.author {
+    margin: 0 10px;
+}
+
+.songDetails {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    position: relative;
+}
+
+
+.songLink {
+    text-decoration: none;
+    color: black;
+}
+
+.searchComponent {
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.songName {
+    color: #5286ed;
+    font-size: 1.3rem;
+    padding: 15px;
+}

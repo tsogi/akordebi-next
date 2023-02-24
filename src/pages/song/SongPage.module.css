@@ -1,0 +1,179 @@
+
+.character {
+    line-height: 2;
+}
+
+
+.textBit {
+    position: relative;
+}
+
+/* .chordLabel {
+    position: absolute;
+    top: -17px;
+    cursor: pointer;
+    color: blue;
+    font-weight: bold;
+    font-size: 0.9rem;
+} */
+
+.chordImage{
+    position: absolute;
+    z-index: 10;
+    bottom: 35px;
+    display: none;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    box-shadow: 0px 0px 1px black;
+    padding: 10px;
+}
+
+.chordImage img {
+    width: 100px;
+}
+
+.songBody {
+    margin-top: 86px;
+    font-size: 16px;
+}
+
+.songName {
+    font-size: 1.6rem;
+    margin-bottom: 5px;
+}
+
+.songPage {
+
+}
+
+.ban {
+    margin-right: 5px;
+}
+
+.coupletWrapper {
+    margin-bottom: 53px;
+}
+
+.chorusWrapper {
+    margin-bottom: 40px;
+}
+
+.imageLabel {
+    font-size: 2rem;
+}
+
+.songAuthors {
+    display: flex;
+    margin-top: 10px;
+}
+
+.songAuthor {
+    margin-right: 15px;
+    font-size: 1.3rem;
+}
+
+.settings {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.font.settings {
+    margin-right: 50px;
+}
+
+.operator {
+    border-style: solid;
+    border-width: 1px;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.fontOperator.plus {
+
+}
+
+.fontOperator.minus {
+
+}
+
+.majorSettings {
+    margin: 40px 0px 56px 0px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.label {
+    margin-right: 20px;
+}
+
+.size {
+    margin: 0 10px;
+}
+
+.sign {
+    margin: 0 3px;
+}
+
+.rightHandLabel {
+    margin-right: 10px;
+}
+
+.closeChordBtn {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.fbComments {
+    margin-top: 111px;
+    width: 100%;
+}
+
+.videoTutorial {
+    height: 500px;
+    margin-top: 180px;
+}
+
+.songVotesWrapper {
+    margin-top: 111px;
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.lineWrapper.rightHand {
+    margin-bottom: 35px;
+    display: flex;
+    font-style: italic;
+}
+
+.lineWrapper {
+    display: flex;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+.lineWrapper.break {
+    height: 30px; 
+}
+
+.chordLabel, .addChord {
+    position: absolute;
+    top: -8px;
+    cursor: pointer;
+    color: #5580ec;
+    font-weight: bold;
+    font-size: 0.9rem;
+    z-index: 10;
+}

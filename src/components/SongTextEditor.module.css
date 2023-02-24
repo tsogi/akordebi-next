@@ -1,0 +1,65 @@
+.bitWrapper {
+    display: flex;
+    position: relative;
+    margin: 0 9px;
+}
+
+/* .lineWrapper {
+    display: flex;
+    margin: 20px 0px;
+    align-items: center;
+} */
+
+.lineActionBtns {
+    margin-left: 35px;
+}
+
+.editInputWrapper {
+    display: flex;
+}
+
+.editInput {
+    width: 600px;
+    margin-right: 40px;
+}
+
+.breakDiv {
+    width: 200px;
+}
+
+.charLabel {
+    line-height: 2.5;
+}
+
+.chordLabel, .addChord {
+    position: absolute;
+    top: -8px;
+    cursor: pointer;
+    color: #5580ec;
+    font-weight: bold;
+    font-size: 0.9rem;
+    z-index: 10;
+}
+
+.addChord {
+    left: -2px;
+}
+
+.poemActionBtns {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.poemActionBtn {
+    margin-right: 20px;
+}
+
+.dragIcon {
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.rightHand {
+    font-style: italic;
+}
