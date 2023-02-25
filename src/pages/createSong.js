@@ -1,17 +1,17 @@
 import * as React from 'react';
-import "./CreateSongPage.css";
+import styles from  "./createSong.module.css";
 import { Alert } from '@mui/material';
 import Slide from '@mui/material/Slide';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import Header from "../components/Header";
-import AuthorsEditor from './AuthorsEditor';
-import DB from "../services/db";
-import SongTextEditor from "./SongTextEditor";
-import Footer from '../components/Footer';
+import Header from "@/components/Header";
+import AuthorsEditor from '@/components/AuthorsEditor';
+import DB from "@/services/data";
+import SongTextEditor from "@/components/SongTextEditor";
+import Footer from '@/components/Footer';
 import Snackbar from '@mui/material/Snackbar';
 
-export default function CreateSongPage(){
+export default function CreateSong(){
     const [songName, setSongName] = React.useState("");
     const [authors, setAuthors] = React.useState([]);
     const [songText, setSongText] = React.useState([]);
@@ -38,28 +38,32 @@ export default function CreateSongPage(){
     }
     
     async function handleSaveSongClick(){
-        setSaving(true);
-        let rawText = getRawText(songText);
+        try{
+            setSaving(true);
+            let rawText = getRawText(songText);
 
-        let data = { name: songName, authors, songText, rawText, videoLesson }
+            let data = { name: songName, authors, songText, rawText, videoLesson }
 
-        let error = validationError(data);
-        if(error) {
+            let error = validationError(data);
+            if(error) {
+                setSaving(false);
+                updateSnackData("warning", error, true);
+
+                return;
+            }
+
+            let response = await DB.storeSong(data)
+
+            if(response.error === "") {
+                updateSnackData("success", response.msg, true);
+            } else {
+                setSaving(false);
+                updateSnackData("error", response.error, true);
+            }
+        } catch(error){
             setSaving(false);
-            updateSnackData("warning", error, true);
-
-            return;
+            alert(error);
         }
-
-        let response = await DB.storeSong(data)
-
-        if(response.error === "") {
-            updateSnackData("success", response.msg, true);
-        } else {
-            setSaving(false);
-            updateSnackData("error", response.error, true);
-        }
-
     }
 
     function updateSnackData(severity, msg, open){
@@ -106,18 +110,18 @@ export default function CreateSongPage(){
 
     return <>
         <Header />
-        <div className="createSongPage page_container">
-            <div className='inputName'>
+        <div className={`${styles.createSongPage} page_container`}>
+            <div className={ styles.inputName }>
                 <TextField value={songName} onChange={handleSongNameChange} style={{ width: "400px" }} label="ჩაწერეთ სიმღერის სახელი" id="fullWidth" />
             </div>
-            <div className='inputAuthors'>
+            <div className={ styles.inputAuthors }>
                 <AuthorsEditor onAuthorsChange={setAuthors} />
             </div>
-            <div className='inputVideo'>
+            <div className={ styles.inputVideo }>
                 <TextField value={videoLesson} onChange={handleVideoLessonChange} style={{ width: "600px" }} label="ვიდეო გაკვეთილის ლინკი (არასავალდებულო)" id="fullWidth" />
             </div>
             <SongTextEditor onSongTextChange={setSongText} />
-            <div className='saveSongBtn capital'>
+            <div className={ `${styles.saveSongBtn} capital` }>
                 <Button disabled={saving ? true : false} style={{ fontSize: "1.3rem" }} size="large" onClick={handleSaveSongClick} variant="contained">სიმღერის შენახვა</Button>
             </div>
             <Snackbar

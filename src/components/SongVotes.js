@@ -9,7 +9,6 @@ const SongVotes = (props) => {
   const [votedDown, setVotedDown] = useState(false);
 
   useEffect(() => {
-    console.log(props.songId)
     refreshVotePlugin();
   }, [props.songId]);
 

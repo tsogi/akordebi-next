@@ -2,14 +2,9 @@ import Head from 'next/head'
 import Header from '@/components/Header'
 import ChordsList from '@/components/ChordsList'
 import Footer from '@/components/Footer'
-import { useEffect } from 'react'
 import db from '@/services/db'
 
 export default function Home({ initialSongs }) {
-  useEffect(() => {
-    console.log(initialSongs);
-  }, [initialSongs]) 
-
   return (
     <>
       <Head>

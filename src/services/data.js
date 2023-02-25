@@ -1,18 +1,6 @@
 class Db_client{
-    async getSong(songId){
-        let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/getSong/${songId}`);
-
-        return response.json();
-    }
-
-    async getAllSongs(){
-        let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/getAllSongs`);
-
-        return response.json();
-    }
-
     async searchSongs(searchText){
-        const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/searchSongs`, {
+        const response = await fetch(`api/searchSongs`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -26,7 +14,7 @@ class Db_client{
     }
 
     async storeSong(data){
-        let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/storeSong`, {
+        let response = await fetch(`api/storeSong`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'

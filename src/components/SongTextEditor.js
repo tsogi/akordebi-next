@@ -142,7 +142,7 @@ return (
                         ) : (
                             <>
                                 <div className={styles.charLabel}>{char}</div>
-                                <div className={`${styles.chordLabel} ${addChord}`}><AddIcon style={{ fontSize: "10px" }} /></div>
+                                <div className={`${styles.chordLabel} ${styles.addChord}`}><AddIcon style={{ fontSize: "10px" }} /></div>
                             </>
                         )}
                     </div>

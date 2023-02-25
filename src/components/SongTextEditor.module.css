@@ -4,11 +4,11 @@
     margin: 0 9px;
 }
 
-/* .lineWrapper {
+.lineWrapper {
     display: flex;
     margin: 20px 0px;
     align-items: center;
-} */
+}
 
 .lineActionBtns {
     margin-left: 35px;
