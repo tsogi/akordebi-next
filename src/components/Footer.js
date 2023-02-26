@@ -15,9 +15,9 @@ export default function Footer(){
         }
     }, []);
 
-    return <div className={styles.footerWrapper}>
+    return <footer className={styles.footerWrapper}>
       <div className={styles.topGeWrapper}>
         <div id="top-ge-counter-container" data-site-id="116500"></div>
       </div>
-    </div>
+    </footer>
 }

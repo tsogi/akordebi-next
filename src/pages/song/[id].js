@@ -219,8 +219,13 @@ function chorusLine(line){
 }
 
 export async function getStaticPaths() {
+    let songs = await db.getAllSongs();
+    let paths = songs.map(song => {
+        return { params: { id: "" + song.id } }
+    })
+
     return {
-      paths: [],
+      paths: paths,
       fallback: "blocking", // can also be true or 'blocking'
     }
 }
