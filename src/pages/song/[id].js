@@ -94,21 +94,21 @@ export default function SongPage({ song }){
             </div>
             <div className={styles.songBody} style={{fontSize}}>
                 {
-                    song?.body ? song.body.map(line => {
+                    song?.body ? song.body.map((line, index) => {
                         if(line.type == "rightHand") {
-                            return rightHandLine(line.value);
+                            return rightHandLine(line.value, index);
                         }
 
                         if(line.type == "text") {
-                            return coupletLine(line);
+                            return coupletLine(line, index);
                         }
                         
                         if(line.type == "chorus") {
-                            return chorusLine(line);
+                            return chorusLine(line, index);
                         }
 
                         if(line.type == "break") {
-                            return breakLine();
+                            return breakLine(index);
                         }
                     })
                     :
@@ -137,8 +137,8 @@ export default function SongPage({ song }){
     </>
 }
 
-function rightHandLine(content){
-    return <div className={`${styles.lineWrapper} ${styles.rightHand}`}>
+function rightHandLine(content, index){
+    return <div key={index} className={`${styles.lineWrapper} ${styles.rightHand}`}>
         <div className={styles.rightHandLabel}>მარჯვენა ხელი: </div>
         {
             Array.from(content).map((char) => char === " " ? "\u00A0" : char)
@@ -146,11 +146,11 @@ function rightHandLine(content){
     </div>
 }
 
-function renderLine(line){
-    return <div className={`lineWrapper ${line.type}`}>
+function renderLine(line, index){
+    return <div key={index} className={`lineWrapper ${line.type}`}>
     {
         line.value.split("").map((character, index) => {
-            return <div className={styles.textBit}>
+            return <div key={index} className={styles.textBit}>
                 <div className={styles.character}>{character == " " ? '\u00A0' : character}</div>
                 {
                     line.chords[index] ?
@@ -206,16 +206,16 @@ function handleChordClick(event){
     }
 }
 
-function coupletLine(line){
-    return renderLine(line)
+function coupletLine(line, index){
+    return renderLine(line, index)
 }
 
-function breakLine(){
-    return <div className={`lineWrapper break`}></div>
+function breakLine(index){
+    return <div key={index} className={`lineWrapper break`}></div>
 }
 
-function chorusLine(line){
-    return renderLine(line)
+function chorusLine(line, index){
+    return renderLine(line, index)
 }
 
 export async function getStaticPaths() {

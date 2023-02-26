@@ -5,7 +5,7 @@ export default function Header(){
     return <header className={styles.headerWrapper}>
         <div className={styles.logoArea}>
             <a href="/">
-                <Image src={"/akordebi.png"} width={300} height={124} />
+                <Image alt="akordebiLogo" src={"/akordebi.png"} width={300} height={124} />
             </a>
         </div>
         <div></div>

@@ -32,7 +32,7 @@ export default function ChordsList({ initialSongs }){
             </div>
             {
                 songs.map(song => {
-                    return <SongCard song={song} />
+                    return <SongCard key={song.id} song={song} />
                 })
             }
         </div>
