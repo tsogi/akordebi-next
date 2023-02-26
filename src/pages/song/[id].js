@@ -1,6 +1,7 @@
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { useRouter } from 'next/router'
 import { useEffect, useState } from "react";
+import Head from 'next/head';
 import FbComments from "@/components/FbComments";
 import Header from "@/components/Header";
 import EmbedVideo from "@/components/EmbedVideo";
@@ -58,6 +59,12 @@ export default function SongPage({ song }){
     }
 
     return <>
+        <Head>
+            <title>{`${song.name} - გიტარის აკორდები`}</title>
+            <meta name="description" content={ `${song.searchWords}` } />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link rel="icon" href="/guitar.ico" />
+        </Head>
         <Header />    
         <div className={`${styles.songPage} page_container`}>
             <div className={styles.majorSettings}>

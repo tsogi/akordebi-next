@@ -16,7 +16,7 @@ export default function ChordsList({ initialSongs }){
         <div className={styles.searchComponent}>
             <SearchSongs onSearch={setSongs} />
         </div>
-        <div className={styles.songsList}>
+        <div className={"songsList"}>
             <div className={"songItemWrapper"}>
                 <a className={styles.songLink} href={`/createSong`}>
                     <Paper elevation={2} style={{ height: "100%" }}>
