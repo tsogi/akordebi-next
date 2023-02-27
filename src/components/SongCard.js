@@ -44,7 +44,7 @@ export default function SongCard({ song }){
                     song.videoLesson ?
                     <div className={styles.videoLessonIcon}>
                         <Tooltip style={{ color: "#15a894" }} placement="top" title="ვიდეო გაკვეთილი">
-                            <OndemandVideoIcon />
+                            <OndemandVideoIcon style={{ color: "#9ebeff" }} />
                         </Tooltip>
                     </div>
                     :

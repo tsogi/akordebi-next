@@ -1,5 +1,12 @@
 .videoLessonIcon {
     margin-right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.confirmedIcon {
+    display: flex;
+    align-items: center;
 }
 
 .songMetaRight {

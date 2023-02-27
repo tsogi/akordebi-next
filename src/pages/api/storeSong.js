@@ -13,7 +13,6 @@ export default async function handler(req, res) {
 
             if(result === true) {
                 response2.msg = "სიმღერა წარმატებითა გამოქვეყნდა საიტზე";
-                await res.revalidate('/')
             } else {
                 response2.error = "სიმღერის შენახვისას დაფიქსირდა შეცდომა. დაუკავშირდით ადმინისტრაციას";
             }
