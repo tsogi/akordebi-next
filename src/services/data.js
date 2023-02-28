@@ -24,6 +24,18 @@ class Db_client{
         
         return response.json()
     }
+
+    async updateSong(data){
+        let response = await fetch(`/api/updateSong`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        
+        return response.json()
+    }
 }
 
 export default new Db_client();

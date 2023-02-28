@@ -1,5 +1,4 @@
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import { useRouter } from 'next/router'
 import { useEffect, useState } from "react";
 import Head from 'next/head';
 import FbComments from "@/components/FbComments";
@@ -12,8 +11,6 @@ import styles from "./SongPage.module.css";
 let intervalId;
 
 export default function SongPage({ song }){
-    const router = useRouter()
-
     const[fontSize, setFontSize] = useState(16);
     const[scrollSpeed, setScrollSpeed] = useState(0);
 

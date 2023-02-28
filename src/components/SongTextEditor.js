@@ -8,8 +8,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import SwapVertIcon from '@mui/icons-material/SwapVert';
 import styles from "./SongTextEditor.module.css";
 
-const PoemEditor = ({onSongTextChange}) => {
-  const [lines, setLines] = useState([]);
+const PoemEditor = ({onSongTextChange, _lines = []}) => {
+  const [lines, setLines] = useState(_lines);
 
   useEffect(() => {
     onSongTextChange(lines);

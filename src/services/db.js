@@ -90,6 +90,25 @@ class Db{
         return true;
     }
 
+    async updateSong(data){
+        let authorNames = data.authors.map(author => author.name);
+
+        let authors = await this.storeAuthors(authorNames);
+
+        await this.deleteSongAuthors(data.id);
+
+        let song = { name: data.name, body: data.songText, text: data.rawText, videoLesson: data.videoLesson, searchWords: data.searchWords }
+        await this.updateSongToDb(song, data.id);
+
+        await this.storeSongAuthors(authors.map(el => el.id), data.id);
+
+        return true;
+    }
+
+    async deleteSongAuthors(songId){
+        await this.pool.execute('delete from authors_songs where song_id', [songId]);
+    }
+
     async storeSongAuthors(authorIds, songId) {
         if(!authorIds.length) {
             return true;
@@ -139,6 +158,18 @@ class Db{
         let [results] = await this.pool.execute(query, [song.name, song.body, song.text, song.videoLesson, song.searchWords])
 
         return results.insertId
+    }
+
+    async updateSongToDb(song, id){
+        let query = `
+            update songs 
+            set name = ?, body = ?, text = ?, videoLesson = ?, searchWords = ?
+            where id = ?
+        `;
+
+        await this.pool.execute(query, [song.name, song.body, song.text, song.videoLesson, song.searchWords, id])
+
+        return true;
     }
 
     async storeAuthors(authors){

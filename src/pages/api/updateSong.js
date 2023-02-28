@@ -1,6 +1,7 @@
 import db from "@/services/db";
 
 export default async function handler(req, res) {
+    // Todo updateSong.js and storeSong.js violate DRY principle, fix it
     if (req.method === 'POST') {
         let response2 = { error: "", msg: "" }
 
@@ -8,16 +9,16 @@ export default async function handler(req, res) {
             // Todo handle case when user saves song with same name or if user clicks "Save song button twice"
             let data = {...req.body};
             data.searchWords = generateSearchText(data);
-            let result = await db.storeSong(data);
+            let result = await db.updateSong(data);
 
             if(result === true) {
-                response2.msg = "სიმღერა წარმატებითა გამოქვეყნდა საიტზე";
+                response2.msg = "სიმღერა წარმატებითა შეიცვალა";
             } else {
-                response2.error = "სიმღერის შენახვისას დაფიქსირდა შეცდომა. დაუკავშირდით ადმინისტრაციას";
+                response2.error = "სიმღერის შეცვლისას დაფიქსირდა შეცდომა. დაუკავშირდით ადმინისტრაციას";
             }
         } catch(err) {
             console.log(err)
-            response2.error = "სიმღერის შენახვისას დაფიქსირდა შეცდომა. დაუკავშირდით ადმინისტრაციას";
+            response2.error = "სიმღერის შეცვლისას დაფიქსირდა შეცდომა. დაუკავშირდით ადმინისტრაციას";
         }
 
         res.json(response2);

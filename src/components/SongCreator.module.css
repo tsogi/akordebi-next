@@ -1,0 +1,9 @@
+.inputAuthors {
+    margin: 40px 0px;
+}
+
+.saveSongBtn {
+    margin-top: 100px;
+    display: flex;
+    justify-content: right;
+}

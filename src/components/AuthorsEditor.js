@@ -5,8 +5,8 @@ import { Tooltip } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import styles from "./AuthorsEditor.module.css";
 
-const AuthorsEditor = ({ onAuthorsChange }) => {
-  const [authors, setAuthors] = useState([{ id: 1, name: '' }]);
+const AuthorsEditor = ({ onAuthorsChange, _authors = [{ id: 1, name: '' }] }) => {
+  const [authors, setAuthors] = useState(_authors);
 
   const addInput = () => {
     const newInput = { id: authors.length + 1, name: '' };
