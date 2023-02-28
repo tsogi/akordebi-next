@@ -122,7 +122,9 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
             <div className={ styles.inputVideo }>
                 <TextField value={videoLesson} onChange={handleVideoLessonChange} style={{ width: "600px" }} label="ვიდეო გაკვეთილის ლინკი (არასავალდებულო)" id="fullWidth" />
             </div>
-            <SongTextEditor _lines={songText} onSongTextChange={setSongText} />
+            <div className={styles.textEditor}>
+                <SongTextEditor _lines={songText} onSongTextChange={setSongText} />
+            </div>
             <div className={ `${styles.saveSongBtn} capital` }>
                 <Button disabled={saving ? true : false} style={{ fontSize: "1.3rem" }} size="large" onClick={handleSaveSongClick} variant="contained">სიმღერის შენახვა</Button>
             </div>

@@ -7,3 +7,7 @@
     display: flex;
     justify-content: right;
 }
+
+.textEditor {
+    margin-top: 88px;
+}
