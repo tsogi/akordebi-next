@@ -137,9 +137,13 @@ export default function SongPage({ song }){
 function rightHandLine(content, index){
     return <div key={index} className={`${styles.lineWrapper} ${styles.rightHand}`}>
         <div className={styles.rightHandLabel}>მარჯვენა ხელი: </div>
-        {
-            Array.from(content).map((char) => char === " " ? "\u00A0" : char)
-        }
+        <div className={styles.rightHandText}>
+            {
+                Array.from(content).map((char) => char === " " ? " \u00A0 " : char).reduce((previous, current) => {
+                    return previous += current;
+                }, "")
+            }
+        </div>
     </div>
 }
 
