@@ -106,7 +106,7 @@ class Db{
     }
 
     async deleteSongAuthors(songId){
-        await this.pool.execute('delete from authors_songs where song_id', [songId]);
+        await this.pool.execute('delete from authors_songs where song_id = ?', [songId]);
     }
 
     async storeSongAuthors(authorIds, songId) {

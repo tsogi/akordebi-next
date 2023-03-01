@@ -45,6 +45,10 @@
     padding: 15px;
 }
 
+.author {
+    margin: 0 10px;
+}
+
 .songMeta {
     display: flex;
     align-items: center;

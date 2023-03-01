@@ -22,7 +22,6 @@ export default function ModifySong({ song }){
 export async function getServerSideProps({ params }) {
     let { id } = params;
     let song = await db.getSong(id);
-    console.log(song);
   
     return {
       props: {
