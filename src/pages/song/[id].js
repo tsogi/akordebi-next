@@ -63,7 +63,7 @@ export default function SongPage({ song }){
             <link rel="icon" href="/guitar.ico" />
         </Head>
         <Header />    
-        <div className={`${styles.songPage} page_container`}>
+        <div className={`${styles.songPage} page_container noselect`}>
             <div className={styles.majorSettings}>
                 <div className={`${styles.font} ${styles.settings}`}>
                     <div className={`${styles.font} ${styles.label}`}>ფონტი</div>

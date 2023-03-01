@@ -45,6 +45,7 @@
 .songName {
     font-size: 1.6rem;
     margin-bottom: 5px;
+    margin-left: 10px;
 }
 
 .songPage {
@@ -70,6 +71,7 @@
 .songAuthors {
     display: flex;
     margin-top: 10px;
+    margin-left: 10px;
 }
 
 .songAuthor {
@@ -156,6 +158,7 @@
     margin-bottom: 35px;
     display: flex;
     font-style: italic;
+    margin-left: 10px;
 }
 
 .lineWrapper {

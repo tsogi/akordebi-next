@@ -222,9 +222,14 @@ code {
 }
 
 .chorusLineWrapper {
-    border-bottom-style: ridge;
-    border-bottom-width: 1px;
-    border-bottom-color: #b3e6dd;
+    border-left: 2px solid #a7e485;
+}
+
+.lineWrapper.chorus {
+  margin-left: 0px;
+  border-left-style: solid;
+  border-left-width: 2px;
+  border-left-color: #a7e485;
 }
 
 .lineWrapper.rightHand {
@@ -235,7 +240,7 @@ code {
 
 .lineWrapper {
     display: flex;
-    margin-top: 25px;
+    padding: 10px 0 11px 11px;
     flex-wrap: wrap;
 }
 
