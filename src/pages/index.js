@@ -22,7 +22,7 @@ export default function Home({ initialSongs }) {
   )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     let initialSongs = await db.getAllSongs();
   
     return {

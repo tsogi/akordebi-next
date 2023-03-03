@@ -127,7 +127,7 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
                 <AuthorsEditor _authors={authors} onAuthorsChange={setAuthors} />
             </div>
             <div className={ styles.inputVideo }>
-                <TextField value={videoLesson} onChange={handleVideoLessonChange} style={{ width: "600px" }} label="ვიდეო გაკვეთილის ლინკი (არასავალდებულო)" id="fullWidth" />
+                <TextField value={videoLesson} onChange={handleVideoLessonChange} style={{ width: "600px" }} placeholder={"youtube-ის ლინკი. მაგ. youtube.com/watch?v=O08BvtiPka8"} label="ვიდეო გაკვეთილის ლინკი (არასავალდებულო)" id="fullWidth" />
             </div>
             <div className={ styles.uploader }>
                 <TextField value={uploader} onChange={handleUploaderChange} style={{ width: "600px" }} placeholder={"გამოჩნდება სიმღერის ტექსტის ქვემოთ"} label="ამტვირთის სახელი/გვარი (არასავალდებულო)" id="fullWidth" />
@@ -142,7 +142,7 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
                 anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                 open={snackOpen}
                 onClose={handleSnackClose}
-                autoHideDuration={4000}
+                // autoHideDuration={4000}
                 TransitionComponent={Slide}
                 message="I love snacks"
                 key={"top" + "right"} 
