@@ -13,7 +13,7 @@ export default function ModifySong({ song }){
         </Head>
         <Header />
         <div className={`${styles.createSongPage} page_container`}>
-            <SongCreator _songId={song.id} _songName={song.name} _songText={song.body} _videoLesson={song.videoLesson} _authors={song.authors.map((author, index) => { return { id: index, name: author } })} />
+            <SongCreator _songId={song.id} _songName={song.name} _songText={song.body} _videoLesson={song.videoLesson} _uploader={song.uploader} _authors={song.authors.map((author, index) => { return { id: index, name: author } })} />
         </div>
         <Footer />
     </>

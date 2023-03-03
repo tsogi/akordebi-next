@@ -153,10 +153,15 @@
 }
 
 .songVotesWrapper {
-    margin-top: 111px;
+    margin-top: 20px;
     display: flex;
     align-items: center;
     font-size: 1.2rem;
+}
+
+.uploaderWrapper {
+    font-size: 1.2rem;
+    margin-top: 111px;
 }
 
 .lineWrapper.rightHand {

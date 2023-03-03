@@ -112,6 +112,16 @@ export default function SongPage({ song }){
                     null
                 } 
             </div>
+            {
+                song.uploader ?
+                <div className={styles.uploaderWrapper}>
+                    <div>
+                        ატვირთა: {song.uploader}
+                    </div>
+                </div>
+                :
+                null
+            }
             <div className={styles.songVotesWrapper}>
                 <div>
                     შეაფასეთ აკორდების სისწორე: 
@@ -219,19 +229,19 @@ function chorusLine(line, index){
     return renderLine(line, index)
 }
 
-export async function getStaticPaths() {
-    let songs = await db.getAllSongs();
-    let paths = songs.map(song => {
-        return { params: { id: "" + song.id } }
-    })
+// export async function getStaticPaths() {
+//     let songs = await db.getAllSongs();
+//     let paths = songs.map(song => {
+//         return { params: { id: "" + song.id } }
+//     })
 
-    return {
-      paths: paths,
-      fallback: "blocking", // can also be true or 'blocking'
-    }
-}
+//     return {
+//       paths: paths,
+//       fallback: "blocking", // can also be true or 'blocking'
+//     }
+// }
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
     let { id } = params;
     let song = await db.getSong(id);
   

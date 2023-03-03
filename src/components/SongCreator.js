@@ -9,11 +9,12 @@ import DB from "@/services/data";
 import SongTextEditor from "@/components/SongTextEditor";
 import Snackbar from '@mui/material/Snackbar';
 
-export default function SongCreator({ _songName = "", _authors = [], _songText = [], _videoLesson = "", _songId = null }){
+export default function SongCreator({ _songName = "", _authors = [], _songText = [], _videoLesson = "", _songId = null, _uploader = "" }){
     const [songName, setSongName] = React.useState(_songName);
     const [authors, setAuthors] = React.useState(_authors);
     const [songText, setSongText] = React.useState(_songText);
     const [videoLesson, setVideoLesson] = React.useState(_videoLesson);
+    const [uploader, setUploader] = React.useState(_uploader);
     const [saving, setSaving] = React.useState(false);
     const [snackOpen, setSnackOpen] = React.useState(false);
     const [snackSeverity, setSnackSeverity] = React.useState();
@@ -31,6 +32,12 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
         setVideoLesson(video);
     }
 
+    function handleUploaderChange(event) {
+        let uploader = event.target.value;
+
+        setUploader(uploader);
+    }
+
     function handleSnackClose(){
         setSnackOpen(false);
     }
@@ -40,7 +47,7 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
             setSaving(true);
             let rawText = getRawText(songText);
 
-            let data = { name: songName, authors, songText, rawText, videoLesson, id: _songId }
+            let data = { uploader, name: songName, authors, songText, rawText, videoLesson, id: _songId }
 
             let error = validationError(data);
             if(error) {
@@ -121,6 +128,9 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
             </div>
             <div className={ styles.inputVideo }>
                 <TextField value={videoLesson} onChange={handleVideoLessonChange} style={{ width: "600px" }} label="ვიდეო გაკვეთილის ლინკი (არასავალდებულო)" id="fullWidth" />
+            </div>
+            <div className={ styles.uploader }>
+                <TextField value={uploader} onChange={handleUploaderChange} style={{ width: "600px" }} placeholder={"გამოჩნდება სიმღერის ტექსტის ქვემოთ"} label="ამტვირთის სახელი/გვარი (არასავალდებულო)" id="fullWidth" />
             </div>
             <div className={styles.textEditor}>
                 <SongTextEditor _lines={songText} onSongTextChange={setSongText} />
