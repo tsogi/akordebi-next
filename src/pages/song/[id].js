@@ -229,19 +229,19 @@ function chorusLine(line, index){
     return renderLine(line, index)
 }
 
-// export async function getStaticPaths() {
-//     let songs = await db.getAllSongs();
-//     let paths = songs.map(song => {
-//         return { params: { id: "" + song.id } }
-//     })
+export async function getStaticPaths() {
+    let songs = await db.getAllSongs();
+    let paths = songs.map(song => {
+        return { params: { id: "" + song.id } }
+    })
 
-//     return {
-//       paths: paths,
-//       fallback: "blocking", // can also be true or 'blocking'
-//     }
-// }
+    return {
+      paths: paths,
+      fallback: "blocking", // can also be true or 'blocking'
+    }
+}
 
-export async function getServerSideProps({ params }) {
+export async function getStaticProps({ params }) {
     let { id } = params;
     let song = await db.getSong(id);
   

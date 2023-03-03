@@ -19,7 +19,7 @@ export default function ModifySong({ song }){
     </>
 }
 
-export async function getServerSideProps({ params }) {
+export async function getStaticProps({ params }) {
     let { id } = params;
     let song = await db.getSong(id);
   
