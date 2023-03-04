@@ -112,21 +112,23 @@ export default function SongPage({ song }){
                     null
                 } 
             </div>
-            {
-                song.uploader ?
-                <div className={styles.uploaderWrapper}>
-                    <div>
-                        ატვირთა: {song.uploader}
+            <div className={styles.postSongArea}>
+                {
+                    song.uploader ?
+                    <div className={styles.uploaderWrapper}>
+                        <div>
+                            ატვირთა: {song.uploader}
+                        </div>
                     </div>
+                    :
+                    null
+                }
+                <div className={styles.songVotesWrapper}>
+                    <div>
+                        შეაფასეთ აკორდების სისწორე: 
+                    </div>
+                    <SongVotes songId={song.id} />
                 </div>
-                :
-                null
-            }
-            <div className={styles.songVotesWrapper}>
-                <div>
-                    შეაფასეთ აკორდების სისწორე: 
-                </div>
-                <SongVotes songId={song.id} />
             </div>
             {
                 song?.videoLesson ?

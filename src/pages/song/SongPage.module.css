@@ -161,7 +161,10 @@
 
 .uploaderWrapper {
     font-size: 1.2rem;
-    margin-top: 111px;
+}
+
+.postSongArea {
+    margin-top: 110px;
 }
 
 .lineWrapper.rightHand {
