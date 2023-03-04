@@ -219,6 +219,7 @@ code {
 
 .textLineWrapper, .chorusLineWrapper {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .chorusLineWrapper {

@@ -156,7 +156,9 @@ return (
                 line.type == "rightHand" ?
                 <div className={styles.rightHand}>
                   {
-                    Array.from(line.value).map((char) => char === " " ? "\u00A0" : char)
+                    Array.from(line.value).map((char) => char === " " ? " \u00A0 " : char).reduce((previous, current) => {
+                        return previous += current;
+                    }, "")
                   }
                 </div>
                 :
@@ -201,7 +203,6 @@ return (
             </div>
             <div className={styles.poemActionBtn}>
                 <Button
-                    className={styles.poemActionBtn}
                     variant="outlined"
                     color="primary"
                     startIcon={<AddIcon />}
@@ -212,7 +213,6 @@ return (
             </div>
             <div className={styles.poemActionBtn}>
                 <Button
-                    className={styles.poemActionBtn}
                     variant="outlined"
                     color="primary"
                     startIcon={<AddIcon />}
@@ -223,7 +223,6 @@ return (
             </div>
             <div className={styles.poemActionBtn}>
                 <Button
-                    className={styles.poemActionBtn}
                     variant="outlined"
                     color="primary"
                     startIcon={<AddIcon />}

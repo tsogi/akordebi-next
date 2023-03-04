@@ -12,6 +12,7 @@
 
 .lineActionBtns {
     margin-left: 35px;
+    display: flex;
 }
 
 .editInputWrapper {
@@ -19,7 +20,7 @@
 }
 
 .editInput {
-    width: 600px;
+    width: 80%;
     margin-right: 40px;
 }
 
@@ -49,10 +50,11 @@
     margin-top: 40px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .poemActionBtn {
-    margin-right: 20px;
+    margin: 2px 2px;
 }
 
 .dragIcon {

@@ -121,16 +121,16 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
 
     return <>
             <div className={ styles.inputName }>
-                <TextField value={songName} onChange={handleSongNameChange} style={{ width: "400px" }} label="ჩაწერეთ სიმღერის სახელი" id="fullWidth" />
+                <TextField value={songName} onChange={handleSongNameChange} style={{ width: "100%" }} label="ჩაწერეთ სიმღერის სახელი" id="fullWidth" />
             </div>
             <div className={ styles.inputAuthors }>
                 <AuthorsEditor _authors={authors} onAuthorsChange={setAuthors} />
             </div>
             <div className={ styles.inputVideo }>
-                <TextField value={videoLesson} onChange={handleVideoLessonChange} style={{ width: "600px" }} placeholder={"youtube-ის ლინკი. მაგ. youtube.com/watch?v=O08BvtiPka8"} label="ვიდეო გაკვეთილის ლინკი (არასავალდებულო)" id="fullWidth" />
+                <TextField value={videoLesson} onChange={handleVideoLessonChange} style={{ width: "100%" }} placeholder={"youtube-ის ლინკი. მაგ. youtube.com/watch?v=O08BvtiPka8"} label="ვიდეო გაკვეთილის ლინკი (არასავალდებულო)" id="fullWidth" />
             </div>
             <div className={ styles.uploader }>
-                <TextField value={uploader} onChange={handleUploaderChange} style={{ width: "600px" }} placeholder={"გამოჩნდება სიმღერის ტექსტის ქვემოთ"} label="ამტვირთის სახელი/გვარი (არასავალდებულო)" id="fullWidth" />
+                <TextField value={uploader} onChange={handleUploaderChange} style={{ width: "100%" }} placeholder={"გამოჩნდება სიმღერის ტექსტის ქვემოთ"} label="ამტვირთის სახელი/გვარი (არასავალდებულო)" id="fullWidth" />
             </div>
             <div className={styles.textEditor}>
                 <SongTextEditor _lines={songText} onSongTextChange={setSongText} />
