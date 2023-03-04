@@ -20,7 +20,7 @@
 .chordImage{
     position: absolute;
     z-index: 10;
-    bottom: 35px;
+    bottom: 42px;
     display: none;
     justify-content: center;
     flex-direction: column;

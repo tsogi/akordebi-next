@@ -215,7 +215,17 @@ function handleChordClick(event){
             item.style.display = "none";
         });
 
+        const mouseX = event.clientX;
+        const screenWidth = window.innerWidth;
+        let center = screenWidth / 2;
+        let side = center < mouseX ? "right" : "left";
+
         event.target.nextSibling.style.display = "flex";
+        if(side == "right") {
+            event.target.nextSibling.style.right = "0";
+        } else {
+            event.target.nextSibling.style.left = "0";
+        }
     }
 }
 
