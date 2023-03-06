@@ -95,7 +95,7 @@ const handleNumberChange = event => {
 
 const handleSave = () => {
   const newLines = [...lines];
-  newLines[selectedLineIndex].chords[selectedCharIndex] = selectedChord;
+  newLines[selectedLineIndex].chords[selectedCharIndex] = selectedChord.trim();
 
   for(let i = 0; i < selectedCharIndex; i++) {
     if(!newLines[selectedLineIndex].chords[i]) {
