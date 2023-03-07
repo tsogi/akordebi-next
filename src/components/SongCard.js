@@ -8,21 +8,21 @@ import { ThumbUp } from '@mui/icons-material';
 import styles from "./SongCard.module.css";
 
 export default function SongCard({ song }){
-    return <div key={song.id} className={"songItemWrapper"}>
+    return <article key={song.id} className={"songItemWrapper"}>
             <a className={styles.songLink} href={`/song/${song.id}`}>
                 <Paper elevation={2} style={{ height: "100%" }}>
                     <CardActionArea style={{ height: "100%" }}>
                 <div className={styles.songItem}>
                     <div className={styles.songDetails}>
-                        <div style={{ padding: "15px" }} className={`${styles.songName} capital`}>{ song.name }</div>
+                        <h2 className={`${styles.songName} capital`}>{ song.name }</h2>
                         <div className={styles.authors}>
                             {
                                 song.authors.map(author => {
-                                    return <div key={author} className={styles.author}>
+                                    return <h4 key={author} className={styles.author}>
                                         {
                                             author
                                         }
-                                    </div>
+                                    </h4>
                                 })
                             }
                         </div>
@@ -62,5 +62,5 @@ export default function SongCard({ song }){
                 }
                 </div>
             </div>
-        </div>
+        </article>
 }

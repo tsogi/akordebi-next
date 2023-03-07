@@ -43,7 +43,6 @@
 }
 
 .songName {
-    font-size: 1.6rem;
     margin-bottom: 5px;
     margin-left: 10px;
 }
@@ -70,13 +69,12 @@
 
 .songAuthors {
     display: flex;
-    margin-top: 10px;
+    margin-top: 25px;
     margin-left: 10px;
 }
 
 .songAuthor {
     margin-right: 15px;
-    font-size: 1.3rem;
 }
 
 .settings {
@@ -107,7 +105,7 @@
 }
 
 .majorSettings {
-    margin: 0px 0px 56px 0px;
+    margin: 0px 0px 70px 0px;
     display: flex;
     flex-wrap: wrap;
 }

@@ -20,8 +20,7 @@
 }
 
 .songName{
-    padding: 15px;
-    font-size: 1.6rem;
+    padding: 0 15px;
 }
 
 .songLink {
@@ -38,11 +37,10 @@
 }
 
 .authors {
-    font-size: 1.1rem;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    padding: 15px;
+    padding: 25px 15px;
 }
 
 .author {

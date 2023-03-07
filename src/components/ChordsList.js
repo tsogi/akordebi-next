@@ -16,8 +16,8 @@ export default function ChordsList({ initialSongs }){
         <div className={styles.searchComponent}>
             <SearchSongs onSearch={setSongs} />
         </div>
-        <div className={"songsList"}>
-            <div className={"songItemWrapper"}>
+        <main className={"songsList"}>
+            <aside className={"songItemWrapper"}>
                 <a className={styles.songLink} href={`/createSong`}>
                     <Paper elevation={2} style={{ height: "100%" }}>
                         <CardActionArea style={{ height: "100%" }}>
@@ -29,12 +29,12 @@ export default function ChordsList({ initialSongs }){
                     </CardActionArea>
                     </Paper>
                 </a>
-            </div>
+            </aside>
             {
                 songs.map(song => {
                     return <SongCard key={song.id} song={song} />
                 })
             }
-        </div>
+        </main>
     </div>
 }

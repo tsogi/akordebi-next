@@ -78,18 +78,18 @@ export default function SongPage({ song }){
                     <div className={`${styles.scroll} ${styles.operator} ${styles.plus}`} onClick={handlePlusScrollClick}>+</div>
                 </div>
             </div>
-            <div className={`${styles.songName} capital`}>{song?.name}</div>
+            <h2 className={`${styles.songName} capital`}>{song?.name}</h2>
             <div className={styles.songAuthors}>
                 {
                     song?.authors ?
                     song.authors.map((author) => {
-                        return <div key={author} className={styles.songAuthor}>{author}</div>
+                        return <h4 key={author} className={styles.songAuthor}>{author}</h4>
                     })
                     :
                     null
                 }
             </div>
-            <div className={styles.songBody} style={{fontSize}}>
+            <main className={styles.songBody} style={{fontSize}}>
                 {
                     song?.body ? song.body.map((line, index) => {
                         if(line.type == "rightHand") {
@@ -111,7 +111,7 @@ export default function SongPage({ song }){
                     :
                     null
                 } 
-            </div>
+            </main>
             <div className={styles.postSongArea}>
                 {
                     song.uploader ?
