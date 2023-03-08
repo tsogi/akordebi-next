@@ -208,6 +208,9 @@ function renderLine(line, index){
 function findChordImage(code){
     // let chordImage = chords.find(chord => chord.name == code)?.image
     code = encodeURIComponent(code);
+    code = code.replace("/", "-");
+    code = code.replace(":", "-");
+
     let chordImage = `/chords/${code}.png`;
     
     return chordImage;
