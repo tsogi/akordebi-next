@@ -241,6 +241,7 @@ return (
           value={selectedChord}
           onChange={handleNumberChange}
           fullWidth
+          placeholder='მაგ. Am, F#, Csus4/Bb'
           margin="normal"
         />
         <Button variant="contained" color="primary" onClick={handleSave}>

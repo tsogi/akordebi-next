@@ -11,12 +11,27 @@ import styles from "./SongPage.module.css";
 let intervalId;
 
 export default function SongPage({ song }){
-    const[fontSize, setFontSize] = useState(16);
-    const[scrollSpeed, setScrollSpeed] = useState(0);
+    const [fontSize, setFontSize] = useState(16);
+    const [scrollSpeed, setScrollSpeed] = useState(0);
 
     useEffect(() => {
         scroll();
     }, [scrollSpeed])
+
+    useEffect(() => {
+        document.addEventListener('click', handleScreenClick);
+
+        return () => {
+            document.removeEventListener('click', handleScreenClick);
+        };
+    }, []);
+
+    function handleScreenClick(event) {
+        let el = event.target;
+        if(!el.classList.contains('chordBtn')) {
+            handleChordClose();
+        }
+    }
 
     function scroll(){
         clearInterval(intervalId);
@@ -168,7 +183,7 @@ function renderLine(line, index){
                 {
                     line.chords[index] ?
                     <>
-                        <div className={styles.chordLabel} onClick={handleChordClick}>{line.chords[index]}</div>
+                        <div className={`${styles.chordLabel} chordBtn`} onClick={handleChordClick}>{line.chords[index]}</div>
                         <div className={`${styles.chordImage} chordImage`}>
                             <div className={styles.closeChordBtn} onClick={handleChordClose}><HighlightOffIcon /></div>
                             {/* <div className={styles.imageLabel">{line.chords[index]}</div> */}
@@ -192,7 +207,8 @@ function renderLine(line, index){
 
 function findChordImage(code){
     // let chordImage = chords.find(chord => chord.name == code)?.image
-    let chordImage = `/chords/${code}.png`
+    code = encodeURIComponent(code);
+    let chordImage = `/chords/${code}.png`;
     
     return chordImage;
 }
