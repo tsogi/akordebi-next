@@ -8,8 +8,28 @@ import { ThumbUp } from '@mui/icons-material';
 import styles from "./SongCard.module.css";
 
 export default function SongCard({ song }){
+    function generateChordUrl(song){
+        let name = song.name.replaceAll(" ", "-");
+
+        let authorsUrl = "";
+        for(let author of song.authors) {
+            authorsUrl += author + "~";
+        }
+
+        if(authorsUrl) { authorsUrl = authorsUrl.slice(0, -1); }
+        
+        authorsUrl = authorsUrl.replaceAll(" ", "-");
+
+        let url = `${name}_${authorsUrl}`;
+        if(url[url.length - 1] == "_") {
+            url = url.slice(0, -1);
+        }
+
+        return url;
+    }
+
     return <article key={song.id} className={"songItemWrapper"}>
-            <a className={styles.songLink} href={`/song/${song.id}`}>
+            <a className={styles.songLink} href={`/chord/${generateChordUrl(song)}`}>
                 <Paper elevation={2} style={{ height: "100%" }}>
                     <CardActionArea style={{ height: "100%" }}>
                 <div className={styles.songItem}>

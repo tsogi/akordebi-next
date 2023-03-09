@@ -47,7 +47,7 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
             setSaving(true);
             let rawText = getRawText(songText);
 
-            let data = { uploader, name: songName, authors, songText, rawText, videoLesson, id: _songId }
+            let data = { uploader, name: songName.trim(), authors, songText, rawText, videoLesson, id: _songId }
 
             let error = validationError(data);
             if(error) {
@@ -86,6 +86,10 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
     function validationError(data){
         if(!data.name) {
             return "სიმღერის სახელის ჩაწერა აუცილებელია";
+        }
+
+        if(data.name.includes("_") || data.name.includes("-") || data.name.includes("~")) {
+            return "სახელში ტირე, ქვედა ტირე და ტილდა (- _ ~) სიმბოლოების გამოყენება არ შეიძლება";
         }
 
         if(!data.songText.length) {

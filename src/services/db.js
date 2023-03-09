@@ -29,6 +29,25 @@ class Db{
         return song;
     }
 
+    async getSongByName(songName){
+        const [rows,fields] = await this.pool.execute(`
+            select songs.id, songs.videoLesson, songs.uploader, songs.searchWords, songs.name, songs.body, GROUP_CONCAT(authors.name) as authors from songs 
+            left join authors_songs on songs.id = authors_songs.song_id
+            left join authors on authors_songs.author_id = authors.id
+            where songs.name = ?
+            group by songs.id
+        `, [songName]);
+
+        if(rows.length){
+            let song = rows[0];
+            song.authors = song.authors ? song.authors.split(",") : [];
+
+            return song;
+        }
+
+        return null;
+    }
+
     async getAllSongs(){
         const [rows,fields] = await this.pool.execute(`
             select songs.name, songs.searchWords, songs.videoLesson, songs.id, songs.confirmed, IFNULL(GROUP_CONCAT(authors.name), "") as authors, IFNULL(GROUP_CONCAT(votes.vote), "") as votes from songs

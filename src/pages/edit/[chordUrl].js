@@ -20,8 +20,12 @@ export default function ModifySong({ song }){
 }
 
 export async function getServerSideProps({ params }) {
-    let { id } = params;
-    let song = await db.getSong(id);
+    let { chordUrl } = params;
+
+    let name = chordUrl.split("_")[0];
+    name = name.replaceAll("-", " ");
+
+    let song = await db.getSongByName(name);
   
     return {
       props: {

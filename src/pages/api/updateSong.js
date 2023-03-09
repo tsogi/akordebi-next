@@ -6,7 +6,7 @@ export default async function handler(req, res) {
         let response2 = { error: "", msg: "" }
 
         try{
-            // Todo handle case when user saves song with same name or if user clicks "Save song button twice"
+            // Todo handle case when user saves song with same name
             let data = {...req.body};
             data.searchWords = generateSearchText(data);
             let result = await db.updateSong(data);
