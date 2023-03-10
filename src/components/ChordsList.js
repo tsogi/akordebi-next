@@ -23,7 +23,7 @@ export default function ChordsList({ initialSongs }){
                         <CardActionArea style={{ height: "100%" }}>
                     <div className={styles.songItem}>
                         <div className={styles.songDetails}>
-                            <div style={{ padding: "15px" }} className={`${styles.songName} capital`}>სიმღერის დამატება</div>
+                            <div style={{ padding: "15px" }} className={`${styles.songName} capital`}>სიმღერის ატვირთვა</div>
                         </div>
                     </div>
                     </CardActionArea>
