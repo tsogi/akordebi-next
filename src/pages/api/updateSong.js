@@ -8,7 +8,10 @@ export default async function handler(req, res) {
         try{
             // Todo handle case when user saves song with same name
             let data = {...req.body};
-            data.searchWords = generateSearchText(data);
+            let { fullText, url } = generateMeta(data);
+            data.searchWords = fullText;
+            data.url = url;
+
             let result = await db.updateSong(data);
 
             if(result === true) {
@@ -25,16 +28,27 @@ export default async function handler(req, res) {
     }
 
     // Todo move this function to its module
-    function generateSearchText(data){
+    function generateMeta(data){
         let text = data.name;
 
-        for(let author of data.authors) {
-            text += ` ${author.name}`;
+        let authors = data.authors;
+        for(let i = 0; i < authors.length; i++){
+            if(i === 0) { 
+                text += "-";
+            } else {
+                text += " ";
+            }
+            text += `${authors[i].name}`;
         }
 
         let textLatin = georgianToLatin(text);
+        let url = textLatin.trim().replaceAll(" ", "_");
+        textLatin = textLatin.replaceAll("-", " ");
+        text = text.replaceAll("-", " ");
 
-        return text + " " + textLatin;
+        let ret = { fullText: `${text} ${textLatin}`, url }
+
+        return ret;
     }
 
     function georgianToLatin(text) {
@@ -44,7 +58,7 @@ export default async function handler(req, res) {
           'ლ': 'l', 'მ': 'm', 'ნ': 'n', 'ო': 'o', 'პ': 'p',
           'ჟ': 'zh', 'რ': 'r', 'ს': 's', 'ტ': 't', 'უ': 'u',
           'ფ': 'f', 'ქ': 'q', 'ღ': 'gh', 'ყ': 'y', 'შ': 'sh',
-          'ჩ': 'ch', 'ც': 'ts', 'ძ': 'dz', 'წ': 'ts', 'ჭ': 'ch',
+          'ჩ': 'ch', 'ც': 'ts', 'ძ': 'dz', 'წ': 'w', 'ჭ': 'ch',
           'ხ': 'kh', 'ჯ': 'j', 'ჰ': 'h'
         };
       
