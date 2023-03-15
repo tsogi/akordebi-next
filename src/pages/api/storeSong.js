@@ -11,7 +11,6 @@ export default async function handler(req, res) {
             data.searchWords = fullText;
             data.url = url;
 
-            // let dbSong = await db.getSongByName(data.name);
             let dbSong = await db.getSongByUrl(data.url);
             
             if(dbSong) {

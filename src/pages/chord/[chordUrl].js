@@ -206,7 +206,6 @@ function renderLine(line, index){
 }
 
 function findChordImage(code){
-    // let chordImage = chords.find(chord => chord.name == code)?.image
     code = code.replace("/", "-");
     code = code.replace(":", "-");
     code = code.replace("#", "_");
@@ -276,10 +275,7 @@ function chorusLine(line, index){
 export async function getServerSideProps({ params }) {
     let { chordUrl } = params;
 
-    let name = chordUrl.split("_")[0];
-    name = name.replaceAll("-", " ");
-
-    let song = await db.getSongByName(name);
+    let song = await db.getSongByUrl(chordUrl);
   
     return {
       props: {
