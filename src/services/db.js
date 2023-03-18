@@ -14,6 +14,7 @@ class Db{
         }
     }
 
+    // Todo Most of the code in getSong(), getSongByUrl(), getSongByName() are duplicated. Fix DRY
     async getSong(songId){
         const [rows,fields] = await this.pool.execute(`
             select songs.id, songs.videoLesson, songs.uploader, songs.searchWords, songs.name, songs.body, GROUP_CONCAT(authors.name) as authors from songs 
@@ -23,10 +24,14 @@ class Db{
             group by songs.id
         `, [songId]);
 
-        let song = rows[0];
-        song.authors = song.authors ? song.authors.split(",") : [];
+        if(rows.length){
+            let song = rows[0];
+            song.authors = song.authors ? song.authors.split(",") : [];
 
-        return song;
+            return song;
+        }
+
+        return null;
     }
 
     async getSongByUrl(url){
@@ -37,6 +42,25 @@ class Db{
             where songs.url = ?
             group by songs.id
         `, [url]);
+
+        if(rows.length){
+            let song = rows[0];
+            song.authors = song.authors ? song.authors.split(",") : [];
+
+            return song;
+        }
+
+        return null;
+    }
+
+    async getSongByName(songName){
+        const [rows,fields] = await this.pool.execute(`
+            select songs.id, songs.videoLesson, songs.uploader, songs.searchWords, songs.name, songs.body, GROUP_CONCAT(authors.name) as authors from songs 
+            left join authors_songs on songs.id = authors_songs.song_id
+            left join authors on authors_songs.author_id = authors.id
+            where songs.name = ?
+            group by songs.id
+        `, [songName]);
 
         if(rows.length){
             let song = rows[0];

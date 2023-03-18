@@ -278,6 +278,17 @@ export async function getServerSideProps({ params }) {
     let song = await db.getSongByUrl(chordUrl);
 
     if (!song) {
+        let name = chordUrl.split("_")[0];
+        name = name.replaceAll("-", " ");
+
+        song = await db.getSongByName(name);
+    }
+
+    if (!song) {
+        song = await db.getSong(chordUrl);
+    }
+
+    if (!song) {
         return {
             notFound: true,
         }
