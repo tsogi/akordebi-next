@@ -276,6 +276,12 @@ export async function getServerSideProps({ params }) {
     let { chordUrl } = params;
 
     let song = await db.getSongByUrl(chordUrl);
+
+    if (!song) {
+        return {
+            notFound: true,
+        }
+    }
   
     return {
       props: {
