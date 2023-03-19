@@ -7,6 +7,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 import SwapVertIcon from '@mui/icons-material/SwapVert';
 import styles from "./SongTextEditor.module.css";
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 const PoemEditor = ({onSongTextChange, _lines = []}) => {
   const [lines, setLines] = useState(_lines);
@@ -48,7 +49,14 @@ const PoemEditor = ({onSongTextChange, _lines = []}) => {
         newLine.value = "";
     }
 
+    console.log(lines)
     setLines([...lines, newLine]);
+  };
+
+  const duplicateLine = (lineIndex) => {
+    const lineToDuplicate = lines[lineIndex];
+    const newLine = { ...lineToDuplicate, id: Date.now() };
+    setLines([...lines.slice(0, lineIndex + 1), newLine, ...lines.slice(lineIndex + 1)]);
   };
 
   const editLine = (id, value) => {
@@ -180,6 +188,9 @@ return (
                     :
                     null
                 }
+                <Tooltip placement="top" title="სტრიქონის დუბლირება">
+                  <ContentCopyIcon style={{ cursor: "pointer", marginLeft: "10px" }} onClick={() => duplicateLine(lineIndex)}/>
+                </Tooltip>
                 <Tooltip placement="top" title="სტრიქონის წაშლა">
                   <DeleteForeverIcon style={{ cursor: "pointer", marginLeft: "10px" }} onClick={() => deleteLine(line.id)} />
                 </Tooltip>
