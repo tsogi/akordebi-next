@@ -75,7 +75,7 @@ export default function SongPage({ song }){
             <title>{`${song.name} - გიტარის აკორდები`}</title>
             <meta name="description" content={ `${song.searchWords}` } />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <link rel="icon" href="/guitar.ico" />
+            <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         </Head>
         <Header />    
         <div className={`${styles.songPage} page_container noselect`}>

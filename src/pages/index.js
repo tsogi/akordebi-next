@@ -11,7 +11,7 @@ export default function Home({ initialSongs }) {
         <title>გიტარის აკორდები | gitaris akordebi</title>
         <meta name="description" content="ქართული სიმღერების გიტარის აკორდები | Guitar chords of Georgian songs" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/guitar.ico" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
       </Head>
       <Header />
       <div className="songsPage">
