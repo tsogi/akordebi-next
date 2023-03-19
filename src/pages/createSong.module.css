@@ -1,3 +1,16 @@
 .createSongPage {
 
 }
+
+.videoInstruction {
+    margin-top: 100px;
+}
+
+.uploadLabel {
+    margin-bottom: 60px;
+    line-height: 1.8;
+}
+
+.uploadLabel a {
+    color: #0000EE;
+}
