@@ -17,7 +17,7 @@ export default function CreateSong(){
             <div className={styles.uploadLabel}>სიმღერის akordebi.ge-ზე გამოსაქვეყნებლად შეავსეთ ველები და ატვირთეთ ტექსტი პლიუს(+) ღილაკების მეშვეობით. პროცესი არის მარტივი და ინტუიტიური. ასევე, ამ გვერდის ბოლოში, შეგიძლიათ ნახოთ <a href="#videoInstruction">ატვირთვის ვიდეო ინსტრუქცია</a></div>
             <SongCreator  />
             <div id="videoInstruction" className={styles.videoInstruction}>
-                <iframe width="100%" height="500px" src="https://www.youtube.com/embed/HuO8oZXFKgg" title="ატვირთვის ვიდეო ინსტრუქციები" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe width="100%" height="500px" src="https://www.youtube.com/embed/HuO8oZXFKgg" title="ატვირთვის ვიდეო ინსტრუქციები" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
         </div>
         <Footer />

@@ -55,8 +55,11 @@ const PoemEditor = ({onSongTextChange, _lines = []}) => {
   };
 
   const duplicateLine = (lineIndex) => {
-    const lineToDuplicate = lines[lineIndex];
+    const lineToDuplicate = {...lines[lineIndex]};
     const newLine = { ...lineToDuplicate, id: Date.now() };
+    if(newLine.chords) {
+      newLine.chords = [...newLine.chords];
+    }
     setLines([...lines.slice(0, lineIndex + 1), newLine, ...lines.slice(lineIndex + 1)]);
   };
 
