@@ -8,6 +8,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import SwapVertIcon from '@mui/icons-material/SwapVert';
 import styles from "./SongTextEditor.module.css";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import MusicOffIcon from '@mui/icons-material/MusicOff';
 
 const PoemEditor = ({onSongTextChange, _lines = []}) => {
   const [lines, setLines] = useState(_lines);
@@ -34,7 +36,7 @@ const PoemEditor = ({onSongTextChange, _lines = []}) => {
     let newId = lines.length ? (lines.map(line => line.id).sort((a,b) => { return a - b }).pop() + 1) : 1;
     let newLine = { id: newId, type }
 
-    if(type == "text" || type == "chorus") {
+    if(type == "text") {
         newLine.chords = [];
         newLine.value = "";
         setEditId(newLine.id);
@@ -49,7 +51,6 @@ const PoemEditor = ({onSongTextChange, _lines = []}) => {
         newLine.value = "";
     }
 
-    console.log(lines)
     setLines([...lines, newLine]);
   };
 
@@ -71,7 +72,10 @@ const PoemEditor = ({onSongTextChange, _lines = []}) => {
   };
 
   const deleteLine = id => {
-    setLines(lines.filter(line => line.id !== id));
+    let conf = confirm("დარწმუნებული ხართ რომ გინდათ სტრიქონის წაშლა?");
+    if(conf) {
+      setLines(lines.filter(line => line.id !== id));
+    }
   };
 
   const handleEdit = lineId => {
@@ -92,6 +96,22 @@ const PoemEditor = ({onSongTextChange, _lines = []}) => {
     setOpen(true);
  
 };
+
+function makeLineStriqoni(lineId) {
+  let line = lines.find((line) => { return line.id == lineId });
+  line.type = "text";
+  let newLines = [...lines];
+
+  setLines(newLines);
+}
+
+function makeLineChorus(lineId) {
+  let line = lines.find((line) => { return line.id == lineId });
+  line.type = "chorus";
+  let newLines = [...lines];
+
+  setLines(newLines);
+}
 
 const handleClose = () => {
   setOpen(false);
@@ -127,14 +147,62 @@ return (
                     value={line.value}
                     onChange={e => handleUpdate(line.id, e.target.value)}
                 />
-                <Button style={{ marginLeft: "20px" }} color='primary' variant='outlined' onClick={handleSaveClick}>შენახვა</Button>
+                <Button className={styles.saveBtn} style={{ marginLeft: "20px" }} color='primary' variant='outlined' onClick={handleSaveClick}>შენახვა</Button>
             </div>
         ) : (
           <div className={styles.lineWrapper}>
-            <div className={styles.dragIcon}>
-              <Tooltip placement="left" title="სტრიქონის გადატანა">
-                <SwapVertIcon />
-              </Tooltip>
+            <div className={styles.lineActionBtns}>
+                    <span className={styles.actionBtn}>
+                      <Tooltip placement="top" title="სტრიქონის წაშლა">
+                        <DeleteForeverIcon onClick={() => deleteLine(line.id)} />
+                      </Tooltip>
+                    </span>
+                    <span className={styles.actionBtn}>
+                      <Tooltip placement="top" title="სტრიქონის გადატანა">
+                        <SwapVertIcon />
+                      </Tooltip>
+                    </span>
+                    <span className={styles.actionBtn}>
+                      <Tooltip placement="top" title="სტრიქონის დუბლირება">
+                        <ContentCopyIcon onClick={() => duplicateLine(lineIndex)}/>
+                      </Tooltip>
+                    </span>
+                {
+                    ["text", "chorus", "rightHand"].includes(line.type) ?
+                    <span className={styles.actionBtn}>
+                      <Tooltip placement="top" title="სტრიქონის შეცვლა">
+                        <EditIcon onClick={() => handleEdit(line.id)} />
+                      </Tooltip>
+                    </span>
+                    :
+                    <div className={styles.actionPlace}></div>
+                }
+                {
+                    ["text"].includes(line.type) ?
+                    <span className={styles.actionBtn}>
+                      <Tooltip placement="top" title="მისამღერად მონიშვნა">
+                        <MusicNoteIcon onClick={() => makeLineChorus(line.id)} />
+                      </Tooltip>
+                    </span>
+                    :
+                    null
+                }
+                {
+                    ["chorus"].includes(line.type) ?
+                    <span className={styles.actionBtn}>
+                      <Tooltip placement="top" title="სტრიქონად მონიშვნა">
+                        <MusicOffIcon onClick={() => makeLineStriqoni(line.id)} />
+                      </Tooltip>
+                    </span>
+                    :
+                    null
+                }
+                {
+                    ["break", "rightHand"].includes(line.type) ?
+                    <div className={styles.actionPlace}></div>
+                    :
+                    null
+                }
             </div>
             {
                 line.type == "text" || line.type == "chorus" ?
@@ -179,22 +247,6 @@ return (
                 :
                 null
             }
-            <div className={styles.lineActionBtns}>
-                {
-                    ["text", "chorus", "rightHand"].includes(line.type) ?
-                    <Tooltip placement="top" title="სტრიქონის შეცვლა">
-                      <EditIcon style={{ cursor: "pointer" }} onClick={() => handleEdit(line.id)} />
-                    </Tooltip>
-                    :
-                    null
-                }
-                <Tooltip placement="top" title="სტრიქონის დუბლირება">
-                  <ContentCopyIcon style={{ cursor: "pointer", marginLeft: "10px" }} onClick={() => duplicateLine(lineIndex)}/>
-                </Tooltip>
-                <Tooltip placement="top" title="სტრიქონის წაშლა">
-                  <DeleteForeverIcon style={{ cursor: "pointer", marginLeft: "10px" }} onClick={() => deleteLine(line.id)} />
-                </Tooltip>
-            </div>
           </div>
         )}
       </Box>
@@ -227,16 +279,6 @@ return (
                     variant="outlined"
                     color="primary"
                     startIcon={<AddIcon />}
-                    onClick={() => { addLine("chorus") }}
-                >
-                    მისამღერის სტრიქონის დამატება
-                </Button>
-            </div>
-            <div className={styles.poemActionBtn}>
-                <Button
-                    variant="outlined"
-                    color="primary"
-                    startIcon={<AddIcon />}
                     onClick={() => { addLine("break") }}
                 >
                     გამოტოვების დამატება
@@ -255,9 +297,10 @@ return (
           placeholder='მაგ. Am, F#, Csus4/Bb'
           margin="normal"
         />
-        <Button variant="contained" color="primary" onClick={handleSave}>
-          შენახვა
-        </Button>
+          <Button variant="contained" color="primary" onClick={handleSave}>
+            შენახვა
+          </Button>
+        
       </div>
     </Modal>
   </div>

@@ -11,8 +11,8 @@
 }
 
 .lineActionBtns {
-    margin-left: 35px;
     display: flex;
+    margin-right: 35px;
 }
 
 .editInputWrapper {
@@ -21,7 +21,6 @@
 
 .editInput {
     width: 80%;
-    margin-right: 40px;
 }
 
 .breakDiv {
@@ -42,6 +41,10 @@
     z-index: 10;
 }
 
+.saveBtn {
+    width: 18%;
+}
+
 .addChord {
     left: -2px;
 }
@@ -57,11 +60,18 @@
     margin: 2px 2px;
 }
 
-.dragIcon {
-    margin-right: 20px;
+.rightHand {
+    font-style: italic;
+    margin-left: 9px;
+}
+
+.actionBtn {
+    margin-right: 10px;
     cursor: pointer;
 }
 
-.rightHand {
-    font-style: italic;
+.actionPlace {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
 }

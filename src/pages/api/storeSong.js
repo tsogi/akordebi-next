@@ -27,7 +27,6 @@ export default async function handler(req, res) {
                 response2.error = "სიმღერის შენახვისას დაფიქსირდა შეცდომა. დაუკავშირდით ადმინისტრაციას";
             }
         } catch(err) {
-            console.log(err)
             response2.error = "სიმღერის შენახვისას დაფიქსირდა შეცდომა. დაუკავშირდით ადმინისტრაციას";
         }
 
