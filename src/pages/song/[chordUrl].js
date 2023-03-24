@@ -7,7 +7,7 @@ import EmbedVideo from "@/components/EmbedVideo";
 import Footer from "@/components/Footer";
 import SongVotes from "@/components/SongVotes";
 import db from "@/services/db";
-import styles from "./SongPage.module.css";
+import styles from "../chord/SongPage.module.css";
 let intervalId;
 
 export default function SongPage({ song }){
@@ -87,7 +87,7 @@ export default function SongPage({ song }){
                     <div className={`${styles.font} ${styles.operator} ${styles.plus}`} onClick={handlePlusFontClick}>+</div>
                 </div>
                 <div className={`${styles.scroll} ${styles.settings}`}>
-                    <div className={`${styles.scroll} ${styles.label}`}>სქროლი</div>
+                    <div className={`${styles.scroll} ${styles.label}`}>ავტო-სქროლი</div>
                     <div className={`${styles.scroll} ${styles.operator} ${styles.minus}`} onClick={handleMinusScrollClick}>-</div>
                     <div className={`${styles.scroll} ${styles.size}`}>{scrollSpeed}</div>
                     <div className={`${styles.scroll} ${styles.operator} ${styles.plus}`} onClick={handlePlusScrollClick}>+</div>
