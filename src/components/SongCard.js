@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Paper from '@mui/material/Paper';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
-import { CardActionArea, Tooltip } from '@mui/material';
+import { CardActionArea } from '@mui/material';
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import Badge from '@mui/material/Badge';
 import { ThumbUp } from '@mui/icons-material';
@@ -43,9 +43,7 @@ export default function SongCard({ song }){
                 {
                     song.videoLesson ?
                     <div className={styles.videoLessonIcon}>
-                        <Tooltip style={{ color: "#15a894" }} placement="top" title="ვიდეო გაკვეთილი">
-                            <OndemandVideoIcon style={{ color: "#9ebeff" }} />
-                        </Tooltip>
+                        <OndemandVideoIcon style={{ color: "#9ebeff" }} />
                     </div>
                     :
                     null
@@ -53,9 +51,7 @@ export default function SongCard({ song }){
                 {
                     song.confirmed ?
                     <div className={styles.confirmedIcon}>
-                        <Tooltip style={{ color: "#15a894" }} placement="top" title="სისწორე დადასტურებულია">
-                            <TaskAltIcon /> 
-                        </Tooltip>
+                        <TaskAltIcon style={{ color: "#15a894" }} /> 
                     </div>
                     :
                     null
