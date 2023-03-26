@@ -3,8 +3,13 @@ import Header from '@/components/Header'
 import ChordsList from '@/components/ChordsList'
 import Footer from '@/components/Footer'
 import db from '@/services/db'
+import { useEffect } from 'react'
 
 export default function Home({ initialSongs }) {
+  // useEffect(() => {
+  //   let songs = initialSongs.map(song => { return song.url });
+  //   console.log(songs);
+  // }, [])
   return (
     <>
       <Head>
@@ -12,6 +17,7 @@ export default function Home({ initialSongs }) {
         <meta name="description" content="ქართული სიმღერების გიტარის აკორდები | Guitar chords of Georgian songs" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8346425726826566" crossorigin="anonymous"></script>
       </Head>
       <Header />
       <div className="songsPage">
