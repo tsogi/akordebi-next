@@ -77,6 +77,24 @@
     margin-right: 15px;
 }
 
+.coupletChordsBtn {
+    cursor: pointer;    
+}
+
+.scroll.settings {
+    margin-right: 50px;
+}
+
+.coupletChordsList {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.coupletChordImg {
+    height: 90px;
+}
+
 .settings {
     display: flex;
     align-items: center;

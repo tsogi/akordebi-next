@@ -13,6 +13,11 @@ let intervalId;
 export default function SongPage({ song }){
     const [fontSize, setFontSize] = useState(16);
     const [scrollSpeed, setScrollSpeed] = useState(0);
+    const [showChords, setShowChords ] = useState(false);
+
+    useEffect(() => {
+        console.log(song);
+    }, [song])
 
     useEffect(() => {
         scroll();
@@ -70,6 +75,15 @@ export default function SongPage({ song }){
         }
     }
 
+    function handleShowChordsClick(){
+        if(showChords) {
+            setShowChords(false);
+            return;
+        }
+
+        setShowChords(true);
+    }
+
     return <>
         <Head>
             <title>{`${song.name} - გიტარის აკორდები`}</title>
@@ -93,6 +107,9 @@ export default function SongPage({ song }){
                     <div className={`${styles.scroll} ${styles.size}`}>{scrollSpeed}</div>
                     <div className={`${styles.scroll} ${styles.operator} ${styles.plus}`} onClick={handlePlusScrollClick}>+</div>
                 </div>
+                <div className={`${styles.coupletChords} ${styles.settings}`}>
+                    <div onClick={handleShowChordsClick} className={`${styles.coupletChordsBtn}`}>აკორდების {showChords ? "დამალვა" : "გამოჩენა"}</div>
+                </div>
             </div>
             <h2 className={`${styles.songName} capital`}>{song?.name}</h2>
             <div className={styles.songAuthors}>
@@ -110,6 +127,10 @@ export default function SongPage({ song }){
                     song?.body ? song.body.map((line, index) => {
                         if(line.type == "rightHand") {
                             return rightHandLine(line.value, index);
+                        }
+
+                        if(line.type == "coupletChords") {
+                            return coupletChordsLine(line.list, index, showChords);
                         }
 
                         if(line.type == "text") {
@@ -160,6 +181,18 @@ export default function SongPage({ song }){
         </div>
         <Footer />
     </>
+}
+
+function coupletChordsLine(chords, index, showChords){
+    return <div key={index} className={`${styles.lineWrapper} ${styles.coupletChords}`}>
+        <div className={styles.coupletChordsList} style={{ display: showChords ? "flex" : "none" }}>
+            {
+                chords.map(chord => {
+                    return <img className={styles.coupletChordImg} onError = {() => { this.style.display = 'none' }} src={ findChordImage(chord) } />
+                })
+            }
+        </div>
+    </div>
 }
 
 function rightHandLine(content, index){
@@ -276,9 +309,22 @@ function chorusLine(line, index){
 export async function getServerSideProps({ params }) {
     let { chordUrl } = params;
 
-    let song = await db.getSong(chordUrl);
+    let song = await db.getSongByUrl(chordUrl);
 
     if (!song) {
+        let name = chordUrl.split("_")[0];
+        name = name.replaceAll("-", " ");
+
+        song = await db.getSongByName(name);
+    }
+
+    if (!song) {
+        song = await db.getSong(chordUrl);
+    }
+
+    if (song) {
+        song = addCoupletChords(song)
+    } else {
         return {
             notFound: true,
         }
@@ -289,4 +335,38 @@ export async function getServerSideProps({ params }) {
         song
       },
     }
+}
+
+function addCoupletChords(song){
+    let newLines = [];
+    let lines = song.body;
+    for(let i =0; i< lines.length; i++) {
+        let line = lines[i];
+        let nextLine = lines[i + 1];
+        if(!["text", "chorus"].includes(line.type) && ["text", "chorus"].includes(nextLine.type)) {
+            newLines.push(line);
+            // let randomNumber = Math.floor(Math.random() * 10000) + 1;
+            newLines.push({id: new Date().getTime(), type: 'coupletChords', value: '', list: []});
+        } else {
+            newLines.push(line);
+        }
+    }
+
+    let chordsList = [];
+    for(let i = newLines.length - 1; i >= 0; i--) {
+        let line = newLines[i];
+
+        if(line.chords) {
+            let lineChords = line.chords.filter(Boolean);
+            chordsList = [...new Set([...lineChords, ...chordsList])] 
+        }
+        if(line.type == "coupletChords") {
+            line.list = [...chordsList];
+            chordsList = [];
+        }
+    }
+
+    song.body = newLines;
+
+    return song;
 }
