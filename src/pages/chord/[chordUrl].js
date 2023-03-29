@@ -343,7 +343,7 @@ function addCoupletChords(song){
     for(let i =0; i< lines.length; i++) {
         let line = lines[i];
         let nextLine = lines[i + 1];
-        if(!["text", "chorus"].includes(line.type) && ["text", "chorus"].includes(nextLine.type)) {
+        if(nextLine && !["text", "chorus"].includes(line.type) && ["text", "chorus"].includes(nextLine.type)) {
             newLines.push(line);
             // let randomNumber = Math.floor(Math.random() * 10000) + 1;
             newLines.push({id: new Date().getTime(), type: 'coupletChords', value: '', list: []});
