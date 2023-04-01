@@ -29,28 +29,7 @@ export default function Home({ initialSongs }) {
 }
 
 export async function getServerSideProps() {
-    let initialSongs = await db.getAllSongs();
-
-    const compare = (a, b) => {
-      // First, check if both have videoLesson and confirmed=1
-      if (a.videoLesson && a.confirmed === 1 && b.videoLesson && b.confirmed === 1) {
-        return b.voteSum - a.voteSum; // Sort by voteSum
-      } else if (a.videoLesson && a.confirmed === 1) {
-        return -1; // a comes before b
-      } else if (b.videoLesson && b.confirmed === 1) {
-        return 1; // b comes before a
-      } else if(a.confirmed && b.confirmed) {
-        return b.voteSum - a.voteSum;
-      } else if(a.confirmed) {
-        return -1;
-      } else if(b.confirmed) {
-        return 1;
-      } else {
-        return b.voteSum - a.voteSum;
-      } 
-    };
-    
-    initialSongs.sort(compare);
+    let initialSongs = await db.getAllSongsSorted();
   
     return {
       props: {

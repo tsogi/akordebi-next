@@ -42,7 +42,7 @@ const generateSitemapXml = (records) => {
 
 export default async (req, res) => {
   try {
-    let results = await db.getAllSongUrls();
+    let results = await db.getAllSongsSorted();
 
     const sitemapXml = generateSitemapXml(results);
 
