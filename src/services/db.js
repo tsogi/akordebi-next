@@ -72,6 +72,14 @@ class Db{
         return null;
     }
 
+    async getAllSongUrls(){
+        const [rows,fields] = await this.pool.execute(`
+            select url from songs
+        `);
+
+        return rows;
+    }
+
     async getAllSongs(){
         const [rows,fields] = await this.pool.execute(`
             select songs.name, songs.url, songs.searchWords, songs.videoLesson, songs.id, songs.confirmed, IFNULL(GROUP_CONCAT(authors.name), "") as authors, IFNULL(GROUP_CONCAT(votes.vote), "") as votes from songs
