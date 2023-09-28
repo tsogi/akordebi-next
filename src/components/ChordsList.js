@@ -9,17 +9,33 @@ import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
+import Pagination from "./Pagination";
+
+const resultsPerPage = 20;
 
 export default function ChordsList({ initialSongs }){
-    const[songs, setSongs] = useState([]);
+    const[displayedSongs, setDisplayedSongs] = useState([]);
     const[filterConfirmed, setFilterConfirmed] = useState(false);
     const[filterLessoned, setFilterLessoned] = useState(false);
     const[sortBy, setSortBy] = useState("");
+    const[currentPage, setCurrentPage] = useState(1);
+    const[paginationCount, setPaginationCount] = useState(0);
 
+    function handleNextClick(){
+        setCurrentPage(currentPage + 1);
+    }
+
+    function handlePreviousClick(){
+        setCurrentPage(currentPage - 1);
+    }
+
+    function handlePageClick(page){
+        setCurrentPage(page);
+    }
 
     useEffect(() => {
         applyFilters();
-    }, [filterConfirmed, filterLessoned, sortBy]);
+    }, [filterConfirmed, filterLessoned, sortBy, currentPage]);
 
     function applyFilters(){
         let songs = [...initialSongs];
@@ -36,14 +52,32 @@ export default function ChordsList({ initialSongs }){
             songs = songs.sort((a, b) => b.voteSum - a.voteSum);
         }
 
-        setSongs(songs);
+        setPaginationCount(songs.length);
+
+        songs = getSongsOnPage(songs, currentPage);
+
+        setDisplayedSongs(songs);
+    }
+
+    function getSongsOnPage(songs, currentPage) {
+        let startIndex = 0;
+        let endIndex = resultsPerPage;
+
+        if (currentPage > 1 && Number.isInteger(currentPage)) {
+            startIndex = (currentPage - 1) * resultsPerPage;
+            endIndex = currentPage * resultsPerPage;
+        }
+        let ret = songs.slice(startIndex, endIndex);
+
+        return ret;
     }
 
     useEffect(() => {
-        setSongs([...initialSongs]);
+        applyFilters();
     }, [initialSongs]);
 
     function handleConfirmedClick(){
+        setCurrentPage(1);
         if(filterConfirmed) {
             setFilterConfirmed(false);
             return;
@@ -54,9 +88,11 @@ export default function ChordsList({ initialSongs }){
 
     function handleSortChange(event) {
         setSortBy(event.target.value);
+        setCurrentPage(1);
     }
 
     function handleLessonedClick(){
+        setCurrentPage(1);
         if(filterLessoned) {
             setFilterLessoned(false);
             return;
@@ -66,13 +102,16 @@ export default function ChordsList({ initialSongs }){
     }
 
     function handleSearchClick(songs){
+        setCurrentPage(1);
         setFilterConfirmed(false);
         setFilterLessoned(false);
         setSortBy("");
 
-        // Todo find safer way to make sure setSongs is executed after setFilterConfirmed and setFilterLessoned
+        // Todo find safer way to make sure setAllSongs is executed after setFilterConfirmed and setFilterLessoned
         setTimeout(() => {
-            setSongs(songs);
+            initialSongs = songs;
+            applyFilters();
+            // setDisplayedSongs(songs);
         }, 10);
     }
 
@@ -118,10 +157,18 @@ export default function ChordsList({ initialSongs }){
                 </a>
             </aside>
             {
-                songs.map(song => {
+                displayedSongs.map(song => {
                     return <SongCard key={song.id} song={song} />
                 })
             }
         </main>
+        <Pagination 
+            currentPage = {currentPage}
+            totalResults = {paginationCount}
+            resultsPerPage = {resultsPerPage}
+            onNextClick = {handleNextClick}
+            onPreviousClick = {handlePreviousClick}
+            goToPage = {handlePageClick}
+        />
     </div>
 }
