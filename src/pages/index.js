@@ -6,10 +6,6 @@ import db from '@/services/db'
 import { useEffect } from 'react'
 
 export default function Home({ initialSongs }) {
-  // useEffect(() => {
-  //   let songs = initialSongs.map(song => { return song.url });
-  //   console.log(songs);
-  // }, [])
   return (
     <>
       <Head>
