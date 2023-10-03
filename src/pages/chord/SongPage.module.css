@@ -35,6 +35,7 @@
 
 .chordImage img {
     width: 120px;
+    max-width: 120px;
 }
 
 .songBody {
@@ -155,7 +156,6 @@
     top: 0px;
     right: 0px;
     cursor: pointer;
-    padding: 5px;
 }
 
 .fbComments {
