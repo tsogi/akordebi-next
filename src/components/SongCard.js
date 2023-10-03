@@ -10,8 +10,6 @@ import styles from "./SongCard.module.css";
 export default function SongCard({ song }){
     return <article key={song.id} className={"songItemWrapper"}>
             <a className={styles.songLink} href={`/chord/${song.url}`}>
-                <Paper elevation={2} style={{ height: "100%" }}>
-                    <CardActionArea style={{ height: "100%" }}>
                 <div className={styles.songItem}>
                     <div className={styles.songDetails}>
                         <h2 className={`${styles.songName} capital`}>{ song.name }</h2>
@@ -28,8 +26,6 @@ export default function SongCard({ song }){
                         </div>
                     </div>
                 </div>
-                </CardActionArea>
-                </Paper>
             </a>
             <div className={styles.songMeta}>
                 <div className={styles.songMetaLeft}>

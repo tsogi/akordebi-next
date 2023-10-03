@@ -174,15 +174,11 @@ export default function ChordsList({ initialSongs }){
         <main className={"songsList"}>
             <aside className={"songItemWrapper"}>
                 <a className={styles.songLink} href={`/createSong`}>
-                    <Paper elevation={2} style={{ height: "100%" }}>
-                        <CardActionArea style={{ height: "100%" }}>
                     <div className={styles.songItem}>
                         <div className={styles.songDetails}>
                             <div style={{ padding: "15px" }} className={`${styles.songName} capital`}>სიმღერის ატვირთვა</div>
                         </div>
                     </div>
-                    </CardActionArea>
-                    </Paper>
                 </a>
             </aside>
             {

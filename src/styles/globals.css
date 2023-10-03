@@ -114,6 +114,11 @@ html, body, #root {
 
 body {
   touch-action: pan-x pan-y;
+  background: linear-gradient(180deg,#212740 0,#20273e 10%,#20273e 100%);
+}
+
+footer {
+  background-image: url(/footer_skies.webp);
 }
 
 .guitar, .songsPage {
