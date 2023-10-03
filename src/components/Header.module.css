@@ -1,7 +1,7 @@
 .headerWrapper {
     display: flex;
     justify-content: center;
-    margin-bottom: 70px;
+    margin-bottom: 30px;
 }
 
 .logoImage {
@@ -9,5 +9,5 @@
 }
 
 .logoArea {
-    margin-top: 40px;
+
 }
