@@ -9,7 +9,7 @@ import styles from "./SongCard.module.css";
 
 export default function SongCard({ song }){
     return <article key={song.id} className={"songItemWrapper"}>
-            <a target='blank' className={styles.songLink} href={`/chord/${song.url}`}>
+            <a className={styles.songLink} href={`/chord/${song.url}`}>
                 <Paper elevation={2} style={{ height: "100%" }}>
                     <CardActionArea style={{ height: "100%" }}>
                 <div className={styles.songItem}>

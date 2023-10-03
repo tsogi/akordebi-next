@@ -10,6 +10,7 @@ import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Pagination from "./Pagination";
+import { useRouter } from 'next/router';
 
 const resultsPerPage = 20;
 
@@ -17,10 +18,47 @@ export default function ChordsList({ initialSongs }){
     const[displayedSongs, setDisplayedSongs] = useState([]);
     const[filterConfirmed, setFilterConfirmed] = useState(false);
     const[filterLessoned, setFilterLessoned] = useState(false);
-    const[sortBy, setSortBy] = useState("");
+    const[sortBy, setSortBy] = useState("default");
     const[currentPage, setCurrentPage] = useState(1);
     const[paginationCount, setPaginationCount] = useState(0);
 
+    const router = useRouter();
+
+    useEffect(() => {
+        writeParametersToState();
+    }, []);
+
+    useEffect(() => {
+        applyFilters();
+        updateUrlParameters();
+    }, [currentPage, sortBy, filterLessoned, filterConfirmed]);
+
+    useEffect(() => {
+        applyFilters();
+    }, [initialSongs]);
+
+    function writeParametersToState(){
+        const { page: urlPage, sort: urlSort, lessoned: urlLessoned, confirmed: urlConfirmed } = router.query;
+        
+        if(urlPage) setCurrentPage(Number(urlPage));
+        if(urlSort) setSortBy(urlSort);
+        if(urlLessoned) setFilterLessoned(urlLessoned === 'true');
+        if(urlConfirmed) setFilterConfirmed(urlConfirmed === 'true');
+    }
+    
+    function updateUrlParameters(){
+        router.replace({
+          pathname: router.pathname,
+          query: {
+            ...router.query,
+            page: currentPage,
+            sort: sortBy,
+            lessoned: filterLessoned,
+            confirmed: filterConfirmed
+          }
+        }, undefined, { scroll: false });
+    }
+    
     function handleNextClick(){
         setCurrentPage(currentPage + 1);
     }
@@ -32,10 +70,6 @@ export default function ChordsList({ initialSongs }){
     function handlePageClick(page){
         setCurrentPage(page);
     }
-
-    useEffect(() => {
-        applyFilters();
-    }, [filterConfirmed, filterLessoned, sortBy, currentPage]);
 
     function applyFilters(){
         let songs = [...initialSongs];
@@ -72,10 +106,6 @@ export default function ChordsList({ initialSongs }){
         return ret;
     }
 
-    useEffect(() => {
-        applyFilters();
-    }, [initialSongs]);
-
     function handleConfirmedClick(){
         setCurrentPage(1);
         if(filterConfirmed) {
@@ -105,13 +135,12 @@ export default function ChordsList({ initialSongs }){
         setCurrentPage(1);
         setFilterConfirmed(false);
         setFilterLessoned(false);
-        setSortBy("");
+        setSortBy("default");
 
         // Todo find safer way to make sure setAllSongs is executed after setFilterConfirmed and setFilterLessoned
         setTimeout(() => {
             initialSongs = songs;
             applyFilters();
-            // setDisplayedSongs(songs);
         }, 10);
     }
 
