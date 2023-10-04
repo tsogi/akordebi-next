@@ -2,9 +2,11 @@
 rm -r .next
 npm run build
 zip -r ../next-build.zip .next
+zip -r ../public.zip public
 
-# Upload the build to EC2
+# Upload files to EC2
 scp -i ../akordebi.pem ../next-build.zip ubuntu@akordebi.ge:/var/projects/akordebi
+scp -i ../akordebi.pem ../public.zip ubuntu@akordebi.ge:/var/projects/akordebi
 
 # Reload app on EC2
 ssh -i ../akordebi.pem ubuntu@akordebi.ge << EOF
@@ -14,7 +16,9 @@ ssh -i ../akordebi.pem ubuntu@akordebi.ge << EOF
     
     # Executing the commands
     rm -r .next
+    rm -r public
     unzip next-build.zip
+    unzip public.zip
     npx pm2 restart akordebi
     
 EOF
