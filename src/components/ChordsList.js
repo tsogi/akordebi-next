@@ -145,30 +145,29 @@ export default function ChordsList({ initialSongs }){
     }
 
     return <div className={"page_container"}>
-        <div className={styles.searchComponent}>
-            <SearchSongs onSearch={handleSearchClick} />
-        </div>
-        <div className={styles.filterSongs}>
-            <div className={styles.sortContainer}>
-                <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
-                    <InputLabel id="sort">სორტირება</InputLabel>
-                    <Select labelId="sort" label="სორტირება" id="sort" value={sortBy} onChange={handleSortChange}>
-                        <MenuItem value="default">ხარისხით</MenuItem>
-                        <MenuItem value="likes">პოპულარობით</MenuItem>
-                    </Select>
-                </FormControl>
+        <div className="flex justify-between flex-wrap filterAndSearch">
+            <div className={`${styles.searchComponent} searchWrapper`}>
+                <SearchSongs onSearch={handleSearchClick} />
             </div>
-            <div className={styles.filterContainer}>
-                <Tooltip placement="top" title="მიჩვენე მხოლოდ გაკვეთილით">
-                    <div onClick={handleLessonedClick} className={`${styles.filter} ${styles.confirmed} ${filterLessoned ? styles.filterSelected : ""}`}>
+            <div className={`${styles.filterSongs} filtersWrapper`}>
+                <div className={styles.sortContainer}>
+                    <select className={styles.selectSort} value={sortBy} onChange={handleSortChange}>
+                        <option value="default">ხარისხით</option>
+                        <option value="likes">პოპულარობით</option>
+                    </select>
+                </div>
+                <div className={styles.filterContainer}>
+                    <Tooltip placement="top" title="მიჩვენე მხოლოდ გაკვეთილით">
+                        <div onClick={handleLessonedClick} className={`${styles.filter} ${styles.confirmed} ${filterLessoned ? styles.filterSelected : ""}`}>
                             <OndemandVideoIcon style={{ color: "#9ebeff" }} />
-                    </div>
-                </Tooltip>
-                <Tooltip placement="top" title="მიჩვენე მხოლოდ დამოწმებული">
-                    <div onClick={handleConfirmedClick} className={`${styles.filter} ${styles.lesson} ${filterConfirmed ? styles.filterSelected : ""}`}>
-                        <TaskAltIcon style={{ color: "#15a894" }} /> 
-                    </div>
-                </Tooltip>
+                        </div>
+                    </Tooltip>
+                    <Tooltip placement="top" title="მიჩვენე მხოლოდ დამოწმებული">
+                        <div onClick={handleConfirmedClick} className={`${styles.filter} ${styles.lesson} ${filterConfirmed ? styles.filterSelected : ""}`}>
+                            <TaskAltIcon style={{ color: "#15a894" }} /> 
+                        </div>
+                    </Tooltip>
+                </div>
             </div>
         </div>
         <main className={"songsList"}>

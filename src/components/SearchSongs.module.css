@@ -22,3 +22,42 @@
     padding: 13px 20px 16px;
     color: white;
 }
+
+
+/* Standard syntax */
+.searchInput::placeholder {
+    color: white; /* Your desired color */
+}
+
+/* Firefox 18- */
+.searchInput::-moz-placeholder {
+    color: white;
+}
+
+/* Firefox 19+ */
+.searchInput::-moz-placeholder {
+    color: white;
+    opacity: 1; /* Firefox reduces the opacity by default */
+}
+
+/* Internet Explorer 10-11 */
+.searchInput:-ms-input-placeholder {
+    color: white;
+}
+
+/* Edge 18- */
+.searchInput::-ms-input-placeholder {
+    color: white;
+}
+
+/* Safari and Chrome, Android and iOS */
+.searchInput::-webkit-input-placeholder {
+    color: white;
+}
+
+.searchInput:active, .searchInput:focus {
+    border-color: #ffac64;
+    -webkit-box-shadow: inset 12px 12px 30px rgba(53,123,230,.2);
+    box-shadow: inset 12px 12px 30px rgba(53,123,230,.2);
+    outline: none;
+}

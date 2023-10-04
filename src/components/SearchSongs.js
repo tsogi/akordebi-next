@@ -33,7 +33,7 @@ const SearchSong = ({ onSearch }) => {
     <div className={styles.searchContainer}>
       <input type='text' id={styles.test} className={styles.searchInput} label="აკორდების ძებნა"
         value={searchText}
-        placeholder="ჩაწერეთ სიმღერის ან ავტორის სახელი"
+        placeholder="მოძებნეთ სიმღერა ან ავტორი"
         onChange={handleInputChange}
         onKeyDown={handleInputPress}
       />
