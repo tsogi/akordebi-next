@@ -33,9 +33,9 @@
 
 .chordLabel, .addChord {
     position: absolute;
-    top: -8px;
+    top: -13px;
     cursor: pointer;
-    color: #5580ec;
+    color: #5286ed;
     font-weight: bold;
     font-size: 0.9rem;
     z-index: 10;

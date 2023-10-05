@@ -54,11 +54,11 @@ const SongVotes = (props) => {
   return (
     <div className={styles.votesPlugin}>
       <IconButton onClick={handleUpVote} disabled={votedUp} color={votedUp ? 'primary' : 'default'}>
-        <ThumbUp />
+        <ThumbUp style={{ color: votedUp ? "grey" : 'white' }} />
       </IconButton>
       <Typography variant="body1" component="div">{totalVotes}</Typography>
       <IconButton onClick={handleDownVote} disabled={votedDown} color={votedDown ? 'secondary' : 'default'}>
-        <ThumbDown />
+        <ThumbDown style={{ color: votedDown ? "grey" : 'white' }} />
       </IconButton>
     </div>
   );

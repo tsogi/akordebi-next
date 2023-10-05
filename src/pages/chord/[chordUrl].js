@@ -175,9 +175,9 @@ export default function SongPage({ song }){
                 :
                 null
             }
-            <div className={styles.fbComments}>
+            {/* <div className={styles.fbComments}>
                 <FbComments href={`akordebi.ge/songPage/${song.id}`} />
-            </div>
+            </div> */}
         </div>
         <Footer />
     </>

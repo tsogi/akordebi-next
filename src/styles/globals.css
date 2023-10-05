@@ -92,7 +92,8 @@ body {
   color: white;
   max-width: 100vw;
   overflow-x: hidden;
-  background-color: white;
+  /* background-color: white; */
+  background: linear-gradient(180deg,#212740 0,#20273e 10%,#20273e 100%);
 }
 
 a {
@@ -114,7 +115,6 @@ html, body, #root {
 
 body {
   touch-action: pan-x pan-y;
-  background: linear-gradient(180deg,#212740 0,#20273e 10%,#20273e 100%);
 }
 
 footer {
