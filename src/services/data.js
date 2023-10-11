@@ -13,6 +13,18 @@ class Db_client{
         return data;
     }
 
+    async logEvent(eventName, eventDetails = ""){
+        try{
+            const response = await fetch(`/api/logEvent`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ eventName, eventDetails }),
+            });
+        }catch(error) { }
+    }
+
     async storeSong(data){
         let response = await fetch(`api/storeSong`, {
             method: "POST",

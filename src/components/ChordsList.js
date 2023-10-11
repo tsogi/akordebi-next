@@ -11,6 +11,7 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Pagination from "./Pagination";
 import { useRouter } from 'next/router';
+import db from '@/services/data';
 
 const resultsPerPage = 20;
 
@@ -59,16 +60,22 @@ export default function ChordsList({ initialSongs }){
         }, undefined, { scroll: false });
     }
     
-    function handleNextClick(){
+    async function handleNextClick(){
         setCurrentPage(currentPage + 1);
+
+        await db.logEvent("page_click", "next");
     }
 
-    function handlePreviousClick(){
+    async function handlePreviousClick(){
         setCurrentPage(currentPage - 1);
+
+        await db.logEvent("page_click", "previous");
     }
 
-    function handlePageClick(page){
+    async function handlePageClick(page){
         setCurrentPage(page);
+
+        await db.logEvent("page_click", page);
     }
 
     function applyFilters(){
@@ -106,7 +113,7 @@ export default function ChordsList({ initialSongs }){
         return ret;
     }
 
-    function handleConfirmedClick(){
+    async function handleConfirmedClick(){
         setCurrentPage(1);
         if(filterConfirmed) {
             setFilterConfirmed(false);
@@ -114,14 +121,19 @@ export default function ChordsList({ initialSongs }){
         } 
 
         setFilterConfirmed(true);
+
+        await db.logEvent("filter", "confirmed");
     }
 
-    function handleSortChange(event) {
-        setSortBy(event.target.value);
+    async function handleSortChange(event) {
+        let val = event.target.value;
+        setSortBy(val);
         setCurrentPage(1);
+
+        await db.logEvent("filter", val);
     }
 
-    function handleLessonedClick(){
+    async function handleLessonedClick(){
         setCurrentPage(1);
         if(filterLessoned) {
             setFilterLessoned(false);
@@ -129,6 +141,8 @@ export default function ChordsList({ initialSongs }){
         }
 
         setFilterLessoned(true);
+
+        await db.logEvent("filter", "lessoned");
     }
 
     function handleSearchClick(songs){

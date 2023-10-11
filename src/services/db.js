@@ -213,6 +213,12 @@ class Db{
         return rows.affectedRows;
     }
 
+    async storeLog(eventName, eventDetails, ip){
+        const [rows] = await this.pool.execute('INSERT INTO logs (event, details, ip) VALUES (?, ?, ?)', [eventName, eventDetails, ip]);
+
+        return rows.affectedRows;
+    }
+
     async updateVote(songId, vote, ip){
         const [rows] = await this.pool.execute('UPDATE votes SET vote = ? WHERE song_id = ? AND ip = ?', [vote, songId, ip])
 

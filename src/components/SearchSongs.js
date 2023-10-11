@@ -14,6 +14,8 @@ const SearchSong = ({ onSearch }) => {
         alert("ძებნისას დაფიქსირდა შეცდომა");
     }
 
+    await db.logEvent("song_search", searchText);
+
     if(!response.data.length) {
         alert("სამწუხაროდ ვერაფერი მოიძებნა. გთხოვთ დაწეროთ ქართულად და სრულად");
     }

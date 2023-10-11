@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Button, TextField, Container, Box, Modal, Typography } from '@mui/material';
+import { Button, TextField, Box, Modal, Typography } from '@mui/material';
 import Tooltip from '@mui/material/Tooltip';
 import AddIcon from '@mui/icons-material/Add';
 import { ReactSortable } from "react-sortablejs";
@@ -10,6 +10,10 @@ import styles from "./SongTextEditor.module.css";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import MusicOffIcon from '@mui/icons-material/MusicOff';
+
+const css = {
+    textInput: "h-[50px] pl-5 text-white w-full bg-[rgba(255,255,255,.05)] shadow-[inset 12px 12px 30px rgba(53,123,230,.2)]"
+}
 
 const PoemEditor = ({onSongTextChange, _lines = []}) => {
   const [lines, setLines] = useState(_lines);
@@ -145,7 +149,7 @@ return (
       <Box key={line.id} my={2}>
         {line.id === editId ? (
             <div className={styles.editInputWrapper}>
-                <TextField className={styles.editInput}
+                <input type="text" className={`${styles.editInput} ${css.textInput}`}
                     inputRef={inputRef}
                     value={line.value}
                     onChange={e => handleUpdate(line.id, e.target.value)}
@@ -290,15 +294,12 @@ return (
         </div>
     </Box>
     <Modal open={open} onClose={handleClose}>
-      <div style={{ position: 'absolute', width: 400, backgroundColor: "white", borderRadius: "4px", padding: "35px", top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+      <div style={{ position: 'absolute', width: 400, backgroundColor: "#004aad", borderRadius: "4px", padding: "35px", top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
         <Typography variant="h6">ჩაწერეთ აკორდი</Typography>
-        <TextField
-          label="აკორდი"
+        <input type="text" className={`${css.textInput} my-[30px]`}
           value={selectedChord}
           onChange={handleNumberChange}
-          fullWidth
           placeholder='მაგ. Am, F#, Csus4/Bb'
-          margin="normal"
         />
           <Button variant="contained" color="primary" onClick={handleSave}>
             შენახვა

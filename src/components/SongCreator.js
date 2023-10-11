@@ -2,12 +2,15 @@ import * as React from 'react';
 import styles from  "@/components/SongCreator.module.css";
 import { Alert } from '@mui/material';
 import Slide from '@mui/material/Slide';
-import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import AuthorsEditor from '@/components/AuthorsEditor';
 import DB from "@/services/data";
 import SongTextEditor from "@/components/SongTextEditor";
 import Snackbar from '@mui/material/Snackbar';
+
+const css = {
+    textInput: "h-[50px] pl-5 text-white w-full bg-[rgba(255,255,255,.05)] shadow-[inset 12px 12px 30px rgba(53,123,230,.2)]"
+}
 
 export default function SongCreator({ _songName = "", _authors = [], _songText = [], _videoLesson = "", _songId = null, _uploader = "" }){
     const [songName, setSongName] = React.useState(_songName);
@@ -120,22 +123,22 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
 
     return <>
             <div className={ styles.inputName }>
-                <TextField value={songName} onChange={handleSongNameChange} style={{ width: "100%" }} label="ჩაწერეთ სიმღერის სახელი" id="fullWidth" />
+                <input className={css.textInput} type="text" value={songName} onChange={handleSongNameChange} style={{ width: "100%" }} placeholder="ჩაწერეთ სიმღერის სახელი" />
             </div>
             <div className={ styles.inputAuthors }>
                 <AuthorsEditor _authors={authors} onAuthorsChange={setAuthors} />
             </div>
             <div className={ styles.inputVideo }>
-                <TextField value={videoLesson} onChange={handleVideoLessonChange} style={{ width: "100%" }} placeholder={"youtube-ის ლინკი. მაგ. youtube.com/watch?v=O08BvtiPka8"} label="ვიდეო გაკვეთილის ლინკი (არასავალდებულო)" id="fullWidth" />
+                <input className={css.textInput} type="text" value={videoLesson} onChange={handleVideoLessonChange} style={{ width: "100%" }} placeholder={"ვიდეო გაკვეთილის ლინკი. მაგ. youtube.com/watch?v=O08BvtiPka8 (არასავალდებულო)"} />
             </div>
             <div className={ styles.uploader }>
-                <TextField value={uploader} onChange={handleUploaderChange} style={{ width: "100%" }} placeholder={"გამოჩნდება სიმღერის ტექსტის ქვემოთ"} label="ამტვირთის სახელი/გვარი (არასავალდებულო)" id="fullWidth" />
+                <input className={css.textInput} type="text" value={uploader} onChange={handleUploaderChange} style={{ width: "100%" }} placeholder={"ამტვირთის სახელი/გვარი (არასავალდებულო)"} />
             </div>
             <div className={styles.textEditor}>
                 <SongTextEditor _lines={songText} onSongTextChange={setSongText} />
             </div>
             <div className={ `${styles.saveSongBtn} capital` }>
-                <Button disabled={saving ? true : false} style={{ fontSize: "1.3rem" }} size="large" onClick={handleSaveSongClick} variant="contained">სიმღერის შენახვა</Button>
+                <Button disabled={saving ? true : false} style={{ background: "#033475", fontSize: "1.3rem" }} size="large" onClick={handleSaveSongClick} variant="outlined">სიმღერის შენახვა</Button>
             </div>
             <Snackbar
                 anchorOrigin={{ vertical: 'top', horizontal: 'right' }}

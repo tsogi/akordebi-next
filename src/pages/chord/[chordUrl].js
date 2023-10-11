@@ -7,6 +7,7 @@ import EmbedVideo from "@/components/EmbedVideo";
 import Footer from "@/components/Footer";
 import SongVotes from "@/components/SongVotes";
 import db from "@/services/db";
+import uiDb from '@/services/data';
 import styles from "./SongPage.module.css";
 let intervalId;
 
@@ -16,15 +17,13 @@ export default function SongPage({ song }){
     const [showChords, setShowChords ] = useState(false);
 
     useEffect(() => {
-        console.log(song);
-    }, [song])
-
-    useEffect(() => {
         scroll();
     }, [scrollSpeed])
 
     useEffect(() => {
         document.addEventListener('click', handleScreenClick);
+        
+        uiDb.logEvent("song_page", song.id);
 
         return () => {
             document.removeEventListener('click', handleScreenClick);
@@ -47,41 +46,51 @@ export default function SongPage({ song }){
         }, 200);
     }
 
-    function handlePlusFontClick(){
+    async function handlePlusFontClick(){
         let newFontSize = fontSize + 1;
         if(newFontSize < 50) {
             setFontSize(newFontSize);
         }
+
+        await uiDb.logEvent("font_click", "plus");
     }
 
-    function handleMinusFontClick(){
+    async function handleMinusFontClick(){
         let newFontSize = fontSize - 1;
         if(newFontSize > 5) {
             setFontSize(newFontSize);
         }
+
+        await uiDb.logEvent("font_click", "minus");
     }
 
-    function handleMinusScrollClick(){
+    async function handleMinusScrollClick(){
         let newSpeed = scrollSpeed - 1;
         if(newSpeed >= 0) {
             setScrollSpeed(newSpeed);
         }
+
+        await uiDb.logEvent("auto_scroll", "minus");
     }
 
-    function handlePlusScrollClick(){
+    async function handlePlusScrollClick(){
         let newSpeed = scrollSpeed + 1;
         if(newSpeed < 6) {
             setScrollSpeed(newSpeed);
         }
+
+        await uiDb.logEvent("auto_scroll", "plus");
     }
 
-    function handleShowChordsClick(){
+    async function handleShowChordsClick(){
         if(showChords) {
             setShowChords(false);
             return;
         }
 
         setShowChords(true);
+
+        await uiDb.logEvent("show_chords");
     }
 
     return <>
@@ -217,7 +226,7 @@ function renderLine(line, index){
                 {
                     line.chords[index] ?
                     <>
-                        <div className={`${styles.chordLabel} chordBtn`} onClick={handleChordClick}>{line.chords[index]}</div>
+                        <div className={`${styles.chordLabel} chordBtn`} onClick={(event) => { handleChordClick(event, line.chords[index])}}>{line.chords[index]}</div>
                         <div className={`${styles.chordImage} chordImage`}>
                             <div className={styles.closeChordBtn} onClick={handleChordClose}><HighlightOffIcon /></div>
                             {/* <div className={styles.imageLabel">{line.chords[index]}</div> */}
@@ -256,7 +265,7 @@ function handleChordClose(){
     });
 }
 
-function handleChordClick(event){
+async function handleChordClick(event, chord){
     if(event.target.nextSibling.style.display == "flex") {
         document.querySelectorAll(".chordImage").forEach((item) => {
             item.style.display = "none";
@@ -280,6 +289,8 @@ function handleChordClick(event){
             event.target.nextSibling.style.left = "0";
         }
     }
+
+    await uiDb.logEvent("chord_click", chord);
 }
 
 function coupletLine(line, index){

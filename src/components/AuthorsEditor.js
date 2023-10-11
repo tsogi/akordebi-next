@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Tooltip } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import styles from "./AuthorsEditor.module.css";
+
+const css = {
+    textInput: "h-[50px] pl-5 text-white w-full bg-[rgba(255,255,255,.05)] shadow-[inset 12px 12px 30px rgba(53,123,230,.2)]"
+}
 
 const AuthorsEditor = ({ onAuthorsChange, _authors = [{ id: 1, name: '' }] }) => {
   const [authors, setAuthors] = useState(_authors);
@@ -37,14 +40,14 @@ const AuthorsEditor = ({ onAuthorsChange, _authors = [{ id: 1, name: '' }] }) =>
       <div className={styles.authorsWrapper}>
         {authors.map((input, index) => (
           <div className={styles.authorWrapper} key={input.id}>
-            <TextField className={styles.authorInput} onChange={e => editInput(input.id, e.target.value)} value={input.name} label={`ჩაწერეთ ავტორი`} />
+            <input type="text" className={`${styles.authorInput} ${css.textInput}`} onChange={e => editInput(input.id, e.target.value)} value={input.name} placeholder={`ჩაწერეთ ავტორი`} />
             <Tooltip placement="top" title="ავტორის წაშლა">
               <DeleteForeverIcon className={styles.deleteAuthorIcon} onClick={() => deleteInput(input.id)}></DeleteForeverIcon>
             </Tooltip>
           </div>
         ))}
       </div>
-      <Button onClick={addInput}>ავტორის დამატება</Button>
+      <Button variant="outlined" color="primary" onClick={addInput}>ავტორის დამატება</Button>
     </div>
   );
 };
