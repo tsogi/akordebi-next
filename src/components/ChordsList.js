@@ -165,7 +165,7 @@ export default function ChordsList({ initialSongs }){
             </div>
             <div className={`${styles.filterSongs} filtersWrapper`}>
                 <div className={styles.sortContainer}>
-                    <select className={styles.selectSort} value={sortBy} onChange={handleSortChange}>
+                    <select className={`${styles.selectSort} text-[14px]`} value={sortBy} onChange={handleSortChange}>
                         <option value="default">ხარისხით</option>
                         <option value="likes">პოპულარობით</option>
                     </select>
