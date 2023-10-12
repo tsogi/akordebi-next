@@ -101,7 +101,7 @@ class Db{
 
     async getAllSongs(){
         const [rows,fields] = await this.pool.execute(`
-            select songs.name, songs.url, songs.searchWords, songs.videoLesson, songs.id, songs.confirmed, IFNULL(GROUP_CONCAT(authors.name), "") as authors, IFNULL(GROUP_CONCAT(votes.vote), "") as votes from songs
+            select songs.name, songs.url, songs.searchWords, songs.videoLesson, songs.id, songs.confirmed, songs.difficulty, IFNULL(GROUP_CONCAT(authors.name), "") as authors, IFNULL(GROUP_CONCAT(votes.vote), "") as votes from songs
             left join authors_songs on songs.id = authors_songs.song_id
             left join authors on authors_songs.author_id = authors.id
             left join votes on songs.id = votes.song_id

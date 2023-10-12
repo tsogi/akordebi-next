@@ -93,6 +93,10 @@ export default function ChordsList({ initialSongs }){
             songs = songs.sort((a, b) => b.voteSum - a.voteSum);
         }
 
+        if (sortBy === "difficulty") {
+            songs = songs.sort((a, b) => a.difficulty - b.difficulty);
+        }
+
         setPaginationCount(songs.length);
 
         songs = getSongsOnPage(songs, currentPage);
@@ -168,6 +172,7 @@ export default function ChordsList({ initialSongs }){
                     <select className={`${styles.selectSort} text-[14px]`} value={sortBy} onChange={handleSortChange}>
                         <option value="default">ხარისხით</option>
                         <option value="likes">პოპულარობით</option>
+                        <option value="difficulty">სირთულით</option>
                     </select>
                 </div>
                 <div className={styles.filterContainer}>
