@@ -4,6 +4,9 @@ npm run build
 zip -r ../next-build.zip .next
 zip -r ../public.zip public
 
+# Download mysql backup
+# scp ubuntu@akordebi.ge:/var/projects/akordebi/akordebi_15.sql ./
+
 # Upload files to EC2
 scp -i ../akordebi.pem ../next-build.zip ubuntu@akordebi.ge:/var/projects/akordebi
 scp -i ../akordebi.pem ../public.zip ubuntu@akordebi.ge:/var/projects/akordebi

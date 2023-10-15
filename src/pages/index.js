@@ -3,9 +3,14 @@ import Header from '@/components/Header'
 import ChordsList from '@/components/ChordsList'
 import Footer from '@/components/Footer'
 import db from '@/services/db'
+import uiDb from '@/services/data';
 import { useEffect } from 'react'
 
 export default function Home({ initialSongs }) {
+  useEffect(() => {
+    uiDb.logEvent("homepage");
+  }, [])
+
   return (
     <>
       <Head>
