@@ -6,3 +6,19 @@
     display: flex;
     justify-content: center;
 }
+
+.feedback {
+    width: 50%;
+}
+
+@media (max-width: 992px) {
+    .feedback {
+        width: 100%;
+    }
+
+    .copyright {
+        width: 100%;
+        text-align: center;
+        margin-top: 25px;
+    }
+}

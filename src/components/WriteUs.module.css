@@ -1,0 +1,14 @@
+.input {
+  background: rgba(255,255,255,.02);
+}
+
+.input:active, .input:focus {
+  border-color: #ffac64;
+  -webkit-box-shadow: inset 12px 12px 30px rgba(53,123,230,.2);
+  box-shadow: inset 12px 12px 30px rgba(53,123,230,.2);
+  outline: none;
+}
+
+.input::placeholder {
+    color: white; /* Your desired color */
+}
