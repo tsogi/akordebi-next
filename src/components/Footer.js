@@ -26,7 +26,7 @@ export default function Footer(){
             <a className="text-[#f2ac2b]" href="https://github.com/tsogi"> tsogi</a>
           </div>
         </div>
-        <div className="mt-[40px]" id="top-ge-counter-container" data-site-id="116500"></div>
+        <div className="mt-[70px]" id="top-ge-counter-container" data-site-id="116500"></div>
       </div>
     </footer>
 }

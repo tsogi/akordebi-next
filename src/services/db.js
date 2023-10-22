@@ -101,11 +101,33 @@ class Db{
 
     async getAllSongs(){
         const [rows,fields] = await this.pool.execute(`
-            select songs.name, songs.url, songs.searchWords, songs.videoLesson, songs.id, songs.confirmed, songs.difficulty, IFNULL(GROUP_CONCAT(authors.name), "") as authors, IFNULL(GROUP_CONCAT(votes.vote), "") as votes from songs
-            left join authors_songs on songs.id = authors_songs.song_id
-            left join authors on authors_songs.author_id = authors.id
-            left join votes on songs.id = votes.song_id
-            group by songs.id
+                SELECT 
+                songs.name, 
+                songs.url, 
+                songs.searchWords, 
+                songs.videoLesson, 
+                songs.id, 
+                songs.confirmed, 
+                songs.difficulty, 
+                IFNULL(authors_agg.authors, "") as authors, 
+                IFNULL(votes_agg.votes, "") as votes 
+            FROM songs
+            LEFT JOIN (
+                SELECT 
+                    authors_songs.song_id,
+                    GROUP_CONCAT(authors.name) AS authors
+                FROM authors_songs
+                JOIN authors ON authors_songs.author_id = authors.id
+                GROUP BY authors_songs.song_id
+            ) AS authors_agg ON songs.id = authors_agg.song_id
+            LEFT JOIN (
+                SELECT 
+                    votes.song_id,
+                    GROUP_CONCAT(votes.vote) AS votes
+                FROM votes
+                GROUP BY votes.song_id
+            ) AS votes_agg ON songs.id = votes_agg.song_id
+            GROUP BY songs.id;
         `);
 
         for(let row of rows) {
