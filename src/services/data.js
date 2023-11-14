@@ -14,6 +14,7 @@ class Db_client{
     }
 
     async logEvent(eventName, eventDetails = ""){
+        return true;
         try{
             const response = await fetch(`/api/logEvent`, {
                 method: 'POST',
