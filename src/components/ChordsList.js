@@ -190,6 +190,11 @@ export default function ChordsList({ initialSongs }){
             </div>
         </div>
         <main className={"songsList"}>
+            {
+                displayedSongs.map(song => {
+                    return <SongCard key={song.id} song={song} />
+                })
+            }
             <aside className={"songItemWrapper"}>
                 <a className={styles.songLink} href={`/createSong`}>
                     <div className={styles.songItem}>
@@ -199,11 +204,6 @@ export default function ChordsList({ initialSongs }){
                     </div>
                 </a>
             </aside>
-            {
-                displayedSongs.map(song => {
-                    return <SongCard key={song.id} song={song} />
-                })
-            }
         </main>
         <Pagination 
             currentPage = {currentPage}
