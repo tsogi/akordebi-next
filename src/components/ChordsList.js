@@ -205,6 +205,7 @@ export default function ChordsList({ initialSongs }){
                 </a>
             </aside>
         </main>
+        <img src="/yamaha_C40II.png" />
         <Pagination 
             currentPage = {currentPage}
             totalResults = {paginationCount}
