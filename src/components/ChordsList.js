@@ -24,6 +24,25 @@ export default function ChordsList({ initialSongs }){
     const[paginationCount, setPaginationCount] = useState(0);
 
     const router = useRouter();
+        
+    async function handleYamahaClick(){
+        try {
+        let msg = `akordebi.ge: yamaha banner clicked`;
+
+        const response = await fetch("/api/sendSlack", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ message: msg })
+        });
+
+        alert("სამწუხაროდ მარაგი ამოწურულია. გთხოვთ შეამოწმოთ რამდენიმე დღეში");
+
+        } catch(error){
+
+        }
+    }
 
     useEffect(() => {
         writeParametersToState();
@@ -205,7 +224,6 @@ export default function ChordsList({ initialSongs }){
                 </a>
             </aside>
         </main>
-        <img src="/yamaha_C40II.png" />
         <Pagination 
             currentPage = {currentPage}
             totalResults = {paginationCount}
@@ -214,5 +232,8 @@ export default function ChordsList({ initialSongs }){
             onPreviousClick = {handlePreviousClick}
             goToPage = {handlePageClick}
         />
+        <div className="px-[10px] mt-[40px]">
+            <img onClick={handleYamahaClick} className="radius-[4px] cursor-pointer" src="/yamaha_C40II.png" />
+        </div>
     </div>
 }
