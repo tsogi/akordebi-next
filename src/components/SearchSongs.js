@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import db from '@/services/data';
 import styles from "./SearchSongs.module.css";
+import lang from '../services/lang'
 
 const SearchSong = ({ onSearch }) => {
   const [searchText, setSearchText] = useState('');
@@ -33,9 +34,9 @@ const SearchSong = ({ onSearch }) => {
 
   return (
     <div className={styles.searchContainer}>
-      <input type='text' id={styles.test} className={styles.searchInput} label="აკორდების ძებნა"
+      <input type='text' id={styles.test} className={styles.searchInput} label={lang._searchLabel}
         value={searchText}
-        placeholder="მოძებნეთ სიმღერა ან ავტორი"
+        placeholder={lang._searchText}
         onChange={handleInputChange}
         onKeyDown={handleInputPress}
       />

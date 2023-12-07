@@ -1,6 +1,7 @@
 import styles from "./Footer.module.css";
 import { useEffect } from "react";
 import WriteUs from "./WriteUs";
+import lang from '../services/lang'
 
 export default function Footer(){
     useEffect(() => {
@@ -22,8 +23,8 @@ export default function Footer(){
           <div className={`${styles.feedback}`}>
             <WriteUs />
           </div>
-          <div className={`${styles.copyright} text-[#004aad]`}>Designed and developed by 
-            <a className="text-[#f2ac2b]" href="https://github.com/tsogi"> tsogi</a>
+          <div className={`${styles.copyright} text-[#004aad]`}>{lang._footer_designBy} 
+            <a className="text-[#f2ac2b]" href="https://github.com/tsogi"> {lang._footer_tsogi}</a>
           </div>
         </div>
         <div className="mt-[70px]" id="top-ge-counter-container" data-site-id="116500"></div>

@@ -12,34 +12,35 @@ import InputLabel from '@mui/material/InputLabel';
 import Pagination from "./Pagination";
 import { useRouter } from 'next/router';
 import db from '@/services/data';
+import lang from '../services/lang'
 
 const resultsPerPage = 20;
 
-export default function ChordsList({ initialSongs }){
-    const[displayedSongs, setDisplayedSongs] = useState([]);
-    const[filterConfirmed, setFilterConfirmed] = useState(false);
-    const[filterLessoned, setFilterLessoned] = useState(false);
-    const[sortBy, setSortBy] = useState("default");
-    const[currentPage, setCurrentPage] = useState(1);
-    const[paginationCount, setPaginationCount] = useState(0);
+export default function ChordsList({ initialSongs }) {
+    const [displayedSongs, setDisplayedSongs] = useState([]);
+    const [filterConfirmed, setFilterConfirmed] = useState(false);
+    const [filterLessoned, setFilterLessoned] = useState(false);
+    const [sortBy, setSortBy] = useState("default");
+    const [currentPage, setCurrentPage] = useState(1);
+    const [paginationCount, setPaginationCount] = useState(0);
 
     const router = useRouter();
-        
-    async function handleYamahaClick(){
+
+    async function handleYamahaClick() {
         try {
-        let msg = `akordebi.ge: yamaha banner clicked`;
+            let msg = `akordebi.ge: yamaha banner clicked`;
 
-        const response = await fetch("/api/sendSlack", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ message: msg })
-        });
+            const response = await fetch("/api/sendSlack", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: msg })
+            });
 
-        alert("სამწუხაროდ მარაგი ამოწურულია. გთხოვთ შეამოწმოთ რამდენიმე დღეში");
+            alert("სამწუხაროდ მარაგი ამოწურულია. გთხოვთ შეამოწმოთ რამდენიმე დღეში");
 
-        } catch(error){
+        } catch (error) {
 
         }
     }
@@ -57,54 +58,54 @@ export default function ChordsList({ initialSongs }){
         applyFilters();
     }, [initialSongs]);
 
-    function writeParametersToState(){
+    function writeParametersToState() {
         const { page: urlPage, sort: urlSort, lessoned: urlLessoned, confirmed: urlConfirmed } = router.query;
-        
-        if(urlPage) setCurrentPage(Number(urlPage));
-        if(urlSort) setSortBy(urlSort);
-        if(urlLessoned) setFilterLessoned(urlLessoned === 'true');
-        if(urlConfirmed) setFilterConfirmed(urlConfirmed === 'true');
+
+        if (urlPage) setCurrentPage(Number(urlPage));
+        if (urlSort) setSortBy(urlSort);
+        if (urlLessoned) setFilterLessoned(urlLessoned === 'true');
+        if (urlConfirmed) setFilterConfirmed(urlConfirmed === 'true');
     }
-    
-    function updateUrlParameters(){
+
+    function updateUrlParameters() {
         router.replace({
-          pathname: router.pathname,
-          query: {
-            ...router.query,
-            page: currentPage,
-            sort: sortBy,
-            lessoned: filterLessoned,
-            confirmed: filterConfirmed
-          }
+            pathname: router.pathname,
+            query: {
+                ...router.query,
+                page: currentPage,
+                sort: sortBy,
+                lessoned: filterLessoned,
+                confirmed: filterConfirmed
+            }
         }, undefined, { scroll: false });
     }
-    
-    async function handleNextClick(){
+
+    async function handleNextClick() {
         setCurrentPage(currentPage + 1);
 
         await db.logEvent("page_click", "next");
     }
 
-    async function handlePreviousClick(){
+    async function handlePreviousClick() {
         setCurrentPage(currentPage - 1);
 
         await db.logEvent("page_click", "previous");
     }
 
-    async function handlePageClick(page){
+    async function handlePageClick(page) {
         setCurrentPage(page);
 
         await db.logEvent("page_click", page);
     }
 
-    function applyFilters(){
+    function applyFilters() {
         let songs = [...initialSongs];
 
-        if(filterConfirmed) {
+        if (filterConfirmed) {
             songs = songs.filter((song) => { return song.confirmed })
         }
 
-        if(filterLessoned) {
+        if (filterLessoned) {
             songs = songs.filter((song) => { return song.videoLesson })
         }
 
@@ -136,12 +137,12 @@ export default function ChordsList({ initialSongs }){
         return ret;
     }
 
-    async function handleConfirmedClick(){
+    async function handleConfirmedClick() {
         setCurrentPage(1);
-        if(filterConfirmed) {
+        if (filterConfirmed) {
             setFilterConfirmed(false);
             return;
-        } 
+        }
 
         setFilterConfirmed(true);
 
@@ -156,9 +157,9 @@ export default function ChordsList({ initialSongs }){
         await db.logEvent("filter", val);
     }
 
-    async function handleLessonedClick(){
+    async function handleLessonedClick() {
         setCurrentPage(1);
-        if(filterLessoned) {
+        if (filterLessoned) {
             setFilterLessoned(false);
             return;
         }
@@ -168,7 +169,7 @@ export default function ChordsList({ initialSongs }){
         await db.logEvent("filter", "lessoned");
     }
 
-    function handleSearchClick(songs){
+    function handleSearchClick(songs) {
         setCurrentPage(1);
         setFilterConfirmed(false);
         setFilterLessoned(false);
@@ -189,9 +190,9 @@ export default function ChordsList({ initialSongs }){
             <div className={`${styles.filterSongs} filtersWrapper`}>
                 <div className={styles.sortContainer}>
                     <select className={`${styles.selectSort} text-[14px]`} value={sortBy} onChange={handleSortChange}>
-                        <option value="default">ხარისხით</option>
-                        <option value="likes">პოპულარობით</option>
-                        <option value="difficulty">სირთულით</option>
+                        <option value="default">{lang._filterQuality}</option>
+                        <option value="likes">{lang._filterPopularity}</option>
+                        <option value="difficulty">{lang._filterDifficulty}</option>
                     </select>
                 </div>
                 <div className={styles.filterContainer}>
@@ -202,7 +203,7 @@ export default function ChordsList({ initialSongs }){
                     </Tooltip>
                     <Tooltip placement="top" title="მიჩვენე მხოლოდ დამოწმებული">
                         <div onClick={handleConfirmedClick} className={`${styles.filter} ${styles.lesson} ${filterConfirmed ? styles.filterSelected : ""}`}>
-                            <TaskAltIcon style={{ color: "#15a894" }} /> 
+                            <TaskAltIcon style={{ color: "#15a894" }} />
                         </div>
                     </Tooltip>
                 </div>
@@ -218,19 +219,19 @@ export default function ChordsList({ initialSongs }){
                 <a className={styles.songLink} href={`/createSong`}>
                     <div className={styles.songItem}>
                         <div className={styles.songDetails}>
-                            <div style={{ padding: "15px" }} className={`${styles.songName} capital`}>სიმღერის ატვირთვა</div>
+                            <div style={{ padding: "15px" }} className={`${styles.songName} capital`}>{lang._uploadSong}</div>
                         </div>
                     </div>
                 </a>
             </aside>
         </main>
-        <Pagination 
-            currentPage = {currentPage}
-            totalResults = {paginationCount}
-            resultsPerPage = {resultsPerPage}
-            onNextClick = {handleNextClick}
-            onPreviousClick = {handlePreviousClick}
-            goToPage = {handlePageClick}
+        <Pagination
+            currentPage={currentPage}
+            totalResults={paginationCount}
+            resultsPerPage={resultsPerPage}
+            onNextClick={handleNextClick}
+            onPreviousClick={handlePreviousClick}
+            goToPage={handlePageClick}
         />
         <div className="px-[10px] mt-[40px]">
             <img onClick={handleYamahaClick} className="radius-[4px] cursor-pointer" src="/yamaha_C40II.png" />

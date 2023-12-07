@@ -5,6 +5,7 @@ import Footer from '@/components/Footer'
 import db from '@/services/db'
 import uiDb from '@/services/data';
 import { useEffect } from 'react'
+import lang from '../services/lang'
 
 export default function Home({ initialSongs }) {
   useEffect(() => {
@@ -14,8 +15,8 @@ export default function Home({ initialSongs }) {
   return (
     <>
       <Head>
-        <title>გიტარის აკორდები | gitaris akordebi</title>
-        <meta name="description" content="ქართული სიმღერების გიტარის აკორდები | Guitar chords of Georgian songs" />
+        <title>{lang._metaTitle}</title>
+        <meta name="description" content={lang._metaDescription} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8346425726826566" crossOrigin="anonymous"></script>
@@ -30,11 +31,11 @@ export default function Home({ initialSongs }) {
 }
 
 export async function getServerSideProps() {
-    let initialSongs = await db.getAllSongsSorted();
-  
-    return {
-      props: {
-        initialSongs
-      },
-    }
+  let initialSongs = await db.getAllSongsSorted();
+
+  return {
+    props: {
+      initialSongs
+    },
+  }
 }

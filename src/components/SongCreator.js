@@ -7,6 +7,7 @@ import AuthorsEditor from '@/components/AuthorsEditor';
 import DB from "@/services/data";
 import SongTextEditor from "@/components/SongTextEditor";
 import Snackbar from '@mui/material/Snackbar';
+import lang from '../services/lang'
 
 const css = {
     textInput: "h-[50px] pl-5 text-white w-full bg-[rgba(255,255,255,.05)] shadow-[inset 12px 12px 30px rgba(53,123,230,.2)]"
@@ -123,22 +124,22 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
 
     return <>
             <div className={ styles.inputName }>
-                <input className={css.textInput} type="text" value={songName} onChange={handleSongNameChange} style={{ width: "100%" }} placeholder="ჩაწერეთ სიმღერის სახელი" />
+                <input className={css.textInput} type="text" value={songName} onChange={handleSongNameChange} style={{ width: "100%" }} placeholder={lang.upload.song_name_input} />
             </div>
             <div className={ styles.inputAuthors }>
                 <AuthorsEditor _authors={authors} onAuthorsChange={setAuthors} />
             </div>
             <div className={ styles.inputVideo }>
-                <input className={css.textInput} type="text" value={videoLesson} onChange={handleVideoLessonChange} style={{ width: "100%" }} placeholder={"ვიდეო გაკვეთილის ლინკი. მაგ. youtube.com/watch?v=O08BvtiPka8 (არასავალდებულო)"} />
+                <input className={css.textInput} type="text" value={videoLesson} onChange={handleVideoLessonChange} style={{ width: "100%" }} placeholder={lang.upload.video_lesson_link} />
             </div>
             <div className={ styles.uploader }>
-                <input className={css.textInput} type="text" value={uploader} onChange={handleUploaderChange} style={{ width: "100%" }} placeholder={"ამტვირთის სახელი/გვარი (არასავალდებულო)"} />
+                <input className={css.textInput} type="text" value={uploader} onChange={handleUploaderChange} style={{ width: "100%" }} placeholder={lang.upload.uploader_name} />
             </div>
             <div className={styles.textEditor}>
                 <SongTextEditor _lines={songText} onSongTextChange={setSongText} />
             </div>
             <div className={ `${styles.saveSongBtn} capital` }>
-                <Button disabled={saving ? true : false} style={{ background: "#033475", fontSize: "1.3rem" }} size="large" onClick={handleSaveSongClick} variant="outlined">სიმღერის შენახვა</Button>
+                <Button disabled={saving ? true : false} style={{ background: "#033475", fontSize: "1.3rem" }} size="large" onClick={handleSaveSongClick} variant="outlined">{lang.upload.save}</Button>
             </div>
             <Snackbar
                 anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
