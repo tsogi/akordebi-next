@@ -58,7 +58,7 @@
 
 .songMeta {
     display: flex;
-    align-items: center;
+    align-items: end;
     justify-content: space-between;
     position: absolute;
     bottom: 30px;
