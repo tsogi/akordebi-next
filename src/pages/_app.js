@@ -3,6 +3,7 @@ import Script from 'next/script';
 import { createPagesBrowserClient } from '@supabase/auth-helpers-nextjs'
 import { SessionContextProvider } from '@supabase/auth-helpers-react'
 import { useState } from 'react'
+import { MyUserContextProvider } from '@/utils/useUser';
 
 export default function App({ Component, pageProps }) {
 
@@ -27,8 +28,9 @@ export default function App({ Component, pageProps }) {
       supabaseClient={supabaseClient}
       initialSession={pageProps.initialSession}
     >
-
-      <Component {...pageProps} />
+      <MyUserContextProvider>
+        <Component {...pageProps} />
+      </MyUserContextProvider>
     </SessionContextProvider>
   </>
 }
