@@ -9,13 +9,13 @@ import SongVotes from "@/components/SongVotes";
 import db from "@/services/db";
 import uiDb from '@/services/data';
 import styles from "./SongPage.module.css";
-import lang from '../../services/lang'
+import lang from '@/services/lang'
 let intervalId;
 
-export default function SongPage({ song }) {
+export default function SongPage({ song }){
     const [fontSize, setFontSize] = useState(16);
     const [scrollSpeed, setScrollSpeed] = useState(0);
-    const [showChords, setShowChords] = useState(false);
+    const [showChords, setShowChords ] = useState(false);
 
     useEffect(() => {
         scroll();
@@ -23,7 +23,7 @@ export default function SongPage({ song }) {
 
     useEffect(() => {
         document.addEventListener('click', handleScreenClick);
-
+        
         uiDb.logEvent("song_page", song.id);
 
         return () => {
@@ -33,12 +33,12 @@ export default function SongPage({ song }) {
 
     function handleScreenClick(event) {
         let el = event.target;
-        if (!el.classList.contains('chordBtn')) {
+        if(!el.classList.contains('chordBtn')) {
             handleChordClose();
         }
     }
 
-    function scroll() {
+    function scroll(){
         clearInterval(intervalId);
 
         intervalId = setInterval(() => {
@@ -47,44 +47,44 @@ export default function SongPage({ song }) {
         }, 200);
     }
 
-    async function handlePlusFontClick() {
+    async function handlePlusFontClick(){
         let newFontSize = fontSize + 1;
-        if (newFontSize < 50) {
+        if(newFontSize < 50) {
             setFontSize(newFontSize);
         }
 
         await uiDb.logEvent("font_click", "plus");
     }
 
-    async function handleMinusFontClick() {
+    async function handleMinusFontClick(){
         let newFontSize = fontSize - 1;
-        if (newFontSize > 5) {
+        if(newFontSize > 5) {
             setFontSize(newFontSize);
         }
 
         await uiDb.logEvent("font_click", "minus");
     }
 
-    async function handleMinusScrollClick() {
+    async function handleMinusScrollClick(){
         let newSpeed = scrollSpeed - 1;
-        if (newSpeed >= 0) {
+        if(newSpeed >= 0) {
             setScrollSpeed(newSpeed);
         }
 
         await uiDb.logEvent("auto_scroll", "minus");
     }
 
-    async function handlePlusScrollClick() {
+    async function handlePlusScrollClick(){
         let newSpeed = scrollSpeed + 1;
-        if (newSpeed < 6) {
+        if(newSpeed < 6) {
             setScrollSpeed(newSpeed);
         }
 
         await uiDb.logEvent("auto_scroll", "plus");
     }
 
-    async function handleShowChordsClick() {
-        if (showChords) {
+    async function handleShowChordsClick(){
+        if(showChords) {
             setShowChords(false);
             return;
         }
@@ -97,12 +97,12 @@ export default function SongPage({ song }) {
     return <>
         <Head>
             <title>{`${song.name} - გიტარის აკორდები`}</title>
-            <meta name="description" content={`${song.searchWords}`} />
+            <meta name="description" content={ `${song.searchWords}` } />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link rel="icon" type="image/x-icon" href="/favicon.ico" />
             <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8346425726826566" crossOrigin="anonymous"></script>
         </Head>
-        <Header />
+        <Header />    
         <div className={`${styles.songPage} page_container noselect`}>
             <div className={styles.majorSettings}>
                 <div className={`${styles.font} ${styles.settings}`}>
@@ -125,65 +125,65 @@ export default function SongPage({ song }) {
             <div className={styles.songAuthors}>
                 {
                     song?.authors ?
-                        song.authors.map((author) => {
-                            return <h4 key={author} className={styles.songAuthor}>{author}</h4>
-                        })
-                        :
-                        null
+                    song.authors.map((author) => {
+                        return <h4 key={author} className={styles.songAuthor}>{author}</h4>
+                    })
+                    :
+                    null
                 }
             </div>
-            <main className={styles.songBody} style={{ fontSize }}>
+            <main className={styles.songBody} style={{fontSize}}>
                 {
                     song?.body ? song.body.map((line, index) => {
-                        if (line.type == "rightHand") {
+                        if(line.type == "rightHand") {
                             return rightHandLine(line.value, index);
                         }
 
-                        if (line.type == "coupletChords") {
+                        if(line.type == "coupletChords") {
                             return coupletChordsLine(line.list, index, showChords);
                         }
 
-                        if (line.type == "text") {
+                        if(line.type == "text") {
                             return coupletLine(line, index);
                         }
-
-                        if (line.type == "chorus") {
+                        
+                        if(line.type == "chorus") {
                             return chorusLine(line, index);
                         }
 
-                        if (line.type == "break") {
+                        if(line.type == "break") {
                             return breakLine(index);
                         }
                     })
-                        :
-                        null
-                }
+                    :
+                    null
+                } 
             </main>
             <div className={styles.postSongArea}>
                 {
                     song.uploader ?
-                        <div className={styles.uploaderWrapper}>
-                            <div>
-                                {lang.chord.uploaded}: {song.uploader}
-                            </div>
+                    <div className={styles.uploaderWrapper}>
+                        <div>
+                            {lang.chord.uploaded}: {song.uploader}
                         </div>
-                        :
-                        null
+                    </div>
+                    :
+                    null
                 }
                 <div className={styles.songVotesWrapper}>
                     <div>
-                       {lang.chord.rate}:
+                      {lang.chord.rate}:
                     </div>
                     <SongVotes songId={song.id} />
                 </div>
             </div>
             {
                 song?.videoLesson ?
-                    <div className={styles.videoTutorial}>
-                        <EmbedVideo url={song.videoLesson} />
-                    </div>
-                    :
-                    null
+                <div className={styles.videoTutorial}>
+                    <EmbedVideo url={song.videoLesson} />
+                </div>
+                :
+                null
             }
             {/* <div className={styles.fbComments}>
                 <FbComments href={`akordebi.ge/songPage/${song.id}`} />
@@ -193,19 +193,19 @@ export default function SongPage({ song }) {
     </>
 }
 
-function coupletChordsLine(chords, index, showChords) {
+function coupletChordsLine(chords, index, showChords){
     return <div key={index} className={`${styles.lineWrapper} ${styles.coupletChords}`}>
         <div className={styles.coupletChordsList} style={{ display: showChords ? "flex" : "none" }}>
             {
                 chords.map(chord => {
-                    return <img className={styles.coupletChordImg} onError={() => { this.style.display = 'none' }} src={findChordImage(chord)} />
+                    return <img className={styles.coupletChordImg} onError = {() => { this.style.display = 'none' }} src={ findChordImage(chord) } />
                 })
             }
         </div>
     </div>
 }
 
-function rightHandLine(content, index) {
+function rightHandLine(content, index){
     return <div key={index} className={`${styles.lineWrapper} ${styles.rightHand}`}>
         <div className={styles.rightHandLabel}>მარჯვენა ხელი: </div>
         <div className={styles.rightHandText}>
@@ -218,56 +218,56 @@ function rightHandLine(content, index) {
     </div>
 }
 
-function renderLine(line, index) {
+function renderLine(line, index){
     return <div key={index} className={`lineWrapper ${line.type}`}>
-        {
-            line.value.split("").map((character, index) => {
-                return <div key={index} className={styles.textBit}>
-                    <div className={styles.character}>{character == " " ? '\u00A0' : character}</div>
-                    {
-                        line.chords[index] ?
-                            <>
-                                <div className={`${styles.chordLabel} chordBtn`} onClick={(event) => { handleChordClick(event, line.chords[index]) }}>{line.chords[index]}</div>
-                                <div className={`${styles.chordImage} chordImage`}>
-                                    <div className={styles.closeChordBtn} onClick={handleChordClose}><HighlightOffIcon /></div>
-                                    {/* <div className={styles.imageLabel">{line.chords[index]}</div> */}
-                                    <img
-                                        onError={({ currentTarget }) => {
-                                            currentTarget.onerror = null; // prevents looping
-                                            currentTarget.src = "";
-                                        }}
+    {
+        line.value.split("").map((character, index) => {
+            return <div key={index} className={styles.textBit}>
+                <div className={styles.character}>{character == " " ? '\u00A0' : character}</div>
+                {
+                    line.chords[index] ?
+                    <>
+                        <div className={`${styles.chordLabel} chordBtn`} onClick={(event) => { handleChordClick(event, line.chords[index])}}>{line.chords[index]}</div>
+                        <div className={`${styles.chordImage} chordImage`}>
+                            <div className={styles.closeChordBtn} onClick={handleChordClose}><HighlightOffIcon /></div>
+                            {/* <div className={styles.imageLabel">{line.chords[index]}</div> */}
+                            <img
+                                onError={({ currentTarget }) => {
+                                    currentTarget.onerror = null; // prevents looping
+                                    currentTarget.src="";
+                                }}
 
-                                        src={findChordImage(line.chords[index])} />
-                                </div>
-                            </>
-                            :
-                            null
-                    }
-                </div>
-            })
-        }
+                            src={ findChordImage(line.chords[index]) } />
+                        </div>
+                    </>
+                    :
+                    null
+                }
+            </div>
+        })
+    }
     </div>
 }
 
-function findChordImage(code) {
+function findChordImage(code){
     code = code.replace("/", "-");
     code = code.replace(":", "-");
     code = code.replace("#", "_");
     code = encodeURIComponent(code);
 
     let chordImage = `/chords/${code}.png`;
-
+    
     return chordImage;
 }
 
-function handleChordClose() {
+function handleChordClose(){
     document.querySelectorAll(".chordImage").forEach((item) => {
         item.style.display = "none";
     });
 }
 
-async function handleChordClick(event, chord) {
-    if (event.target.nextSibling.style.display == "flex") {
+async function handleChordClick(event, chord){
+    if(event.target.nextSibling.style.display == "flex") {
         document.querySelectorAll(".chordImage").forEach((item) => {
             item.style.display = "none";
         });
@@ -284,7 +284,7 @@ async function handleChordClick(event, chord) {
         let side = center < mouseX ? "right" : "left";
 
         event.target.nextSibling.style.display = "flex";
-        if (side == "right") {
+        if(side == "right") {
             event.target.nextSibling.style.right = "0";
         } else {
             event.target.nextSibling.style.left = "0";
@@ -294,15 +294,15 @@ async function handleChordClick(event, chord) {
     await uiDb.logEvent("chord_click", chord);
 }
 
-function coupletLine(line, index) {
+function coupletLine(line, index){
     return renderLine(line, index)
 }
 
-function breakLine(index) {
+function breakLine(index){
     return <div key={index} className={`lineWrapper break`}></div>
 }
 
-function chorusLine(line, index) {
+function chorusLine(line, index){
     return renderLine(line, index)
 }
 
@@ -341,38 +341,38 @@ export async function getServerSideProps({ params }) {
             notFound: true,
         }
     }
-
+  
     return {
-        props: {
-            song
-        },
+      props: {
+        song
+      },
     }
 }
 
-function addCoupletChords(song) {
+function addCoupletChords(song){
     let newLines = [];
     let lines = song.body;
-    for (let i = 0; i < lines.length; i++) {
+    for(let i =0; i< lines.length; i++) {
         let line = lines[i];
         let nextLine = lines[i + 1];
-        if (nextLine && !["text", "chorus"].includes(line.type) && ["text", "chorus"].includes(nextLine.type)) {
+        if(nextLine && !["text", "chorus"].includes(line.type) && ["text", "chorus"].includes(nextLine.type)) {
             newLines.push(line);
             // let randomNumber = Math.floor(Math.random() * 10000) + 1;
-            newLines.push({ id: new Date().getTime(), type: 'coupletChords', value: '', list: [] });
+            newLines.push({id: new Date().getTime(), type: 'coupletChords', value: '', list: []});
         } else {
             newLines.push(line);
         }
     }
 
     let chordsList = [];
-    for (let i = newLines.length - 1; i >= 0; i--) {
+    for(let i = newLines.length - 1; i >= 0; i--) {
         let line = newLines[i];
 
-        if (line.chords) {
+        if(line.chords) {
             let lineChords = line.chords.filter(Boolean);
-            chordsList = [...new Set([...lineChords, ...chordsList])]
+            chordsList = [...new Set([...lineChords, ...chordsList])] 
         }
-        if (line.type == "coupletChords") {
+        if(line.type == "coupletChords") {
             line.list = [...chordsList];
             chordsList = [];
         }

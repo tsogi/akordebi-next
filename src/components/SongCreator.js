@@ -7,7 +7,7 @@ import AuthorsEditor from '@/components/AuthorsEditor';
 import DB from "@/services/data";
 import SongTextEditor from "@/components/SongTextEditor";
 import Snackbar from '@mui/material/Snackbar';
-import lang from '../services/lang'
+import lang from '@/services/lang'
 
 const css = {
     textInput: "h-[50px] pl-5 text-white w-full bg-[rgba(255,255,255,.05)] shadow-[inset 12px 12px 30px rgba(53,123,230,.2)]"

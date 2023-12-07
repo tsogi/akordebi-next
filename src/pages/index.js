@@ -5,7 +5,7 @@ import Footer from '@/components/Footer'
 import db from '@/services/db'
 import uiDb from '@/services/data';
 import { useEffect } from 'react'
-import lang from '../services/lang'
+import lang from '@/services/lang'
 
 export default function Home({ initialSongs }) {
   useEffect(() => {
@@ -31,11 +31,11 @@ export default function Home({ initialSongs }) {
 }
 
 export async function getServerSideProps() {
-  let initialSongs = await db.getAllSongsSorted();
-
-  return {
-    props: {
-      initialSongs
-    },
-  }
+    let initialSongs = await db.getAllSongsSorted();
+  
+    return {
+      props: {
+        initialSongs
+      },
+    }
 }

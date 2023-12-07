@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import db from '@/services/data';
 import styles from "./SearchSongs.module.css";
-import lang from '../services/lang'
+import lang from '@/services/lang'
 
 const SearchSong = ({ onSearch }) => {
   const [searchText, setSearchText] = useState('');

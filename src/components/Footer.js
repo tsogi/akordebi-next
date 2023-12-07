@@ -1,7 +1,7 @@
 import styles from "./Footer.module.css";
 import { useEffect } from "react";
 import WriteUs from "./WriteUs";
-import lang from '../services/lang'
+import lang from '@/services/lang'
 
 export default function Footer(){
     useEffect(() => {
