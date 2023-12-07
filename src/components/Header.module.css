@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     margin-bottom: 30px;
+    position: relative;
 }
 
 .logoImage {
@@ -18,4 +19,13 @@
 
 .logoArea {
 
+}
+
+.authButton{
+    position: absolute;
+    border: 2px solid white;
+    border-radius: 16px;
+    padding: 10px 20px;
+    right: 0;
+    top: 24px;
 }
