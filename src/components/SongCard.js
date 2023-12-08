@@ -63,46 +63,32 @@ function renderDifficulty(difficulty) {
         return null;
     }
 
-    let difficultyStyle = {};
-    let transform = '';
+    let difficultyIcon = '';
     switch (difficulty) {
         case 1:
-            difficultyStyle = {
-                background: 'linear-gradient(30deg, #85CB9E 0%, #85CB9E 25%, #cecaca 25%, #cecaca 100%)',
-            };
-            transform = 'rotate(-60deg)';
+            difficultyIcon = '/difficulty/difficulty1.png';
             break;
         case 2:
-            difficultyStyle = {
-                background: 'linear-gradient(60deg, #FECE0C 0%, #FECE0C 37.5%, #cecaca 37.5%, #cecaca 100%)',
-            };
-            transform = 'rotate(-30deg)';
+            difficultyIcon = '/difficulty/difficulty2.png';
+
             break;
         case 3:
-            difficultyStyle = {
-                background: 'linear-gradient(90deg, blue 0%, blue 50%, #cecaca 50%, #cecaca 100%)',
-            };
-            transform = 'rotate(0deg)';
+            difficultyIcon = '/difficulty/difficulty3.png';
+
             break;
         case 4:
-            difficultyStyle = {
-                background: 'linear-gradient(120deg, orange 0%, orange 62.5%, #cecaca 62.5%, #cecaca 100%)',
-            };
-            transform = 'rotate(30deg)';
+            difficultyIcon = '/difficulty/difficulty4.png';
+
             break;
         case 5:
-            difficultyStyle = {
-                background: '#F05549',
-            };
-            transform = 'rotate(90deg)';
+            difficultyIcon = '/difficulty/difficulty5.png';
+
             break;
         default:
             break;
     }
 
     return (
-        <div style={difficultyStyle} className={styles.difficultyIcon}>
-            <div style={{ transform }} className={styles.bar} />
-        </div>
+            <img className="w-12 h-8 object-contain mb-[2px]" src={difficultyIcon} />
     );
 }
