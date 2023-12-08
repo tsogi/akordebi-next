@@ -101,8 +101,8 @@ function renderDifficulty(difficulty) {
     }
 
     return (
-        <div style={difficultyStyle} className='difficultyIcon'>
-            <div style={{ transform }} className='bar' />
+        <div style={difficultyStyle} className={styles.difficultyIcon}>
+            <div style={{ transform }} className={styles.bar} />
         </div>
     );
 }
