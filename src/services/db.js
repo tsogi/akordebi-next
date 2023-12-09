@@ -45,6 +45,23 @@ class Db{
         return null;
     }
 
+    async addSongToFavorites(songId, userId){
+        const [rows,fields] = await this.pool.execute(`
+            insert into favorite_songs (song_id, user_id)
+            values (?, ?)
+        `, [songId, userId]);
+
+        return rows.affectedRows;
+    }
+
+    async removeSongFromFavorites(songId, userId){
+        const [rows,fields] = await this.pool.execute(`
+            delete from favorite_songs where song_id = ? and user_id = ?
+        `, [songId, userId]);
+
+        return rows.affectedRows;
+    }
+
     // Todo Most of the code in getSong(), getSongByUrl(), getSongByName() are duplicated. Fix DRY
     async getSong(songId){
         const [rows,fields] = await this.pool.execute(`
@@ -103,8 +120,8 @@ class Db{
         return null;
     }
 
-    async getAllSongsSorted(){
-        let initialSongs = await this.getAllSongs();
+    async getAllSongsSorted(userID = null){
+        let initialSongs = await this.getAllSongs(userID);
 
         const compare = (a, b) => {
             // First, check if both have videoLesson and confirmed=1
@@ -130,7 +147,7 @@ class Db{
         return initialSongs;
     }
 
-    async getAllSongs(){
+    async getAllSongs(userID = null){
         const [rows,fields] = await this.pool.execute(`
                 SELECT 
                 songs.name, 
@@ -141,7 +158,8 @@ class Db{
                 songs.confirmed, 
                 songs.difficulty, 
                 IFNULL(authors_agg.authors, "") as authors, 
-                IFNULL(votes_agg.votes, "") as votes 
+                IFNULL(votes_agg.votes, "") as votes
+                ${userID ? ', IF(favorite_songs.id IS NOT NULL, TRUE, FALSE) AS isFavorite' : ''}
             FROM songs
             LEFT JOIN (
                 SELECT 
@@ -158,6 +176,9 @@ class Db{
                 FROM votes
                 GROUP BY votes.song_id
             ) AS votes_agg ON songs.id = votes_agg.song_id
+            ${userID ? `
+            LEFT JOIN favorite_songs ON songs.id = favorite_songs.song_id AND favorite_songs.user_id = '${userID}'
+            ` : ''}
             GROUP BY songs.id;
         `);
 
