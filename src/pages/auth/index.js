@@ -43,4 +43,9 @@ export const getServerSideProps = async (ctx) => {
         permanent: false,
       },
     }
+  else {
+    return {
+      props: {},
+    }
+  }
 }
