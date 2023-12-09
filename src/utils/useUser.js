@@ -12,24 +12,21 @@ export const MyUserContextProvider = ({ children }) => {
   const [isLoadingData, setIsloadingData] = useState(false);
   const [userDetails, setUserDetails] = useState(null);
 
-  // Function to fetch user details
-  const fetchUserDetails = async () => {
-    try {
-      const { data, error } = await supabase.from('users').select('*').single();
-      if (error) throw error;
-      return data;
-    } catch (error) {
-      console.error('Error fetching user details:', error);
-      return null;
-    }
-  };
-
   useEffect(() => {
     const initializeUserDetails = async () => {
       if (user && !isLoadingData && !userDetails) {
         setIsloadingData(true);
-        const userDetails = await fetchUserDetails();
-        setUserDetails(userDetails);
+
+        const response = await fetch(`api/auth/getUser`,
+          { method: "GET", headers: { 'Content-Type': 'application/json', }}
+        );
+
+        const {user: foundUserDetails} = await response.json();
+
+        if (foundUserDetails) {
+          setUserDetails(foundUserDetails);
+        }
+
         setIsloadingData(false);
       } else if (!user && !isLoadingUser && !isLoadingData) {
         setUserDetails(null);

@@ -14,6 +14,37 @@ class Db{
         }
     }
 
+    async setUserData(user){
+        const id = user.id;
+        const email = user.email;
+        const createdAt = user.created_at;
+        const fullName = user.user_metadata.full_name ?? '';
+        const avatarUrl = user.user_metadata.avatar_url ?? '';
+
+        let query = `
+            insert into users (id, email, full_name, avatar_url, created_at)
+            values (?, ?, ?, ?, ?)
+            on duplicate key update email = ?, full_name = ?, avatar_url = ?
+        `;
+
+        await this.pool.execute(query, [id, email, fullName, avatarUrl, createdAt, email, fullName, avatarUrl])
+
+        const userDetails = await this.getUserByID(id);
+
+        return userDetails;
+    }
+
+    async getUserByID(id){
+        const [rows,fields] = await this.pool.execute(`
+            select * from users where id = ?
+        `, [id]);
+
+        if(rows.length){
+            return rows[0];
+        }
+        return null;
+    }
+
     // Todo Most of the code in getSong(), getSongByUrl(), getSongByName() are duplicated. Fix DRY
     async getSong(songId){
         const [rows,fields] = await this.pool.execute(`
