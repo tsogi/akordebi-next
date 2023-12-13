@@ -16,9 +16,6 @@ export default function Header(){
         {
             user ?
             <>
-            {
-                userDetails?.avatar_url && <Image src={userDetails.avatar_url} width={40} height={40} alt={user.full_name} />
-            }
             <div>
                 {user.email}
             </div>
