@@ -1,8 +1,11 @@
 import { useState } from "react";
 import styles from "./WriteUs.module.css";
+import Alert from "./Alert";
 
 export default function WriteUs(){
   const [text, setText] = useState("");
+  const [showAlert,setShowAlert] = useState(false);
+  const [showError,setShowError] = useState(false);
 
   const handleInputChange = (event) => {
     setText(event.target.value);
@@ -27,10 +30,10 @@ export default function WriteUs(){
 
       setText("");
 
-      alert("მესიჯი წარმატებით გაიგზავნა. მადლობა უკუკავშირისთვის");
+      setShowAlert(true)
     } catch(error){
       console.log(error);
-      alert("მესიჯი ვერ გაიგზავნა. გთხოვთ მოგვწეროთ მეილზე tsogiaidze@yahoo.com");
+      setShowError(true)
     }
   }
 
@@ -40,7 +43,10 @@ export default function WriteUs(){
     }
   }
 
-    return <div className="flex w-full relative">
+    return <>
+    <Alert type="success" duration={10} message={"თქვენი კომენტარი წარმატებით გაიგზავნა"} open={showAlert} setOpen={setShowAlert}/>
+    <Alert type="error" duration={10} message={"მესიჯი ვერ გაიგზავნა. გთხოვთ მოგვწეროთ მეილზე tsogiaidze@yahoo.com"} open={showError} setOpen={setShowError}/>
+    <div className="flex w-full relative">
       <input type='text' id={styles.test} className={`${styles.input} text-xs leading-5 tracking-tight h-12 w-full border-b border-f2ac2b bg-opacity-2 py-3 px-5 text-white`} label="აკორდების ძებნა"
         value={text}
         placeholder="მოგვწერეთ იდეები, შენიშვნები, მოსაზრებები"
@@ -54,4 +60,5 @@ export default function WriteUs(){
         </svg>
       </button>
     </div>
+    </>
 }
