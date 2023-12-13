@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     margin-bottom: 30px;
+    position: relative;
 }
 
 .logoImage {
@@ -18,4 +19,23 @@
 
 .logoArea {
 
+}
+
+.authWrapper{
+    position: absolute;
+    border: 2px solid white;
+    border-radius: 16px;
+    padding: 10px 20px;
+    right: 0;
+    top: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.authWrapper img {
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
 }

@@ -14,6 +14,52 @@ class Db{
         }
     }
 
+    async setUserData(user){
+        const id = user.id;
+        const email = user.email;
+        const fullName = user.user_metadata.full_name ?? '';
+
+        let query = `
+            insert into users (id, email, full_name)
+            values (?, ?, ?)
+            on duplicate key update email = ?, full_name = ?
+        `;
+
+        await this.pool.execute(query, [id, email, fullName, email, fullName])
+
+        const userDetails = await this.getUserByID(id);
+
+        return userDetails;
+    }
+
+    async getUserByID(id){
+        const [rows,fields] = await this.pool.execute(`
+            select * from users where id = ?
+        `, [id]);
+
+        if(rows.length){
+            return rows[0];
+        }
+        return null;
+    }
+
+    async addSongToFavorites(songId, userId){
+        const [rows,fields] = await this.pool.execute(`
+            insert into favorite_songs (song_id, user_id)
+            values (?, ?)
+        `, [songId, userId]);
+
+        return rows.affectedRows;
+    }
+
+    async removeSongFromFavorites(songId, userId){
+        const [rows,fields] = await this.pool.execute(`
+            delete from favorite_songs where song_id = ? and user_id = ?
+        `, [songId, userId]);
+
+        return rows.affectedRows;
+    }
+
     // Todo Most of the code in getSong(), getSongByUrl(), getSongByName() are duplicated. Fix DRY
     async getSong(songId){
         const [rows,fields] = await this.pool.execute(`
@@ -72,8 +118,8 @@ class Db{
         return null;
     }
 
-    async getAllSongsSorted(){
-        let initialSongs = await this.getAllSongs();
+    async getAllSongsSorted(userID = null){
+        let initialSongs = await this.getAllSongs(userID);
 
         const compare = (a, b) => {
             // First, check if both have videoLesson and confirmed=1
@@ -99,7 +145,7 @@ class Db{
         return initialSongs;
     }
 
-    async getAllSongs(){
+    async getAllSongs(userID = null){
         const [rows,fields] = await this.pool.execute(`
                 SELECT 
                 songs.name, 
@@ -110,7 +156,8 @@ class Db{
                 songs.confirmed, 
                 songs.difficulty, 
                 IFNULL(authors_agg.authors, "") as authors, 
-                IFNULL(votes_agg.votes, "") as votes 
+                IFNULL(votes_agg.votes, "") as votes,
+                MAX(IF(favorite_songs.user_id IS NOT NULL AND favorite_songs.song_id = songs.id, TRUE, FALSE)) AS isFavorite
             FROM songs
             LEFT JOIN (
                 SELECT 
@@ -127,6 +174,7 @@ class Db{
                 FROM votes
                 GROUP BY votes.song_id
             ) AS votes_agg ON songs.id = votes_agg.song_id
+            LEFT JOIN favorite_songs ON songs.id = favorite_songs.song_id AND favorite_songs.user_id = '${userID}'
             GROUP BY songs.id;
         `);
 
