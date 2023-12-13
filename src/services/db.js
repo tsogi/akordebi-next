@@ -17,17 +17,15 @@ class Db{
     async setUserData(user){
         const id = user.id;
         const email = user.email;
-        const createdAt = user.created_at;
         const fullName = user.user_metadata.full_name ?? '';
-        const avatarUrl = user.user_metadata.avatar_url ?? '';
 
         let query = `
-            insert into users (id, email, full_name, avatar_url, created_at)
-            values (?, ?, ?, ?, ?)
-            on duplicate key update email = ?, full_name = ?, avatar_url = ?
+            insert into users (id, email, full_name)
+            values (?, ?, ?)
+            on duplicate key update email = ?, full_name = ?
         `;
 
-        await this.pool.execute(query, [id, email, fullName, avatarUrl, createdAt, email, fullName, avatarUrl])
+        await this.pool.execute(query, [id, email, fullName, email, fullName])
 
         const userDetails = await this.getUserByID(id);
 

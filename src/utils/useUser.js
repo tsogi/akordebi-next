@@ -17,7 +17,7 @@ export const MyUserContextProvider = ({ children }) => {
       if (user && !isLoadingData && !userDetails) {
         setIsloadingData(true);
 
-        const response = await fetch(`api/auth/getUser`,
+        const response = await fetch(`/api/auth/getUser`,
           { method: "GET", headers: { 'Content-Type': 'application/json', }}
         );
 
