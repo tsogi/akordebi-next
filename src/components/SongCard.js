@@ -28,7 +28,7 @@ export default function SongCard({ song }){
                 </div>
             </a>
             <div className={styles.songMeta}>
-                <div className={`${styles.songMetaLeft} flex items-end`}>
+                <div className={`${styles.songMetaLeft} flex items-center`}>
                     <div className={styles.votesSumWrapper}>
                         <Badge anchorOrigin={{ vertical: 'top', horizontal: 'right', }} badgeContent={song.voteSum || "0"}  style={{ color: "#9ebeff" }}>
                             <ThumbUp style={{ color: "#9ebeff" }} />
@@ -89,6 +89,6 @@ function renderDifficulty(difficulty) {
     }
 
     return (
-            <img className="w-12 h-8 object-contain mb-[2px]" src={difficultyIcon} />
+            <img className="ml-[10px] w-[25px] h-[18px]" src={difficultyIcon} />
     );
 }
