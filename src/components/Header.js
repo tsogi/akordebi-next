@@ -1,6 +1,5 @@
 import Link from "next/link";
 import styles from "./Header.module.css";
-import Image from "next/image";
 import { useUser } from "@/utils/useUser";
 
 export default function Header(){

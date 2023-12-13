@@ -156,8 +156,8 @@ class Db{
                 songs.confirmed, 
                 songs.difficulty, 
                 IFNULL(authors_agg.authors, "") as authors, 
-                IFNULL(votes_agg.votes, "") as votes
-                ${userID ? ', IF(favorite_songs.id IS NOT NULL, TRUE, FALSE) AS isFavorite' : ''}
+                IFNULL(votes_agg.votes, "") as votes,
+                MAX(IF(favorite_songs.user_id IS NOT NULL AND favorite_songs.song_id = songs.id, TRUE, FALSE)) AS isFavorite
             FROM songs
             LEFT JOIN (
                 SELECT 
@@ -174,9 +174,7 @@ class Db{
                 FROM votes
                 GROUP BY votes.song_id
             ) AS votes_agg ON songs.id = votes_agg.song_id
-            ${userID ? `
             LEFT JOIN favorite_songs ON songs.id = favorite_songs.song_id AND favorite_songs.user_id = '${userID}'
-            ` : ''}
             GROUP BY songs.id;
         `);
 
