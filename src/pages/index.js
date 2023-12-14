@@ -6,6 +6,7 @@ import db from '@/services/db'
 import uiDb from '@/services/data';
 import { useEffect } from 'react'
 import lang from '@/services/lang'
+import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
 
 export default function Home({ initialSongs }) {
   useEffect(() => {
@@ -30,12 +31,17 @@ export default function Home({ initialSongs }) {
   )
 }
 
-export async function getServerSideProps() {
-    let initialSongs = await db.getAllSongsSorted();
-  
-    return {
-      props: {
-        initialSongs
-      },
-    }
+
+export async function getServerSideProps(ctx) {
+  const supabase = createPagesServerClient(ctx);
+  const {data} = await supabase.auth.getSession();
+  const userID = data?.session?.user?.id ?? null;
+
+  let initialSongs = await db.getAllSongsSorted(userID);
+
+  return {
+    props: {
+      initialSongs,
+    },
+  };
 }
