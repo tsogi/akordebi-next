@@ -11,10 +11,14 @@ import { useUser } from '@/utils/useUser';
 
 export default function SongCard({ song }){
 
-    const { user } = useUser();
+    const { user, setAuthOpenedFrom } = useUser();
     const router = useRouter();
 
     const [isFavorite, setIsFavorite] = React.useState(song.isFavorite?? false);
+
+    React.useEffect(() => {
+        setIsFavorite(song.isFavorite?? false);
+    }, [song.isFavorite]);
 
     React.useEffect(() => {
         if(user && localStorage.getItem("addSongToFavorites") == song.id){
@@ -27,7 +31,7 @@ export default function SongCard({ song }){
         if (!user){
             // save song to local storage
             localStorage.setItem("addSongToFavorites", song.id);
-            router.push("/auth");
+            setAuthOpenedFrom('favorites');
             return;
         }
         if(isFavorite){

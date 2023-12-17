@@ -4,6 +4,7 @@ import { createPagesBrowserClient } from '@supabase/auth-helpers-nextjs'
 import { SessionContextProvider } from '@supabase/auth-helpers-react'
 import { useState } from 'react'
 import { MyUserContextProvider } from '@/utils/useUser';
+import AuthSlideOver from '@/components/AuthSlideOver';
 
 export default function App({ Component, pageProps }) {
 
@@ -30,6 +31,7 @@ export default function App({ Component, pageProps }) {
     >
       <MyUserContextProvider>
         <Component {...pageProps} />
+        <AuthSlideOver />
       </MyUserContextProvider>
     </SessionContextProvider>
   </>
