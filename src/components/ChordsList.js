@@ -20,6 +20,7 @@ export default function ChordsList({ initialSongs }){
     const[filterConfirmed, setFilterConfirmed] = useState(false);
     const[filterLessoned, setFilterLessoned] = useState(false);
     const[sortBy, setSortBy] = useState("default");
+    // Todo if you go to page 3 unauthorised, click favorite and login, it will put page 1 in url page parameter
     const[currentPage, setCurrentPage] = useState(1);
     const[paginationCount, setPaginationCount] = useState(0);
 
