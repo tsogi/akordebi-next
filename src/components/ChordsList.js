@@ -20,7 +20,9 @@ export default function ChordsList({ initialSongs }){
     const[filterConfirmed, setFilterConfirmed] = useState(false);
     const[filterLessoned, setFilterLessoned] = useState(false);
     const[sortBy, setSortBy] = useState("default");
-    const[currentPage, setCurrentPage] = useState(1);
+    const[currentPage, setCurrentPage] = useState(
+        typeof window !== "undefined" ? Number(window.location.search.replace("?page=", "")) || 1 : 1
+    );
     const[paginationCount, setPaginationCount] = useState(0);
 
     const router = useRouter();
