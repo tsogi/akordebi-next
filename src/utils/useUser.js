@@ -11,6 +11,7 @@ export const MyUserContextProvider = ({ children }) => {
   const accessToken = session?.access_token ?? null;
   const [isLoadingData, setIsloadingData] = useState(false);
   const [userDetails, setUserDetails] = useState(null);
+  const [authOpenedFrom, setAuthOpenedFrom] = useState(null);
 
   useEffect(() => {
     const initializeUserDetails = async () => {
@@ -34,6 +35,12 @@ export const MyUserContextProvider = ({ children }) => {
     };
 
     initializeUserDetails();
+
+    // close auth slide over if user is logged in
+    if(user && !!authOpenedFrom) {
+      setAuthOpenedFrom(null);
+    }
+
   }, [user, isLoadingUser, userDetails]);
 
   const contextValue = {
@@ -41,6 +48,8 @@ export const MyUserContextProvider = ({ children }) => {
     user,
     userDetails,
     isLoading: isLoadingUser || isLoadingData,
+    authOpenedFrom,
+    setAuthOpenedFrom,
   };
 
   return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>;

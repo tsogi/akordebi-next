@@ -1,30 +1,41 @@
 import { useEffect, useState } from "react";
 import styles from "./ChordsList.module.css";
 import SongCard from "./SongCard";
-import Paper from '@mui/material/Paper';
-import { CardActionArea, MenuItem, Tooltip } from '@mui/material';
+import { Tooltip } from '@mui/material';
 import SearchSongs from "./SearchSongs";
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
-import Select from '@mui/material/Select';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
 import Pagination from "./Pagination";
 import { useRouter } from 'next/router';
 import db from '@/services/data';
 import lang from '@/services/lang'
+import { HeartIcon } from '@heroicons/react/20/solid';
+import { useUser } from "@/utils/useUser";
 
 const resultsPerPage = 20;
 
 export default function ChordsList({ initialSongs }){
+    const router = useRouter();
+    const { user, setAuthOpenedFrom } = useUser();
+
     const[displayedSongs, setDisplayedSongs] = useState([]);
-    const[filterConfirmed, setFilterConfirmed] = useState(false);
-    const[filterLessoned, setFilterLessoned] = useState(false);
-    const[sortBy, setSortBy] = useState("default");
-    const[currentPage, setCurrentPage] = useState(1);
+    const[filterConfirmed, setFilterConfirmed] = useState(
+        router.query.confirmed ? router.query.confirmed : false
+    );
+    const[filterFavorites, setFilterFavorites] = useState(
+        router.query.favorites ? router.query.favorites : false
+    );
+    const[filterLessoned, setFilterLessoned] = useState(
+        router.query.lessoned ? router.query.lessoned : false
+    );
+    const[sortBy, setSortBy] = useState(
+        router.query.sort ? router.query.sort : "default"
+    );
+    const[currentPage, setCurrentPage] = useState(
+        router.query.page ? Number(router.query.page) : 1
+    );
     const[paginationCount, setPaginationCount] = useState(0);
 
-    const router = useRouter();
         
     async function handleYamahaClick(){
         try {
@@ -52,18 +63,19 @@ export default function ChordsList({ initialSongs }){
     useEffect(() => {
         applyFilters();
         updateUrlParameters();
-    }, [currentPage, sortBy, filterLessoned, filterConfirmed]);
+    }, [currentPage, sortBy, filterFavorites, filterLessoned, filterConfirmed]);
 
     useEffect(() => {
         applyFilters();
     }, [initialSongs]);
 
     function writeParametersToState(){
-        const { page: urlPage, sort: urlSort, lessoned: urlLessoned, confirmed: urlConfirmed } = router.query;
+        const { page: urlPage, sort: urlSort, favorites: urlFavorites,  lessoned: urlLessoned, confirmed: urlConfirmed } = router.query;
         
         if(urlPage) setCurrentPage(Number(urlPage));
         if(urlSort) setSortBy(urlSort);
         if(urlLessoned) setFilterLessoned(urlLessoned === 'true');
+        if(urlFavorites) setFilterFavorites(urlFavorites === 'true');
         if(urlConfirmed) setFilterConfirmed(urlConfirmed === 'true');
     }
     
@@ -75,6 +87,7 @@ export default function ChordsList({ initialSongs }){
             page: currentPage,
             sort: sortBy,
             lessoned: filterLessoned,
+            favorites: filterFavorites,
             confirmed: filterConfirmed
           }
         }, undefined, { scroll: false });
@@ -107,6 +120,10 @@ export default function ChordsList({ initialSongs }){
 
         if(filterLessoned) {
             songs = songs.filter((song) => { return song.videoLesson })
+        }
+
+        if(filterFavorites) {
+            songs = songs.filter((song) => { return song.isFavorite })
         }
 
         if (sortBy === "likes") {
@@ -157,6 +174,23 @@ export default function ChordsList({ initialSongs }){
         await db.logEvent("filter", val);
     }
 
+    async function handleFavoritesClick(){
+        if(!user){
+            setAuthOpenedFrom('favoritesFilter');
+            return;
+        }
+
+        setCurrentPage(1);
+        if(filterFavorites) {
+            setFilterFavorites(false);
+            return;
+        }
+
+        setFilterFavorites(true);
+
+        await db.logEvent("filter", "favorites");
+    }
+
     async function handleLessonedClick(){
         setCurrentPage(1);
         if(filterLessoned) {
@@ -173,6 +207,7 @@ export default function ChordsList({ initialSongs }){
         setCurrentPage(1);
         setFilterConfirmed(false);
         setFilterLessoned(false);
+        setFilterFavorites(false);
         setSortBy("default");
 
         // Todo find safer way to make sure setAllSongs is executed after setFilterConfirmed and setFilterLessoned
@@ -196,6 +231,14 @@ export default function ChordsList({ initialSongs }){
                     </select>
                 </div>
                 <div className={styles.filterContainer}>
+                    <Tooltip placement="top" title="მიჩვენე მხოლოდ ფავორიტები">
+                        <div onClick={handleFavoritesClick} className={`${styles.filter} ${styles.favorites} ${filterFavorites ? styles.filterSelected : ""}`}>
+                            <HeartIcon 
+                                style={{ fill: "transparent", stroke: "white" }} 
+                                className={`w-[26px] h-[26px]`}  
+                            />
+                        </div>
+                    </Tooltip>
                     <Tooltip placement="top" title="მიჩვენე მხოლოდ გაკვეთილით">
                         <div onClick={handleLessonedClick} className={`${styles.filter} ${styles.confirmed} ${filterLessoned ? styles.filterSelected : ""}`}>
                             <OndemandVideoIcon style={{ color: "#9ebeff" }} />
