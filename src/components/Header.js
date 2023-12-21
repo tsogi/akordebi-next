@@ -1,9 +1,11 @@
-import Link from "next/link";
 import styles from "./Header.module.css";
 import { useUser } from "@/utils/useUser";
+import { supabase } from "@/utils/supabase-client";
+import { useRouter } from "next/router";
 
 export default function Header(){
-    const { user, userDetails } = useUser();
+    const { user, setAuthOpenedFrom } = useUser();
+    const router = useRouter();
 
     return <header className={`page_container ${styles.headerWrapper}`}>
         <div className={styles.logoArea}>
@@ -18,9 +20,20 @@ export default function Header(){
             <div>
                 {user.email}
             </div>
+            <button
+                onClick={async () => {
+                    const { error } = await supabase.auth.signOut();
+                    if(error){
+                        console.error(error);
+                    }
+                    router.reload();
+                }}
+            >
+                Logout
+            </button>
             </>
             :
-            <Link href="/auth">შესვლა</Link>
+            <button onClick={() => setAuthOpenedFrom('header')}>შესვლა</button>
         }
                 
         </div>
