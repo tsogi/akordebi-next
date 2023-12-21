@@ -166,7 +166,7 @@ function FavoriteIcon({isFavorite, onClick}){
         height="24"
         fill={isFavorite ? "#e31b23" : "transparent"}
         xmlns="http://www.w3.org/2000/svg"
-        className='ml-4 cursor-pointer'
+        className='ml-[10px] cursor-pointer'
         onClick={onClick}
     >
         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
