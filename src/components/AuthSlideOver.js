@@ -5,6 +5,7 @@ import { supabase } from "@/utils/supabase-client";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { useUser } from "@/utils/useUser";
+import lang from "@/services/lang";
 
 export default function AuthSlideOver() {
   const { authOpenedFrom, setAuthOpenedFrom } = useUser();
@@ -36,7 +37,9 @@ export default function AuthSlideOver() {
                     <div className="px-4 sm:px-6">
                       <div className="flex items-start justify-between">
                         <Dialog.Title className="text-base font-semibold leading-6 text-gray-900">
-                          ავტორიზაცია
+                          {
+                            lang._auth.login
+                          }
                         </Dialog.Title>
                         <div className="ml-3 flex h-7 items-center">
                           <button
@@ -84,16 +87,16 @@ export default function AuthSlideOver() {
 
 function whyLoginText(authOpenedFrom){
   if(authOpenedFrom == "header"){
-    return 'სისტემაში შესვლის შემდეგ შეძლებთ დამატებითი ფუნქციებით სარგებლობას როგორიცაა მაგალითად "ფავორიტებში დამატება"';
+    return lang._auth.enterBtn;
   }
 
   if(authOpenedFrom == "favorites"){
-    return "სიმღერის ფავორიტებში დასამატებლათ გთხოვთ შეხვიდეთ სისტემაში რის შემდეგაც შეძლებთ დამატებითი ფუნქციებით სარგებლობას";
+    return lang._auth.addFavorites;
   }
 
   if(authOpenedFrom == "favoritesFilter"){
-    return '"ფავორიტებში დამატების" ფუნქციის გამოსაყენებლად გთხოვთ შეხვიდეთ სისტემაში';
+    return lang._auth.favoritesBtn;
   }
  
-  return 'სისტემაში შესვლის შემდეგ შეძლებთ დამატებითი ფუნქციონალით სარგებლობას როგორიცაა მაგალითად "ფავორიტებში დამატება"';
+  return lang._auth.enterBtn;
 }

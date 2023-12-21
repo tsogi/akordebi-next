@@ -1,4 +1,4 @@
-export default {
+const interfaceGeo = {
     _metaTitle: "გიტარის აკორდები | gitaris akordebi",
     _metaDescription: "ქართული სიმღერების გიტარის აკორდები | Guitar chords of Georgian songs",
     _searchText: "მოძებნეთ სიმღერა ან ავტორი",
@@ -8,15 +8,24 @@ export default {
     _filterDifficulty: "სირთულით",
     _videoIconTitle: "მიჩვენე მხოლოდ გაკვეთილით",
     _verifyIconTitle: "მიჩვენე მხოლოდ დამოწმებული",
+    _favoriteIconTitle: "მიჩვენე მხოლოდ ჩემი ფავორიტები",
+    _login: "შესვლა",
     _uploadSong: "სიმღერის ატვირთვა",
     _isShown: "ნაჩვენებია",
     _from: "დან",
-    _till: "მდე. სულ",
+    _till: "მდე.",
+    _totally: "სულ",
     _song: 'სიმღერა',
     _footer_designBy: "Designed and developed by",
     _footer_tsogi: "tsogi",
     _footer_input: 'აკორდების ძებნა',
     _footer_input_placeholder: 'მოგვწერეთ იდეები, შენიშვნები, მოსაზრებები',
+    _auth: {
+        login: "ავტორიზაცია",
+        enterBtn: 'სისტემაში შესვლის შემდეგ შეძლებთ დამატებითი ფუნქციებით სარგებლობას როგორიცაა მაგალითად "ფავორიტებში დამატება"',
+        addFavorites: "სიმღერის ფავორიტებში დასამატებლათ გთხოვთ შეხვიდეთ სისტემაში რის შემდეგაც შეძლებთ დამატებითი ფუნქციებით სარგებლობას",
+        favoritesBtn: '"ფავორიტების" ფუნქციის გამოსაყენებლად გთხოვთ შეხვიდეთ სისტემაში'
+    },
     chord: {
         font: "ფონტი",
         autoScroll: "ავტო-სქროლი",
@@ -27,8 +36,8 @@ export default {
         rate: " შეაფასეთ აკორდების სისწორე",
     },
     upload: {
-        publish: "სიმღერის akordebi.ge-ზე გამოსაქვეყნებლად შეავსეთ ველები და ატვირთეთ ტექსტი პლიუს(+) ღილაკების მეშვეობით. პროცესი არის მარტივი და ინტუიტიური. ასევე, ამ გვერდის ბოლოში, შეგიძლიათ ნახოთ",
-        video_Instructions: "ტვირთვის ვიდეო ინსტრუქცია",
+        publish: "სიმღერის akordebi.ge-ზე გამოსაქვეყნებლად შეავსეთ ველები და ატვირთეთ ტექსტი პლიუს(+) ღილაკების მეშვეობით. პროცესი არის მარტივი და ინტუიტიური. ასევე, ამ გვერდის ბოლოში, შეგიძლიათ ნახოთ ",
+        video_Instructions: "ატვირთვის ვიდეო ინსტრუქცია",
         video_ifream_title: "ატვირთვის ვიდეო ინსტრუქციები",
         song_name_input: "ჩაწერეთ სიმღერის სახელი",
         video_lesson_link: "ვიდეო გაკვეთილის ლინკი. მაგ. youtube.com/watch?v=O08BvtiPka8 (არასავალდებულო)",
@@ -45,5 +54,84 @@ export default {
         add_string_button: "სტრიქონის დამატება",
         add_skip_button: "გამოტოვების დამატება",
         write_chord: "ჩაწერეთ აკორდი",
+        ex: "მაგალითი",
+        authors: {
+            add: "ავტორის დამატება",
+            authorName: "ავტორის სახელი",
+            delete: "ავტორის წაშლა",
+        }
     },
 }
+
+const interfaceEng = {
+    _metaTitle: "Clean Guitar chords",
+    _metaDescription: "Clean guitar chords of popular songs",
+    _searchText: "Search songs and authors",
+    _searchLabel: "Search chords",
+    _filterPopularity: "By popularity",
+    _filterQuality: "By quality",
+    _filterDifficulty: "By difficulty",
+    _videoIconTitle: "Show only chords with tutorials",
+    _verifyIconTitle: "Show only confirmed chords",
+    _favoriteIconTitle: "Show only my favorites",
+    _login: "Login",
+    _uploadSong: "Upload a song",
+    _isShown: "Showing",
+    _from: "from",
+    _till: "to",
+    _totally: "Totally",
+    _song: 'songs',
+    _footer_designBy: "Designed and developed by",
+    _footer_tsogi: "tsogi",
+    _footer_input: 'Search songs',
+    _footer_input_placeholder: 'Write us ideas and comments',
+    _auth: {
+        login: "Log in",
+        enterBtn: 'After logging in you will be able to use additional features like "Add to favorites"',
+        addFavorites: 'In order to add the song to your favorites please log in to the system',
+        favoritesBtn: 'In order to use Favorites feature please log in to the system'
+    },
+    chord: {
+        font: "Font size",
+        autoScroll: "Auto scroll",
+        chord: "chords",
+        hide: "Hide",
+        appearance: "Show",
+        uploaded: "Uploaded by",
+        rate: "Evaluate correctness of the chords",
+    },
+    upload: {
+        publish: "In order to upload new song chord you should fill out the fields and upload song text using plus(+) buttons. The process is simple and intuitive. Also at the end of this page you can find ",
+        video_Instructions: "video instructions for upload",
+        video_ifream_title: "video instructions for upload",
+        song_name_input: "Enter the song name",
+        video_lesson_link: "Url to video tutorial. Ex. youtube.com/watch?v=O08BvtiPka8 (optional)",
+        uploader_name: "Name of the uploader (optional)",
+        save: "Save the song",
+        editor_save: "Save",
+        editor_delete_title: "Delete the line",
+        editor_move_title: "Move the line",
+        editor_duplicate_title: "Duplicate the line",
+        editor_change_title: "Edit the line",
+        editor_mark_title: "Mark as verse",
+        editor_mark_string_title: "Mark as normal text",
+        addition_right_hand_button: "Add the right hand",
+        add_string_button: "Add the line",
+        add_skip_button: "Add the linebreak",
+        write_chord: "Enter the chord",
+        ex: "Examples",
+        authors: {
+            add: "Add author",
+            authorName: "Author name",
+            delete: "Delete the author"
+        }
+    },
+}
+
+let words = interfaceGeo;
+
+if(process.env.NEXT_PUBLIC_LANG == "eng"){
+    words = interfaceEng;
+}
+
+export default words;

@@ -3,6 +3,7 @@ import { useUser } from "@/utils/useUser";
 import { supabase } from "@/utils/supabase-client";
 import { useRouter } from "next/router";
 import { UserIcon } from '@heroicons/react/20/solid';
+import lang from '@/services/lang'
 
 export default function Header(){
     const { user, setAuthOpenedFrom } = useUser();
@@ -41,7 +42,7 @@ export default function Header(){
                 :
                 <div onClick={() => setAuthOpenedFrom('header')} className="flex items-center  cursor-pointer ">
                     <UserIcon className="w-[18px] " />
-                    <span className={`${styles.enterLabel} pl-[5px]`}>შესვლა</span>
+                    <span className={`${styles.enterLabel} pl-[5px]`}>{lang._login}</span>
                 </div>
             }
             </div>

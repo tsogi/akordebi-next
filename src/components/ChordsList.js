@@ -231,7 +231,7 @@ export default function ChordsList({ initialSongs }){
                     </select>
                 </div>
                 <div className={styles.filterContainer}>
-                    <Tooltip placement="top" title="მიჩვენე მხოლოდ ფავორიტები">
+                    <Tooltip placement="top" title={lang._favoriteIconTitle}>
                         <div onClick={handleFavoritesClick} className={`${styles.filter} ${styles.favorites} ${filterFavorites ? styles.filterSelected : ""}`}>
                             <HeartIcon 
                                 style={{ fill: "transparent", stroke: "white" }} 
@@ -239,12 +239,12 @@ export default function ChordsList({ initialSongs }){
                             />
                         </div>
                     </Tooltip>
-                    <Tooltip placement="top" title="მიჩვენე მხოლოდ გაკვეთილით">
+                    <Tooltip placement="top" title={lang._videoIconTitle}>
                         <div onClick={handleLessonedClick} className={`${styles.filter} ${styles.confirmed} ${filterLessoned ? styles.filterSelected : ""}`}>
                             <OndemandVideoIcon style={{ color: "#9ebeff" }} />
                         </div>
                     </Tooltip>
-                    <Tooltip placement="top" title="მიჩვენე მხოლოდ დამოწმებული">
+                    <Tooltip placement="top" title={lang._verifyIconTitle}>
                         <div onClick={handleConfirmedClick} className={`${styles.filter} ${styles.lesson} ${filterConfirmed ? styles.filterSelected : ""}`}>
                             <TaskAltIcon style={{ color: "#15a894" }} /> 
                         </div>

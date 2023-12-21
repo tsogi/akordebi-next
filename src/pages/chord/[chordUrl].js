@@ -9,7 +9,7 @@ import SongVotes from "@/components/SongVotes";
 import db from "@/services/db";
 import uiDb from '@/services/data';
 import styles from "./SongPage.module.css";
-import lang from '@/services/lang'
+import lang from '@/services/lang';
 let intervalId;
 
 export default function SongPage({ song }){
@@ -118,7 +118,11 @@ export default function SongPage({ song }){
                     <div className={`${styles.scroll} ${styles.operator} ${styles.plus}`} onClick={handlePlusScrollClick}>+</div>
                 </div>
                 <div className={`${styles.coupletChords} ${styles.settings}`}>
-                    <div onClick={handleShowChordsClick} className={`${styles.coupletChordsBtn}`}>{lang.chord.chord} {showChords ? lang.chord.hide : lang.chord.appearance}</div>
+                    <div onClick={handleShowChordsClick} className={`${styles.coupletChordsBtn}`}>
+                        {
+                            showHideText(showChords)
+                        }
+                    </div>
                 </div>
             </div>
             <h2 className={`${styles.songName} capital`}>{song?.name}</h2>
@@ -381,4 +385,12 @@ function addCoupletChords(song){
     song.body = newLines;
 
     return song;
+}
+
+function showHideText(showChords){
+    if(process.env.NEXT_PUBLIC_LANG == "geo") {
+        return `${lang.chord.chord} ${showChords ? lang.chord.hide : lang.chord.appearance}`;
+    }
+
+    return `${showChords ? lang.chord.hide : lang.chord.appearance} ${lang.chord.chord}`;
 }

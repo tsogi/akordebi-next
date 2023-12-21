@@ -45,10 +45,9 @@ export default function Pagination({
     <div className="flex items-center justify-center mt-[20px] text-white px-4 py-3 sm:px-6">
       <div className="sm:flex sm:flex-1 sm:items-center sm:justify-between">
         <div className='mb-[15px]'>
-          <p className="text-sm text-white">
-              {lang._isShown} <span className="font-medium">{(currentPage - 1) * 20}</span>-{lang._from} <span className="font-medium">{currentPage * 20}</span>-{lang._till}{' '}
-              <span className="font-medium">{totalResults}</span> {lang._song}
-          </p>
+          {
+            paginationMeta(currentPage, totalResults)
+          }
         </div>
         <div>
           <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
@@ -90,4 +89,31 @@ export default function Pagination({
       </div>
     </div>
   )
+}
+
+function paginationMeta(currentPage, totalResults){
+  if(process.env.NEXT_PUBLIC_LANG == "geo") {
+    return <p className="text-sm text-white">
+        {lang._isShown} 
+        <span className="font-medium"> {(currentPage - 1) * 20}</span>
+        -{lang._from} 
+        <span className="font-medium"> {currentPage * 20}</span>
+        -{lang._till}{' '}
+        {lang._totally}
+        <span className="font-medium"> {totalResults} </span> 
+        {lang._song}
+    </p>
+  }
+
+  return <p className="text-sm text-white">
+      {lang._isShown} 
+      <span> </span>
+      {lang._from}
+      <span className="font-medium"> {(currentPage - 1) * 20} </span>
+      {lang._till}
+      <span className="font-medium"> {currentPage * 20}</span>
+      . {lang._totally}
+      <span className="font-medium"> {totalResults} </span> 
+      {lang._song}
+  </p>
 }

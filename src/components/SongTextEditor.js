@@ -300,7 +300,7 @@ return (
         <input type="text" className={`${css.textInput} my-[30px]`}
           value={selectedChord}
           onChange={handleNumberChange}
-          placeholder='მაგ. Am, F#, Csus4/Bb'
+          placeholder={`${lang.upload.ex} Am, F#, Csus4/Bb`}
         />
           <Button variant="contained" color="primary" onClick={handleSave}>
              {lang.upload.editor_save}
