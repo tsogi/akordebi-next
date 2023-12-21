@@ -36,7 +36,7 @@ export default function AuthSlideOver() {
                     <div className="px-4 sm:px-6">
                       <div className="flex items-start justify-between">
                         <Dialog.Title className="text-base font-semibold leading-6 text-gray-900">
-                          Log In
+                          ავტორიზაცია
                         </Dialog.Title>
                         <div className="ml-3 flex h-7 items-center">
                           <button
@@ -53,22 +53,16 @@ export default function AuthSlideOver() {
                     </div>
                     <div className="relative mt-6 flex-1 px-4 sm:px-6">
                       <div className="">
-                        <div>
-                          <h2>
-                            <span className="block text-sm font-medium text-gray-900">
-                              In order to {" "}
-                              {
-                                authOpenedFrom == "header" ? "use additional features" 
-                                : authOpenedFrom == "favorites" ? "add the song to your favorites"
-                                : "use additional features"
-                              }, please log in.
-                            </span>
-                          </h2>
-                        </div>
+                          <span className="block text-sm font-medium text-gray-900 mt-[12px] mb-[58px]">
+                            {
+                              whyLoginText(authOpenedFrom)
+                            }
+                            
+                          </span>
                         <Auth
                           supabaseClient={supabase}
                           appearance={{ theme: ThemeSupa }}
-                          providers={["google", "facebook"]}
+                          providers={["facebook"]}
                           theme=""
                           onlyThirdPartyProviders
                           redirectTo={
@@ -86,4 +80,16 @@ export default function AuthSlideOver() {
       </Dialog>
     </Transition.Root>
   );
+}
+
+function whyLoginText(authOpenedFrom){
+  if(authOpenedFrom == "header"){
+    return 'სისტემაში შესვლის შემდეგ შეძლებთ დამატებითი ფუნქციებით სარგებლობას როგორიცაა მაგალითად "ფავორიტებში დამატება"';
+  }
+
+  if(authOpenedFrom == "favorites"){
+    return "სიმღერის ფავორიტებში დასამატებლათ გთხოვთ შეხვიდეთ სისტემაში რის შემდეგაც შეძლებთ დამატებითი ფუნქციებით სარგებლობას";
+  }
+ 
+  return 'სისტემაში შესვლის შემდეგ შეძლებთ დამატებითი ფუნქციონალით სარგებლობას როგორიცაა მაგალითად "ფავორიტებში დამატება"';
 }
