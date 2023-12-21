@@ -18,10 +18,15 @@ const resultsPerPage = 20;
 export default function ChordsList({ initialSongs }){
     const router = useRouter();
     const[displayedSongs, setDisplayedSongs] = useState([]);
-    const[filterConfirmed, setFilterConfirmed] = useState(false);
-    const[filterLessoned, setFilterLessoned] = useState(false);
-    const[sortBy, setSortBy] = useState("default");
-    // Todo if you go to page 3 unauthorised, click favorite and login, it will put page 1 in url page parameter
+    const[filterConfirmed, setFilterConfirmed] = useState(
+        router.query.confirmed ? router.query.confirmed : false
+    );
+    const[filterLessoned, setFilterLessoned] = useState(
+        router.query.lessoned ? router.query.lessoned : false
+    );
+    const[sortBy, setSortBy] = useState(
+        router.query.sort ? router.query.sort : "default"
+    );
     const[currentPage, setCurrentPage] = useState(
         router.query.page ? Number(router.query.page) : 1
     );
