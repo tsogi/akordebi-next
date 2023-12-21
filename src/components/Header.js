@@ -21,7 +21,8 @@ export default function Header(){
                 {user.email}
             </div>
             <button
-                onClick={async () => {
+                onClick={async (e) => {
+                    e.preventDefault();
                     const { error } = await supabase.auth.signOut();
                     if(error){
                         console.error(error);
