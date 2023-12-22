@@ -91,33 +91,40 @@ export default function SongCard({ song }){
                     </div>
                 </div>
             </a>
-            <div className={styles.songMeta}>
+            <div className={styles.songMetaTop}>
                 <div className={`${styles.songMetaLeft} flex items-center`}>
+
+                </div>
+                <div className={styles.songMetaRight}>
+                    {
+                        song.videoLesson ?
+                        <div className={styles.videoLessonIcon}>
+                            <OndemandVideoIcon style={{ color: "#9ebeff" }} />
+                        </div>
+                        :
+                        null
+                    }
+                    {
+                        song.confirmed ?
+                        <div className={styles.confirmedIcon}>
+                            <TaskAltIcon style={{ color: "#15a894" }} /> 
+                        </div>
+                        :
+                        null
+                    }
+                </div>
+            </div>
+            <div className={styles.songMetaBottom}>
+                <div className={`${styles.songMetaLeft} flex items-center`}>
+                    <FavoriteIcon isFavorite={isFavorite} onClick={handleFavoriteClick} />
+                </div>
+                <div className={styles.songMetaRight}>
+                    { renderDifficulty(song.difficulty) }
                     <div className={styles.votesSumWrapper}>
                         <Badge anchorOrigin={{ vertical: 'top', horizontal: 'right', }} badgeContent={song.voteSum || "0"}  style={{ color: "#9ebeff" }}>
                             <ThumbUp style={{ color: "#9ebeff" }} />
                         </Badge>
                     </div>
-                    { renderDifficulty(song.difficulty) }
-                    <FavoriteIcon isFavorite={isFavorite} onClick={handleFavoriteClick} />
-                </div>
-                <div className={styles.songMetaRight}>
-                {
-                    song.videoLesson ?
-                    <div className={styles.videoLessonIcon}>
-                        <OndemandVideoIcon style={{ color: "#9ebeff" }} />
-                    </div>
-                    :
-                    null
-                }
-                {
-                    song.confirmed ?
-                    <div className={styles.confirmedIcon}>
-                        <TaskAltIcon style={{ color: "#15a894" }} /> 
-                    </div>
-                    :
-                    null
-                }
                 </div>
             </div>
         </article>
@@ -153,7 +160,7 @@ function renderDifficulty(difficulty) {
     }
 
     return (
-            <img className="ml-[10px] w-[25px] h-[18px]" src={difficultyIcon} />
+            <img className="mr-[10px] w-[25px] h-[18px]" src={difficultyIcon} />
     );
 }
 
@@ -162,7 +169,7 @@ function FavoriteIcon({isFavorite, onClick}){
         <>
             <HeartIcon 
                 style={{ fill: isFavorite ? "red" : "transparent", stroke: isFavorite ? "red" : "white" }} 
-                className={`w-[26px] h-[26px] ml-[10px] cursor-pointer`}  
+                className={`w-[26px] h-[26px] cursor-pointer`}  
                 onClick={onClick} 
             />
         </>
