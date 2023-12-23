@@ -6,18 +6,14 @@ import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { useUser } from "@/utils/useUser";
 import lang from "@/services/lang";
+import { useRouter } from 'next/router';
 
 export default function AuthSlideOver() {
   const { authOpenedFrom, setAuthOpenedFrom } = useUser();
   const [open, setOpen] = useState(!!authOpenedFrom);
-  const [redirectTo, setRedirectTo] = useState("/");
 
-  useEffect(() => {
-    console.log("window", window.location);
-    if (typeof window !== "undefined") {
-      setRedirectTo(window.location.href);
-    }
-  }, []);
+  const router = useRouter();
+  const currentPath = router.asPath;
 
   useEffect(() => {
     setOpen(!!authOpenedFrom);
@@ -76,7 +72,7 @@ export default function AuthSlideOver() {
                           providers={["facebook"]}
                           theme=""
                           onlyThirdPartyProviders
-                          redirectTo={redirectTo}
+                          redirectTo={currentPath}
                         />
                       </div>
                     </div>
