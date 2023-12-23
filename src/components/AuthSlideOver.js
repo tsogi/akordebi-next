@@ -1,4 +1,3 @@
-"use client"
 import { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
@@ -11,6 +10,13 @@ import lang from "@/services/lang";
 export default function AuthSlideOver() {
   const { authOpenedFrom, setAuthOpenedFrom } = useUser();
   const [open, setOpen] = useState(!!authOpenedFrom);
+  const [redirectTo, setRedirectTo] = useState("/");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setRedirectTo(window.location.href);
+    }
+  }, []);
 
   useEffect(() => {
     setOpen(!!authOpenedFrom);
@@ -69,10 +75,7 @@ export default function AuthSlideOver() {
                           providers={["facebook"]}
                           theme=""
                           onlyThirdPartyProviders
-                          redirectTo={
-                            // "https://akordebi.vercel.app"
-                            typeof window !== "undefined" ? window.location.href : "/"
-                          }
+                          redirectTo={redirectTo}
                         />
                       </div>
                     </div>
