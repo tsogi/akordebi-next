@@ -13,6 +13,7 @@ export default function AuthSlideOver() {
   const [redirectTo, setRedirectTo] = useState("/");
 
   useEffect(() => {
+    console.log("window", window.location);
     if (typeof window !== "undefined") {
       setRedirectTo(window.location.href);
     }
