@@ -69,7 +69,8 @@ export default function AuthSlideOver() {
                           theme=""
                           onlyThirdPartyProviders
                           redirectTo={
-                            typeof window !== "undefined" ? window.location.href : "/"
+                            "https://akordebi.vercel.app"
+                            // typeof window !== "undefined" ? window.location.href : "/"
                           }
                         />
                       </div>
