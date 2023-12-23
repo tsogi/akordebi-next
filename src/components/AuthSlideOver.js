@@ -1,3 +1,4 @@
+"use client"
 import { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
@@ -69,8 +70,8 @@ export default function AuthSlideOver() {
                           theme=""
                           onlyThirdPartyProviders
                           redirectTo={
-                            "https://akordebi.vercel.app"
-                            // typeof window !== "undefined" ? window.location.href : "/"
+                            // "https://akordebi.vercel.app"
+                            typeof window !== "undefined" ? window.location.href : "/"
                           }
                         />
                       </div>
