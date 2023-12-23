@@ -68,9 +68,9 @@ export default function AuthSlideOver() {
                           providers={["facebook"]}
                           theme=""
                           onlyThirdPartyProviders
-                          redirectTo={
-                            typeof window !== "undefined" ? window.location.href : "/"
-                          }
+                          // redirectTo={
+                          //   typeof window !== "undefined" ? window.location.href : "/"
+                          // }
                         />
                       </div>
                     </div>
