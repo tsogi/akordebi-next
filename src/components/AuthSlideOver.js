@@ -68,8 +68,6 @@ export default function AuthSlideOver() {
                           providers={["facebook"]}
                           theme=""
                           onlyThirdPartyProviders
-                          // Todo get the current url dynamically, without .env
-                          // redirectTo={process.env.NEXT_PUBLIC_DOMAIN}
                           redirectTo={
                             typeof window !== "undefined" ? window.location.href : "/"
                           }
