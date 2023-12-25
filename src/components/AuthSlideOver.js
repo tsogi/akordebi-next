@@ -6,14 +6,10 @@ import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { useUser } from "@/utils/useUser";
 import lang from "@/services/lang";
-import { useRouter } from 'next/router';
 
 export default function AuthSlideOver() {
   const { authOpenedFrom, setAuthOpenedFrom } = useUser();
   const [open, setOpen] = useState(!!authOpenedFrom);
-
-  const router = useRouter();
-  const currentPath = router.asPath;
 
   useEffect(() => {
     setOpen(!!authOpenedFrom);
@@ -72,7 +68,8 @@ export default function AuthSlideOver() {
                           providers={["facebook"]}
                           theme=""
                           onlyThirdPartyProviders
-                          redirectTo={currentPath}
+                          // Todo get the current url dynamically, without .env
+                          redirectTo={process.env.NEXT_PUBLIC_DOMAIN}
                         />
                       </div>
                     </div>
