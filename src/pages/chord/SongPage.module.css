@@ -182,6 +182,21 @@
     font-size: 1.2rem;
 }
 
+.songDifficultiesWrapper {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    gap: 12px;
+}
+
+@media screen and (max-width: 768px) {
+    .songDifficultiesWrapper {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
 .uploaderWrapper {
     font-size: 1.2rem;
 }

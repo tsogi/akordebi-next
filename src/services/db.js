@@ -154,9 +154,9 @@ class Db{
                 songs.videoLesson, 
                 songs.id, 
                 songs.confirmed, 
-                songs.difficulty, 
                 IFNULL(authors_agg.authors, "") as authors, 
                 IFNULL(votes_agg.votes, "") as votes,
+                ROUND(AVG(difficulties.difficulty)) as difficulty, 
                 MAX(IF(favorite_songs.user_id IS NOT NULL AND favorite_songs.song_id = songs.id, TRUE, FALSE)) AS isFavorite
             FROM songs
             LEFT JOIN (
@@ -175,6 +175,7 @@ class Db{
                 GROUP BY votes.song_id
             ) AS votes_agg ON songs.id = votes_agg.song_id
             LEFT JOIN favorite_songs ON songs.id = favorite_songs.song_id AND favorite_songs.user_id = '${userID}'
+            LEFT JOIN difficulties ON songs.id = difficulties.song_id
             GROUP BY songs.id;
         `);
 
@@ -185,6 +186,8 @@ class Db{
             delete row.votes;
 
             row.voteSum = votes.reduce((accumulator, current) => accumulator + parseInt(current), 0) || 0;
+
+            row.difficulty = parseInt(row.difficulty) || 0;
         }
 
         return rows;
@@ -270,6 +273,12 @@ class Db{
 
         return rows;
     }
+
+    async getSongDifficulties(songId){
+        const [rows] = await this.pool.execute('SELECT difficulty FROM difficulties WHERE song_id = ?', [songId]);
+
+        return rows;
+    }
     
     async getVoteForIp(songId, ip) {
         const [[existingVote]] = await this.pool.execute('SELECT vote FROM votes WHERE song_id = ? AND ip = ?', [songId, ip]);
@@ -277,8 +286,20 @@ class Db{
         return existingVote;
     }
 
+    async getDifficultyForIp(songId, ip) {
+        const [[existingVote]] = await this.pool.execute('SELECT difficulty FROM difficulties WHERE song_id = ? AND ip = ?', [songId, ip]);
+
+        return existingVote;
+    }
+
     async saveVote(songId, vote, ip){
         const [rows] = await this.pool.execute('INSERT INTO votes (song_id, vote, ip) VALUES (?, ?, ?)', [songId, vote, ip]);
+
+        return rows.affectedRows;
+    }
+
+    async saveDifficulty(songId, difficulty, ip){
+        const [rows] = await this.pool.execute('INSERT INTO difficulties (song_id, difficulty, ip) VALUES (?, ?, ?)', [songId, difficulty, ip]);
 
         return rows.affectedRows;
     }
@@ -291,6 +312,12 @@ class Db{
 
     async updateVote(songId, vote, ip){
         const [rows] = await this.pool.execute('UPDATE votes SET vote = ? WHERE song_id = ? AND ip = ?', [vote, songId, ip])
+
+        return rows.affectedRows;
+    }
+
+    async updateDifficulty(songId, difficulty, ip){
+        const [rows] = await this.pool.execute('UPDATE difficulties SET difficulty = ? WHERE song_id = ? AND ip = ?', [difficulty, songId, ip])
 
         return rows.affectedRows;
     }

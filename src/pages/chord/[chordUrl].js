@@ -9,6 +9,7 @@ import SongVotes from "@/components/SongVotes";
 import db from "@/services/db";
 import uiDb from '@/services/data';
 import styles from "./SongPage.module.css";
+import SongDifficulties from '@/components/SongDifficulties';
 import lang from '@/services/lang';
 let intervalId;
 
@@ -179,6 +180,12 @@ export default function SongPage({ song }){
                       {lang.chord.rate}:
                     </div>
                     <SongVotes songId={song.id} />
+                </div>
+                <div className={styles.songDifficultiesWrapper}>
+                    <div>
+                        Evaluate the difficulty of the chords:
+                    </div>
+                    <SongDifficulties songId={song.id} />
                 </div>
             </div>
             {
