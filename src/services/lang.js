@@ -17,7 +17,7 @@ const interfaceGeo = {
     _totally: "სულ",
     _song: 'სიმღერა',
     _footer_designBy: "Designed and developed by",
-    _footer_tsogi: "tsogi",
+    _footer_tsogi: "Nika Tsogiaidze",
     _footer_input: 'აკორდების ძებნა',
     _footer_input_placeholder: 'მოგვწერეთ იდეები, შენიშვნები, მოსაზრებები',
     _auth: {
@@ -82,7 +82,7 @@ const interfaceEng = {
     _totally: "Totally",
     _song: 'songs',
     _footer_designBy: "Designed and developed by",
-    _footer_tsogi: "tsogi",
+    _footer_tsogi: "Nika Tsogiaidze",
     _footer_input: 'Search songs',
     _footer_input_placeholder: 'Write us ideas and comments',
     _auth: {
