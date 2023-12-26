@@ -23,11 +23,19 @@ export default function Footer(){
           <div className={`${styles.feedback}`}>
             <WriteUs />
           </div>
-          <div className={`${styles.copyright} text-[#004aad]`}>{lang._footer_designBy} 
+          <div className={`${styles.copyright} text-[#035fda]`}>{lang._footer_designBy} 
             <a className="text-[#f2ac2b]" href="https://github.com/tsogi"> {lang._footer_tsogi}</a>
           </div>
         </div>
-        <div className="mt-[70px]" id="top-ge-counter-container" data-site-id="116500"></div>
+        {
+          topGeJsx()
+        }
       </div>
     </footer>
+}
+
+function topGeJsx(){
+  if(process.env.NEXT_PUBLIC_DOMAIN == "akordebi.ge"){
+    return <div className="mt-[70px]" id="top-ge-counter-container" data-site-id="116500"></div>
+  }
 }

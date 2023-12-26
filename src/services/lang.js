@@ -64,8 +64,8 @@ const interfaceGeo = {
 }
 
 const interfaceEng = {
-    _metaTitle: "Clean Guitar chords",
-    _metaDescription: "Clean guitar chords of popular songs",
+    _metaTitle: "Clean guitar chords",
+    _metaDescription: "Curated list of guitar chords with user votes, difficulty and favorites features",
     _searchText: "Search songs and authors",
     _searchLabel: "Search chords",
     _filterPopularity: "By popularity",

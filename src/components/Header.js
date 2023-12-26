@@ -13,10 +13,12 @@ export default function Header(){
         <div className={styles.fakeDiv}></div>
         <div className={`${styles.logoArea}`}>
             <a href="/" className="flex justify-center">
-                <img className={styles.logoImage} alt="akordebiLogo" src={"/akordebige_logo.svg"} />
+                {
+                    siteLogo()
+                }
             </a>
         </div>
-        <div className={`${styles.authWrapper}`}>
+        <div className={`${styles.authWrapper}`} style={{ visibility: process.env.NEXT_PUBLIC_DOMAIN == "dev.akordebi.ge" ? "visible" : "hidden" }} >
             <div className={`flex text-[#96bcef] border-solid border-[1px] rounded-[4px] px-[12px] py-[5px] border-[#96bcef]`}>
             {
                 user ?
@@ -47,7 +49,20 @@ export default function Header(){
             }
             </div>
         </div>
-        
     </header>
 }
 
+
+function siteLogo(){
+    if(process.env.NEXT_PUBLIC_DOMAIN == "akordebi.ge") {
+        return <img className={styles.logoImage} alt="akordebiLogo" src={"/akordebige_logo.svg"} />
+    }
+
+    if(process.env.NEXT_PUBLIC_DOMAIN == "chordsofsongs.com") {
+        return <img className={styles.logoImage} alt="akordebiLogo" src={"/chordsofsongs.svg"} />
+    }
+
+    if(process.env.NEXT_PUBLIC_DOMAIN == "dev.akordebi.ge") {
+        return <img className={styles.logoImage} alt="akordebiLogo" src={"/devakordebige_logo.svg"} />
+    }
+}
