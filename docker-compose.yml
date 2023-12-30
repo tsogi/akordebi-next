@@ -6,19 +6,19 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "4000:3000"
+      - "3000:3000"
     # environment:
     #   - DATABASE_HOST=mysql
     #   - DATABASE_USER=root
-    #   - DATABASE_PASSWORD=password
-    #   - DATABASE_NAME=mydatabase
+    #   - DATABASE_PASSWORD=nikoloz93
+    #   - DATABASE_NAME=akordebi.ge
     depends_on:
       - mysql
 
   mysql:
     image: mysql:latest
     environment:
-      MYSQL_ROOT_PASSWORD: pass123
+      MYSQL_ROOT_PASSWORD: nikoloz93
       MYSQL_DATABASE: akordebi.ge
     volumes:
       - mysql-data:/var/lib/mysql
