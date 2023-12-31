@@ -22,3 +22,6 @@ ssh -i ../akordebi.pem ubuntu@akordebi.ge << EOF
     docker system prune -f
 
 EOF
+
+# Download mysql backup
+# scp ubuntu@akordebi.ge:/var/projects/backups/mysql/akordebi_15.sql ../
