@@ -36,7 +36,7 @@ const interfaceGeo = {
         rate: " შეაფასეთ აკორდების სისწორე",
     },
     upload: {
-        publish: "სიმღერის akordebi.ge-ზე გამოსაქვეყნებლად შეავსეთ ველები და ატვირთეთ ტექსტი პლიუს(+) ღილაკების მეშვეობით. პროცესი არის მარტივი და ინტუიტიური. ასევე, ამ გვერდის ბოლოში, შეგიძლიათ ნახოთ ",
+        publish: `სიმღერის ${process.env.NEXT_PUBLIC_DOMAIN}-ზე გამოსაქვეყნებლად შეავსეთ ველები და ატვირთეთ ტექსტი პლიუს(+) ღილაკების მეშვეობით. პროცესი არის მარტივი და ინტუიტიური. ასევე, ამ გვერდის ბოლოში, შეგიძლიათ ნახოთ `,
         video_Instructions: "ატვირთვის ვიდეო ინსტრუქცია",
         video_ifream_title: "ატვირთვის ვიდეო ინსტრუქციები",
         song_name_input: "ჩაწერეთ სიმღერის სახელი",
@@ -101,7 +101,7 @@ const interfaceEng = {
         rate: "Evaluate correctness of the chords",
     },
     upload: {
-        publish: "In order to upload new song chord you should fill out the fields and upload song text using plus(+) buttons. The process is simple and intuitive. Also at the end of this page you can find ",
+        publish: `In order to upload new song chord to ${process.env.NEXT_PUBLIC_DOMAIN} you should fill out the fields and upload song text using plus(+) buttons. The process is simple and intuitive. Also at the end of this page you can find `,
         video_Instructions: "video instructions for upload",
         video_ifream_title: "video instructions for upload",
         song_name_input: "Enter the song name",

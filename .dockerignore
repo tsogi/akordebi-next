@@ -5,3 +5,5 @@ npm-debug.log
 .gitignore
 .next
 .package-lock.json
+yarn.lock
+package-lock.json

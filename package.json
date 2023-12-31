@@ -28,6 +28,7 @@
     "react-dom": "18.2.0",
     "react-facebook": "^9.0.12",
     "react-sortablejs": "^6.1.4",
+    "sortablejs": "^1.15.1",
     "xmlbuilder": "^15.1.1"
   },
   "devDependencies": {
