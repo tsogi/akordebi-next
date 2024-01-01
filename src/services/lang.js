@@ -20,6 +20,10 @@ const interfaceGeo = {
     _footer_tsogi: "Nika Tsogiaidze",
     _footer_input: 'აკორდების ძებნა',
     _footer_input_placeholder: 'მოგვწერეთ იდეები, შენიშვნები, მოსაზრებები',
+    _footer_terms: "საიტის პირობები",
+    _footer_policy: "კონფედენციალურობა",
+    _footer_all_songs: "ყველა სიმღერა",
+    _footer_add_song: "სიმღერის დამატება",
     _auth: {
         login: "ავტორიზაცია",
         enterBtn: 'სისტემაში შესვლის შემდეგ შეძლებთ დამატებითი ფუნქციებით სარგებლობას როგორიცაა მაგალითად "ფავორიტებში დამატება"',
@@ -85,6 +89,10 @@ const interfaceEng = {
     _footer_tsogi: "Nika Tsogiaidze",
     _footer_input: 'Search songs',
     _footer_input_placeholder: 'Write us ideas and comments',
+    _footer_terms: "Terms of use",
+    _footer_policy: "Privacy policy",
+    _footer_all_songs: "All songs",
+    _footer_add_song: "Add a song",
     _auth: {
         login: "Log in",
         enterBtn: 'After logging in you will be able to use additional features like "Add to favorites"',
