@@ -24,6 +24,7 @@ const interfaceGeo = {
     _footer_policy: "კონფედენციალურობა",
     _footer_all_songs: "ყველა სიმღერა",
     _footer_add_song: "სიმღერის დამატება",
+    rightHand: "მარჯვენა ხელი:",
     _auth: {
         login: "ავტორიზაცია",
         enterBtn: 'სისტემაში შესვლის შემდეგ შეძლებთ დამატებითი ფუნქციებით სარგებლობას როგორიცაა მაგალითად "ფავორიტებში დამატება"',
@@ -93,6 +94,7 @@ const interfaceEng = {
     _footer_policy: "Privacy policy",
     _footer_all_songs: "All songs",
     _footer_add_song: "Add a song",
+    rightHand: "Right hand:",
     _auth: {
         login: "Log in",
         enterBtn: 'After logging in you will be able to use additional features like "Add to favorites"',

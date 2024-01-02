@@ -211,7 +211,7 @@ function coupletChordsLine(chords, index, showChords){
 
 function rightHandLine(content, index){
     return <div key={index} className={`${styles.lineWrapper} ${styles.rightHand}`}>
-        <div className={styles.rightHandLabel}>მარჯვენა ხელი: </div>
+        <div className={styles.rightHandLabel}>{lang.rightHand}</div>
         <div className={styles.rightHandText}>
             {
                 Array.from(content).map((char) => char === " " ? " \u00A0 " : char).reduce((previous, current) => {
