@@ -1,4 +1,5 @@
 # Create docker image .tar for intel
+curl -o ./public/sitemap.xml https://chordsofsongs.com/api/sitemap
 docker buildx build --platform linux/amd64 -t chordsofsongs:1.1 --output "type=docker,dest=../chordsofsongs.tar" .
 
 # Upload docker image .tar to ssh
