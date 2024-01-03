@@ -9,7 +9,6 @@ export default function CreateSong(){
             <meta name="description" content={"სიმღერის აკორდების დამატება | Add new song chords"} />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8346425726826566" crossOrigin="anonymous"></script>
         </Head>
         <Header />
         <div>
