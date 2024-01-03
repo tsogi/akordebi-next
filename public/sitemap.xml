@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://akordebi.ge</loc>
+    <loc>https://chordsofsongs.com</loc>
     <changefreq>daily</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/createSong</loc>
+    <loc>https://chordsofsongs.com/createSong</loc>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/Imagine-John_Lennon</loc>
+    <loc>https://chordsofsongs.com/chord/Imagine-John_Lennon</loc>
     <changefreq>monthly</changefreq>
     <priority>0.800</priority>
+  </url>
+  <url>
+    <loc>https://chordsofsongs.com/chord/Hallelujah-Leonard_Cohen</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.799</priority>
+  </url>
+  <url>
+    <loc>https://chordsofsongs.com/chord/Wish_you_were_here-Pink_Floyd</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.798</priority>
   </url>
 </urlset>

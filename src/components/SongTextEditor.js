@@ -135,10 +135,26 @@ const PoemEditor = ({onSongTextChange, _lines = []}) => {
 
         let beforeOpen = splitOpen[0];
         let splitClose = line.value.split(/\)(.*)/s);
-        let chord = beforeOpen == "" ? splitClose[0].split("(")[1] : splitClose[0].split(beforeOpen)[1].split("(")[1];
+        let chord = splitClose[0].split(beforeOpen)[1].split("(")[1];
+
+        // Chord on beggining of line
+        if(beforeOpen == "") {
+          chord = splitClose[0].split("(")[1];
+        }
+
+        // Chord on end of line
+        if(splitClose[1] == "") {
+          chord = splitClose[0].split("(")[1];
+        }
+
         let textAfterClose = splitClose[1];
         let newLineValue = beforeOpen + textAfterClose;
-        line.chords[beforeOpen.length] = chord;
+
+        if(splitClose[1] == "") {
+          line.chords[beforeOpen.length - 1] = chord;
+        } else {
+          line.chords[beforeOpen.length] = chord;
+        }
         
         line.value = newLineValue;
       }
