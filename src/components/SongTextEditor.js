@@ -38,7 +38,8 @@ const PoemEditor = ({onSongTextChange, _lines = []}) => {
   }, [editId]);
 
   const addLine = (type) => {
-    let newId = lines.length ? (lines.map(line => line.id).sort((a,b) => { return a - b }).pop() + 1) : 1;
+    // let newId = lines.length ? (lines.map(line => line.id).sort((a,b) => { return a - b }).pop() + 1) : 1;
+    let newId = Date.now();
     let newLine = { id: newId, type }
 
     if(type == "text") {
@@ -47,6 +48,7 @@ const PoemEditor = ({onSongTextChange, _lines = []}) => {
         setEditId(newLine.id);
     }
 
+    // Todo if user adds multiple lines for rightHand, goes error
     if(type == "rightHand") {
         newLine.value = "";
         setEditId(newLine.id);
@@ -69,14 +71,14 @@ const PoemEditor = ({onSongTextChange, _lines = []}) => {
   };
 
   const editLine = (id, value) => {
-    setLines(
-      lines.map(line => {
-        if (line.id === id) {
-          return { ...line, value };
-        }
-        return line;
-      })
-    );
+    let updatedLines = lines.map(line => {
+      if (line.id === id) {
+        return { ...line, value };
+      }
+      return line;
+    })
+
+    setLines(updatedLines);
   };
 
   const deleteLine = id => {
@@ -95,7 +97,56 @@ const PoemEditor = ({onSongTextChange, _lines = []}) => {
   };
 
   const handleSaveClick = () => {
+    let newLines = handleMultiLineText();
+    setLines(newLines);
     setEditId(null);
+  }
+
+  function handleMultiLineText(){
+    let updatedLines = lines.flatMap(line => {
+      if (line.value.includes("\n")) {
+        // Split the value into an array by newline
+        const values = line.value.split("\n");
+        return values.map((val, index) => {
+          // Calculate the start index for the chords of the current line
+          const startChordIndex = index === 0 ? 0 : line.value.substring(0, line.value.indexOf(val)).split("\n").reduce((acc, curr) => acc + curr.length, 0);
+          // Calculate the end index for the chords of the current line
+          const endChordIndex = startChordIndex + val.length;
+          return {
+            id: Number(line.id.toString() + index), // Generate a new ID
+            type: line.type,
+            chords: line.chords.slice(startChordIndex, endChordIndex), // Slice the chords array to fit the current line
+            value: val,
+            chosen: line.chosen
+          };
+        });
+      } else {
+        // If no newline, return the line as is
+        return line;
+      }
+    });
+
+    updatedLines = updatedLines.map((line, index) => {
+      while(true){
+        let splitOpen = line.value.split(/\((.*)/s);
+        if(splitOpen.length == 1) {
+          break;
+        }
+
+        let beforeOpen = splitOpen[0];
+        let splitClose = line.value.split(/\)(.*)/s);
+        let chord = splitClose[0].split(beforeOpen)[1].split("(")[1];
+        let textAfterClose = splitClose[1];
+        let newLineValue = beforeOpen + textAfterClose;
+        line.chords[beforeOpen.length] = chord;
+        
+        line.value = newLineValue;
+      }
+
+      return line;
+    });
+
+    return updatedLines;
   }
 
   const handleOpen = (lineIndex, charIndex) => {
@@ -150,11 +201,11 @@ return (
       <Box key={line.id} my={2}>
         {line.id === editId ? (
             <div className={styles.editInputWrapper}>
-                <input type="text" className={`${styles.editInput} ${css.textInput}`}
+                <textarea className={`${styles.editInput} ${css.textInput}`}
                     inputRef={inputRef}
                     value={line.value}
                     onChange={e => handleUpdate(line.id, e.target.value)}
-                />
+                ></textarea>
                 <Button className={styles.saveBtn} style={{ marginLeft: "20px" }} color='primary' variant='outlined' onClick={handleSaveClick}>{lang.upload.editor_save}</Button>
             </div>
         ) : (
