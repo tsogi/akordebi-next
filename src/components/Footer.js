@@ -5,6 +5,7 @@ import lang from '@/services/lang'
 
 export default function Footer(){
     useEffect(() => {
+      if(process.env.NEXT_PUBLIC_DOMAIN == "akordebi.ge"){
         const script = document.createElement('script');
 
         script.src = "//counter.top.ge/counter.js";
@@ -15,6 +16,7 @@ export default function Footer(){
         return () => {
           document.body.removeChild(script);
         }
+      }
     }, []);
 
     return <footer className={styles.footerWrapper}>

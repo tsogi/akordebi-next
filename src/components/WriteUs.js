@@ -19,7 +19,7 @@ export default function WriteUs(){
     }
 
     try {
-      let msg = `akordebi.ge feedback: ${text}`;
+      let msg = `${process.env.NEXT_PUBLIC_DOMAIN} feedback: ${text}`;
 
       const response = await fetch("/api/sendSlack", {
           method: 'POST',
