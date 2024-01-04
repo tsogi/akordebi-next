@@ -14,7 +14,7 @@ export default function WriteUs(){
 
   async function handleSend(){
     if(!text) {
-      alert("ჩაწერეთ ტექსტი");
+      alert(lang._enter_text);
       return;
     }
 
@@ -46,8 +46,8 @@ export default function WriteUs(){
 
     
     return <>
-    <Alert type="success" duration={10} message={"თქვენი კომენტარი წარმატებით გაიგზავნა"} open={showAlert} setOpen={setShowAlert}/>
-    <Alert type="error" duration={10} message={"მესიჯი ვერ გაიგზავნა. გთხოვთ მოგვწეროთ მეილზე tsogiaidze@yahoo.com"} open={showError} setOpen={setShowError}/>
+    <Alert type="success" duration={10} message={lang._comment_sent} open={showAlert} setOpen={setShowAlert}/>
+    <Alert type="error" duration={10} message={lang._comment_not_sent} open={showError} setOpen={setShowError}/>
     <div className="flex w-full relative">
     <input type='text' id={styles.test} className={`${styles.input} text-xs leading-5 tracking-tight h-12 w-full border-b border-f2ac2b bg-opacity-2 py-3 px-5 text-white`} label={lang._footer_input}
         value={text}

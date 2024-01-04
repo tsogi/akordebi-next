@@ -37,18 +37,23 @@ function processLines(lines) {
         } else {
             // Odd index, lyrics line
             let processedLine = line;
+            let endChords = '';
             if (chordsLine.trim() !== '') {
                 let chordsWithPositions = extractChordsWithPositions(chordsLine);
                 let offset = 0;
 
                 chordsWithPositions.forEach(({ chord, position }) => {
                     if (position + offset <= processedLine.length) {
+                        // Chord aligns with a part of the lyrics
                         processedLine = processedLine.slice(0, position + offset) + `(${chord})` + processedLine.slice(position + offset);
                         offset += chord.length + 2; // Length of chord plus parentheses
+                    } else {
+                        // Chord is beyond the end of the lyrics line
+                        endChords += `(${chord})`;
                     }
                 });
             }
-            result += processedLine + '\n';
+            result += processedLine + endChords + '\n'; // Append end chords
         }
     });
 

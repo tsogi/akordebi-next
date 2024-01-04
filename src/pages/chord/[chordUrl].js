@@ -96,7 +96,7 @@ export default function SongPage({ song }){
 
     return <>
         <Head>
-            <title>{`${song.name} - გიტარის აკორდები`}</title>
+            <title>{`${song.name} - ${lang._guitar_chords}`}</title>
             <meta name="description" content={ `${song.searchWords}` } />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link rel="icon" type="image/x-icon" href="/favicon.ico" />
