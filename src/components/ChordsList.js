@@ -232,7 +232,7 @@ export default function ChordsList({ initialSongs }){
                 </div>
                 <div className={styles.filterContainer}>
                     {
-                        process.env.NEXT_PUBLIC_DOMAIN == "dev.akordebi.ge" ?
+                        ["dev.akordebi.ge", "akordebi.ge"].includes(process.env.NEXT_PUBLIC_DOMAIN) ?
                         <Tooltip placement="top" title={lang._favoriteIconTitle}>
                             <div onClick={handleFavoritesClick} className={`${styles.filter} ${styles.favorites} ${filterFavorites ? styles.filterSelected : ""}`}>
                                 <HeartIcon 

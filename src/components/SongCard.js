@@ -116,7 +116,7 @@ export default function SongCard({ song }){
             </div>
             <div className={styles.songMetaBottom}>
                 <div className={`${styles.songMetaLeft} flex items-center`}
-                    style={{ visibility: process.env.NEXT_PUBLIC_DOMAIN == "dev.akordebi.ge" ? "visible" : "hidden"}}
+                    style={{ visibility: ["dev.akordebi.ge", "akordebi.ge"].includes(process.env.NEXT_PUBLIC_DOMAIN) ? "visible" : "hidden"}}
                 >
                     <FavoriteIcon isFavorite={isFavorite} onClick={handleFavoriteClick} />
                 </div>
