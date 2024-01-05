@@ -6,12 +6,7 @@
 
 .select {
   cursor: pointer;
-  display: inline-block;
-  position: relative;
-  font-size: 16px;
   color: #fff;
-  width: 220px;
-  height: 40px;
 }
 
 @media screen and (max-width: 768px) {

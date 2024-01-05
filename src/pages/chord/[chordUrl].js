@@ -164,16 +164,6 @@ export default function SongPage({ song }){
                 } 
             </main>
             <div className={styles.postSongArea}>
-                {
-                    song.uploader ?
-                    <div className={styles.uploaderWrapper}>
-                        <div>
-                            {lang.chord.uploaded}: {song.uploader}
-                        </div>
-                    </div>
-                    :
-                    null
-                }
                 <div className={styles.songVotesWrapper}>
                     <div>
                       {lang.chord.rate}:
@@ -181,16 +171,28 @@ export default function SongPage({ song }){
                     <SongVotes songId={song.id} />
                 </div>
                 <div className={styles.songDifficultiesWrapper}>
-                    <div>
-                        Evaluate the difficulty of the chords:
+                    <div className={styles.evaluate_label}>
+                        {lang._evaluate_difficulty}
                     </div>
-                    <SongDifficulties songId={song.id} />
+                    <div className={styles.difficultiesWrapper}>
+                        <SongDifficulties songId={song.id} />
+                    </div>
                 </div>
             </div>
             {
                 song?.videoLesson ?
                 <div className={styles.videoTutorial}>
                     <EmbedVideo url={song.videoLesson} />
+                </div>
+                :
+                null
+            }
+            {
+                song.uploader ?
+                <div className={styles.uploaderWrapper}>
+                    <div>
+                        {lang.chord.uploaded}: {song.uploader}
+                    </div>
                 </div>
                 :
                 null

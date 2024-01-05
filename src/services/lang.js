@@ -30,7 +30,16 @@ const interfaceGeo = {
     _enter_text: "ჩაწერეთ ტექსტი",
     _comment_sent: "თქვენი კომენტარი წარმატებით გაიგზავნა",
     _comment_not_sent: "მესიჯი ვერ გაიგზავნა. გთხოვთ სცადოთ მოგვიანებით",
+    _evaluate_difficulty: "შეაფასეთ დაკვრის სირთულე:",
     rightHand: "მარჯვენა ხელი:",
+    difficulty: {
+        select: "არჩევა",
+        very_easy: "უმარტივესი",
+        easy: "მარტივი",
+        medium: "საშუალო",
+        hard: "რთული",
+        very_hard: "ურთულესი",
+    },
     _auth: {
         login: "ავტორიზაცია",
         enterBtn: 'სისტემაში შესვლის შემდეგ შეძლებთ დამატებითი ფუნქციებით სარგებლობას როგორიცაა მაგალითად "ფავორიტებში დამატება"',
@@ -106,7 +115,16 @@ const interfaceEng = {
     _enter_text: "Enter text",
     _comment_sent: "Your comment sent",
     _comment_not_sent: "Comment wasn't sent. Please try again later",
+    _evaluate_difficulty: "Evaluate playing difficulty:",
     rightHand: "Right hand:",
+    difficulty: {
+        select: "Select",
+        very_easy: "Easiest",
+        easy: "Easy",
+        medium: "Medium",
+        hard: "Hard",
+        very_hard: "Hardest",
+    },
     _auth: {
         login: "Log in",
         enterBtn: 'After logging in you will be able to use additional features like "Add to favorites"',
@@ -120,7 +138,7 @@ const interfaceEng = {
         hide: "Hide",
         appearance: "Show",
         uploaded: "Uploaded by",
-        rate: "Evaluate correctness of the chords",
+        rate: "Evaluate correctness of chords",
     },
     upload: {
         publish: `In order to upload new song chord to ${process.env.NEXT_PUBLIC_DOMAIN} you should fill out the fields and upload song text using plus(+) buttons. The process is simple and intuitive. Also at the end of this page you can find `,

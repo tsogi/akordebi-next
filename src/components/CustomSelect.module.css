@@ -13,7 +13,7 @@
     background-position: calc(100% - 15px) 23px; 
     color: white;
     padding-left: 20px;
-    width: 150px;
+    width: 100%;
 }
 
 .selectSort:focus, .selectSort:active {

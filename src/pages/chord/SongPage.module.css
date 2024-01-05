@@ -172,37 +172,47 @@
 
 .videoTutorial {
     height: 500px;
-    margin-top: 180px;
+    margin-top: 80px;
 }
 
 .songVotesWrapper {
     margin-top: 20px;
     display: flex;
     align-items: center;
-    font-size: 1.2rem;
 }
 
 .songDifficultiesWrapper {
-    margin-top: 20px;
     display: flex;
-    align-items: center;
-    font-size: 1.2rem;
-    gap: 12px;
+    align-items: end;
+}
+
+.difficultiesWrapper {
+    margin-left: 10px;
+    width: 128px;
 }
 
 @media screen and (max-width: 768px) {
+    .songVotesWrapper {
+        justify-content: space-between;
+    }
+
     .songDifficultiesWrapper {
-        flex-direction: column;
-        align-items: flex-start;
+        justify-content: space-between; 
+    }
+
+    .difficultiesWrapper {
+        margin-left: 0px;
     }
 }
 
 .uploaderWrapper {
-    font-size: 1.2rem;
+    font-size: 15px;
+    margin-top: 80px;
 }
 
 .postSongArea {
-    margin-top: 110px;
+    margin-top: 80px;
+    font-size: 15px;
 }
 
 .lineWrapper.rightHand {
