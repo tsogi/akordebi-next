@@ -65,7 +65,7 @@ export default function AuthSlideOver() {
                         <Auth
                           supabaseClient={supabase}
                           appearance={{ theme: ThemeSupa }}
-                          providers={["facebook"]}
+                          providers={["google"]}
                           theme=""
                           onlyThirdPartyProviders
                           redirectTo={

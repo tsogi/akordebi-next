@@ -12,13 +12,13 @@ const SearchSong = ({ onSearch }) => {
     if(response.status == "ok") {
         onSearch(response.data);
     } else {
-        alert("ძებნისას დაფიქსირდა შეცდომა");
+        alert(lang._search_error);
     }
 
     await db.logEvent("song_search", searchText);
 
     if(!response.data.length) {
-        alert("სამწუხაროდ ვერაფერი მოიძებნა. გთხოვთ დაწეროთ ქართულად და სრულად");
+        alert(lang._nothing_found);
     }
   };
 

@@ -97,11 +97,10 @@ export default function SongPage({ song }){
 
     return <>
         <Head>
-            <title>{`${song.name} - გიტარის აკორდები`}</title>
+            <title>{`${song.name} - ${lang._guitar_chords}`}</title>
             <meta name="description" content={ `${song.searchWords}` } />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8346425726826566" crossOrigin="anonymous"></script>
         </Head>
         <Header />    
         <div className={`${styles.songPage} page_container noselect`}>
@@ -218,7 +217,7 @@ function coupletChordsLine(chords, index, showChords){
 
 function rightHandLine(content, index){
     return <div key={index} className={`${styles.lineWrapper} ${styles.rightHand}`}>
-        <div className={styles.rightHandLabel}>მარჯვენა ხელი: </div>
+        <div className={styles.rightHandLabel}>{lang.rightHand}</div>
         <div className={styles.rightHandText}>
             {
                 Array.from(content).map((char) => char === " " ? " \u00A0 " : char).reduce((previous, current) => {

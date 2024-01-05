@@ -11,6 +11,7 @@ import db from '@/services/data';
 import lang from '@/services/lang'
 import { HeartIcon } from '@heroicons/react/20/solid';
 import { useUser } from "@/utils/useUser";
+import CustomSelect from "./CustomSelect";
 
 const resultsPerPage = 20;
 
@@ -224,21 +225,26 @@ export default function ChordsList({ initialSongs }){
             </div>
             <div className={`${styles.filterSongs} filtersWrapper`}>
                 <div className={styles.sortContainer}>
-                    <select className={`${styles.selectSort} text-[14px]`} value={sortBy} onChange={handleSortChange}>
-                        <option value="default">{lang._filterQuality}</option>
-                        <option value="likes">{lang._filterPopularity}</option>
-                        <option value="difficulty">{lang._filterDifficulty}</option>
-                    </select>
+                    <CustomSelect 
+                        options={[{ label: lang._filterQuality, value: "default" }, { label: lang._filterPopularity, value: "likes" }, { label: lang._filterDifficulty, value: "difficulty" } ]} 
+                        value={sortBy} 
+                        onChange={handleSortChange} 
+                    />
                 </div>
                 <div className={styles.filterContainer}>
-                    <Tooltip placement="top" title={lang._favoriteIconTitle}>
-                        <div onClick={handleFavoritesClick} className={`${styles.filter} ${styles.favorites} ${filterFavorites ? styles.filterSelected : ""}`}>
-                            <HeartIcon 
-                                style={{ fill: "transparent", stroke: "white" }} 
-                                className={`w-[26px] h-[26px]`}  
-                            />
-                        </div>
-                    </Tooltip>
+                    {
+                        ["dev.akordebi.ge", "akordebi.ge"].includes(process.env.NEXT_PUBLIC_DOMAIN) ?
+                        <Tooltip placement="top" title={lang._favoriteIconTitle}>
+                            <div onClick={handleFavoritesClick} className={`${styles.filter} ${styles.favorites} ${filterFavorites ? styles.filterSelected : ""}`}>
+                                <HeartIcon 
+                                    style={{ fill: "transparent", stroke: "white" }} 
+                                    className={`w-[26px] h-[26px]`}  
+                                />
+                            </div>
+                        </Tooltip>
+                        : 
+                        null
+                    }
                     <Tooltip placement="top" title={lang._videoIconTitle}>
                         <div onClick={handleLessonedClick} className={`${styles.filter} ${styles.confirmed} ${filterLessoned ? styles.filterSelected : ""}`}>
                             <OndemandVideoIcon style={{ color: "#9ebeff" }} />

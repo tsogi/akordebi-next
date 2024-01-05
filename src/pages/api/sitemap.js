@@ -1,13 +1,15 @@
 import db from '@/services/db';
 var builder = require('xmlbuilder');
 
+const domain = process.env.NEXT_PUBLIC_DOMAIN;
+
 const generateSitemapXml = (records) => {
   const urlset = builder.create('urlset', { encoding: 'utf-8' })
     .att('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
     
     urlset
         .ele('url')
-        .ele('loc', `https://akordebi.ge`)
+        .ele('loc', `https://${domain}`)
         .up()
         .ele('changefreq', 'daily')
         .up()
@@ -16,7 +18,7 @@ const generateSitemapXml = (records) => {
 
     urlset
         .ele('url')
-        .ele('loc', `https://akordebi.ge/createSong`)
+        .ele('loc', `https://${domain}/createSong`)
         .up()
         .ele('changefreq', 'weekly')
         .up()
@@ -27,7 +29,7 @@ const generateSitemapXml = (records) => {
   records.forEach((record) => {
     urlset
       .ele('url')
-      .ele('loc', `https://akordebi.ge/chord/${record.url}`)
+      .ele('loc', `https://${domain}/chord/${record.url}`)
       .up()
       .ele('changefreq', 'monthly')
       .up()
