@@ -11,6 +11,7 @@ import db from '@/services/data';
 import lang from '@/services/lang'
 import { HeartIcon } from '@heroicons/react/20/solid';
 import { useUser } from "@/utils/useUser";
+import CustomSelect from "./CustomSelect";
 
 const resultsPerPage = 20;
 
@@ -224,11 +225,11 @@ export default function ChordsList({ initialSongs }){
             </div>
             <div className={`${styles.filterSongs} filtersWrapper`}>
                 <div className={styles.sortContainer}>
-                    <select className={`${styles.selectSort} text-[14px]`} value={sortBy} onChange={handleSortChange}>
-                        <option value="default">{lang._filterQuality}</option>
-                        <option value="likes">{lang._filterPopularity}</option>
-                        <option value="difficulty">{lang._filterDifficulty}</option>
-                    </select>
+                    <CustomSelect 
+                        options={[{ label: lang._filterQuality, value: "default" }, { label: lang._filterPopularity, value: "likes" }, { label: lang._filterDifficulty, value: "difficulty" } ]} 
+                        value={sortBy} 
+                        onChange={handleSortChange} 
+                    />
                 </div>
                 <div className={styles.filterContainer}>
                     {

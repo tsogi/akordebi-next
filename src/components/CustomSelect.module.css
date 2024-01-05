@@ -1,0 +1,21 @@
+.selectSort {
+    border: 0;
+    height: 50px;
+    border-bottom: 1px solid #f2ac2b;
+    background: rgba(255,255,255,.02);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg width='7' height='5' viewBox='0 0 7 5' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.01527 4.81132C3.1903 5.06289 3.62788 5.06289 3.80291 4.81132L6.75658 0.566038C6.93161 0.314466 6.71282 0 6.36276 0H0.455426C0.105361 0 -0.113429 0.314465 0.0616028 0.566038L3.01527 4.81132Z' fill='white'/%3E%3C/svg%3E%0A");
+    background-repeat: no-repeat;
+    background-position: -webkit-calc(100% - 15px) 23px;
+    background-position: calc(100% - 15px) 23px; 
+    color: white;
+    padding-left: 20px;
+    width: 150px;
+}
+
+.selectSort:focus, .selectSort:active {
+    outline: none;
+}
