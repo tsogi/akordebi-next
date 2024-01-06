@@ -187,7 +187,7 @@ class Db{
 
             row.voteSum = votes.reduce((accumulator, current) => accumulator + parseInt(current), 0) || 0;
 
-            row.difficulty = parseInt(row.difficulty) || 0;
+            row.difficulty = parseInt(row.difficulty) || 11;
         }
 
         return rows;
