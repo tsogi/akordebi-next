@@ -9,6 +9,7 @@ import SongVotes from "@/components/SongVotes";
 import db from "@/services/db";
 import uiDb from '@/services/data';
 import styles from "./SongPage.module.css";
+import SongDifficulties from '@/components/SongDifficulties';
 import lang from '@/services/lang';
 let intervalId;
 
@@ -163,27 +164,35 @@ export default function SongPage({ song }){
                 } 
             </main>
             <div className={styles.postSongArea}>
-                {
-                    song.uploader ?
-                    <div className={styles.uploaderWrapper}>
-                        <div>
-                            {lang.chord.uploaded}: {song.uploader}
-                        </div>
-                    </div>
-                    :
-                    null
-                }
                 <div className={styles.songVotesWrapper}>
                     <div>
                       {lang.chord.rate}:
                     </div>
                     <SongVotes songId={song.id} />
                 </div>
+                <div className={styles.songDifficultiesWrapper}>
+                    <div className={styles.evaluate_label}>
+                        {lang._evaluate_difficulty}
+                    </div>
+                    <div className={styles.difficultiesWrapper}>
+                        <SongDifficulties songId={song.id} />
+                    </div>
+                </div>
             </div>
             {
                 song?.videoLesson ?
                 <div className={styles.videoTutorial}>
                     <EmbedVideo url={song.videoLesson} />
+                </div>
+                :
+                null
+            }
+            {
+                song.uploader ?
+                <div className={styles.uploaderWrapper}>
+                    <div>
+                        {lang.chord.uploaded}: {song.uploader}
+                    </div>
                 </div>
                 :
                 null
