@@ -364,6 +364,9 @@ export async function getServerSideProps({ params }) {
 function addCoupletChords(song){
     let newLines = [];
     let lines = song.body;
+
+    newLines.push({id: new Date().getTime(), type: 'coupletChords', value: '', list: []});
+
     for(let i =0; i< lines.length; i++) {
         let line = lines[i];
         let nextLine = lines[i + 1];
@@ -371,9 +374,17 @@ function addCoupletChords(song){
             newLines.push(line);
             // let randomNumber = Math.floor(Math.random() * 10000) + 1;
             newLines.push({id: new Date().getTime(), type: 'coupletChords', value: '', list: []});
-        } else {
-            newLines.push(line);
+            continue;
         }
+
+        if(nextLine && line.type == "text" && line.value == "") {
+            newLines.push(line);
+            // let randomNumber = Math.floor(Math.random() * 10000) + 1;
+            newLines.push({id: new Date().getTime(), type: 'coupletChords', value: '', list: []});
+            continue;
+        }
+
+        newLines.push(line);
     }
 
     let chordsList = [];

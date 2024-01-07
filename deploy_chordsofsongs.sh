@@ -25,5 +25,9 @@ ssh -i ../akordebi.pem ubuntu@akordebi.ge << EOF
 
 EOF
 
+# This is to cause next app to get cached so users don't have to wait for the first load
+curl https://akordebi.ge
+curl https://chordsofsongs.com
+
 # Download mysql backup
 # scp ubuntu@akordebi.ge:/var/projects/backups/mysql/akordebi_15.sql ../
