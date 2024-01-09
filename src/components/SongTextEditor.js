@@ -28,6 +28,7 @@ const PoemEditor = ({onSongTextChange, _lines = []}) => {
   const [selectedCharIndex, setSelectedCharIndex] = useState(null);
   const [open, setOpen] = useState(false);
   const [selectedChord, setselectedChord] = useState('');
+  const [lineType, setLineType] = useState('');
 
   const inputRef = useRef(null);
 
@@ -45,12 +46,14 @@ const PoemEditor = ({onSongTextChange, _lines = []}) => {
     if(type == "text") {
         newLine.chords = [];
         newLine.value = "";
+        setLineType("text");
         setEditId(newLine.id);
     }
 
     // Todo if user adds multiple lines for rightHand, goes error
     if(type == "rightHand") {
         newLine.value = "";
+        setLineType("rightHand");
         setEditId(newLine.id);
     }
 
@@ -221,6 +224,8 @@ return (
                     inputRef={inputRef}
                     value={line.value}
                     onChange={e => handleUpdate(line.id, e.target.value)}
+                    rows={ getTextAreaRows(lineType) }
+                    placeholder={ getTextAreaPlaceholder(lineType) }
                 ></textarea>
                 <Button className={styles.saveBtn} style={{ marginLeft: "20px" }} color='primary' variant='outlined' onClick={handleSaveClick}>{lang.upload.editor_save}</Button>
             </div>
@@ -331,7 +336,7 @@ return (
         <div className={styles.poemActionBtns}>
             <div className={styles.poemActionBtn}>
                 <Button
-                    variant="outlined"
+                    variant="contained"
                     color="primary"
                     startIcon={<AddIcon />}
                     onClick={() => { addLine("rightHand") }}
@@ -341,22 +346,11 @@ return (
             </div>
             <div className={styles.poemActionBtn}>
                 <Button
-                    variant="outlined"
-                    color="primary"
+                    variant="contained"
                     startIcon={<AddIcon />}
                     onClick={() => { addLine("text") }}
                 >
                     {lang.upload.add_string_button}
-                </Button>
-            </div>
-            <div className={styles.poemActionBtn}>
-                <Button
-                    variant="outlined"
-                    color="primary"
-                    startIcon={<AddIcon />}
-                    onClick={() => { addLine("break") }}
-                >
-                {lang.upload.add_skip_button}
                 </Button>
             </div>
         </div>
@@ -378,5 +372,29 @@ return (
   </div>
 );
 };
+
+function getTextAreaPlaceholder(type) {
+  if(type == "rightHand") {
+    return lang.placeholder.rightHand;
+  }
+
+  if(type == "text") {
+    return lang.placeholder.songText;
+  }
+
+  return "";
+}
+
+function getTextAreaRows(type) {
+  if(type == "rightHand") {
+    return 3;
+  }
+
+  if(type == "text") {
+    return 25;
+  }
+
+  return 6;
+}
 
 export default PoemEditor;

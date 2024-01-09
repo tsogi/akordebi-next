@@ -48,7 +48,7 @@ const AuthorsEditor = ({ onAuthorsChange, _authors = [{ id: 1, name: '' }] }) =>
           </div>
         ))}
       </div>
-      <Button variant="outlined" color="primary" onClick={addInput}>{lang.upload.authors.add}</Button>
+      <Button className={styles.addAuthorBtn} variant="contained" color="primary" onClick={addInput}>{lang.upload.authors.add}</Button>
     </div>
   );
 };

@@ -62,7 +62,7 @@ const interfaceGeo = {
         song_name_input: "ჩაწერეთ სიმღერის სახელი",
         video_lesson_link: "ვიდეო გაკვეთილის ლინკი. მაგ. youtube.com/watch?v=O08BvtiPka8 (არასავალდებულო)",
         uploader_name: "ამტვირთის სახელი/გვარი (არასავალდებულო)",
-        save: "სიმღერის შენახვა",
+        save: "სიმღერის ატვირთვა საიტზე",
         editor_save: "შენახვა",
         editor_delete_title: "სტრიქონის წაშლა",
         editor_move_title: "სტრიქონის გადატანა",
@@ -81,6 +81,32 @@ const interfaceGeo = {
             delete: "ავტორის წაშლა",
         }
     },
+    placeholder: {
+        songText: `ჩაწერეთ ტექსტი. მაგალითად: 
+
+(Am)მელიქიშვილის (Dm)გამზირი,
+(E7)ია, ვარდი და (Am)ბზა...
+უშენოდ ვეღარ (Dm)გავძელი,
+(G7)ჩემი ბალღობის (C)გზავ.
+
+(A7)გზად სტუდენტობა (Dm)იჩქარის,
+(E7)მძებნელი მზის და (Am)გზის.
+სად არის ახლა (Dm)ის ქალი?!
+(E7)ალბათ, აკვანთან (Am)ზის.
+
+(Am)იქნებ რუსთავი (Dm)არჩია,
+(E7)იქნებ სამგორშიც (Am)ქრის,
+იქნება ისევ (Dm)ბავშვია,
+(G7)თვალებიც შერჩა (C)შვლის.
+
+(A7)და (Dm)ელანდება დამწველი
+(E7)კვლავ სტუდენტობის (Am)გზა _
+მელიქიშვილის (Dm)გამზირი,
+(E7)ია, ვარდი და (Am)ბზა.
+        `,
+        rightHand: `ჩაწერეთ მარჯვენა ხელის ინსტრუქცია. მაგალითად: 
+ბანი დაბლა დაბლა მაღლა დაბლა მაღლა ან ბანი ↓ ↓ ↑ ↓ ↑ ან ბანი 3 2 1 2 3`
+    }
 }
 
 const interfaceEng = {
@@ -147,7 +173,7 @@ const interfaceEng = {
         song_name_input: "Enter the song name",
         video_lesson_link: "Url to video tutorial. Ex. youtube.com/watch?v=O08BvtiPka8 (optional)",
         uploader_name: "Name of the uploader (optional)",
-        save: "Save the song",
+        save: "Upload song to website",
         editor_save: "Save",
         editor_delete_title: "Delete the line",
         editor_move_title: "Move the line",
@@ -166,6 +192,25 @@ const interfaceEng = {
             delete: "Delete the author"
         }
     },
+    placeholder: {
+        songText: `Enter text. Example: 
+
+(C)Imagine there's n(Cmaj7)o    h(F)eaven
+(C)It's easy if (Cmaj7)you   (F)try
+(C)No hell (Cmaj7)below (F)us
+(C)Above us (Cmaj7)only  (F)sky
+
+(F)Imagine (Am)all th(Dm7)e peop(F)le
+(G)Living for (C)to (G7)- day a-hah
+
+(C)Imagine there's (Cmaj7)no    (F)countries
+(C)It isn't hard (Cmaj7)to    (F)do
+(C)Nothing to kill o(Cmaj7)r    d(F)ie for
+(C)And no religi(Cmaj7)on   t(F)oo
+        `,
+        rightHand: `Enter instructions for right hand. Example: 
+Bass Down Down Up Down Up or Bass ↓ ↓ ↑ ↓ ↑ or Bass 3 2 1 2 3`
+    }
 }
 
 let words = interfaceGeo;

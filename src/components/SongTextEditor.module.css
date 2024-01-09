@@ -17,9 +17,12 @@
 
 .editInputWrapper {
     display: flex;
+    align-items: flex-start;
 }
 
 .editInput {
+    padding: 20px;
+    height: auto;
     width: 80%;
 }
 
@@ -43,6 +46,8 @@
 
 .saveBtn {
     width: 18%;
+    color: white;
+    border-color: white;
 }
 
 .addChord {
@@ -58,6 +63,8 @@
 
 .poemActionBtn {
     margin: 2px 2px;
+    color: white;
+    background-color: #004aad;
 }
 
 .rightHand {

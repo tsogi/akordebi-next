@@ -139,7 +139,7 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
                 <SongTextEditor _lines={songText} onSongTextChange={setSongText} />
             </div>
             <div className={ `${styles.saveSongBtn} capital` }>
-                <Button disabled={saving ? true : false} style={{ background: "#033475", fontSize: "1.3rem" }} size="large" onClick={handleSaveSongClick} variant="outlined">{lang.upload.save}</Button>
+                <Button disabled={saving ? true : false} style={{ background: "green", color: "white", fontSize: "1.3rem" }} size="large" onClick={handleSaveSongClick} variant="outlined" color='success'>{lang.upload.save}</Button>
             </div>
             <Snackbar
                 anchorOrigin={{ vertical: 'top', horizontal: 'right' }}

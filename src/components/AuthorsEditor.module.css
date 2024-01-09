@@ -24,3 +24,8 @@
     flex-wrap: wrap;
     align-items: center;
 }
+
+.addAuthorBtn {
+    color: white;
+    background-color: #004aad;
+}
