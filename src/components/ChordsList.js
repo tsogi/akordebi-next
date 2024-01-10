@@ -283,6 +283,9 @@ export default function ChordsList({ initialSongs }){
             onPreviousClick = {handlePreviousClick}
             goToPage = {handlePageClick}
         />
+        <div className="px-[10px] mt-[40px]">
+            <img onClick={() => { }} className="radius-[4px] cursor-pointer" src="/vacancy_mobile.png" />
+        </div>
         {/* <div className="px-[10px] mt-[40px]">
             <img onClick={handleYamahaClick} className="radius-[4px] cursor-pointer" src="/yamaha_C40II.png" />
         </div> */}

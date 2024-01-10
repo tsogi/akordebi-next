@@ -1,7 +1,78 @@
-<html>
-<head><title>502 Bad Gateway</title></head>
-<body>
-<center><h1>502 Bad Gateway</h1></center>
-<hr><center>nginx/1.18.0 (Ubuntu)</center>
-</body>
-</html>
+<?xml version="1.0" encoding="utf-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://chordsofsongs.com</loc>
+    <changefreq>daily</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://chordsofsongs.com/createSong</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://chordsofsongs.com/chord/Hotel_California-Eagles</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.800</priority>
+  </url>
+  <url>
+    <loc>https://chordsofsongs.com/chord/Imagine-John_Lennon</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.799</priority>
+  </url>
+  <url>
+    <loc>https://chordsofsongs.com/chord/Hallelujah-Leonard_Cohen</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.798</priority>
+  </url>
+  <url>
+    <loc>https://chordsofsongs.com/chord/Wish_you_were_here-Pink_Floyd</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.797</priority>
+  </url>
+  <url>
+    <loc>https://chordsofsongs.com/chord/Nothing_else_matters-Metallica</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.796</priority>
+  </url>
+  <url>
+    <loc>https://chordsofsongs.com/chord/Felicita-Romina_Power_Al_Bano</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.795</priority>
+  </url>
+  <url>
+    <loc>https://chordsofsongs.com/chord/The_sound_of_silence-Simon_&amp;_Garfunkel</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.794</priority>
+  </url>
+  <url>
+    <loc>https://chordsofsongs.com/chord/Knockin_On_Heavens_Door-Bob_Dylan</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.793</priority>
+  </url>
+  <url>
+    <loc>https://chordsofsongs.com/chord/Yesterday-The_Beatles</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.792</priority>
+  </url>
+  <url>
+    <loc>https://chordsofsongs.com/chord/House_Of_The_Rising_Sun-The_Animals</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.791</priority>
+  </url>
+  <url>
+    <loc>https://chordsofsongs.com/chord/Let_it_be-The_Beatles</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.790</priority>
+  </url>
+  <url>
+    <loc>https://chordsofsongs.com/chord/We_will_rock_you-Queen</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.789</priority>
+  </url>
+  <url>
+    <loc>https://chordsofsongs.com/chord/Flowers-Miley_Cyrus</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.788</priority>
+  </url>
+</urlset>
