@@ -284,7 +284,9 @@ export default function ChordsList({ initialSongs }){
             goToPage = {handlePageClick}
         />
         <div className="px-[10px] mt-[40px]">
-            <img onClick={() => { }} className="radius-[4px] cursor-pointer" src="/vacancy_mobile.png" />
+            <a href={`mailto:tsogiaidze@yahoo.com?subject=ვაკანსია`}>
+                <div onClick={() => {  }} className={styles.vacancyImage}></div>
+            </a>
         </div>
         {/* <div className="px-[10px] mt-[40px]">
             <img onClick={handleYamahaClick} className="radius-[4px] cursor-pointer" src="/yamaha_C40II.png" />

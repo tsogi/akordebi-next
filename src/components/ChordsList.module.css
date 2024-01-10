@@ -95,9 +95,24 @@
   align-items: center;
 }
 
+.vacancyImage {
+    background-image: url('/vacancy_desktop.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 212px;
+    border-radius: 4px;
+    width: 100%;
+}
+
 @media (max-width: 992px) {
     .searchComponent {
         width: 100%;
+    }
+
+    .vacancyImage {
+        background-image: url('/vacancy_mobile.png');
+        height: 330px;
     }
 
     .filterSongs {
