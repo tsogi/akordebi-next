@@ -172,6 +172,7 @@ class Db{
                 songs.searchWords, 
                 songs.videoLesson, 
                 songs.id, 
+                songs.uploaderUserId as analyticId,
                 songs.confirmed, 
                 IFNULL(authors_agg.authors, "") as authors, 
                 IFNULL(votes_agg.votes, "") as votes,
