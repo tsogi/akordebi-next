@@ -1,6 +1,15 @@
 import db from "@/services/db";
+import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 
 export default async function handler(req, res) {
+    const supabase = createPagesServerClient({ req, res });
+
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+        return res.status(401).json({ error: "Not authenticated" });
+    }
+
     // Todo updateSong.js and storeSong.js violate DRY principle, fix it
     if (req.method === 'POST') {
         let response2 = { error: "", msg: "" }
@@ -11,6 +20,20 @@ export default async function handler(req, res) {
             let { fullText, url } = generateMeta(data);
             data.searchWords = fullText;
             data.url = url;
+            data.userId = user.id;
+            let dbSong = await db.getSongById(data.id);
+
+            if(!dbSong) {
+                response2.error = "სიმღერა ვერ მოიძებნა";
+                res.json(response2);
+                return;
+            }
+
+            if(dbSong.uploaderUserId != data.userId) {
+                response2.error = "თქვენ არ შეგიძლიათ სხვისი შექმნილი სიმღერის შეცვლა";
+                res.json(response2);
+                return;
+            }
 
             let result = await db.updateSong(data);
 

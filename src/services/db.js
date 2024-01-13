@@ -99,6 +99,25 @@ class Db{
         return null;
     }
 
+    async getSongById(songId){
+        const [rows,fields] = await this.pool.execute(`
+            select songs.id, songs.videoLesson, songs.uploaderUserId, songs.uploader, songs.searchWords, songs.name, songs.body, GROUP_CONCAT(authors.name) as authors from songs 
+            left join authors_songs on songs.id = authors_songs.song_id
+            left join authors on authors_songs.author_id = authors.id
+            where songs.id = ?
+            group by songs.id
+        `, [songId]);
+
+        if(rows.length){
+            let song = rows[0];
+            song.authors = song.authors ? song.authors.split(",") : [];
+
+            return song;
+        }
+
+        return null;
+    }
+
     async getSongByName(songName){
         const [rows,fields] = await this.pool.execute(`
             select songs.id, songs.videoLesson, songs.uploader, songs.searchWords, songs.name, songs.body, GROUP_CONCAT(authors.name) as authors from songs 
@@ -225,7 +244,7 @@ class Db{
 
         let authors = await this.storeAuthors(authorNames);
 
-        let song = { name: data.name, url: data.url, body: data.songText, text: data.rawText, videoLesson: data.videoLesson, searchWords: data.searchWords, uploader: data.uploader }
+        let song = { name: data.name, url: data.url, body: data.songText, text: data.rawText, videoLesson: data.videoLesson, searchWords: data.searchWords, uploader: data.uploader, userId: data.userId }
         let songId = await this.storeSongToDb(song);
 
         await this.storeSongAuthors(authors.map(el => el.id), songId);
@@ -240,7 +259,7 @@ class Db{
 
         await this.deleteSongAuthors(data.id);
 
-        let song = { name: data.name, url: data.url, body: data.songText, text: data.rawText, videoLesson: data.videoLesson, searchWords: data.searchWords, uploader: data.uploader }
+        let song = { name: data.name, url: data.url, body: data.songText, text: data.rawText, videoLesson: data.videoLesson, searchWords: data.searchWords, uploader: data.uploader, userId: data.userId }
         await this.updateSongToDb(song, data.id);
 
         await this.storeSongAuthors(authors.map(el => el.id), data.id);
@@ -324,11 +343,11 @@ class Db{
 
     async storeSongToDb(song){
         let query = `
-            insert into songs (name, url, body, text, videoLesson, searchWords, uploader)
-            values (?, ?, ?, ?, ?, ?, ?)
+            insert into songs (name, url, body, text, videoLesson, searchWords, uploader, uploaderUserId)
+            values (?, ?, ?, ?, ?, ?, ?, ?)
         `;
 
-        let [results] = await this.pool.execute(query, [song.name, song.url, song.body, song.text, song.videoLesson, song.searchWords, song.uploader])
+        let [results] = await this.pool.execute(query, [song.name, song.url, song.body, song.text, song.videoLesson, song.searchWords, song.uploader, song.userId])
 
         return results.insertId
     }

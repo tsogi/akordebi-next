@@ -12,6 +12,7 @@ import lang from '@/services/lang'
 import { HeartIcon } from '@heroicons/react/20/solid';
 import { useUser } from "@/utils/useUser";
 import CustomSelect from "./CustomSelect";
+import UploadSongBtn from "./UploadSongBtn";
 
 const resultsPerPage = 20;
 
@@ -36,6 +37,7 @@ export default function ChordsList({ initialSongs }){
         router.query.page ? Number(router.query.page) : 1
     );
     const[paginationCount, setPaginationCount] = useState(0);
+
 
         
     // async function handleYamahaClick(){
@@ -265,14 +267,7 @@ export default function ChordsList({ initialSongs }){
                 })
             }
             <aside className={"songItemWrapper"}>
-                <a className={styles.songLink} href={`/createSong`}>
-                    <div className={styles.songItem}>
-                        <div className={styles.songDetails}>
-                             <div style={{ padding: "15px" }} className={`${styles.songName} capital`}>{lang._uploadSong}</div>
-                             <div style={{ padding: "15px" }} className={`${styles.songName} capital`}>{ uploadWebsite(process.env.NEXT_PUBLIC_DOMAIN) }</div>
-                        </div>
-                    </div>
-                </a>
+                <UploadSongBtn />
             </aside>
         </main>
         <Pagination 
@@ -292,16 +287,4 @@ export default function ChordsList({ initialSongs }){
             <img onClick={handleYamahaClick} className="radius-[4px] cursor-pointer" src="/yamaha_C40II.png" />
         </div> */}
     </div>
-}
-
-function uploadWebsite(domain){
-    if(domain == "akordebi.ge") {
-        return "AKORDEBI.GE-ზე";
-    }
-
-    if(domain == "chordsofsongs.com"){
-        return "At CHORDSOFSONGS.COM";
-    }
-
-    return;
 }

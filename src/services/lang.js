@@ -44,7 +44,8 @@ const interfaceGeo = {
         login: "ავტორიზაცია",
         enterBtn: 'სისტემაში შესვლის შემდეგ შეძლებთ დამატებითი ფუნქციებით სარგებლობას როგორიცაა მაგალითად "ფავორიტებში დამატება"',
         addFavorites: "სიმღერის ფავორიტებში დასამატებლათ გთხოვთ შეხვიდეთ სისტემაში რის შემდეგაც შეძლებთ დამატებითი ფუნქციებით სარგებლობას",
-        favoritesBtn: '"ფავორიტების" ფუნქციის გამოსაყენებლად გთხოვთ შეხვიდეთ სისტემაში'
+        favoritesBtn: '"ფავორიტების" ფუნქციის გამოსაყენებლად გთხოვთ შეხვიდეთ სისტემაში',
+        uploadSongBtn: 'სიმღერის საიტზე ასატვირთად გთხოვთ შეხვიდეთ სისტემაში'
     },
     chord: {
         font: "ფონტი",
@@ -155,7 +156,8 @@ const interfaceEng = {
         login: "Log in",
         enterBtn: 'After logging in you will be able to use additional features like "Add to favorites"',
         addFavorites: 'In order to add the song to your favorites please log in to the system',
-        favoritesBtn: 'In order to use Favorites feature please log in to the system'
+        favoritesBtn: 'In order to use Favorites feature please log in to the system',
+        uploadSongBtn: 'In order to upload song to the website please log in to the system'
     },
     chord: {
         font: "Font size",

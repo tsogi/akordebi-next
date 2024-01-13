@@ -1,6 +1,15 @@
 import db from "@/services/db";
+import { createPagesServerClient } from "@supabase/auth-helpers-nextjs";
 
 export default async function handler(req, res) {
+    const supabase = createPagesServerClient({ req, res });
+
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+        return res.status(401).json({ error: "Not authenticated" });
+    }
+
     if (req.method === 'POST') {
         let response2 = { error: "", msg: "" }
 
@@ -10,6 +19,7 @@ export default async function handler(req, res) {
             let { fullText, url } = generateMeta(data);
             data.searchWords = fullText;
             data.url = url;
+            data.userId = user.id;
 
             let dbSong = await db.getSongByUrl(data.url);
             

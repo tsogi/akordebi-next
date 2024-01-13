@@ -94,6 +94,10 @@ function whyLoginText(authOpenedFrom){
     return lang._auth.addFavorites;
   }
 
+  if(authOpenedFrom == "uploadSongBtn"){
+    return lang._auth.uploadSongBtn;
+  }
+
   if(authOpenedFrom == "favoritesFilter"){
     return lang._auth.favoritesBtn;
   }
