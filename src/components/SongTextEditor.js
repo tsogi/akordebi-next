@@ -227,7 +227,7 @@ return (
                     rows={ getTextAreaRows(lineType) }
                     placeholder={ getTextAreaPlaceholder(lineType) }
                 ></textarea>
-                <Button className={styles.saveBtn} style={{ marginLeft: "20px" }} color='primary' variant='outlined' onClick={handleSaveClick}>{lang.upload.editor_save}</Button>
+                <Button className={styles.saveBtn} style={{ borderColor: "white", color: "white", marginLeft: "20px" }} color='primary' variant='outlined' onClick={handleSaveClick}>{lang.upload.editor_save}</Button>
             </div>
         ) : (
           <div className={styles.lineWrapper}>
