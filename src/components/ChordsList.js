@@ -234,19 +234,14 @@ export default function ChordsList({ initialSongs }){
                     />
                 </div>
                 <div className={styles.filterContainer}>
-                    {
-                        ["dev.akordebi.ge", "akordebi.ge"].includes(process.env.NEXT_PUBLIC_DOMAIN) ?
-                        <Tooltip placement="top" title={lang._favoriteIconTitle}>
-                            <div onClick={handleFavoritesClick} className={`${styles.filter} ${styles.favorites} ${filterFavorites ? styles.filterSelected : ""}`}>
-                                <HeartIcon 
-                                    style={{ fill: "transparent", stroke: "white" }} 
-                                    className={`w-[26px] h-[26px]`}  
-                                />
-                            </div>
-                        </Tooltip>
-                        : 
-                        null
-                    }
+                    <Tooltip placement="top" title={lang._favoriteIconTitle}>
+                        <div onClick={handleFavoritesClick} className={`${styles.filter} ${styles.favorites} ${filterFavorites ? styles.filterSelected : ""}`}>
+                            <HeartIcon 
+                                style={{ fill: "transparent", stroke: "white" }} 
+                                className={`w-[26px] h-[26px]`}  
+                            />
+                        </div>
+                    </Tooltip>
                     <Tooltip placement="top" title={lang._videoIconTitle}>
                         <div onClick={handleLessonedClick} className={`${styles.filter} ${styles.confirmed} ${filterLessoned ? styles.filterSelected : ""}`}>
                             <OndemandVideoIcon style={{ color: "#9ebeff" }} />

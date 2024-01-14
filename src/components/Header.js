@@ -18,7 +18,7 @@ export default function Header(){
                 }
             </a>
         </div>
-        <div className={`${styles.authWrapper}`} style={{ visibility: ["dev.akordebi.ge", "akordebi.ge"].includes(process.env.NEXT_PUBLIC_DOMAIN) ? "visible" : "hidden" }} >
+        <div className={`${styles.authWrapper}`}>
             <div className={`flex text-[#96bcef] border-solid border-[1px] rounded-[4px] px-[12px] py-[5px] border-[#96bcef]`}>
             {
                 user ?
