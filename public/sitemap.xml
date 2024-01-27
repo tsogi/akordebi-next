@@ -75,4 +75,9 @@
     <changefreq>monthly</changefreq>
     <priority>0.788</priority>
   </url>
+  <url>
+    <loc>https://chordsofsongs.com/chord/Yellow_Submarine-The_Beatles</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.787</priority>
+  </url>
 </urlset>
