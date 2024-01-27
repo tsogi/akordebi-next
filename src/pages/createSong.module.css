@@ -7,6 +7,11 @@
 }
 
 .uploadLabel {
-    margin-bottom: 60px;
+    margin-bottom: 30px;
+    line-height: 1.8;
+}
+
+.uploadLabel2 {
+    margin-bottom: 70px;
     line-height: 1.8;
 }

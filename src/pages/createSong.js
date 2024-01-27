@@ -16,6 +16,7 @@ export default function CreateSong(){
         <Header />
         <div className={`${styles.createSongPage} page_container`}>
             <div className={styles.uploadLabel}>{lang.upload.publish}<a className="text-[#f2ac2b] underline" href="#videoInstruction">{lang.upload.video_Instructions}</a></div>
+            <div className={styles.uploadLabel2}>{lang.upload.publish2}<a target="_blank" className="text-[#f2ac2b] underline" href="https://www.canva.com/design/DAF53EzSRJA/jrIBZWmCneGThXPXUInqNA/edit?utm_content=DAF53EzSRJA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton">{lang.upload.earn_terms}</a></div>
             <SongCreator  />
             <div id="videoInstruction" className={styles.videoInstruction}>
                  <iframe width="100%" height="500px" src={getYoutubeSrc()} title={lang.upload.video_ifream_title} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -29,8 +30,8 @@ function getYoutubeSrc(){
     let domain = process.env.NEXT_PUBLIC_DOMAIN;
 
     if(domain == "chordsofsongs.com") {
-        return "https://www.youtube.com/embed/R_h7mSX0KGk?si=Fmq68zapOB1F8OGO";
+        return "https://www.youtube.com/embed/n8W9bmGs5gA?si=A09bhMPskCr3OwBa";
     }
 
-    return "https://www.youtube.com/embed/HuO8oZXFKgg";
+    return "https://www.youtube.com/embed/n8W9bmGs5gA?si=A09bhMPskCr3OwBa";
 }
