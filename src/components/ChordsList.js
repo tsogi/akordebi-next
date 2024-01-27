@@ -273,11 +273,16 @@ export default function ChordsList({ initialSongs }){
             onPreviousClick = {handlePreviousClick}
             goToPage = {handlePageClick}
         />
-        {/* <div className="px-[10px] mt-[40px]">
-            <a href={`mailto:tsogiaidze@yahoo.com?subject=ვაკანსია`}>
-                <div onClick={() => {  }} className={styles.vacancyImage}></div>
-            </a>
-        </div> */}
+        {
+            process.env.NEXT_PUBLIC_DOMAIN == "akordebi.ge" ?
+            <div className="px-[10px] mt-[40px]">
+                <a href={`https://chordsofsongs.com`}>
+                    <div className={styles.chordsofsongs}></div>
+                </a>
+            </div>
+            :
+            null
+        }
         {/* <div className="px-[10px] mt-[40px]">
             <img onClick={handleYamahaClick} className="radius-[4px] cursor-pointer" src="/yamaha_C40II.png" />
         </div> */}

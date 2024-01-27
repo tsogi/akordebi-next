@@ -96,8 +96,8 @@
   align-items: center;
 }
 
-.vacancyImage {
-    background-image: url('/vacancy_desktop.png');
+.chordsofsongs {
+    background-image: url('/chordsofsongs_desktop.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -111,8 +111,8 @@
         width: 100%;
     }
 
-    .vacancyImage {
-        background-image: url('/vacancy_mobile.png');
+    .chordsofsongs {
+        background-image: url('/chordsofsongs_mobile.png');
         height: 330px;
     }
 
