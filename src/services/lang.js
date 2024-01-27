@@ -125,7 +125,7 @@ const interfaceEng = {
     _verifyIconTitle: "Show only confirmed chords",
     _favoriteIconTitle: "Show only my favorites",
     _login: "Login",
-    _uploadSong: "Upload a song",
+    _uploadSong: "Upload songs",
     _earn_money: "Earn money",
     _isShown: "Showing",
     _from: "from",

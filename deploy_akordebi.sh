@@ -1,3 +1,6 @@
+# Copy envs
+cp .env.production.local.akordebi .env.production.local
+
 # Create docker image .tar for intel
 curl -o ./public/sitemap.xml https://akordebi.ge/api/sitemap
 docker buildx build --platform linux/amd64 -t akordebi:1.2 --output "type=docker,dest=../akordebi.tar" .
