@@ -191,6 +191,23 @@
     width: 128px;
 }
 
+.chordsofsongs {
+    background-image: url('/chordsofsongs_desktop.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 212px;
+    border-radius: 4px;
+    width: 100%;
+}
+
+@media (max-width: 992px) {
+    .chordsofsongs {
+        background-image: url('/chordsofsongs_mobile.png');
+        height: 330px;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .songVotesWrapper {
         justify-content: space-between;
