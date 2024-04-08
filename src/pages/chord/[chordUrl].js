@@ -197,7 +197,7 @@ export default function SongPage({ song }){
                 :
                 null
             }
-            {
+            {/* {
                 process.env.NEXT_PUBLIC_DOMAIN == "akordebi.ge" ?
                 <div className="mt-[40px]">
                     <a href={`https://chordsofsongs.com`}>
@@ -206,7 +206,7 @@ export default function SongPage({ song }){
                 </div>
                 :
                 null
-            }
+            } */}
             {/* <div className={styles.fbComments}>
                 <FbComments href={`akordebi.ge/songPage/${song.id}`} />
             </div> */}

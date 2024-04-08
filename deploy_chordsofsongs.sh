@@ -2,7 +2,7 @@
 yesterday=$(date -v-1d +%Y%m%d)
 day=$(echo $yesterday | cut -c 7-8)
 filename="akordebi_${day}.sql"
-scp ubuntu@akordebi.ge:/var/projects/backups/mysql/$filename ../
+scp ubuntu@akordebi.ge:/var/projects/backups/mysql/$filename ../backups/akordebige/mysql/
 
 # Copy envs
 cp .env.production.local.chordsofsongs .env.production.local
