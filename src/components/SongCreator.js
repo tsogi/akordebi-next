@@ -23,6 +23,13 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
     const [snackOpen, setSnackOpen] = React.useState(false);
     const [snackSeverity, setSnackSeverity] = React.useState();
     const [snackMessage, setSnackMessage] = React.useState("");
+    const [pass, setPass] = React.useState("");
+
+    React.useEffect(() => {
+        const queryParams = new URLSearchParams(window.location.search);
+        const passValue = queryParams.get('pass');
+        setPass(passValue);
+    }, []);
     
     function handleSongNameChange(event) {
         let name = event.target.value;
@@ -51,7 +58,7 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
             setSaving(true);
             let rawText = getRawText(songText);
 
-            let data = { uploader, name: songName.trim(), authors, songText, rawText, videoLesson, id: _songId }
+            let data = { pass, uploader, name: songName.trim(), authors, songText, rawText, videoLesson, id: _songId }
 
             let error = validationError(data);
             if(error) {

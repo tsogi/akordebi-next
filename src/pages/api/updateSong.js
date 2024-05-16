@@ -7,7 +7,7 @@ export default async function handler(req, res) {
     const { data: { user } } = await supabase.auth.getUser();
 
     if (!user) {
-        return res.status(401).json({ error: "Not authenticated" });
+        return res.status(401).json({ error: "Not authenticated. Please login" });
     }
 
     // Todo updateSong.js and storeSong.js violate DRY principle, fix it
@@ -29,7 +29,7 @@ export default async function handler(req, res) {
                 return;
             }
 
-            if(dbSong.uploaderUserId != data.userId) {
+            if(dbSong.uploaderUserId != data.userId && data.pass != process.env.ADMIN_PASS) {
                 response2.error = "თქვენ არ შეგიძლიათ სხვისი შექმნილი სიმღერის შეცვლა";
                 res.json(response2);
                 return;
