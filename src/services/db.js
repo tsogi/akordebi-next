@@ -80,13 +80,23 @@ class Db{
         return null;
     }
 
-    async getSongByUrl(url){
+    async getSongByUrl(url, userID = null){
         const [rows,fields] = await this.pool.execute(`
-            select songs.id, songs.videoLesson, songs.uploader, songs.searchWords, songs.name, songs.body, GROUP_CONCAT(authors.name) as authors from songs 
-            left join authors_songs on songs.id = authors_songs.song_id
-            left join authors on authors_songs.author_id = authors.id
-            where songs.url = ?
-            group by songs.id
+            SELECT 
+                songs.id, 
+                songs.videoLesson, 
+                songs.uploader, 
+                songs.searchWords, 
+                songs.name, 
+                songs.body, 
+                GROUP_CONCAT(DISTINCT authors.name ORDER BY authors.name) AS authors,
+                MAX(IF(favorite_songs.user_id IS NOT NULL AND favorite_songs.song_id = songs.id, TRUE, FALSE)) AS isFavorite
+            FROM songs
+            LEFT JOIN authors_songs ON songs.id = authors_songs.song_id
+            LEFT JOIN authors ON authors_songs.author_id = authors.id
+            LEFT JOIN favorite_songs ON songs.id = favorite_songs.song_id AND favorite_songs.user_id = '${userID}'
+            WHERE songs.url = ?
+            GROUP BY songs.id;
         `, [url]);
 
         if(rows.length){

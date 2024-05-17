@@ -4,17 +4,13 @@ import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import Badge from '@mui/material/Badge';
 import { ThumbUp } from '@mui/icons-material';
 import styles from "./SongCard.module.css";
-import { useRouter } from 'next/router';
 import { useUser } from '@/utils/useUser';
-import { HeartIcon } from '@heroicons/react/20/solid';
 import Link from 'next/link';
+import Favorite from "./Favorite";
 
 
 export default function SongCard({ song }){
-
     const { user, setAuthOpenedFrom } = useUser();
-    const router = useRouter();
-
     const [isFavorite, setIsFavorite] = React.useState(song.isFavorite?? false);
 
     React.useEffect(() => {
@@ -27,52 +23,6 @@ export default function SongCard({ song }){
             localStorage.removeItem("addSongToFavorites");
         }
     } , [user, localStorage.getItem("addSongToFavorites")]);
-
-    const handleFavoriteClick = async () => {
-        if (!user){
-            // save song to local storage
-            localStorage.setItem("addSongToFavorites", song.id);
-            setAuthOpenedFrom('favorites');
-            return;
-        }
-        if(isFavorite){
-            try {
-                await handleRemoveFromFavorites();
-            } catch(error){
-                console.error(error);
-            }
-        }
-        else {
-            try {
-                await handleAddToFavorites();
-            } catch(error){
-                console.error(error);
-            }
-            
-        }
-    }
-
-    const handleAddToFavorites = async () => {
-        await fetch("/api/favorites/add", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ songId: song.id })
-        });
-        setIsFavorite(true);
-    }
-
-    const handleRemoveFromFavorites = async () => {
-        await fetch("/api/favorites/remove", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ songId: song.id })
-        });
-        setIsFavorite(false);
-    }
 
     return <article key={song.id} className={"songItemWrapper"}>
             <a className={styles.songLink} href={`/chord/${song.url}`}>
@@ -126,9 +76,7 @@ export default function SongCard({ song }){
                 </div>
             </div>
             <div className={styles.songMetaBottom}>
-                <div className={`${styles.songMetaLeft} flex items-center`} >
-                    <FavoriteIcon isFavorite={isFavorite} onClick={handleFavoriteClick} />
-                </div>
+                <Favorite song={song} />
                 <div className={styles.songMetaRight}>
                     { renderDifficulty(song.difficulty) }
                     <div className={styles.votesSumWrapper}>
@@ -173,16 +121,4 @@ function renderDifficulty(difficulty) {
     return (
             <img className="mr-[10px] w-[25px] h-[18px]" src={difficultyIcon} />
     );
-}
-
-function FavoriteIcon({isFavorite, onClick}){
-    return (
-        <>
-            <HeartIcon 
-                style={{ fill: isFavorite ? "red" : "transparent", stroke: isFavorite ? "red" : "white" }} 
-                className={`w-[26px] h-[26px] cursor-pointer`}  
-                onClick={onClick} 
-            />
-        </>
-    )
 }

@@ -12,7 +12,6 @@ export async function sendSlackNotification(message) {
         },
         body: JSON.stringify(payload)
     });
-    console.log("resp", response);
 
     if (!response.ok) {
         throw new Error(`Failed to send slack message with status code ${response.status}`);

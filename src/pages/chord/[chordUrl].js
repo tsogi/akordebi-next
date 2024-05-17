@@ -11,6 +11,8 @@ import uiDb from '@/services/data';
 import styles from "./SongPage.module.css";
 import SongDifficulties from '@/components/SongDifficulties';
 import lang from '@/services/lang';
+import Favorite from '@/components/Favorite';
+import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
 let intervalId;
 
 export default function SongPage({ song }){
@@ -123,6 +125,9 @@ export default function SongPage({ song }){
                             showHideText(showChords)
                         }
                     </div>
+                </div>
+                <div className={`${styles.settings}`}>
+                    <Favorite song={song} />
                 </div>
             </div>
             <h2 className={`${styles.songName} capital`}>{song?.name}</h2>
@@ -328,22 +333,13 @@ function chorusLine(line, index){
     return renderLine(line, index)
 }
 
-// export async function getStaticPaths() {
-//     let songs = await db.getAllSongs();
-//     let paths = songs.map(song => {
-//         return { params: { id: "" + song.id } }
-//     })
+export async function getServerSideProps(ctx) {
+    const supabase = createPagesServerClient(ctx);
+    const {data} = await supabase.auth.getSession();
+    const userID = data?.session?.user?.id ?? null;
+    let { chordUrl } = ctx.params;
 
-//     return {
-//       paths: paths,
-//       fallback: "blocking", // can also be true or 'blocking'
-//     }
-// }
-
-export async function getServerSideProps({ params }) {
-    let { chordUrl } = params;
-
-    let song = await db.getSongByUrl(chordUrl);
+    let song = await db.getSongByUrl(chordUrl, userID);
 
     if (!song) {
         let name = chordUrl.split("_")[0];
