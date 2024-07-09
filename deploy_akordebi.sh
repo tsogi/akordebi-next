@@ -24,7 +24,6 @@ ssh -i ../akordebi.pem ubuntu@akordebi.ge << EOF
     docker load -i akordebi.tar
 
     docker-compose stop akordebi
-    docker-compose stop chordsofsongs
     docker-compose stop mysql
 
     docker-compose up -d
