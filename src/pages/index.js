@@ -10,7 +10,7 @@ import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
 
 export default function Home({ initialSongs }) {
   useEffect(() => {
-    uiDb.logEvent("homepage");
+    // uiDb.logEvent("homepage");
   }, [])
 
   return (

@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Build the Next.js application
-RUN npm run build
+# RUN npm run build
 
 # Your app will bind to port 3000, so use the EXPOSE instruction to have it mapped by the docker daemon
 EXPOSE 3000

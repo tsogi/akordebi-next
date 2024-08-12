@@ -99,19 +99,19 @@ export default function ChordsList({ initialSongs }){
     async function handleNextClick(){
         setCurrentPage(currentPage + 1);
 
-        await db.logEvent("page_click", "next");
+        // await db.logEvent("page_click", "next");
     }
 
     async function handlePreviousClick(){
         setCurrentPage(currentPage - 1);
 
-        await db.logEvent("page_click", "previous");
+        // await db.logEvent("page_click", "previous");
     }
 
     async function handlePageClick(page){
         setCurrentPage(page);
 
-        await db.logEvent("page_click", page);
+        // await db.logEvent("page_click", page);
     }
 
     function applyFilters(){
@@ -166,7 +166,7 @@ export default function ChordsList({ initialSongs }){
 
         setFilterConfirmed(true);
 
-        await db.logEvent("filter", "confirmed");
+        // await db.logEvent("filter", "confirmed");
     }
 
     async function handleSortChange(event) {
@@ -174,7 +174,7 @@ export default function ChordsList({ initialSongs }){
         setSortBy(val);
         setCurrentPage(1);
 
-        await db.logEvent("filter", val);
+        // await db.logEvent("filter", val);
     }
 
     async function handleFavoritesClick(){
@@ -191,7 +191,7 @@ export default function ChordsList({ initialSongs }){
 
         setFilterFavorites(true);
 
-        await db.logEvent("filter", "favorites");
+        // await db.logEvent("filter", "favorites");
     }
 
     async function handleLessonedClick(){
@@ -203,7 +203,7 @@ export default function ChordsList({ initialSongs }){
 
         setFilterLessoned(true);
 
-        await db.logEvent("filter", "lessoned");
+        // await db.logEvent("filter", "lessoned");
     }
 
     function handleSearchClick(songs){

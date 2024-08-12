@@ -27,7 +27,7 @@ export default function SongPage({ song }){
     useEffect(() => {
         document.addEventListener('click', handleScreenClick);
         
-        uiDb.logEvent("song_page", song.id);
+        // uiDb.logEvent("song_page", song.id);
 
         return () => {
             document.removeEventListener('click', handleScreenClick);
@@ -56,7 +56,7 @@ export default function SongPage({ song }){
             setFontSize(newFontSize);
         }
 
-        await uiDb.logEvent("font_click", "plus");
+        // await uiDb.logEvent("font_click", "plus");
     }
 
     async function handleMinusFontClick(){
@@ -65,7 +65,7 @@ export default function SongPage({ song }){
             setFontSize(newFontSize);
         }
 
-        await uiDb.logEvent("font_click", "minus");
+        // await uiDb.logEvent("font_click", "minus");
     }
 
     async function handleMinusScrollClick(){
@@ -74,7 +74,7 @@ export default function SongPage({ song }){
             setScrollSpeed(newSpeed);
         }
 
-        await uiDb.logEvent("auto_scroll", "minus");
+        // await uiDb.logEvent("auto_scroll", "minus");
     }
 
     async function handlePlusScrollClick(){
@@ -83,7 +83,7 @@ export default function SongPage({ song }){
             setScrollSpeed(newSpeed);
         }
 
-        await uiDb.logEvent("auto_scroll", "plus");
+        // await uiDb.logEvent("auto_scroll", "plus");
     }
 
     async function handleShowChordsClick(){
@@ -94,7 +94,7 @@ export default function SongPage({ song }){
 
         setShowChords(true);
 
-        await uiDb.logEvent("show_chords");
+        // await uiDb.logEvent("show_chords");
     }
 
     return <>
@@ -318,7 +318,7 @@ async function handleChordClick(event, chord){
         }
     }
 
-    await uiDb.logEvent("chord_click", chord);
+    // await uiDb.logEvent("chord_click", chord);
 }
 
 function coupletLine(line, index){

@@ -2,14 +2,14 @@
 yesterday=$(date -v-1d +%Y%m%d)
 day=$(echo $yesterday | cut -c 7-8)
 filename="akordebi_${day}.sql"
-scp ubuntu@akordebi.ge:/var/projects/backups/mysql/$filename ../backups/akordebige/mysql/
+scp -i ../akordebi.pem ubuntu@akordebi.ge:/var/projects/backups/mysql/$filename ../backups/akordebige/mysql/
 
 # Copy envs
 cp .env.production.local.akordebi .env.production.local
 
 # Create docker image .tar for intel
 curl -o ./public/sitemap.xml https://akordebi.ge/api/sitemap
-docker buildx build --platform linux/amd64 -t akordebi:1.2 --output "type=docker,dest=../akordebi.tar" .
+docker buildx build --platform linux/amd64 -t akordebi:1.3 --output "type=docker,dest=../akordebi.tar" .
 
 # Upload docker image .tar to ssh
 scp -i ../akordebi.pem ../akordebi.tar ubuntu@akordebi.ge:/var/projects/akordebi
@@ -35,7 +35,7 @@ EOF
 
 # This is to cause next app to get cached so users don't have to wait for the first load
 curl https://akordebi.ge
-curl https://chordsofsongs.com
+# curl https://chordsofsongs.com
 
 # Download mysql backup
 # scp ubuntu@akordebi.ge:/var/projects/backups/mysql/akordebi_15.sql ../

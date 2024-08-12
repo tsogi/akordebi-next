@@ -3,7 +3,7 @@ npm-debug.log
 .DS_Store
 .git
 .gitignore
-.next
+# .next
 .package-lock.json
 yarn.lock
 package-lock.json

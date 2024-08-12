@@ -15,7 +15,7 @@ const SearchSong = ({ onSearch }) => {
         alert(lang._search_error);
     }
 
-    await db.logEvent("song_search", searchText);
+    // await db.logEvent("song_search", searchText);
 
     if(!response.data.length) {
         alert(lang._nothing_found);

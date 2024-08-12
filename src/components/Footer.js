@@ -4,20 +4,20 @@ import WriteUs from "./WriteUs";
 import lang from '@/services/lang'
 
 export default function Footer(){
-    useEffect(() => {
-      if(process.env.NEXT_PUBLIC_DOMAIN == "akordebi.ge"){
-        const script = document.createElement('script');
+  useEffect(() => {
+    if(process.env.NEXT_PUBLIC_DOMAIN == "akordebi.ge"){
+      const script = document.createElement('script');
 
-        script.src = "//counter.top.ge/counter.js";
-        script.async = true;
+      script.src = "//counter.top.ge/counter.js";
+      script.async = true;
 
-        document.body.appendChild(script);
+      document.body.appendChild(script);
 
-        return () => {
-          document.body.removeChild(script);
-        }
+      return () => {
+        document.body.removeChild(script);
       }
-    }, []);
+    }
+  }, []);
 
     return <footer className={styles.footerWrapper}>
       <div className={`${styles.topGeWrapper} page_container flex flex-col items-center`}>
@@ -44,14 +44,32 @@ export default function Footer(){
                 {lang._footer_add_song}
               </a>
             </div>
-            <div className={`${styles.copyright} text-[#035fda]`}>{lang._footer_designBy} 
-              <a className="text-[#f2ac2b]" href="https://www.linkedin.com/in/tsogiaidze/"> {lang._footer_tsogi}</a>
+            <div className={`${styles.copyright} text-[#035fda]`}>{lang._footer_designBy}<span> </span><a className="text-[#f2ac2b] underline" href="https://tsogi.net">{lang._footer_tsogi}</a>
             </div>
           </div>
         </div>
         {
           topGeJsx()
         }
+        <div className="donationWrapper capital mt-[20px]">
+          <a href="/donation" class="justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 flex items-center gap-2 rounded-md px-4 py-2 bg-red-500 text-white hover:bg-red-600">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="h-5 w-5 fill-white"
+            >
+              <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+            </svg>
+            დონაცია
+          </a>
+        </div>
       </div>
     </footer>
 }
