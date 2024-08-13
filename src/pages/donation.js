@@ -34,8 +34,8 @@ const TermsOfService = () => {
     </Head>
     <Header />
       <div className='page_container'>
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="max-w-3xl p-8 rounded-lg shadow-lg">
+      <div className="flex justify-center">
+        <div className="max-w-3xl rounded-lg shadow-lg">
           <h1 className="text-3xl font-bold text-blue-600 mb-4">
               დონაცია
           </h1>
