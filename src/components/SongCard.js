@@ -65,14 +65,14 @@ export default function SongCard({ song }){
                         :
                         null
                     }
-                    {
+                    {/* {
                         song.confirmed ?
                         <div className={styles.confirmedIcon}>
                             <TaskAltIcon style={{ color: "#15a894" }} /> 
                         </div>
                         :
                         null
-                    }
+                    } */}
                 </div>
             </div>
             <div className={styles.songMetaBottom}>

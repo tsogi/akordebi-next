@@ -247,11 +247,11 @@ export default function ChordsList({ initialSongs }){
                             <OndemandVideoIcon style={{ color: "#9ebeff" }} />
                         </div>
                     </Tooltip>
-                    <Tooltip placement="top" title={lang._verifyIconTitle}>
+                    {/* <Tooltip placement="top" title={lang._verifyIconTitle}>
                         <div onClick={handleConfirmedClick} className={`${styles.filter} ${styles.lesson} ${filterConfirmed ? styles.filterSelected : ""}`}>
                             <TaskAltIcon style={{ color: "#15a894" }} /> 
                         </div>
-                    </Tooltip>
+                    </Tooltip> */}
                 </div>
             </div>
         </div>
