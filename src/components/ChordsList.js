@@ -283,8 +283,8 @@ export default function ChordsList({ initialSongs }){
             :
             null
         } */}
-        {/* <div className="px-[10px] mt-[40px]">
-            <img onClick={handleYamahaClick} className="radius-[4px] cursor-pointer" src="/yamaha_C40II.png" />
-        </div> */}
+        <div className="px-[10px] mt-[40px]">
+            <img className="radius-[4px] w-[100%] rounded-[4px] cursor-pointer" src="/ad_place.png" />
+        </div>
     </div>
 }

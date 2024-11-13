@@ -51,7 +51,7 @@ export default function Footer(){
         {
           topGeJsx()
         }
-        <div className="donationWrapper capital mt-[20px]">
+        {/* <div className="donationWrapper capital mt-[20px]">
           <a href="/donation" class="justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 flex items-center gap-2 rounded-md px-4 py-2 bg-red-500 text-white hover:bg-red-600">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -69,7 +69,7 @@ export default function Footer(){
             </svg>
             დონაცია
           </a>
-        </div>
+        </div> */}
       </div>
     </footer>
 }
