@@ -205,8 +205,8 @@ export default function SongPage({ song }){
             {/* {
                 process.env.NEXT_PUBLIC_DOMAIN == "akordebi.ge" ?
                 <div className="mt-[40px]">
-                    <a href={`https://chordsofsongs.com`}>
-                        <div className={styles.chordsofsongs}></div>
+                    <a href={`https://chords365.com`}>
+                        <div className={styles.chords365}></div>
                     </a>
                 </div>
                 :

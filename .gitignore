@@ -32,4 +32,5 @@ yarn-error.log*
 # vercel
 .vercel
 .env.production.local.akordebi
-.env.production.local.chordsofsongs
+.env.production.local.chords365
+chords365.tar

@@ -268,3 +268,7 @@ code {
     display: flex;
     flex-wrap: wrap;
 }
+
+.isActivePage {
+  color: #4272b3;
+}

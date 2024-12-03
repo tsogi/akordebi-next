@@ -196,7 +196,7 @@
     width: 128px;
 }
 
-.chordsofsongs {
+.chords365 {
     background-image: url('/chordsofsongs_desktop.png');
     background-size: contain;
     background-repeat: no-repeat;
@@ -207,7 +207,7 @@
 }
 
 @media (max-width: 992px) {
-    .chordsofsongs {
+    .chords365 {
         background-image: url('/chordsofsongs_mobile.png');
         height: 330px;
     }

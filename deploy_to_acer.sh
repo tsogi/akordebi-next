@@ -4,6 +4,7 @@
 # filename="akordebi_${day}.sql"
 # scp -i /users/nika/.ssh/id_rsa_ubuntu_server ubuntu@akordebi.ge:/var/projects/backups/mysql/$filename ../backups/akordebige/mysql/
 
+curl -o ./public/sitemap.xml https://akordebi.ge/api/sitemap
 # Copy envs
 cp .env.production.local.akordebi .env.production.local
 
@@ -32,7 +33,6 @@ EOF
 
 # This is to cause next app to get cached so users don't have to wait for the first load
 curl https://akordebi.ge
-# curl https://chordsofsongs.com
 
 # Download mysql backup
 # scp ubuntu@akordebi.ge:/var/projects/backups/mysql/akordebi_15.sql ../

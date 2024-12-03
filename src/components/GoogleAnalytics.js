@@ -21,8 +21,8 @@ function getGtmIdForDomain(domain) {
     switch (domain) {
         case 'akordebi.ge':
             return 'G-EQH6P2B20Z';
-        case 'chordsofsongs.com':
-            return 'G-SH3NXETW0B';
+        case 'chords365.com':
+            return 'G-VLP9K95ZLJ';
         default:
             return '';
     }

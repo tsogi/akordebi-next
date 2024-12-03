@@ -29,7 +29,7 @@ export default function CreateSong(){
 function getYoutubeSrc(){
     let domain = process.env.NEXT_PUBLIC_DOMAIN;
 
-    if(domain == "chordsofsongs.com") {
+    if(domain == "chords365.com") {
         return "https://www.youtube.com/embed/n8W9bmGs5gA?si=A09bhMPskCr3OwBa";
     }
 
