@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 8.0.30, for macos12 (x86_64)
+-- MySQL dump 10.13  Distrib 8.3.0, for macos13.6 (arm64)
 --
 -- Host: localhost    Database: akordebi.ge
 -- ------------------------------------------------------
@@ -7,7 +7,7 @@
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -136,7 +136,7 @@ CREATE TABLE `logs` (
   `ip` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29203 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29216 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,6 +145,7 @@ CREATE TABLE `logs` (
 
 LOCK TABLES `logs` WRITE;
 /*!40000 ALTER TABLE `logs` DISABLE KEYS */;
+INSERT INTO `logs` VALUES (29203,'donation_page_opened','','::1','2024-08-12 12:39:28'),(29204,'donation_page_opened','','::1','2024-08-12 12:39:28'),(29205,'donation_page_opened','','::1','2024-08-12 12:40:17'),(29206,'donation_page_opened','','::1','2024-08-12 12:40:17'),(29207,'donation_page_opened','','::1','2024-08-12 12:40:51'),(29208,'donation_page_opened','','::1','2024-08-12 12:40:51'),(29209,'donation_page_opened','','::1','2024-08-12 12:46:07'),(29210,'donation_page_opened','','::1','2024-08-12 12:46:07'),(29211,'guitar_shop_page_click','','::1','2024-12-03 12:25:39'),(29212,'foreign_songs_page_click','','::1','2024-12-03 12:28:33'),(29213,'guitar_shop_page_click','','::1','2024-12-03 12:33:52'),(29214,'homepage_visit','{\"language\":\"en-US\",\"timezone\":\"Asia/Tbilisi\",\"userAgent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36\",\"screenWidth\":2490,\"screenHeight\":1328}','::1','2024-12-04 13:21:20'),(29215,'homepage_visit','{\"language\":\"en-US\",\"timezone\":\"Asia/Tbilisi\",\"userAgent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36\",\"screenWidth\":2490,\"screenHeight\":1328}','::1','2024-12-04 13:21:20');
 /*!40000 ALTER TABLE `logs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -247,4 +248,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-09 15:32:18
+-- Dump completed on 2025-01-14 21:49:54
