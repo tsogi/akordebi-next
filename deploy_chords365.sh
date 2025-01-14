@@ -1,6 +1,7 @@
 curl -o ./public/sitemap.xml https://chords365.com/api/sitemap
 # Copy envs
 cp .env.production.local.chords365 .env.production.local
+npm run build
 
 # Create docker image .tar for intel
 # curl -o ./public/sitemap.xml https://akordebi.ge/api/sitemap

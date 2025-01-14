@@ -10,7 +10,17 @@ import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
 
 export default function Home({ initialSongs }) {
   useEffect(() => {
-    // uiDb.logEvent("homepage");
+    const demographicData = {
+      language: navigator.language,
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      userAgent: navigator.userAgent,
+      screenWidth: window.innerWidth,
+      screenHeight: window.innerHeight,
+    };
+    
+    const demographicDataString = JSON.stringify(demographicData);
+    
+    uiDb.logEvent("homepage_visit", demographicData);
   }, [])
 
   return (
