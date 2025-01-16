@@ -1,4 +1,4 @@
-const SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/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'; // Replace with your Webhook URL
+const SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/lsdkfj/lsdkfj/LbznmuC8Z'; // Todo move this to .env.local
 
 export async function sendSlackNotification(message) {
     const payload = {
