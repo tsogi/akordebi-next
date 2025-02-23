@@ -133,10 +133,35 @@ const questions = [
   }
 ];
 
+// Add modal content
+const modalContent = {
+  title: {
+    ge: "როგორ მუშაობს გიტარის შერჩევა?",
+    en: "How does the Guitar Finder work?"
+  },
+  description: {
+    ge: `ჩვენი გიტარის შერჩევის სისტემა გეხმარებათ იდეალური გიტარის პოვნაში თქვენი საჭიროებების მიხედვით:
+
+    1. პასუხობთ მარტივ კითხვებს თქვენი პრეფერენციების შესახებ
+    2. სისტემა აანალიზებს თქვენს პასუხებს ხელოვნური ინტელექტის მეშვეობით
+    3. გთავაზობთ საუკეთესო გიტარას თქვენი მოთხოვნების შესაბამისად
+    
+    ყველა რეკომენდაცია ეფუძნება პროფესიონალი გიტარისტების გამოცდილებას და რჩევებს.`,
+    en: `Our Guitar Finder system helps you find the perfect guitar based on your needs:
+
+    1. Answer simple questions about your preferences
+    2. System analyzes your responses
+    3. Get personalized guitar recommendations
+    
+    All recommendations are based on professional guitarists' experience and advice.`
+  }
+};
+
 export default function GuitarQuiz() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState({});
   const [showResults, setShowResults] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const handleAnswer = (answer) => {
     const newAnswers = { ...answers, [questions[currentQuestion].id]: answer };
@@ -158,53 +183,113 @@ export default function GuitarQuiz() {
 
   if (showResults) {
     return (
-      <div className={styles.quizContainer}>
-        <h2 className={styles.title}>გმადლობთ!</h2>
-        <p className={styles.description}>თქვენი პასუხების მიხედვით, დაგეხმარებით საუკეთესო გიტარის შერჩევაში.</p>
-        <button onClick={resetQuiz} className={styles.resetButton}>
-          თავიდან დაწყება
-        </button>
-      </div>
+      <>
+        <h1 className={styles.mainTitle}>
+          იპოვე შენი იდეალური გიტარა
+          <button 
+            className={styles.infoButton}
+            onClick={() => setShowModal(true)}
+            aria-label="ინფორმაცია"
+          >
+            <InfoIcon />
+          </button>
+        </h1>
+        <div className={styles.quizContainer}>
+          <h2 className={styles.title}>გმადლობთ!</h2>
+          <p className={styles.description}>თქვენი პასუხების მიხედვით, დაგეხმარებით საუკეთესო გიტარის შერჩევაში.</p>
+          <button onClick={resetQuiz} className={styles.resetButton}>
+            თავიდან დაწყება
+          </button>
+        </div>
+      </>
     );
   }
 
   const question = questions[currentQuestion];
 
   return (
-    <div className={styles.quizContainer}>
-      <div className={styles.progressContainer}>
-        <div className={styles.progressBar}>
-          <div 
-            className={styles.progressFill} 
-            style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
-          ></div>
+    <>
+      <h1 className={styles.mainTitle}>
+        იპოვე შენი იდეალური გიტარა
+        <button 
+          className={styles.infoButton}
+          onClick={() => setShowModal(true)}
+          aria-label="ინფორმაცია"
+        >
+          <InfoIcon />
+        </button>
+      </h1>
+      <div className={styles.quizContainer}>
+        <div className={styles.progressContainer}>
+          <div className={styles.progressBar}>
+            <div 
+              className={styles.progressFill} 
+              style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
+            ></div>
+          </div>
+          <div className={styles.questionNumber}>
+            <span className={styles.currentStep}>
+              კითხვა {currentQuestion + 1}
+            </span>
+            <span className={styles.totalSteps}>
+              {questions.length} კითხვიდან
+            </span>
+          </div>
         </div>
-        <div className={styles.questionNumber}>
-          <span className={styles.currentStep}>
-            კითხვა {currentQuestion + 1}
-          </span>
-          <span className={styles.totalSteps}>
-            {questions.length} კითხვიდან
-          </span>
+        
+        <div className={styles.questionContainer}>
+          <h3 className={styles.question}>{question.question.ge}</h3>
+          <div className={styles.options}>
+            {question.options.map((option) => (
+              <button
+                key={option.value}
+                className={styles.optionButton}
+                onClick={() => handleAnswer(option.value)}
+              >
+                {option.label.ge}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
-      
-      <h2 className={styles.title}>იპოვე შენი იდეალური გიტარა</h2>
-      
-      <div className={styles.questionContainer}>
-        <h3 className={styles.question}>{question.question.ge}</h3>
-        <div className={styles.options}>
-          {question.options.map((option) => (
-            <button
-              key={option.value}
-              className={styles.optionButton}
-              onClick={() => handleAnswer(option.value)}
+
+      {showModal && (
+        <div className={styles.modalOverlay} onClick={() => setShowModal(false)}>
+          <div className={styles.modal} onClick={e => e.stopPropagation()}>
+            <button 
+              className={styles.closeButton}
+              onClick={() => setShowModal(false)}
+              aria-label="დახურვა"
             >
-              {option.label.ge}
+              ✕
             </button>
-          ))}
+            <h2 className={styles.modalTitle}>{modalContent.title.ge}</h2>
+            <div className={styles.modalContent}>
+              {modalContent.description.ge.split('\n').map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
-} 
+}
+
+// Info icon component
+const InfoIcon = () => (
+  <svg 
+    width="20" 
+    height="20" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round"
+  >
+    <circle cx="12" cy="12" r="10"></circle>
+    <line x1="12" y1="16" x2="12" y2="12"></line>
+    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+  </svg>
+); 

@@ -126,6 +126,96 @@
   background: #4070d6;
 }
 
+.mainTitle {
+  font-size: 2.5rem;
+  color: #fff;
+  text-align: center;
+  margin: 2rem 0;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.infoButton {
+  background: none;
+  border: none;
+  color: #5286ed;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.infoButton:hover {
+  color: #82a7f3;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modal {
+  background: #1e2237;
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.modalTitle {
+  color: #fff;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.modalContent {
+  color: #9ebeff;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.modalContent p {
+  margin-bottom: 1rem;
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: #9ebeff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.closeButton:hover {
+  color: #fff;
+}
+
 @media (max-width: 768px) {
   .quizContainer {
     margin: 1rem;
@@ -138,5 +228,23 @@
 
   .question {
     font-size: 1.1rem;
+  }
+
+  .mainTitle {
+    font-size: 2rem;
+    margin: 1.5rem 0;
+  }
+
+  .modal {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .modalTitle {
+    font-size: 1.3rem;
+  }
+
+  .modalContent {
+    font-size: 0.9rem;
   }
 } 
