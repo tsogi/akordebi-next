@@ -1,0 +1,111 @@
+.quizContainer {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: #1e2237;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.progressBar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: #5286ed;
+  transition: width 0.3s ease;
+}
+
+.title {
+  font-size: 1.8rem;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.questionNumber {
+  text-align: center;
+  color: #9ebeff;
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+}
+
+.questionContainer {
+  margin-bottom: 2rem;
+}
+
+.question {
+  font-size: 1.2rem;
+  color: #fff;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.optionButton {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid rgba(210,210,223,.2);
+  border-radius: 10px;
+  background: transparent;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.optionButton:hover {
+  background: rgba(82, 134, 237, 0.1);
+  border-color: #5286ed;
+}
+
+.description {
+  text-align: center;
+  color: #9ebeff;
+  margin-bottom: 2rem;
+}
+
+.resetButton {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+  padding: 1rem;
+  background: #5286ed;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.resetButton:hover {
+  background: #4070d6;
+}
+
+@media (max-width: 768px) {
+  .quizContainer {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .question {
+    font-size: 1.1rem;
+  }
+} 
