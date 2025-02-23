@@ -9,8 +9,8 @@ export default function GuitarFinder() {
   return (
     <>
       <Head>
-        <title>{`Guitar Finder - ${lang._guitar_chords}`}</title>
-        <meta name="description" content="Find the perfect guitar for you by answering a few simple questions" />
+        <title>{`გიტარის შერჩევა - ${lang._guitar_chords}`}</title>
+        <meta name="description" content="შეარჩიე საუკეთესო გიტარა რამდენიმე მარტივი კითხვის საშუალებით" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
       </Head>
