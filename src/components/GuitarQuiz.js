@@ -9,35 +9,41 @@ const questions = [
       { value: "budget", label: "Under $200" },
       { value: "midRange", label: "$200 - $500" },
       { value: "premium", label: "$500 - $1000" },
-      { value: "highEnd", label: "Over $1000" }
+      { value: "doesNotMatter", label: "Does not matter" }
     ]
   },
   {
     id: 2,
     question: "What style of music do you primarily want to play?",
     options: [
-      { value: "acoustic", label: "Folk/Acoustic" },
-      { value: "electric", label: "Rock/Metal" },
+      { value: "pop", label: "Pop" },
+      { value: "folk", label: "Folk" },
+      { value: "rock_metal", label: "Rock/Metal" },
       { value: "classical", label: "Classical" },
-      { value: "jazz", label: "Jazz" }
+      { value: "jazz", label: "Jazz" },
+      { value: "blues", label: "Blues" },
+      { value: "hiphop", label: "Hip-Hop" },
+      { value: "all", label: "More or less all" },
     ]
   },
   {
     id: 3,
     question: "What's your current skill level?",
     options: [
-      { value: "beginner", label: "Complete Beginner" },
+      { value: "super_beginner", label: "Complete Beginner" },
+      { value: "beginner", label: "Beginner" },
       { value: "intermediate", label: "Some Experience" },
-      { value: "advanced", label: "Experienced Player" }
+      { value: "advanced", label: "Experienced Player" },
+      { value: "superstar", label: "Superstar" }
     ]
   },
   {
     id: 4,
-    question: "What size guitar would you prefer?",
+    question: "How important is portability to you?",
     options: [
-      { value: "small", label: "Smaller (Travel/3/4 size)" },
-      { value: "standard", label: "Standard size" },
-      { value: "large", label: "Larger body" }
+      { value: "very", label: "Very important - I want to travel with it" },
+      { value: "somewhat", label: "Somewhat - Might take it places occasionally" },
+      { value: "not", label: "Not important - It will stay at home" }
     ]
   },
   {
@@ -47,6 +53,52 @@ const questions = [
       { value: "yes", label: "Yes" },
       { value: "no", label: "No" },
       { value: "maybe", label: "Maybe in the future" }
+    ]
+  },
+  {
+    id: 6,
+    question: "How important is the guitar's appearance to you?",
+    options: [
+      { value: "very", label: "Very important - I want it to look stunning" },
+      { value: "somewhat", label: "Somewhat - Nice to have but not crucial" },
+      { value: "not", label: "Not important - Only care about sound" }
+    ]
+  },
+  {
+    id: 7,
+    question: "Do you prefer playing with fingers or a pick?",
+    options: [
+      { value: "fingers", label: "Fingerstyle playing" },
+      { value: "pick", label: "Using a pick" },
+      { value: "both", label: "Both equally" },
+      { value: "unsure", label: "Not sure yet" }
+    ]
+  },
+  {
+    id: 8,
+    question: "What's your preferred playing position?",
+    options: [
+      { value: "sitting", label: "Mostly sitting down" },
+      { value: "standing", label: "Mostly standing up" },
+      { value: "both", label: "Both equally" }
+    ]
+  },
+  {
+    id: 9,
+    question: "How important is having built-in electronics (pickup/preamp)?",
+    options: [
+      { value: "must", label: "Must have - Want to plug into an amp" },
+      { value: "nice", label: "Nice to have but not required" },
+      { value: "not", label: "Not important at all" }
+    ]
+  },
+  {
+    id: 10,
+    question: "What's your hand size?",
+    options: [
+      { value: "small", label: "Small - Prefer smaller necks" },
+      { value: "medium", label: "Average" },
+      { value: "large", label: "Large - Comfortable with wider necks" }
     ]
   }
 ];
