@@ -146,7 +146,7 @@ const modalContent = {
     2. სისტემა აანალიზებს თქვენს პასუხებს ხელოვნური ინტელექტის მეშვეობით
     3. გთავაზობთ საუკეთესო გიტარას თქვენი მოთხოვნების შესაბამისად
     
-    ყველა რეკომენდაცია ეფუძნება პროფესიონალი გიტარისტების გამოცდილებას და რჩევებს.`,
+    რეკომენდაცია ეფუძნება პროფესიონალი გიტარისტების გამოცდილებას და რჩევებს.`,
     en: `Our Guitar Finder system helps you find the perfect guitar based on your needs:
 
     1. Answer simple questions about your preferences
@@ -156,6 +156,24 @@ const modalContent = {
     All recommendations are based on professional guitarists' experience and advice.`
   }
 };
+
+// Update InfoIcon to QuestionIcon
+const QuestionIcon = () => (
+  <svg 
+    width="18" 
+    height="18" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2.5" 
+    strokeLinecap="round" 
+    strokeLinejoin="round"
+  >
+    <circle cx="12" cy="12" r="10"></circle>
+    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+  </svg>
+);
 
 export default function GuitarQuiz() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -185,13 +203,13 @@ export default function GuitarQuiz() {
     return (
       <>
         <h1 className={styles.mainTitle}>
-          იპოვე შენი იდეალური გიტარა
+          იპოვე შენთვის იდეალური გიტარა
           <button 
-            className={styles.infoButton}
+            className={styles.questionButton}
             onClick={() => setShowModal(true)}
             aria-label="ინფორმაცია"
           >
-            <InfoIcon />
+            <QuestionIcon />
           </button>
         </h1>
         <div className={styles.quizContainer}>
@@ -210,13 +228,13 @@ export default function GuitarQuiz() {
   return (
     <>
       <h1 className={styles.mainTitle}>
-        იპოვე შენი იდეალური გიტარა
+        იპოვე შენთვის იდეალური გიტარა
         <button 
-          className={styles.infoButton}
+          className={styles.questionButton}
           onClick={() => setShowModal(true)}
           aria-label="ინფორმაცია"
         >
-          <InfoIcon />
+          <QuestionIcon />
         </button>
       </h1>
       <div className={styles.quizContainer}>
@@ -274,22 +292,4 @@ export default function GuitarQuiz() {
       )}
     </>
   );
-}
-
-// Info icon component
-const InfoIcon = () => (
-  <svg 
-    width="20" 
-    height="20" 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2" 
-    strokeLinecap="round" 
-    strokeLinejoin="round"
-  >
-    <circle cx="12" cy="12" r="10"></circle>
-    <line x1="12" y1="16" x2="12" y2="12"></line>
-    <line x1="12" y1="8" x2="12.01" y2="8"></line>
-  </svg>
-); 
+} 

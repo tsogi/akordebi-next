@@ -130,13 +130,31 @@
   font-size: 2.5rem;
   color: #fff;
   text-align: center;
-  margin: 2rem 0;
+  margin-bottom: 2rem 0;
   font-weight: 600;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  display: flex;
+  display: block;
+  width: 100%;
+}
+
+.questionButton {
+  background: none;
+  border: none;
+  color: #5286ed;
+  cursor: pointer;
+  padding: 0;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  transition: color 0.2s ease;
+  vertical-align: middle;
+  position: relative;
+  top: -0.1em;
+  margin-left: 0.2em;
+}
+
+.questionButton:hover {
+  color: #82a7f3;
 }
 
 .infoButton {
@@ -233,6 +251,7 @@
   .mainTitle {
     font-size: 2rem;
     margin: 1.5rem 0;
+    padding-top: 0px;
   }
 
   .modal {
