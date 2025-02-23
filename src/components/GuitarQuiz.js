@@ -172,15 +172,24 @@ export default function GuitarQuiz() {
 
   return (
     <div className={styles.quizContainer}>
-      <div className={styles.progressBar}>
-        <div 
-          className={styles.progressFill} 
-          style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
-        ></div>
+      <div className={styles.progressContainer}>
+        <div className={styles.progressBar}>
+          <div 
+            className={styles.progressFill} 
+            style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
+          ></div>
+        </div>
+        <div className={styles.questionNumber}>
+          <span className={styles.currentStep}>
+            კითხვა {currentQuestion + 1}
+          </span>
+          <span className={styles.totalSteps}>
+            {questions.length} კითხვიდან
+          </span>
+        </div>
       </div>
       
       <h2 className={styles.title}>იპოვე შენი იდეალური გიტარა</h2>
-      <p className={styles.questionNumber}>კითხვა {currentQuestion + 1} / {questions.length}</p>
       
       <div className={styles.questionContainer}>
         <h3 className={styles.question}>{question.question.ge}</h3>

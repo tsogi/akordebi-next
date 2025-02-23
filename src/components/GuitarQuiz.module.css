@@ -7,19 +7,39 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.progressContainer {
+  margin-bottom: 2.5rem;
+}
+
 .progressBar {
   width: 100%;
-  height: 8px;
+  height: 4px;
   background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-  margin-bottom: 2rem;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
   overflow: hidden;
+  position: relative;
 }
 
 .progressFill {
   height: 100%;
-  background: #5286ed;
-  transition: width 0.3s ease;
+  background: linear-gradient(90deg, #5286ed, #82a7f3);
+  border-radius: 8px;
+  transition: width 0.4s ease;
+  position: relative;
+}
+
+.progressFill::after {
+  content: '';
+  position: absolute;
+  right: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(82, 134, 237, 0.5);
 }
 
 .title {
@@ -30,10 +50,21 @@
 }
 
 .questionNumber {
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   color: #9ebeff;
-  margin-bottom: 2rem;
   font-size: 0.9rem;
+  padding: 0 0.25rem;
+}
+
+.currentStep {
+  color: #fff;
+  font-weight: 500;
+}
+
+.totalSteps {
+  color: rgba(158, 190, 255, 0.7);
 }
 
 .questionContainer {
