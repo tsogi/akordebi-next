@@ -175,6 +175,19 @@ const QuestionIcon = () => (
   </svg>
 );
 
+// Add confetti effect component at the top
+const Confetti = () => (
+  <div className={styles.confetti}>
+    {[...Array(50)].map((_, i) => (
+      <div key={i} className={styles.confettiPiece} style={{
+        '--delay': `${Math.random() * 3}s`,
+        '--rotation': `${Math.random() * 360}deg`,
+        '--position': `${Math.random() * 100}%`,
+      }}></div>
+    ))}
+  </div>
+);
+
 export default function GuitarQuiz() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState({});
@@ -253,8 +266,7 @@ export default function GuitarQuiz() {
             <QuestionIcon />
           </button>
         </h1>
-        <div className={styles.quizContainer}>
-          <h2 className={styles.title}>გმადლობთ!</h2>
+        <div className={`${styles.quizContainer} ${styles.resultsContainer}`}>
           {isLoading ? (
             <p className={styles.description}>ვარჩევთ თქვენთვის საუკეთესო გიტარას...</p>
           ) : error ? (
@@ -265,24 +277,30 @@ export default function GuitarQuiz() {
               </button>
             </div>
           ) : recommendation ? (
-            <div className={styles.recommendationContainer}>
-              <p className={styles.description}>თქვენთვის შერჩეული გიტარა:</p>
-              <div className={styles.guitarCard}>
-                <h3>{recommendation.name}</h3>
-                <p>ფასი: {recommendation.price}₾</p>
-                <a 
-                  href={recommendation.link} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className={styles.viewButton}
-                >
-                  ონლაინ მაღაზიაში ნახვა
-                </a>
+            <>
+              <Confetti />
+              <div className={styles.successMessage}>
+                <h2 className={styles.congratsTitle}>გილოცავთ! 🎉</h2>
+                <p className={styles.congratsText}>ჩვენ ვიპოვეთ იდეალური გიტარა თქვენთვის</p>
               </div>
-              <button onClick={resetQuiz} className={styles.resetButton}>
-                თავიდან დაწყება
-              </button>
-            </div>
+              <div className={styles.recommendationContainer}>
+                <div className={`${styles.guitarCard} ${styles.successCard}`}>
+                  <h3>{recommendation.name}</h3>
+                  <p>ფასი: {recommendation.price}₾</p>
+                  <a 
+                    href={recommendation.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className={styles.viewButton}
+                  >
+                    ონლაინ მაღაზიაში ნახვა
+                  </a>
+                </div>
+                <button onClick={resetQuiz} className={`${styles.resetButton} ${styles.successResetButton}`}>
+                  თავიდან დაწყება
+                </button>
+              </div>
+            </>
           ) : null}
         </div>
       </>

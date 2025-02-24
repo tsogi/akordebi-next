@@ -320,4 +320,123 @@
   color: #9ebeff;
   text-align: center;
   margin: 2rem 0;
+}
+
+.resultsContainer {
+  background: linear-gradient(135deg, #1e2237 0%, #2a305c 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+}
+
+.successMessage {
+  text-align: center;
+  margin-bottom: 2rem;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.congratsTitle {
+  font-size: 2rem;
+  color: #ffd700;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.congratsText {
+  color: #fff;
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.successCard {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  transform: translateY(0);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: slideIn 0.6s ease-out;
+}
+
+.successCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.successResetButton {
+  background: transparent;
+  border: 2px solid #5286ed;
+  color: #5286ed;
+  margin-top: 2rem;
+  transition: all 0.3s ease;
+}
+
+.successResetButton:hover {
+  background: #5286ed;
+  color: white;
+}
+
+.confetti {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.confettiPiece {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #ffd700;
+  top: -10px;
+  left: var(--position);
+  transform: rotate(var(--rotation));
+  animation: confettiFall 3s linear infinite;
+  animation-delay: var(--delay);
+}
+
+.confettiPiece:nth-child(2n) {
+  background: #5286ed;
+}
+
+.confettiPiece:nth-child(3n) {
+  background: #ff6b6b;
+}
+
+.confettiPiece:nth-child(4n) {
+  background: #4CAF50;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 } 
