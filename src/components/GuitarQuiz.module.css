@@ -93,12 +93,19 @@
   color: #fff;
   font-size: 1rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  outline: none;
 }
 
-.optionButton:hover {
-  background: rgba(82, 134, 237, 0.1);
-  border-color: #5286ed;
+.optionButton:hover,
+.optionButton:focus,
+.optionButton:active,
+.optionButton:focus-visible {
+  background: transparent;
+  border: 1px solid rgba(210,210,223,.2);
+  outline: none;
 }
 
 .description {

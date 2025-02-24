@@ -111,7 +111,7 @@ const questions = [
     id: 9,
     question: {
       en: "How important is having built-in electronics (pickup/preamp)?",
-      ge: "რამდენად მნიშვნელოვანია გიტარის ხმის გამაძლიერებელთან მიერთების შესაძლებლობა?"
+      ge: "გსურთ გიტარის ხმის გამაძლიერებელთან მიერთება?"
     },
     options: [
       { value: "must", label: { en: "Must have - Want to plug into an amp", ge: "აუცილებელია - მინდა გამაძლიერებელთან მიერთება" }},
