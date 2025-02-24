@@ -141,7 +141,7 @@ export default function SongPage({ song }){
                     null
                 }
             </div>
-            <main className={styles.songBody} style={{fontSize}}>
+            <main className={`${styles.songBody} mxedruli`} style={{fontSize}}>
                 {
                     song?.body ? song.body.map((line, index) => {
                         if(line.type == "rightHand") {
