@@ -286,7 +286,14 @@ export default function GuitarQuiz() {
               <div className={styles.recommendationContainer}>
                 <div className={`${styles.guitarCard} ${styles.successCard}`}>
                   <h3>{recommendation.name}</h3>
-                  <p>ფასი: {recommendation.price}₾</p>
+                  <p className={styles.price}>ფასი: {recommendation.price}₾</p>
+                  {recommendation.summary && (
+                    <div className={styles.guitarSummary}>
+                      {recommendation.summary.split('\n').map((paragraph, index) => (
+                        <p key={index} className={styles.summaryText}>{paragraph}</p>
+                      ))}
+                    </div>
+                  )}
                   <a 
                     href={recommendation.link} 
                     target="_blank" 

@@ -354,6 +354,7 @@
   transform: translateY(0);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   animation: slideIn 0.6s ease-out;
+  padding: 2rem;
 }
 
 .successCard:hover {
@@ -439,4 +440,30 @@
     opacity: 1;
     transform: translateX(0);
   }
+}
+
+.guitarSummary {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin: 1.5rem 0;
+  text-align: left;
+}
+
+.summaryText {
+  color: #fff;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.summaryText:last-child {
+  margin-bottom: 0;
+}
+
+.price {
+  font-size: 1.2rem;
+  color: #ffd700;
+  margin: 1rem 0;
+  font-weight: 500;
 } 
