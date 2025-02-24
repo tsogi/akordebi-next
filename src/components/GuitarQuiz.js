@@ -9,9 +9,9 @@ const questions = [
       ge: "რა ბიუჯეტი გაქვთ?"
     },
     options: [
-      { value: "budget", label: { en: "Under $200", ge: "$200-მდე" }},
-      { value: "midRange", label: { en: "$200 - $500", ge: "$200 - $500" }},
-      { value: "premium", label: { en: "$500 - $1000", ge: "$500 - $1000" }},
+      { value: "budget", label: { en: "Under 200", ge: "200-მდე" }},
+      { value: "midRange", label: { en: "200 - 500", ge: "200 - 500ლ" }},
+      { value: "premium", label: { en: "500 - 1000", ge: "500 - 1000ლ" }},
       { value: "doesNotMatter", label: { en: "Does not matter", ge: "არ აქვს მნიშვნელობა" }}
     ]
   },
@@ -23,12 +23,12 @@ const questions = [
     },
     options: [
       { value: "pop", label: { en: "Pop", ge: "პოპი" }},
-      { value: "folk", label: { en: "Folk", ge: "ფოლკი" }},
       { value: "rock_metal", label: { en: "Rock/Metal", ge: "როკი/მეტალი" }},
       { value: "classical", label: { en: "Classical", ge: "კლასიკური" }},
+      { value: "hiphop", label: { en: "Hip-Hop", ge: "ჰიპ-ჰოპი" }},
+      { value: "folk", label: { en: "Folk", ge: "ფოლკლორი" }},
       { value: "jazz", label: { en: "Jazz", ge: "ჯაზი" }},
       { value: "blues", label: { en: "Blues", ge: "ბლუზი" }},
-      { value: "hiphop", label: { en: "Hip-Hop", ge: "ჰიპ-ჰოპი" }},
       { value: "all", label: { en: "More or less all", ge: "მეტნაკლებად ყველაფრის" }}
     ]
   },
@@ -61,8 +61,8 @@ const questions = [
   {
     id: 5,
     question: {
-      en: "Do you plan to perform live?",
-      ge: "აპირებთ ცოცხალ შესრულებას?"
+      en: "Do you plan to perform live on stage?",
+      ge: "აპირებთ სცენაზე შესრულებას?"
     },
     options: [
       { value: "yes", label: { en: "Yes", ge: "დიახ" }},
@@ -79,14 +79,14 @@ const questions = [
     options: [
       { value: "very", label: { en: "Very important - I want it to look stunning", ge: "ძალიან მნიშვნელოვანი - მინდა რომ შესანიშნავად გამოიყურებოდეს" }},
       { value: "somewhat", label: { en: "Somewhat - Nice to have but not crucial", ge: "მეტნაკლებად - კარგია, მაგრამ არა გადამწყვეტი" }},
-      { value: "not", label: { en: "Not important - Only care about sound", ge: "არ არის მნიშვნელოვანი - მხოლოდ ხმა მაინტერესებს" }}
+      { value: "not", label: { en: "Not important - Only care about sound", ge: "არ არის მნიშვნელოვანი - მხოლოდ ჟღერადობა მაინტერესებს" }}
     ]
   },
   {
     id: 7,
     question: {
       en: "Do you prefer playing with fingers or a pick?",
-      ge: "თითებით დაკვრა გირჩევნიათ თუ მედიატორით?"
+      ge: "თითებით დაკვრას ამჯობინებთ თუ მედიატორით?"
     },
     options: [
       { value: "fingers", label: { en: "Fingerstyle playing", ge: "თითებით დაკვრა" }},
@@ -99,7 +99,7 @@ const questions = [
     id: 8,
     question: {
       en: "What's your preferred playing position?",
-      ge: "რომელ პოზიციაში გირჩევნიათ დაკვრა?"
+      ge: "რომელ პოზიციაში ამჯობინებთ დაკვრას?"
     },
     options: [
       { value: "sitting", label: { en: "Mostly sitting down", ge: "ძირითადად მჯდომარე" }},
@@ -111,7 +111,7 @@ const questions = [
     id: 9,
     question: {
       en: "How important is having built-in electronics (pickup/preamp)?",
-      ge: "რამდენად მნიშვნელოვანია ჩაშენებული ელექტრონიკა (პიკაპი/პრეამპი)?"
+      ge: "რამდენად მნიშვნელოვანია გიტარის ხმის გამაძლიერებელთან მიერთების შესაძლებლობა?"
     },
     options: [
       { value: "must", label: { en: "Must have - Want to plug into an amp", ge: "აუცილებელია - მინდა გამაძლიერებელთან მიერთება" }},
@@ -257,7 +257,7 @@ export default function GuitarQuiz() {
         
         <div className={styles.questionContainer}>
           <h3 className={styles.question}>{question.question.ge}</h3>
-          <div className={styles.options}>
+          <div className={`${styles.options} mxedruli`}>
             {question.options.map((option) => (
               <button
                 key={option.value}
@@ -282,7 +282,7 @@ export default function GuitarQuiz() {
               ✕
             </button>
             <h2 className={styles.modalTitle}>{modalContent.title.ge}</h2>
-            <div className={styles.modalContent}>
+            <div className={`${styles.modalContent} mxedruli`}>
               {modalContent.description.ge.split('\n').map((paragraph, index) => (
                 <p key={index}>{paragraph}</p>
               ))}
