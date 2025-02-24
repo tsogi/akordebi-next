@@ -12,11 +12,48 @@ const questions = [
       { value: "budget", label: { en: "Under 200 gel", ge: "200-მდე" }},
       { value: "midRange", label: { en: "From 200 to 500 gel", ge: "200 - 500ლ" }},
       { value: "premium", label: { en: "From 500 to 1000 gel", ge: "500 - 1000ლ" }},
-      { value: "doesNotMatter", label: { en: "Unlimited budget", ge: "არ აქვს მნიშვნელობა" }}
+      { value: "doesNotMatter", label: { en: "Unlimited budget", ge: "ნებისმიერი ფასი" }}
     ]
   },
   {
     id: 2,
+    question: {
+      en: "How important is the guitar's appearance to you?",
+      ge: "რამდენად მნიშვნელოვანია გიტარის გარეგნული მხარე?"
+    },
+    options: [
+      { value: "very", label: { en: "Very important - I want it to look stunning", ge: "ძალიან მნიშვნელოვანი - მინდა რომ შესანიშნავად გამოიყურებოდეს" }},
+      { value: "somewhat", label: { en: "Somewhat - Nice to have but not crucial", ge: "მეტნაკლებად - კარგია, მაგრამ არა გადამწყვეტი" }},
+      { value: "not", label: { en: "Not important - Only care about sound", ge: "არ არის მნიშვნელოვანი - მხოლოდ ჟღერადობა მაინტერესებს" }}
+    ]
+  },
+  {
+    id: 3,
+    question: {
+      en: "Do you prefer playing with fingers or a pick?",
+      ge: "თითებით დაკვრას ამჯობინებთ თუ მედიატორით?"
+    },
+    options: [
+      { value: "fingers", label: { en: "Fingerstyle playing", ge: "თითებით დაკვრა" }},
+      { value: "pick", label: { en: "Using a pick", ge: "მედიატორით დაკვრა" }},
+      { value: "both", label: { en: "Both equally", ge: "ორივე თანაბრად" }},
+      { value: "unsure", label: { en: "Not sure yet", ge: "ჯერ არ ვიცი" }}
+    ]
+  },
+  {
+    id: 4,
+    question: {
+      en: "How important is portability to you?",
+      ge: "რამდენად მნიშვნელოვანია გიტარის პორტატულობა?"
+    },
+    options: [
+      { value: "very", label: { en: "Very important - I want to travel with it", ge: "ძალიან - მინდა რომ თან ვატარო" }},
+      { value: "somewhat", label: { en: "Somewhat - Might take it places occasionally", ge: "მეტნაკლებად - შეიძლება პერიოდულად ვატარო" }},
+      { value: "not", label: { en: "Not important - It will stay at home", ge: "არ არის მნიშვნელოვანი - სახლში გამოვიყენებ" }}
+    ]
+  },
+  {
+    id: 5,
     question: {
       en: "What style of music do you primarily want to play?",
       ge: "მუსიკის რომელი სტილის დაკვრა გსურთ?"
@@ -33,7 +70,7 @@ const questions = [
     ]
   },
   {
-    id: 3,
+    id: 6,
     question: {
       en: "What's your current skill level?",
       ge: "რა დონის გიტარისტი ხართ?"
@@ -47,19 +84,7 @@ const questions = [
     ]
   },
   {
-    id: 4,
-    question: {
-      en: "How important is portability to you?",
-      ge: "რამდენად მნიშვნელოვანია გიტარის პორტატულობა?"
-    },
-    options: [
-      { value: "very", label: { en: "Very important - I want to travel with it", ge: "ძალიან - მინდა რომ სამოგზაუროდ ვატარო" }},
-      { value: "somewhat", label: { en: "Somewhat - Might take it places occasionally", ge: "მეტნაკლებად - შეიძლება ზოგჯერ წავიღო" }},
-      { value: "not", label: { en: "Not important - It will stay at home", ge: "არ არის მნიშვნელოვანი - სახლში გამოვიყენებ" }}
-    ]
-  },
-  {
-    id: 5,
+    id: 7,
     question: {
       en: "Do you plan to perform live on stage?",
       ge: "აპირებთ სცენაზე შესრულებას?"
@@ -68,31 +93,6 @@ const questions = [
       { value: "yes", label: { en: "Yes", ge: "დიახ" }},
       { value: "no", label: { en: "No", ge: "არა" }},
       { value: "maybe", label: { en: "Maybe in the future", ge: "შესაძლოა მომავალში" }}
-    ]
-  },
-  {
-    id: 6,
-    question: {
-      en: "How important is the guitar's appearance to you?",
-      ge: "რამდენად მნიშვნელოვანია გიტარის გარეგნული მხარე?"
-    },
-    options: [
-      { value: "very", label: { en: "Very important - I want it to look stunning", ge: "ძალიან მნიშვნელოვანი - მინდა რომ შესანიშნავად გამოიყურებოდეს" }},
-      { value: "somewhat", label: { en: "Somewhat - Nice to have but not crucial", ge: "მეტნაკლებად - კარგია, მაგრამ არა გადამწყვეტი" }},
-      { value: "not", label: { en: "Not important - Only care about sound", ge: "არ არის მნიშვნელოვანი - მხოლოდ ჟღერადობა მაინტერესებს" }}
-    ]
-  },
-  {
-    id: 7,
-    question: {
-      en: "Do you prefer playing with fingers or a pick?",
-      ge: "თითებით დაკვრას ამჯობინებთ თუ მედიატორით?"
-    },
-    options: [
-      { value: "fingers", label: { en: "Fingerstyle playing", ge: "თითებით დაკვრა" }},
-      { value: "pick", label: { en: "Using a pick", ge: "მედიატორით დაკვრა" }},
-      { value: "both", label: { en: "Both equally", ge: "ორივე თანაბრად" }},
-      { value: "unsure", label: { en: "Not sure yet", ge: "ჯერ არ ვიცი" }}
     ]
   },
   {
@@ -111,7 +111,7 @@ const questions = [
     id: 9,
     question: {
       en: "How important is having built-in electronics (pickup/preamp)?",
-      ge: "გსურთ გიტარის ხმის გამაძლიერებელთან მიერთებ?"
+      ge: "გსურთ გიტარის ხმის გამაძლიერებელთან მიერთება?"
     },
     options: [
       { value: "must", label: { en: "Must have - Want to plug into an amp", ge: "აუცილებელია - მინდა გამაძლიერებელთან მიერთება" }},
@@ -272,7 +272,7 @@ export default function GuitarQuiz() {
         </h1>
         <div className={`${styles.quizContainer} ${styles.resultsContainer}`}>
           {isLoading ? (
-            <p className={styles.description}>ვარჩევთ თქვენთვის საუკეთესო გიტარას...</p>
+            <p className={styles.description}>გთხოვთ დაიცადოთ, ვარჩევთ თქვენთვის საუკეთესო გიტარას...</p>
           ) : error ? (
             <div className={styles.error}>
               <p>{error}</p>

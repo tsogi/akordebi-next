@@ -44,7 +44,7 @@ export default function Footer(){
                 {lang._footer_add_song}
               </a>
             </div>
-            <div className={`${styles.copyright} text-[#035fda]`}>{lang._footer_designBy}<span> </span><a className="text-[#f2ac2b] underline" href="https://tsogi.net">{lang._footer_tsogi}</a>
+            <div className={`${styles.copyright} text-[#035fda]`}>© {lang._footer_designBy}<span> </span><a className="text-[#f2ac2b] underline" href="https://tsogi.net">{lang._footer_tsogi}</a>
             </div>
           </div>
         </div>
