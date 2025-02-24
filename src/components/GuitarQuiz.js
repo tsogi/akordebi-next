@@ -9,10 +9,10 @@ const questions = [
       ge: "რა ბიუჯეტი გაქვთ?"
     },
     options: [
-      { value: "budget", label: { en: "Under 200", ge: "200-მდე" }},
-      { value: "midRange", label: { en: "200 - 500", ge: "200 - 500ლ" }},
-      { value: "premium", label: { en: "500 - 1000", ge: "500 - 1000ლ" }},
-      { value: "doesNotMatter", label: { en: "Does not matter", ge: "არ აქვს მნიშვნელობა" }}
+      { value: "budget", label: { en: "Under 200 gel", ge: "200-მდე" }},
+      { value: "midRange", label: { en: "From 200 to 500 gel", ge: "200 - 500ლ" }},
+      { value: "premium", label: { en: "From 500 to 1000 gel", ge: "500 - 1000ლ" }},
+      { value: "doesNotMatter", label: { en: "Unlimited budget", ge: "არ აქვს მნიშვნელობა" }}
     ]
   },
   {
@@ -41,7 +41,7 @@ const questions = [
     options: [
       { value: "super_beginner", label: { en: "Complete Beginner", ge: "სრული დამწყები" }},
       { value: "beginner", label: { en: "Beginner", ge: "დამწყები" }},
-      { value: "intermediate", label: { en: "Some Experience", ge: "საშუალო" }},
+      { value: "intermediate", label: { en: "Medium Experience", ge: "საშუალო" }},
       { value: "advanced", label: { en: "Experienced Player", ge: "გამოცდილი" }},
       { value: "superstar", label: { en: "Superstar", ge: "პროფესიონალი" }}
     ]
@@ -116,7 +116,7 @@ const questions = [
     options: [
       { value: "must", label: { en: "Must have - Want to plug into an amp", ge: "აუცილებელია - მინდა გამაძლიერებელთან მიერთება" }},
       { value: "nice", label: { en: "Nice to have but not required", ge: "კარგია, მაგრამ არა აუცილებელი" }},
-      { value: "not", label: { en: "Not important at all", ge: "საერთოდ არ არის მნიშვნელოვანი" }}
+      { value: "not", label: { en: "No need at all", ge: "არ დამჭირდება" }}
     ]
   },
   {
@@ -185,10 +185,13 @@ export default function GuitarQuiz() {
   const [error, setError] = useState(null);
 
   const formatAnswersForAPI = () => {
-    return questions.map(q => ({
-      question: q.question.en,
-      answer: answers[q.id]
-    }));
+    return questions.map(q => {
+      const selectedOption = q.options.find(opt => opt.value === answers[q.id]);
+      return {
+        question: q.question.en,
+        answer: selectedOption ? selectedOption.label.en : answers[q.id]
+      };
+    });
   };
 
   const handleAnswer = async (answer) => {
