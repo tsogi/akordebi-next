@@ -196,6 +196,7 @@ export default function GuitarQuiz() {
   const [isLoading, setIsLoading] = useState(false);
   const [recommendation, setRecommendation] = useState(null);
   const [error, setError] = useState(null);
+  const [showFullSummary, setShowFullSummary] = useState(false);
 
   const formatAnswersForAPI = (currentAnswers = answers) => {
     return questions.map(q => {
@@ -228,7 +229,7 @@ export default function GuitarQuiz() {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            answers: formatAnswersForAPI(finalAnswers) // Pass the finalAnswers object
+            answers: formatAnswersForAPI(finalAnswers)
           }),
         });
 
@@ -237,7 +238,10 @@ export default function GuitarQuiz() {
         }
 
         const data = await response.json();
-        setRecommendation(data.recommendation);
+        setRecommendation({
+          ...data.recommendation,
+          summary: data.summary
+        });
       } catch (err) {
         setError('Failed to get recommendation. Please try again.');
         console.error('Error:', err);
@@ -287,13 +291,6 @@ export default function GuitarQuiz() {
                 <div className={`${styles.guitarCard} ${styles.successCard}`}>
                   <h3>{recommendation.name}</h3>
                   <p className={styles.price}>ფასი: {recommendation.price}₾</p>
-                  {recommendation.summary && (
-                    <div className={styles.guitarSummary}>
-                      {recommendation.summary.split('\n').map((paragraph, index) => (
-                        <p key={index} className={styles.summaryText}>{paragraph}</p>
-                      ))}
-                    </div>
-                  )}
                   <a 
                     href={recommendation.link} 
                     target="_blank" 
@@ -302,6 +299,23 @@ export default function GuitarQuiz() {
                   >
                     ონლაინ მაღაზიაში ნახვა
                   </a>
+                  {recommendation.summary && (
+                    <div className={styles.guitarSummary}>
+                      <div className={`${styles.summaryContent} ${showFullSummary ? styles.expanded : ''}`}>
+                        {recommendation.summary.split('\n').filter(para => para.trim()).map((paragraph, index) => (
+                          <p key={index} className={styles.summaryText}>{paragraph.trim()}</p>
+                        ))}
+                      </div>
+                      {recommendation.summary.split('\n').filter(para => para.trim()).length > 1 && (
+                        <button 
+                          onClick={() => setShowFullSummary(!showFullSummary)} 
+                          className={styles.readMoreButton}
+                        >
+                          {showFullSummary ? 'ნაკლების ნახვა' : 'მეტის ნახვა'}
+                        </button>
+                      )}
+                    </div>
+                  )}
                 </div>
                 <button onClick={resetQuiz} className={`${styles.resetButton} ${styles.successResetButton}`}>
                   თავიდან დაწყება
