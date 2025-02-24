@@ -111,7 +111,7 @@ const questions = [
     id: 9,
     question: {
       en: "How important is having built-in electronics (pickup/preamp)?",
-      ge: "გსურთ გიტარის ხმის გამაძლიერებელთან მიერთება?"
+      ge: "გსურთ გიტარის ხმის გამაძლიერებელთან მიერთებ?"
     },
     options: [
       { value: "must", label: { en: "Must have - Want to plug into an amp", ge: "აუცილებელია - მინდა გამაძლიერებელთან მიერთება" }},
@@ -180,8 +180,18 @@ export default function GuitarQuiz() {
   const [answers, setAnswers] = useState({});
   const [showResults, setShowResults] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [recommendation, setRecommendation] = useState(null);
+  const [error, setError] = useState(null);
 
-  const handleAnswer = (answer) => {
+  const formatAnswersForAPI = () => {
+    return questions.map(q => ({
+      question: q.question.en,
+      answer: answers[q.id]
+    }));
+  };
+
+  const handleAnswer = async (answer) => {
     const newAnswers = { ...answers, [questions[currentQuestion].id]: answer };
     setAnswers(newAnswers);
 
@@ -189,7 +199,32 @@ export default function GuitarQuiz() {
       setCurrentQuestion(currentQuestion + 1);
     } else {
       setShowResults(true);
-      console.log('Quiz Results:', newAnswers);
+      setIsLoading(true);
+      setError(null);
+      
+      try {
+        const response = await fetch('/api/guitar-recommendation', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            answers: formatAnswersForAPI()
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to get recommendation');
+        }
+
+        const data = await response.json();
+        setRecommendation(data.recommendation);
+      } catch (err) {
+        setError('Failed to get recommendation. Please try again.');
+        console.error('Error:', err);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -214,10 +249,35 @@ export default function GuitarQuiz() {
         </h1>
         <div className={styles.quizContainer}>
           <h2 className={styles.title}>გმადლობთ!</h2>
-          <p className={styles.description}>თქვენი პასუხების მიხედვით, დაგეხმარებით საუკეთესო გიტარის შერჩევაში.</p>
-          <button onClick={resetQuiz} className={styles.resetButton}>
-            თავიდან დაწყება
-          </button>
+          {isLoading ? (
+            <p className={styles.description}>ვარჩევთ თქვენთვის საუკეთესო გიტარას...</p>
+          ) : error ? (
+            <div className={styles.error}>
+              <p>{error}</p>
+              <button onClick={resetQuiz} className={styles.resetButton}>
+                სცადეთ თავიდან
+              </button>
+            </div>
+          ) : recommendation ? (
+            <div className={styles.recommendationContainer}>
+              <p className={styles.description}>თქვენთვის შერჩეული გიტარა:</p>
+              <div className={styles.guitarCard}>
+                <h3>{recommendation.name}</h3>
+                <p>ფასი: {recommendation.price}₾</p>
+                <a 
+                  href={recommendation.link} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className={styles.viewButton}
+                >
+                  დეტალურად ნახვა
+                </a>
+              </div>
+              <button onClick={resetQuiz} className={styles.resetButton}>
+                თავიდან დაწყება
+              </button>
+            </div>
+          ) : null}
         </div>
       </>
     );

@@ -272,4 +272,52 @@
   .modalContent {
     font-size: 0.9rem;
   }
+}
+
+.recommendationContainer {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.guitarCard {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.guitarCard h3 {
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.guitarCard p {
+  color: #9ebeff;
+  margin-bottom: 1rem;
+}
+
+.viewButton {
+  display: inline-block;
+  background: #5286ed;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.viewButton:hover {
+  background: #4070d6;
+}
+
+.error {
+  color: #ff6b6b;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.loading {
+  color: #9ebeff;
+  text-align: center;
+  margin: 2rem 0;
 } 
