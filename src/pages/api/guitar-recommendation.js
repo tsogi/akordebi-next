@@ -28,6 +28,7 @@ ${JSON.stringify(guitars, null, 2)}
 
 Please respond with only the name of the single best matching guitar from the available guitars list.`;
 
+console.log("the prompt", prompt);
     const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [

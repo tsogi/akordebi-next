@@ -184,12 +184,12 @@ export default function GuitarQuiz() {
   const [recommendation, setRecommendation] = useState(null);
   const [error, setError] = useState(null);
 
-  const formatAnswersForAPI = () => {
+  const formatAnswersForAPI = (currentAnswers = answers) => {
     return questions.map(q => {
-      const selectedOption = q.options.find(opt => opt.value === answers[q.id]);
+      const selectedOption = q.options.find(opt => opt.value === currentAnswers[q.id]);
       return {
         question: q.question.en,
-        answer: selectedOption ? selectedOption.label.en : answers[q.id]
+        answer: selectedOption ? selectedOption.label.en : currentAnswers[q.id]
       };
     });
   };
@@ -205,6 +205,9 @@ export default function GuitarQuiz() {
       setIsLoading(true);
       setError(null);
       
+      // Ensure the last answer is included before making the API call
+      const finalAnswers = { ...newAnswers };
+      
       try {
         const response = await fetch('/api/guitar-recommendation', {
           method: 'POST',
@@ -212,7 +215,7 @@ export default function GuitarQuiz() {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            answers: formatAnswersForAPI()
+            answers: formatAnswersForAPI(finalAnswers) // Pass the finalAnswers object
           }),
         });
 
@@ -273,7 +276,7 @@ export default function GuitarQuiz() {
                   rel="noopener noreferrer" 
                   className={styles.viewButton}
                 >
-                  დეტალურად ნახვა
+                  ონლაინ მაღაზიაში ნახვა
                 </a>
               </div>
               <button onClick={resetQuiz} className={styles.resetButton}>
