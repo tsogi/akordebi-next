@@ -38,6 +38,8 @@
 
 .copyright {
     text-align: right;
+    margin-top: 30px;
+    font-size: 0.9rem;
 }
 
 @media (max-width: 992px) {

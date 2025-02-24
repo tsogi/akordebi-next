@@ -17,7 +17,7 @@ const interfaceGeo = {
     _till: "მდე.",
     _totally: "სულ",
     _song: 'სიმღერა',
-    _footer_designBy: "Designed and developed by",
+    _footer_designBy: "საიტის ავტორი",
     _footer_tsogi: "Nika Tsogiaidze",
     _footer_input: 'აკორდების ძებნა',
     _footer_input_placeholder: 'მოგვწერეთ იდეები, შენიშვნები, მოსაზრებები',
@@ -44,7 +44,7 @@ const interfaceGeo = {
     _auth: {
         login: "ავტორიზაცია",
         enterBtn: 'სისტემაში შესვლის შემდეგ შეძლებთ დამატებითი ფუნქციებით სარგებლობას როგორიცაა მაგალითად "ფავორიტებში დამატება"',
-        addFavorites: "სიმღერის ფავორიტებში დასამატებლათ გთხოვთ შეხვიდეთ სისტემაში რის შემდეგაც შეძლებთ დამატებითი ფუნქციებით სარგებლობას",
+        addFavorites: "სიმღერის ფავორიტებში დასამატებლად გთხოვთ შეხვიდეთ სისტემაში რის შემდეგაც შეძლებთ დამატებითი ფუნქციებით სარგებლობას",
         favoritesBtn: '"ფავორიტების" ფუნქციის გამოსაყენებლად გთხოვთ შეხვიდეთ სისტემაში',
         uploadSongBtn: 'სიმღერის საიტზე ასატვირთად გთხოვთ შეხვიდეთ სისტემაში'
     },
@@ -132,7 +132,7 @@ const interfaceEng = {
     _till: "to",
     _totally: "Totally",
     _song: 'songs',
-    _footer_designBy: "Designed and developed by",
+    _footer_designBy: "Created by",
     _footer_tsogi: "Nika Tsogiaidze",
     _footer_input: 'Search songs',
     _footer_input_placeholder: 'Write us ideas and comments',

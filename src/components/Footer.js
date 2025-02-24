@@ -26,7 +26,7 @@ export default function Footer(){
             <WriteUs />
           </div>
           <div className={styles.linksAndCopyright}>
-            <div className={`${styles.quickLinks} text-[#98b9fa] text-[14px] flex flex-wrap items-center mb-[10px]`}>
+            <div className={`${styles.quickLinks} text-[#98b9fa] text-[0.8rem] flex flex-wrap items-center mb-[10px]`}>
               <a className={styles.quickLink} href="/legal/terms">
                 <span className={styles.linksDivider}></span>
                 {lang._footer_terms}

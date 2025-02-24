@@ -40,24 +40,24 @@ export default function Header(){
     function menuPages(){
         if(process.env.NEXT_PUBLIC_DOMAIN == "akordebi.ge") {
             return <>
-                <Link href={"/"} className={`text-base px-[10px] font-medium text-gray-500 hover py-1 sm:py-0 ${isActive("home") ? "isActivePage" : ""}`}>აკორდები</Link>
-                <Link href={""} onClick={handleShopClick} className="text-base px-[10px] font-medium text-gray-500 hover py-1 sm:py-0" >გიტარის მაღაზია</Link>
-                <Link href={""} onClick={handleForeignClick} className="text-base px-[10px] font-medium text-gray-500 hover py-1 sm:py-0" >უცხოური სიმღერები</Link>
+                <Link href={"/"} className={` px-[10px]  text-gray-500 hover py-1 sm:py-0 ${isActive("home") ? "isActivePage" : ""}`}>აკორდები</Link>
+                <Link href={""} onClick={handleShopClick} className=" px-[10px]  text-gray-500 hover py-1 sm:py-0" >გიტარის მაღაზია</Link>
+                <Link href={""} onClick={handleForeignClick} className=" px-[10px]  text-gray-500 hover py-1 sm:py-0" >უცხოური სიმღერები</Link>
             </>
         }
 
         if(process.env.NEXT_PUBLIC_DOMAIN == "chords365.com") {
             return <>
-                {/* <Link href={"/"} className={`text-base px-[10px] font-medium text-gray-500 hover py-1 sm:py-0 ${isActive("home") ? "isActivePage" : ""}`}>Chords</Link> */}
+                {/* <Link href={"/"} className={` px-[10px]  text-gray-500 hover py-1 sm:py-0 ${isActive("home") ? "isActivePage" : ""}`}>Chords</Link> */}
             </>
         }
 
         if(process.env.NEXT_PUBLIC_DOMAIN == "dev.akordebi.ge") {
             return <>
-                <Link href={"/"} className="text-base px-[10px] font-medium text-gray-500 hover py-1 sm:py-0" >აკორდები</Link>
-                <Link href={"/"} className="text-base px-[10px] font-medium text-gray-500 hover py-1 sm:py-0" >ტაბები</Link>
-                <Link href={"/"} className="text-base px-[10px] font-medium text-gray-500 hover py-1 sm:py-0" >გიტარის მაღაზია</Link>
-                <Link href={"/"} className="text-base px-[10px] font-medium text-gray-500 hover py-1 sm:py-0" >უცხოური სიმღერები</Link>
+                <Link href={"/"} className=" px-[10px]  text-gray-500 hover py-1 sm:py-0" >აკორდები</Link>
+                <Link href={"/"} className=" px-[10px]  text-gray-500 hover py-1 sm:py-0" >ტაბები</Link>
+                <Link href={"/"} className=" px-[10px]  text-gray-500 hover py-1 sm:py-0" >გიტარის მაღაზია</Link>
+                <Link href={"/"} className=" px-[10px]  text-gray-500 hover py-1 sm:py-0" >უცხოური სიმღერები</Link>
             </>
         }
     }
@@ -73,7 +73,7 @@ export default function Header(){
                 </div>
                 
                 <div className="flex flex-wrap justify-center w-[100%]">
-                    <nav className="flex items-center flex-wrap justify-center">
+                    <nav className="flex items-center flex-wrap justify-center text-[0.9rem]">
                         {
                             menuPages()
                         }

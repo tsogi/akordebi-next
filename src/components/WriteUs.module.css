@@ -1,5 +1,6 @@
 .input {
   background: rgba(255,255,255,.02);
+  font-size: 0.7rem;
 }
 
 .input:active, .input:focus {

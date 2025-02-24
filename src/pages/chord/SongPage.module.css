@@ -40,7 +40,7 @@
 
 .songBody {
     margin-top: 86px;
-    font-size: 16px;
+    font-size: 1rem;
 }
 
 .songName {
@@ -71,6 +71,7 @@
 }
 
 .songAuthors {
+    font-size: 0.8rem;
     display: flex;
     margin-top: 25px;
     margin-left: 10px;
@@ -138,6 +139,7 @@
     margin: 0px 0px 70px 0px;
     display: flex;
     flex-wrap: wrap;
+    font-size: 0.8rem;
 }
 
 .label {
@@ -228,13 +230,13 @@
 }
 
 .uploaderWrapper {
-    font-size: 15px;
+    font-size: 0.8rem;
     margin-top: 80px;
 }
 
 .postSongArea {
     margin-top: 80px;
-    font-size: 15px;
+    font-size: 0.8rem;
 }
 
 .lineWrapper.rightHand {
