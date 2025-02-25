@@ -322,6 +322,7 @@ export const guitars = [
     "name": "Jackson JS22-7 Dinky AH 502",
     "link": "https://musicroom.ge/product/%e1%83%94%e1%83%9a%e1%83%94%e1%83%a5%e1%83%a2%e1%83%a0%e1%83%9d-%e1%83%92%e1%83%98%e1%83%a2%e1%83%90%e1%83%a0%e1%83%90-jackson-js22-7-dinky-ah-502/",
     "category": "ელექტრო გიტარა",
+    "thumbnail": "https://musicroom.ge/wp-content/uploads/2024/12/61HrxkjRPkL-1536x1536.jpg",
     "price": "900.00"
   },
   {

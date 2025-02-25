@@ -7,13 +7,6 @@ import lang from '@/services/lang'
 import uiDb from '@/services/data';
 import Link from 'next/link'
 
-const pages = [
-    { name: 'აკორდები', href: '/about' },
-    { name: 'ტაბები', href: '/about' },
-    { name: 'გიტარის მაღაზია', href: '/contact' },
-    { name: 'უცხოური სიმღერები', href: '/contact' },
-]
-
 export default function Header(){
     const { user, setAuthOpenedFrom } = useUser();
     const router = useRouter();
@@ -23,12 +16,16 @@ export default function Header(){
         if(page == "home" && ["/", "/chord/[chordUrl]"].includes(router.pathname)){ 
             return true;
         }
+
+        if(page == "guitar-finder" && router.pathname == "/guitar-finder"){
+            return true;
+        }
     }
 
-    function handleShopClick(e){
+    async function handleShopClick(e){
         e.preventDefault();
-        uiDb.logEvent("guitar_shop_page_click");
-        alert("გიტარების და აქსესუარების ონლაინ მაღაზია შექმნის პროცესშია");
+        await uiDb.logEvent("guitar_shop_page_click");
+        router.push("/guitar-finder");
     }
 
     async function handleForeignClick(e){
@@ -40,9 +37,9 @@ export default function Header(){
     function menuPages(){
         if(process.env.NEXT_PUBLIC_DOMAIN == "akordebi.ge") {
             return <>
-                <Link href={"/"} className={` px-[10px]  text-gray-500 hover py-1 sm:py-0 ${isActive("home") ? "isActivePage" : ""}`}>აკორდები</Link>
-                <Link href={""} onClick={handleShopClick} className=" px-[10px]  text-gray-500 hover py-1 sm:py-0" >გიტარის მაღაზია</Link>
-                <Link href={""} onClick={handleForeignClick} className=" px-[10px]  text-gray-500 hover py-1 sm:py-0" >უცხოური სიმღერები</Link>
+                <Link href={"/"} className={` px-[10px] text-gray-500 hover py-1 sm:py-0 ${isActive("home") ? "isActivePage" : ""}`}>აკორდები</Link>
+                <Link href={""} onClick={handleShopClick} className={`${isActive("guitar-finder") ? "isActivePage" : ""} px-[10px] text-gray-500 hover py-1 sm:py-0`}>გიტარის შერჩევა</Link>
+                <Link href={""} onClick={handleForeignClick} className=" px-[10px] text-gray-500 hover py-1 sm:py-0" >უცხოური აკორდები</Link>
             </>
         }
 
