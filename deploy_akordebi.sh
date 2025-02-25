@@ -20,9 +20,16 @@ ssh -i /users/nika/.ssh/id_rsa_ubuntu_server nika@tsogi.net << EOF
     cd /var/projects
     
     # Executing the commands
+    docker-compose stop akordebi
     docker-compose rm -f akordebi
     docker load -i akordebi.tar
     docker-compose up -d akordebi
+    docker system prune -f
+
+
+    # docker-compose rm -f akordebi
+    # docker load -i akordebi.tar
+    # docker-compose up -d akordebi
 
     # Delete all unused containers, networks, images
     # docker system prune -f

@@ -12,7 +12,6 @@ export default function Header(){
     const router = useRouter();
 
     function isActive(page){
-        console.log(router.pathname)
         if(page == "home" && ["/", "/chord/[chordUrl]"].includes(router.pathname)){ 
             return true;
         }
@@ -24,7 +23,7 @@ export default function Header(){
 
     async function handleShopClick(e){
         e.preventDefault();
-        await uiDb.logEvent("guitar_shop_page_click");
+        await uiDb.logEvent("guitar_finder_link_click");
         router.push("/guitar-finder");
     }
 
@@ -38,7 +37,7 @@ export default function Header(){
         if(process.env.NEXT_PUBLIC_DOMAIN == "akordebi.ge") {
             return <>
                 <Link href={"/"} className={` px-[10px] text-gray-500 hover py-1 sm:py-0 ${isActive("home") ? "isActivePage" : ""}`}>ქართული აკორდები</Link>
-                <Link href={""} onClick={handleShopClick} className={`${isActive("guitar-finder") ? "isActivePage" : ""} px-[10px] text-gray-500 hover py-1 sm:py-0`}>გიტარის შერჩევა</Link>
+                <Link href={""} onClick={handleShopClick} className={`${isActive("guitar-finder") ? "isActivePage" : ""} px-[10px] text-gray-500 hover py-1 sm:py-0`}>გიტარის შერჩევა(AI)</Link>
                 <Link href={""} onClick={handleForeignClick} className=" px-[10px] text-gray-500 hover py-1 sm:py-0" >უცხოური აკორდები</Link>
             </>
         }

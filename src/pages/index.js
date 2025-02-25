@@ -9,20 +9,6 @@ import lang from '@/services/lang'
 import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
 
 export default function Home({ initialSongs }) {
-  useEffect(() => {
-    const demographicData = {
-      language: navigator.language,
-      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      userAgent: navigator.userAgent,
-      screenWidth: window.innerWidth,
-      screenHeight: window.innerHeight,
-    };
-    
-    const demographicDataString = JSON.stringify(demographicData);
-    
-    uiDb.logEvent("homepage_visit", demographicData);
-  }, [])
-
   return (
     <>
       <Head>

@@ -1,11 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import GuitarQuiz from '@/components/GuitarQuiz';
 import lang from '@/services/lang';
+import uiDb from '@/services/data';
 
 export default function GuitarFinder() {
+  useEffect(() => {
+    // Log when user visits the guitar finder page
+    uiDb.logEvent("guitar_finder_page_visit");
+  }, []);
+
   return (
     <>
       <Head>
