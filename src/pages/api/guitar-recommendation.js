@@ -18,6 +18,13 @@ export default async function handler(req, res) {
       `Question: ${a.question}\nAnswer: ${a.answer}`
     ).join('\n\n');
 
+    // Create simplified guitar list with only essential properties
+    const simplifiedGuitars = guitars.map(guitar => ({
+      name: guitar.name,
+      price: guitar.price,
+      category: guitar.category
+    }));
+
     // First, get the guitar recommendation
     const recommendationPrompt = `You are a guitar expert seller. You are given a collection of questions and answers. Based on the answers please select which guitar is the best fit for the user.
 
@@ -25,7 +32,7 @@ Questions and Answers:
 ${formattedAnswers}
 
 Available Guitars:
-${JSON.stringify(guitars, null, 2)}
+${JSON.stringify(simplifiedGuitars, null, 2)}
 
 Please respond with only the name of the single best matching guitar from the available guitars list.`;
 
