@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styles from './GuitarQuiz.module.css';
+import Image from 'next/image';
 
 const questions = [
   {
@@ -321,6 +322,17 @@ export default function GuitarQuiz() {
                   თავიდან დაწყება
                 </button>
               </div>
+              {recommendation.thumbnail && (
+                <div className="guitar-image">
+                  <Image 
+                    src={recommendation.thumbnail}
+                    alt={recommendation.name}
+                    width={430}
+                    height={430}
+                    className="rounded-lg"
+                  />
+                </div>
+              )}
             </>
           ) : null}
         </div>

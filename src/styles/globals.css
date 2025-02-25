@@ -297,3 +297,35 @@ code {
 .isActivePage {
   color: #4272b3;
 }
+
+.results-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.guitar-image {
+  width: 100%;
+  max-width: 430px;
+  height: auto;
+}
+
+.guitar-details {
+  width: 100%;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .results-container {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  
+  .guitar-details {
+    text-align: left;
+  }
+}
