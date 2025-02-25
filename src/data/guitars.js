@@ -723,14 +723,6 @@ export const guitars = [
     "thumbnail": "https://musicroom.ge/wp-content/uploads/2024/02/12312312.jpg"
   },
   {
-    "id": "95",
-    "name": "ფანდური ცაცხვი. georgian instrument fanduri",
-    "link": "https://musicroom.ge/product/%e1%83%a4%e1%83%90%e1%83%9c%e1%83%93%e1%83%a3%e1%83%a0%e1%83%98-%e1%83%aa%e1%83%90%e1%83%aa%e1%83%ae%e1%83%95%e1%83%98-georgian-instrument-fanduri/",
-    "category": "ქართული",
-    "price": "₾280.00",
-    "thumbnail": "https://musicroom.ge/wp-content/uploads/2024/02/1050-430x430.jpg"
-  },
-  {
     "id": "96",
     "name": "ბას გიტარა FENDER Vintera ’60s Jazz Bass®, Pau Ferro Fingerboard, 3-Color Sunburst",
     "link": "https://musicroom.ge/product/%e1%83%91%e1%83%90%e1%83%a1-%e1%83%92%e1%83%98%e1%83%a2%e1%83%90%e1%83%a0%e1%83%90-fender-vintera-60s-jazz-bass-pau-ferro-fingerboard-3-color-sunburst/",
@@ -1374,20 +1366,6 @@ export const guitars = [
     "price": "₾450.00"
   },
   {
-    "id": "180",
-    "name": "ფანდურის შალითა ტყავის",
-    "link": "https://musicroom.ge/product/phanduris-chikholi-tqhavis/",
-    "category": "ქართული",
-    "price": "₾30.00"
-  },
-  {
-    "id": "181",
-    "name": "ფანდური თუთის georgian instrument fanduri",
-    "link": "https://musicroom.ge/product/phanduri-thuthis/",
-    "category": "ქართული",
-    "price": "₾500.00"
-  },
-  {
     "id": "182",
     "name": "უკულელე ukulele gk-10 yl",
     "link": "https://musicroom.ge/product/ukulele-gk-10-yl/",
@@ -1414,27 +1392,6 @@ export const guitars = [
     "link": "https://musicroom.ge/product/%e1%83%94%e1%83%9a%e1%83%94%e1%83%a5%e1%83%a2%e1%83%a0%e1%83%9d-%e1%83%90%e1%83%99%e1%83%a3%e1%83%a1%e1%83%a2%e1%83%98%e1%83%99%e1%83%a3%e1%83%a0%e1%83%98-%e1%83%92%e1%83%98%e1%83%a2%e1%83%90-5/",
     "category": "ელექტრო აკუსტიკური გიტარა",
     "price": "₾445.00"
-  },
-  {
-    "id": "186",
-    "name": "ფანდურის ქამარი შავი fanduri strap",
-    "link": "https://musicroom.ge/product/phanduris-qamari-shavi/",
-    "category": "ქართული",
-    "price": "₾10.00"
-  },
-  {
-    "id": "187",
-    "name": "ფანდურის შალითა fanduri bag",
-    "link": "https://musicroom.ge/product/phanduris-chikholi-duti/",
-    "category": "ქართული",
-    "price": "₾70.00"
-  },
-  {
-    "id": "188",
-    "name": "ფანდური პალმოლია დიდი მუცლით georgian instrument fanduri",
-    "link": "https://musicroom.ge/product/phanduri-palmolia-didi-mutslith/",
-    "category": "ქართული",
-    "price": "₾360.00"
   },
   {
     "id": "189",
