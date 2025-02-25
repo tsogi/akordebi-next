@@ -291,7 +291,20 @@ export default function GuitarQuiz() {
               <div className={styles.recommendationContainer}>
                 <div className={`${styles.guitarCard} ${styles.successCard}`}>
                   <h3>{recommendation.name}</h3>
-                  <p className={styles.price}>ფასი: {recommendation.price}₾</p>
+                  <div className="price-image-container">
+                    {recommendation.thumbnail && (
+                      <div className="guitar-thumbnail">
+                        <Image 
+                          src={recommendation.thumbnail}
+                          alt={recommendation.name}
+                          width={150}
+                          height={150}
+                          className="rounded-lg"
+                        />
+                      </div>
+                    )}
+                    <p className="text-lg">ფასი: {recommendation.price} ₾</p>
+                  </div>
                   <a 
                     href={recommendation.link} 
                     target="_blank" 
@@ -322,17 +335,6 @@ export default function GuitarQuiz() {
                   თავიდან დაწყება
                 </button>
               </div>
-              {recommendation.thumbnail && (
-                <div className="guitar-image">
-                  <Image 
-                    src={recommendation.thumbnail}
-                    alt={recommendation.name}
-                    width={430}
-                    height={430}
-                    className="rounded-lg"
-                  />
-                </div>
-              )}
             </>
           ) : null}
         </div>

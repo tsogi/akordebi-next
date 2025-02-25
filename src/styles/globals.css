@@ -299,19 +299,9 @@ code {
 }
 
 .results-container {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  align-items: center;
   max-width: 800px;
   margin: 0 auto;
   padding: 2rem;
-}
-
-.guitar-image {
-  width: 100%;
-  max-width: 430px;
-  height: auto;
 }
 
 .guitar-details {
@@ -319,13 +309,29 @@ code {
   text-align: center;
 }
 
+.guitar-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.guitar-thumbnail {
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.price-text {
+  font-weight: 500;
+}
+
 @media (min-width: 768px) {
-  .results-container {
-    flex-direction: row;
-    align-items: flex-start;
-  }
-  
   .guitar-details {
     text-align: left;
+  }
+  
+  .guitar-header {
+    align-items: flex-start;
   }
 }
