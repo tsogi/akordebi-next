@@ -37,7 +37,7 @@ export default function Header(){
     function menuPages(){
         if(process.env.NEXT_PUBLIC_DOMAIN == "akordebi.ge") {
             return <>
-                <Link href={"/"} className={` px-[10px] text-gray-500 hover py-1 sm:py-0 ${isActive("home") ? "isActivePage" : ""}`}>აკორდები</Link>
+                <Link href={"/"} className={` px-[10px] text-gray-500 hover py-1 sm:py-0 ${isActive("home") ? "isActivePage" : ""}`}>ქართული აკორდები</Link>
                 <Link href={""} onClick={handleShopClick} className={`${isActive("guitar-finder") ? "isActivePage" : ""} px-[10px] text-gray-500 hover py-1 sm:py-0`}>გიტარის შერჩევა</Link>
                 <Link href={""} onClick={handleForeignClick} className=" px-[10px] text-gray-500 hover py-1 sm:py-0" >უცხოური აკორდები</Link>
             </>

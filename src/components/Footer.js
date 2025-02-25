@@ -27,6 +27,12 @@ export default function Footer(){
           </div>
           <div className={styles.linksAndCopyright}>
             <div className={`${styles.quickLinks} text-[#98b9fa] text-[0.8rem] flex flex-wrap items-center mb-[10px]`}>
+              {process.env.NEXT_PUBLIC_DOMAIN === "akordebi.ge" && (
+                <a className={styles.quickLink} href="/guitar-finder">
+                  <span className={styles.linksDivider}></span>
+                  გიტარის შერჩევა
+                </a>
+              )}
               <a className={styles.quickLink} href="/legal/terms">
                 <span className={styles.linksDivider}></span>
                 {lang._footer_terms}
