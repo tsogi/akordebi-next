@@ -30,7 +30,7 @@ export default function Footer(){
               {process.env.NEXT_PUBLIC_DOMAIN === "akordebi.ge" && (
                 <a className={styles.quickLink} href="/guitar-finder">
                   <span className={styles.linksDivider}></span>
-                  გიტარის შერჩევა
+                  გიტარის შემრჩევი AI
                 </a>
               )}
               <a className={styles.quickLink} href="/legal/terms">
