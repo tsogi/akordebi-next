@@ -78,52 +78,31 @@ export default function SongCard({ song }){
             <div className={styles.songMetaBottom}>
                 <Favorite song={song} />
                 <div className={styles.songMetaRight}>
-                    { renderDifficulty(song.difficulty) }
+                    { renderDifficultyBars(song.difficulty) }
                     <div className={styles.votesSumWrapper}>
-                        <Badge 
-                            anchorOrigin={{ vertical: 'top', horizontal: 'right' }} 
-                            badgeContent={song.voteSum || "0"} 
-                            max={Infinity}  
-                            style={{ color: "#9ebeff" }}
-                        >
-                            <ThumbUp style={{ color: "#9ebeff" }} />
-                        </Badge>
+                        <div className={styles.likesCount}>
+                            <ThumbUp style={{ color: "#fff", marginRight: "5px" }} />
+                            <span>{song.voteSum || "0"}</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </article>
 }
 
-function renderDifficulty(difficulty) {
+function renderDifficultyBars(difficulty) {
     if (![1, 2, 3, 4, 5].includes(difficulty)) {
         return null;
     }
 
-    let difficultyIcon = '';
-    switch (difficulty) {
-        case 1:
-            difficultyIcon = '/difficulty/difficulty1.png';
-            break;
-        case 2:
-            difficultyIcon = '/difficulty/difficulty2.png';
-            break;
-        case 3:
-            difficultyIcon = '/difficulty/difficulty3.png';
-
-            break;
-        case 4:
-            difficultyIcon = '/difficulty/difficulty4.png';
-
-            break;
-        case 5:
-            difficultyIcon = '/difficulty/difficulty5.png';
-
-            break;
-        default:
-            break;
-    }
-
     return (
-            <img className="mr-[10px] w-[25px] h-[18px]" src={difficultyIcon} />
+        <div className={styles.difficultyBars}>
+            {[1, 2, 3, 4, 5].map((level) => (
+                <div 
+                    key={level} 
+                    className={`${styles.difficultyBar} ${level <= difficulty ? styles.active : ''}`}
+                ></div>
+            ))}
+        </div>
     );
 }

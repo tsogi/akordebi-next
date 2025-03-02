@@ -11,11 +11,59 @@
 .songMetaRight {
     display: flex;
     align-items: center;
+    gap: 15px;
 }
 
 .votesSumWrapper {
     display: flex;
     align-items: center;
+}
+
+.likesCount {
+    display: flex;
+    align-items: center;
+    background-color: rgba(82, 134, 237, 0.3);
+    border-radius: 20px;
+    padding: 3px 8px;
+    color: white;
+    font-weight: 500;
+}
+
+.likesCount svg {
+    font-size: 18px;
+}
+
+.difficultyBars {
+    display: flex;
+    gap: 2px;
+    align-items: center;
+}
+
+.difficultyBar {
+    width: 6px;
+    height: 15px;
+    background-color: #444;
+    border-radius: 2px;
+}
+
+.difficultyBar.active:nth-child(1) {
+    background-color: #4CAF50;
+}
+
+.difficultyBar.active:nth-child(2) {
+    background-color: #8BC34A;
+}
+
+.difficultyBar.active:nth-child(3) {
+    background-color: #FFC107;
+}
+
+.difficultyBar.active:nth-child(4) {
+    background-color: #FF9800;
+}
+
+.difficultyBar.active:nth-child(5) {
+    background-color: #F44336;
 }
 
 .songName{
