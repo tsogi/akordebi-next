@@ -1,0 +1,87 @@
+.favoriteButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.favoriteButton:hover {
+  transform: scale(1.05);
+  border-color: rgba(242, 172, 43, 0.5);
+}
+
+.favoriteButton:active {
+  transform: scale(0.95);
+}
+
+.favoriteButton.active {
+  background: rgba(242, 172, 43, 0.2);
+  border-color: rgba(242, 172, 43, 0.5);
+}
+
+.favoriteIcon {
+  color: #f2ac2b;
+  transition: all 0.2s ease;
+}
+
+.favoriteButton:not(.active) .favoriteIcon {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.favoriteButton.small {
+  width: 32px;
+  height: 32px;
+}
+
+.favoriteButton.medium {
+  width: 40px;
+  height: 40px;
+}
+
+.favoriteButton.large {
+  width: 48px;
+  height: 48px;
+}
+
+.favoriteButton.small .favoriteIcon {
+  width: 18px;
+  height: 18px;
+}
+
+.favoriteButton.medium .favoriteIcon {
+  width: 22px;
+  height: 22px;
+}
+
+.favoriteButton.large .favoriteIcon {
+  width: 26px;
+  height: 26px;
+}
+
+.favoriteButton.loading {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.favoriteButton.loading::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #f2ac2b;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+} 

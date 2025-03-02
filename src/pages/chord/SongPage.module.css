@@ -1,4 +1,3 @@
-
 .character {
     line-height: 2;
 }
@@ -51,7 +50,8 @@
 }
 
 .songPage {
-
+    padding: 20px;
+    color: white;
 }
 
 .ban {
@@ -264,4 +264,154 @@
     font-weight: bold;
     font-size: 0.9rem;
     z-index: 10;
+}
+
+.controlsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 24px;
+    background: rgba(30, 34, 55, 0.8);
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid rgba(210, 210, 223, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    justify-content: center;
+}
+
+.controlGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 120px;
+}
+
+.controlLabel {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.controlActions {
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.controlButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: rgba(82, 134, 237, 0.2);
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.controlButton:hover {
+    background: rgba(82, 134, 237, 0.4);
+}
+
+.controlButton:active {
+    transform: scale(0.95);
+}
+
+.controlIcon {
+    width: 18px;
+    height: 18px;
+}
+
+.controlValue {
+    min-width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #f2ac2b;
+    margin: 0 4px;
+}
+
+.toggleButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: rgba(82, 134, 237, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: white;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    height: 40px;
+}
+
+.toggleButton:hover {
+    background: rgba(82, 134, 237, 0.4);
+}
+
+.toggleButton.active {
+    background: rgba(242, 172, 43, 0.3);
+    border-color: rgba(242, 172, 43, 0.5);
+}
+
+.toggleIcon {
+    width: 18px;
+    height: 18px;
+}
+
+.favoriteWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 8px;
+}
+
+@media (max-width: 768px) {
+    .controlsContainer {
+        padding: 12px;
+        gap: 8px;
+    }
+    
+    .controlGroup {
+        min-width: 100px;
+    }
+    
+    .toggleButton {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .controlsContainer {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    
+    .controlGroup {
+        min-width: 45%;
+        margin-bottom: 8px;
+    }
+    
+    .toggleButton {
+        min-width: 45%;
+    }
+    
+    .favoriteWrapper {
+        justify-content: flex-end;
+    }
 }

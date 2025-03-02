@@ -1,84 +1,69 @@
-import * as React from 'react';
-import styles from "./SongCard.module.css";
+import React, { useState, useEffect } from 'react';
+import { HeartIcon } from '@heroicons/react/24/solid';
+import { HeartIcon as HeartOutline } from '@heroicons/react/24/outline';
+import styles from './Favorite.module.css';
 import { useUser } from '@/utils/useUser';
-import { HeartIcon } from '@heroicons/react/20/solid';
+import { supabase } from '@/utils/supabase-client';
 
-export default function Favorite({ song }) {
-    const { user, setAuthOpenedFrom } = useUser();
-    const [isFavorite, setIsFavorite] = React.useState(song.isFavorite ?? false);
+export default function Favorite({ song, size = 'medium' }) {
+  const [isFavorite, setIsFavorite] = useState(song.isFavorite ?? false);
+  const { user, setAuthOpenedFrom } = useUser();
+  const [isLoading, setIsLoading] = useState(false);
 
-    React.useEffect(() => {
-        setIsFavorite(song.isFavorite ?? false);
-    }, [song.isFavorite]);
+  useEffect(() => {
+    setIsFavorite(song.isFavorite ?? false);
+  }, [song.isFavorite]);
 
-    React.useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const favoriteSongId = localStorage.getItem("addSongToFavorites");
-            if (user && favoriteSongId == song.id) {
-                handleAddToFavorites();
-                localStorage.removeItem("addSongToFavorites");
-            }
-        }
-    }, [user, song.id]);
+  async function handleFavoriteClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
 
-    const handleFavoriteClick = async () => {
-        if (!user) {
-            if (typeof window !== 'undefined') {
-                localStorage.setItem("addSongToFavorites", song.id);
-                setAuthOpenedFrom('favorites');
-            }
-            return;
-        }
-        if (isFavorite) {
-            try {
-                await handleRemoveFromFavorites();
-            } catch (error) {
-                console.error(error);
-            }
-        } else {
-            try {
-                await handleAddToFavorites();
-            } catch (error) {
-                console.error(error);
-            }
-        }
-    };
+    if (!user) {
+      setAuthOpenedFrom('favorite');
+      localStorage.setItem("addSongToFavorites", song.id);
+      return;
+    }
 
-    const handleAddToFavorites = async () => {
-        await fetch("/api/favorites/add", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ songId: song.id })
-        });
-        setIsFavorite(true);
-    };
-
-    const handleRemoveFromFavorites = async () => {
-        await fetch("/api/favorites/remove", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ songId: song.id })
-        });
+    setIsLoading(true);
+    try {
+      if (isFavorite) {
+        await supabase
+          .from('favorites')
+          .delete()
+          .eq('song_id', song.id)
+          .eq('user_id', user.id);
         setIsFavorite(false);
-    };
+      } else {
+        await supabase
+          .from('favorites')
+          .insert([{ song_id: song.id, user_id: user.id }]);
+        setIsFavorite(true);
+      }
+    } catch (error) {
+      console.error('Error toggling favorite:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
-    return (
-        <div className={`${styles.songMetaLeft} flex items-center`}>
-            <FavoriteIcon isFavorite={isFavorite} onClick={handleFavoriteClick} />
-        </div>
-    );
-}
+  const sizeClasses = {
+    small: styles.small,
+    medium: styles.medium,
+    large: styles.large
+  };
 
-function FavoriteIcon({ isFavorite, onClick }) {
-    return (
-        <HeartIcon
-            style={{ fill: isFavorite ? "red" : "transparent", stroke: isFavorite ? "red" : "white" }}
-            className={`w-[26px] h-[26px] cursor-pointer`}
-            onClick={onClick}
-        />
-    );
+  return (
+    <button 
+      onClick={handleFavoriteClick} 
+      className={`${styles.favoriteButton} ${sizeClasses[size]} ${isFavorite ? styles.active : ''} ${isLoading ? styles.loading : ''}`}
+      aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
+      disabled={isLoading}
+    >
+      {isFavorite ? (
+        <HeartIcon className={styles.favoriteIcon} />
+      ) : (
+        <HeartOutline className={styles.favoriteIcon} />
+      )}
+    </button>
+  );
 }

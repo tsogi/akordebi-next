@@ -13,6 +13,7 @@ import SongDifficulties from '@/components/SongDifficulties';
 import lang from '@/services/lang';
 import Favorite from '@/components/Favorite';
 import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
+import { MinusIcon, PlusIcon, EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 let intervalId;
 
 export default function SongPage({ song }){
@@ -106,28 +107,69 @@ export default function SongPage({ song }){
         </Head>
         <Header />    
         <div className={`${styles.songPage} page_container noselect`}>
-            <div className={styles.majorSettings}>
-                <div className={`${styles.font} ${styles.settings}`}>
-                    <div className={`${styles.font} ${styles.label}`}>{lang.chord.font}</div>
-                    <div className={`${styles.font} ${styles.operator} ${styles.minus}`} onClick={handleMinusFontClick}>-</div>
-                    <div className={`${styles.font} ${styles.size}`}>{fontSize}</div>
-                    <div className={`${styles.font} ${styles.operator} ${styles.plus}`} onClick={handlePlusFontClick}>+</div>
-                </div>
-                <div className={`${styles.scroll} ${styles.settings}`}>
-                    <div className={`${styles.scroll} ${styles.label}`}>{lang.chord.autoScroll}</div>
-                    <div className={`${styles.scroll} ${styles.operator} ${styles.minus}`} onClick={handleMinusScrollClick}>-</div>
-                    <div className={`${styles.scroll} ${styles.size}`}>{scrollSpeed}</div>
-                    <div className={`${styles.scroll} ${styles.operator} ${styles.plus}`} onClick={handlePlusScrollClick}>+</div>
-                </div>
-                <div className={`${styles.coupletChords} ${styles.settings}`}>
-                    <div onClick={handleShowChordsClick} className={`${styles.coupletChordsBtn}`}>
-                        {
-                            showHideText(showChords)
-                        }
+            <div className={styles.controlsContainer}>
+                <div className={styles.controlGroup}>
+                    <label className={styles.controlLabel}>{lang.chord.font}</label>
+                    <div className={styles.controlActions}>
+                        <button 
+                            className={styles.controlButton} 
+                            onClick={handleMinusFontClick}
+                            aria-label="Decrease font size"
+                        >
+                            <MinusIcon className={styles.controlIcon} />
+                        </button>
+                        <div className={styles.controlValue}>{fontSize}</div>
+                        <button 
+                            className={styles.controlButton} 
+                            onClick={handlePlusFontClick}
+                            aria-label="Increase font size"
+                        >
+                            <PlusIcon className={styles.controlIcon} />
+                        </button>
                     </div>
                 </div>
-                <div className={`${styles.settings}`}>
-                    <Favorite song={song} />
+                
+                <div className={styles.controlGroup}>
+                    <label className={styles.controlLabel}>{lang.chord.autoScroll}</label>
+                    <div className={styles.controlActions}>
+                        <button 
+                            className={styles.controlButton} 
+                            onClick={handleMinusScrollClick}
+                            aria-label="Decrease scroll speed"
+                        >
+                            <MinusIcon className={styles.controlIcon} />
+                        </button>
+                        <div className={styles.controlValue}>{scrollSpeed}</div>
+                        <button 
+                            className={styles.controlButton} 
+                            onClick={handlePlusScrollClick}
+                            aria-label="Increase scroll speed"
+                        >
+                            <PlusIcon className={styles.controlIcon} />
+                        </button>
+                    </div>
+                </div>
+                
+                <button 
+                    className={`${styles.toggleButton} ${showChords ? styles.active : ''}`}
+                    onClick={handleShowChordsClick}
+                    aria-label={showChords ? lang.chord.hide : lang.chord.appearance}
+                >
+                    {showChords ? (
+                        <>
+                            <EyeSlashIcon className={styles.toggleIcon} />
+                            <span>{lang.chord.hide}</span>
+                        </>
+                    ) : (
+                        <>
+                            <EyeIcon className={styles.toggleIcon} />
+                            <span>{lang.chord.appearance}</span>
+                        </>
+                    )}
+                </button>
+                
+                <div className={styles.favoriteWrapper}>
+                    <Favorite song={song} size="large" />
                 </div>
             </div>
             <h2 className={`${styles.songName} capital`}>{song?.name}</h2>
