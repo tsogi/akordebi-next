@@ -4,8 +4,9 @@ import { HeartIcon as HeartOutline } from '@heroicons/react/24/outline';
 import styles from './Favorite.module.css';
 import { useUser } from '@/utils/useUser';
 import { supabase } from '@/utils/supabase-client';
+import lang from '@/services/lang';
 
-export default function Favorite({ song, size = 'medium' }) {
+export default function Favorite({ song, size = 'medium', showLabel = false }) {
   const [isFavorite, setIsFavorite] = useState(song.isFavorite ?? false);
   const { user, setAuthOpenedFrom } = useUser();
   const [isLoading, setIsLoading] = useState(false);
@@ -51,6 +52,29 @@ export default function Favorite({ song, size = 'medium' }) {
     medium: styles.medium,
     large: styles.large
   };
+
+  if (showLabel) {
+    return (
+      <button 
+        onClick={handleFavoriteClick} 
+        className={`${styles.favoriteButtonWithLabel} ${isFavorite ? styles.active : ''} ${isLoading ? styles.loading : ''}`}
+        aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
+        disabled={isLoading}
+      >
+        {isFavorite ? (
+          <>
+            <HeartIcon className={styles.favoriteIcon} />
+            <span>{lang.favorites.remove || "ფავორიტებიდან ამოშლა"}</span>
+          </>
+        ) : (
+          <>
+            <HeartOutline className={styles.favoriteIcon} />
+            <span>{lang.favorites.add || "ფავორიტებში დამატება"}</span>
+          </>
+        )}
+      </button>
+    );
+  }
 
   return (
     <button 

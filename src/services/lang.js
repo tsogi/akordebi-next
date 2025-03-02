@@ -41,6 +41,10 @@ const interfaceGeo = {
         hard: "რთული",
         very_hard: "ურთულესი",
     },
+    favorites: {
+        add: "+ ფავორიტებში",
+        remove: "- ფავორიტებიდან"
+    },
     _auth: {
         login: "ავტორიზაცია",
         enterBtn: 'სისტემაში შესვლის შემდეგ შეძლებთ დამატებითი ფუნქციებით სარგებლობას როგორიცაა მაგალითად "ფავორიტებში დამატება"',
@@ -52,8 +56,8 @@ const interfaceGeo = {
         font: "ფონტი",
         autoScroll: "ავტო-სქროლი",
         chord: "აკორდების",
-        hide: "აკორდების დამალვა",
-        appearance: "აკორდების გამოჩენა",
+        hide: "აკორდები",
+        appearance: "აკორდები",
         uploaded: "ატვირთა",
         rate: " შეაფასეთ აკორდების სისწორე",
     },
@@ -156,6 +160,10 @@ const interfaceEng = {
         medium: "Medium",
         hard: "Hard",
         very_hard: "Hardest",
+    },
+    favorites: {
+        add: "Add to favorites",
+        remove: "Remove from favorites"
     },
     _auth: {
         login: "Log in",

@@ -169,7 +169,7 @@ export default function SongPage({ song }){
                 </button>
                 
                 <div className={styles.favoriteWrapper}>
-                    <Favorite song={song} size="large" />
+                    <Favorite song={song} showLabel={true} />
                 </div>
             </div>
             <h2 className={`${styles.songName} capital`}>{song?.name}</h2>

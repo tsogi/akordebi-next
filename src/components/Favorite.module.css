@@ -25,12 +25,40 @@
   border-color: rgba(242, 172, 43, 0.5);
 }
 
+.favoriteButtonWithLabel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(82, 134, 237, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: white;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  height: 40px;
+}
+
+.favoriteButtonWithLabel:hover {
+  background: rgba(82, 134, 237, 0.4);
+}
+
+.favoriteButtonWithLabel.active {
+  background: rgba(242, 172, 43, 0.3);
+  border-color: rgba(242, 172, 43, 0.5);
+}
+
 .favoriteIcon {
   color: #f2ac2b;
   transition: all 0.2s ease;
+  width: 18px;
+  height: 18px;
 }
 
-.favoriteButton:not(.active) .favoriteIcon {
+.favoriteButton:not(.active) .favoriteIcon,
+.favoriteButtonWithLabel:not(.active) .favoriteIcon {
   color: rgba(255, 255, 255, 0.7);
 }
 
@@ -64,12 +92,14 @@
   height: 26px;
 }
 
-.favoriteButton.loading {
+.favoriteButton.loading,
+.favoriteButtonWithLabel.loading {
   opacity: 0.7;
   cursor: not-allowed;
 }
 
-.favoriteButton.loading::after {
+.favoriteButton.loading::after,
+.favoriteButtonWithLabel.loading::after {
   content: '';
   position: absolute;
   width: 16px;
@@ -83,5 +113,13 @@
 @keyframes spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 480px) {
+  .favoriteButtonWithLabel {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    min-width: 45%;
   }
 } 
