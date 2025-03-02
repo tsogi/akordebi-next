@@ -42,8 +42,8 @@ const interfaceGeo = {
         very_hard: "ურთულესი",
     },
     favorites: {
-        add: "+ ფავორიტებში",
-        remove: "- ფავორიტებიდან"
+        add: "შენახვა",
+        remove: "ამოშლა"
     },
     _auth: {
         login: "ავტორიზაცია",

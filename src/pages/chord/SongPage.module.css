@@ -378,6 +378,7 @@
     align-items: center;
     justify-content: center;
     min-width: 120px;
+    font-size: 0.8rem;
 }
 
 @media (max-width: 768px) {
