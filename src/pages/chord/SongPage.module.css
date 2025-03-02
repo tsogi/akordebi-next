@@ -397,11 +397,12 @@
     
     .toggleButton {
         width: 48%;
+        justify-content: flex-start;
     }
     
     .favoriteWrapper {
         width: 48%;
-
+        justify-content: flex-end;
     }
 }
 
@@ -419,11 +420,12 @@
     
     .toggleButton {
         min-width: 45%;
+        justify-content: flex-start;
     }
     
     .favoriteWrapper {
         min-width: 45%;
         font-size: 0.8rem;
-        justify-content: center;
+        justify-content: flex-end;
     }
 }
