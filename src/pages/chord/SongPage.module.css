@@ -274,6 +274,10 @@
     flex-wrap: nowrap;
     width: 100%;
     gap: 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 16px;
 }
 
 .controlGroup {
@@ -340,6 +344,7 @@
 
 .toggleButton {
     display: flex;
+    font-size: 0.8rem;
     align-items: center;
     justify-content: center;
     gap: 8px;
@@ -348,7 +353,6 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     color: white;
-    font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.2s ease;
     height: 40px;
@@ -382,6 +386,7 @@
         flex-wrap: wrap;
         justify-content: space-between;
         gap: 10px;
+        padding: 12px;
     }
     
     .controlGroup {
@@ -395,6 +400,7 @@
     
     .favoriteWrapper {
         width: 48%;
+
     }
 }
 
@@ -416,6 +422,7 @@
     
     .favoriteWrapper {
         min-width: 45%;
+        font-size: 0.8rem;
         justify-content: center;
     }
 }
