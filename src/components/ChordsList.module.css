@@ -56,25 +56,26 @@
     flex-wrap: wrap;
     width: 50%;
     padding-right: 10px;
+    padding-left: 10px;
 }
 
 .filter {
-    padding: 10px;
+    padding: 8px;
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
+    border-radius: 8px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid rgba(242, 172, 43, 0.3);
+    border: 1px solid rgba(242, 172, 43, 0.3);
     transition: all 0.2s ease;
-    height: 46px;
-    width: 46px;
+    height: 38px;
+    width: 38px;
 }
 
 .filter:hover {
     border-color: #f2ac2b;
-    box-shadow: 0 3px 8px rgba(242, 172, 43, 0.2);
+    box-shadow: 0 2px 6px rgba(242, 172, 43, 0.2);
 }
 
 .filterSelected {
@@ -89,7 +90,7 @@
 }
 
 .sortContainer {
-    width: 180px;
+    width: 160px;
 }
 
 .sortContainer > * {
@@ -126,6 +127,5 @@
     .filterSongs {
         width: 100%;
         justify-content: space-between;
-        margin-top: 24px;
     }
 }

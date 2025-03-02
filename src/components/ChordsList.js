@@ -228,13 +228,13 @@ export default function ChordsList({ initialSongs }){
                         <div onClick={handleFavoritesClick} className={`${styles.filter} ${filterFavorites ? styles.filterSelected : ""}`}>
                             <HeartIcon 
                                 style={{ fill: "transparent", stroke: "white" }} 
-                                className={`w-[26px] h-[26px]`}  
+                                className={`w-[22px] h-[22px]`}  
                             />
                         </div>
                     </Tooltip>
                     <Tooltip placement="top" title={lang._videoIconTitle}>
                         <div onClick={handleLessonedClick} className={`${styles.filter} ${filterLessoned ? styles.filterSelected : ""}`}>
-                            <OndemandVideoIcon style={{ color: "#9ebeff" }} />
+                            <OndemandVideoIcon style={{ color: "#9ebeff", fontSize: "22px" }} />
                         </div>
                     </Tooltip>
                 </div>

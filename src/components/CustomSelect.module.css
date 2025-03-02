@@ -1,8 +1,8 @@
 .selectSort {
-    font-size: 0.9rem;
-    border: 2px solid rgba(242, 172, 43, 0.3);
-    border-radius: 10px;
-    height: 46px;
+    font-size: 0.8rem;
+    border: 1px solid rgba(242, 172, 43, 0.3);
+    border-radius: 8px;
+    height: 38px;
     background: rgba(255, 255, 255, 0.05);
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -12,14 +12,14 @@
     background-repeat: no-repeat;
     background-position: calc(100% - 15px) center;
     color: white;
-    padding: 0 35px 0 15px;
+    padding: 0 35px 0 12px;
     width: 100%;
     transition: all 0.2s ease;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .selectSort:focus, .selectSort:active {
     outline: none;
     border-color: #f2ac2b;
-    box-shadow: 0 3px 8px rgba(242, 172, 43, 0.2);
+    box-shadow: 0 2px 6px rgba(242, 172, 43, 0.2);
 }
