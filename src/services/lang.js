@@ -1,7 +1,7 @@
 const interfaceGeo = {
     _metaTitle: "გიტარის აკორდები | gitaris akordebi",
     _metaDescription: "ქართული სიმღერების გიტარის აკორდები | Guitar chords of Georgian songs",
-    _searchText: "მოძებნეთ სიმღერა ან ავტორი",
+    _searchText: "ჩაწერეთ სიმღერა ან ავტორი",
     _searchLabel: "აკორდების ძებნა",
     _filterPopularity: "პოპულარობით",
     _filterQuality: "ხარისხით",
