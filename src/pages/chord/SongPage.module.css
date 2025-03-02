@@ -268,16 +268,12 @@
 
 .controlsContainer {
     display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 24px;
-    background: rgba(30, 34, 55, 0.8);
-    border-radius: 12px;
-    padding: 16px;
-    border: 1px solid rgba(210, 210, 223, 0.1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
+    margin-bottom: 16px;
+    flex-wrap: nowrap;
+    width: 100%;
+    gap: 12px;
 }
 
 .controlGroup {
@@ -356,6 +352,7 @@
     cursor: pointer;
     transition: all 0.2s ease;
     height: 40px;
+    min-width: 120px;
 }
 
 .toggleButton:hover {
@@ -376,22 +373,28 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 45%;
+    min-width: 120px;
 }
 
 @media (max-width: 768px) {
     .controlsContainer {
-        padding: 12px;
-        gap: 8px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 10px;
     }
     
     .controlGroup {
-        min-width: 100px;
+        width: 48%;
+        margin-bottom: 10px;
     }
     
     .toggleButton {
-        padding: 8px 12px;
-        font-size: 0.85rem;
+        width: 48%;
+    }
+    
+    .favoriteWrapper {
+        width: 48%;
     }
 }
 
