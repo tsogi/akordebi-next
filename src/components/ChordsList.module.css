@@ -46,6 +46,8 @@
 
 .filterContainer {
     display: flex;
+    gap: 10px;
+    margin-left: 15px;
 }
 
 .filterSongs {
@@ -58,19 +60,26 @@
 
 .filter {
     padding: 10px;
-    background: #1e2237;
-    border-radius: 3px;
-    margin-left: 5px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgba(210,210,223,.2);
-    border-radius: 5px;
+    border: 2px solid rgba(242, 172, 43, 0.3);
+    transition: all 0.2s ease;
+    height: 46px;
+    width: 46px;
+}
+
+.filter:hover {
+    border-color: #f2ac2b;
+    box-shadow: 0 3px 8px rgba(242, 172, 43, 0.2);
 }
 
 .filterSelected {
-    background-color: #004aad;
+    background-color: rgba(0, 74, 173, 0.3);
+    border-color: #f2ac2b;
 }
 
 .sortContainer,
@@ -80,9 +89,7 @@
 }
 
 .sortContainer {
-    margin-right: 1px;
-    margin-left: 10px;
-    width: 150px;
+    width: 180px;
 }
 
 .sortContainer > * {

@@ -207,21 +207,25 @@ export default function ChordsList({ initialSongs }){
     }
 
     return <div className={"page_container"}>
-        <div className="flex justify-between flex-wrap filterAndSearch">
-            <div className={`${styles.searchComponent} searchWrapper`}>
+        <div className="flex flex-col md:flex-row justify-between items-center w-full gap-6 mb-8">
+            <div className={`${styles.searchComponent} w-full md:w-1/2`}>
                 <SearchSongs onSearch={handleSearchClick} />
             </div>
-            <div className={`${styles.filterSongs} filtersWrapper`}>
+            <div className={`${styles.filterSongs} w-full md:w-1/2 flex justify-end`}>
                 <div className={styles.sortContainer}>
                     <CustomSelect 
-                        options={[{ label: lang._filterQuality, value: "default" }, { label: lang._filterPopularity, value: "likes" }, { label: lang._filterDifficulty, value: "difficulty" } ]} 
+                        options={[
+                            { label: lang._filterQuality, value: "default" }, 
+                            { label: lang._filterPopularity, value: "likes" }, 
+                            { label: lang._filterDifficulty, value: "difficulty" }
+                        ]} 
                         value={sortBy} 
                         onChange={handleSortChange} 
                     />
                 </div>
                 <div className={styles.filterContainer}>
                     <Tooltip placement="top" title={lang._favoriteIconTitle}>
-                        <div onClick={handleFavoritesClick} className={`${styles.filter} ${styles.favorites} ${filterFavorites ? styles.filterSelected : ""}`}>
+                        <div onClick={handleFavoritesClick} className={`${styles.filter} ${filterFavorites ? styles.filterSelected : ""}`}>
                             <HeartIcon 
                                 style={{ fill: "transparent", stroke: "white" }} 
                                 className={`w-[26px] h-[26px]`}  
@@ -229,15 +233,10 @@ export default function ChordsList({ initialSongs }){
                         </div>
                     </Tooltip>
                     <Tooltip placement="top" title={lang._videoIconTitle}>
-                        <div onClick={handleLessonedClick} className={`${styles.filter} ${styles.confirmed} ${filterLessoned ? styles.filterSelected : ""}`}>
+                        <div onClick={handleLessonedClick} className={`${styles.filter} ${filterLessoned ? styles.filterSelected : ""}`}>
                             <OndemandVideoIcon style={{ color: "#9ebeff" }} />
                         </div>
                     </Tooltip>
-                    {/* <Tooltip placement="top" title={lang._verifyIconTitle}>
-                        <div onClick={handleConfirmedClick} className={`${styles.filter} ${styles.lesson} ${filterConfirmed ? styles.filterSelected : ""}`}>
-                            <TaskAltIcon style={{ color: "#15a894" }} /> 
-                        </div>
-                    </Tooltip> */}
                 </div>
             </div>
         </div>

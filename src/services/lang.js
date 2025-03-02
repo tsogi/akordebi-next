@@ -110,7 +110,8 @@ const interfaceGeo = {
         `,
         rightHand: `ჩაწერეთ მარჯვენა ხელის ინსტრუქცია. მაგალითად: 
 ბანი დაბლა დაბლა მაღლა დაბლა მაღლა ან ბანი ↓ ↓ ↑ ↓ ↑ ან ბანი 3 2 1 2 3`
-    }
+    },
+    _search: "ძებნა"
 }
 
 const interfaceEng = {
@@ -218,7 +219,8 @@ const interfaceEng = {
         `,
         rightHand: `Enter instructions for right hand. Example: 
 Bass Down Down Up Down Up or Bass ↓ ↓ ↑ ↓ ↑ or Bass 3 2 1 2 3`
-    }
+    },
+    _search: "Search"
 }
 
 let words = interfaceGeo;

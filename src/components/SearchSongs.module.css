@@ -2,62 +2,83 @@
     display: flex;
     width: 100%;
     position: relative;
+    margin-bottom: 8px;
+}
+
+.searchIconWrapper {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 1;
 }
 
 .searchButton {
-    position: absolute;
-    top: 16px;
-    right: 12px;
+    height: 38px;
+    background: rgba(242, 172, 43, 0.8);
+    border: none;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    padding: 0 12px;
+    font-size: 0.75rem;
+    color: #1e2237;
+    font-weight: 500;
+    min-width: 60px;
+}
+
+.searchButton:hover {
+    background: #f2ac2b;
 }
 
 .searchInput {
     font-size: 0.8rem;
-    line-height: 20px;
-    letter-spacing: .01em;
-    height: 50px;
+    line-height: 1.4;
+    height: 38px;
     width: 100%;
-    border: 0;
-    border-bottom: 1px solid #f2ac2b;
-    background: rgba(255,255,255,.02);
-    padding: 13px 20px 16px;
+    border: 1px solid rgba(242, 172, 43, 0.3);
+    border-radius: 8px 0 0 8px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0 12px 0 36px;
     color: white;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-
-/* Standard syntax */
 .searchInput::placeholder {
-    color: white; /* Your desired color */
+    color: rgba(255, 255, 255, 0.6);
 }
 
-/* Firefox 18- */
-.searchInput::-moz-placeholder {
-    color: white;
-}
-
-/* Firefox 19+ */
-.searchInput::-moz-placeholder {
-    color: white;
-    opacity: 1; /* Firefox reduces the opacity by default */
-}
-
-/* Internet Explorer 10-11 */
-.searchInput:-ms-input-placeholder {
-    color: white;
-}
-
-/* Edge 18- */
-.searchInput::-ms-input-placeholder {
-    color: white;
-}
-
-/* Safari and Chrome, Android and iOS */
-.searchInput::-webkit-input-placeholder {
-    color: white;
-}
-
-.searchInput:active, .searchInput:focus {
-    border-color: #ffac64;
-    -webkit-box-shadow: inset 12px 12px 30px rgba(53,123,230,.2);
-    box-shadow: inset 12px 12px 30px rgba(53,123,230,.2);
+.searchInput:focus {
+    border-color: #f2ac2b;
+    box-shadow: 0 2px 6px rgba(242, 172, 43, 0.2);
     outline: none;
+}
+
+/* Firefox */
+.searchInput::-moz-placeholder {
+    color: rgba(255, 255, 255, 0.6);
+    opacity: 1;
+}
+
+/* Internet Explorer */
+.searchInput:-ms-input-placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Edge */
+.searchInput::-ms-input-placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Chrome, Safari, Opera */
+.searchInput::-webkit-input-placeholder {
+    color: rgba(255, 255, 255, 0.6);
 }
