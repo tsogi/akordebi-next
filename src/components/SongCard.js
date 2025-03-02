@@ -80,7 +80,12 @@ export default function SongCard({ song }){
                 <div className={styles.songMetaRight}>
                     { renderDifficulty(song.difficulty) }
                     <div className={styles.votesSumWrapper}>
-                        <Badge anchorOrigin={{ vertical: 'top', horizontal: 'right', }} badgeContent={song.voteSum || "0"}  style={{ color: "#9ebeff" }}>
+                        <Badge 
+                            anchorOrigin={{ vertical: 'top', horizontal: 'right' }} 
+                            badgeContent={song.voteSum || "0"} 
+                            max={Infinity}  
+                            style={{ color: "#9ebeff" }}
+                        >
                             <ThumbUp style={{ color: "#9ebeff" }} />
                         </Badge>
                     </div>
