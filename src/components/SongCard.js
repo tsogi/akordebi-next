@@ -8,7 +8,6 @@ import { useUser } from '@/utils/useUser';
 import Link from 'next/link';
 import Favorite from "./Favorite";
 
-
 export default function SongCard({ song }){
     const { user, setAuthOpenedFrom } = useUser();
     const [isFavorite, setIsFavorite] = React.useState(song.isFavorite?? false);
@@ -17,12 +16,33 @@ export default function SongCard({ song }){
         setIsFavorite(song.isFavorite?? false);
     }, [song.isFavorite]);
 
+    const handleAddToFavorites = async () => {
+        try {
+            // Using fetch instead of axios
+            const response = await fetch('/api/favorites/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ songId: song.id }),
+            });
+            
+            if (response.ok) {
+                setIsFavorite(true);
+            } else {
+                console.error('Failed to add to favorites');
+            }
+        } catch (error) {
+            console.error('Error adding to favorites:', error);
+        }
+    };
+
     React.useEffect(() => {
         if(user && localStorage.getItem("addSongToFavorites") == song.id){
             handleAddToFavorites();
             localStorage.removeItem("addSongToFavorites");
         }
-    } , [user, localStorage.getItem("addSongToFavorites")]);
+    } , [user, song.id, localStorage.getItem("addSongToFavorites")]);
 
     return (
         <article key={song.id} className={"songItemWrapper"}>

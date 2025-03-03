@@ -3,7 +3,6 @@ import { HeartIcon } from '@heroicons/react/24/solid';
 import { HeartIcon as HeartOutline } from '@heroicons/react/24/outline';
 import styles from './Favorite.module.css';
 import { useUser } from '@/utils/useUser';
-import { supabase } from '@/utils/supabase-client';
 import lang from '@/services/lang';
 
 export default function Favorite({ song, size = 'medium', showLabel = false }) {
@@ -28,17 +27,29 @@ export default function Favorite({ song, size = 'medium', showLabel = false }) {
     setIsLoading(true);
     try {
       if (isFavorite) {
-        await supabase
-          .from('favorites')
-          .delete()
-          .eq('song_id', song.id)
-          .eq('user_id', user.id);
-        setIsFavorite(false);
+        const response = await fetch('/api/favorites/remove', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ songId: song.id }),
+        });
+        
+        if (response.ok) {
+          setIsFavorite(false);
+        }
       } else {
-        await supabase
-          .from('favorites')
-          .insert([{ song_id: song.id, user_id: user.id }]);
-        setIsFavorite(true);
+        const response = await fetch('/api/favorites/add', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ songId: song.id }),
+        });
+        
+        if (response.ok) {
+          setIsFavorite(true);
+        }
       }
     } catch (error) {
       console.error('Error toggling favorite:', error);
