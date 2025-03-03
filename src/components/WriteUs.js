@@ -2,21 +2,25 @@ import { useState } from "react";
 import styles from "./WriteUs.module.css";
 import lang from '@/services/lang'
 import Alert from "./Alert";
+import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
 
 export default function WriteUs(){
   const [text, setText] = useState("");
   const [showAlert,setShowAlert] = useState(false);
   const [showError,setShowError] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (event) => {
     setText(event.target.value);
   };
 
   async function handleSend(){
-    if(!text) {
+    if(!text.trim()) {
       alert(lang._enter_text);
       return;
     }
+
+    setIsSubmitting(true);
 
     try {
       let msg = `${process.env.NEXT_PUBLIC_DOMAIN} feedback: ${text}`;
@@ -38,31 +42,52 @@ export default function WriteUs(){
     } catch(error){
       console.log(error);
       setShowError(true);
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
   function handleInputPress(event){
-    if (event.key === 'Enter') {
-        handleSend();
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      handleSend();
     }
   }
 
-  return <>
-    <Alert type="success" duration={10} message={lang._comment_sent} open={showAlert} setOpen={setShowAlert}/>
-    <Alert type="error" duration={10} message={lang._comment_not_sent} open={showError} setOpen={setShowError}/>
-    <div className="flex w-full relative">
-      <input type='text' id={styles.test} className={`${styles.input} text-xs leading-5 tracking-tight h-12 w-full border-b border-f2ac2b bg-opacity-2 py-3 px-5 text-white`} label={lang._footer_input}
-        value={text}
-        placeholder={lang._footer_input_placeholder}
-        onChange={handleInputChange}
-        onKeyDown={handleInputPress}
+  return (
+    <div className={styles.container}>
+      <Alert 
+        type="success" 
+        duration={10} 
+        message={lang._comment_sent} 
+        open={showAlert} 
+        setOpen={setShowAlert}
       />
-      <button onClick={handleSend} className="absolute top-[12px] right-3"
-      type="submit"> 
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
-        </svg>
-      </button>
+      <Alert 
+        type="error" 
+        duration={10} 
+        message={lang._comment_not_sent} 
+        open={showError} 
+        setOpen={setShowError}
+      />
+      <div className={styles.inputWrapper}>
+        <input
+          type="text"
+          value={text}
+          onChange={handleInputChange}
+          onKeyDown={handleInputPress}
+          placeholder={lang._footer_input_placeholder}
+          className={styles.input}
+        />
+        <button 
+          onClick={handleSend}
+          disabled={isSubmitting || !text.trim()} 
+          className={styles.sendButton}
+          aria-label="Send feedback"
+        >
+          <PaperAirplaneIcon className={styles.sendIcon} />
+        </button>
+      </div>
     </div>
-  </>
+  );
 }
