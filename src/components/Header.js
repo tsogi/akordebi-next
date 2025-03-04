@@ -8,6 +8,7 @@ import lang from '@/services/lang'
 import uiDb from '@/services/data';
 import Link from 'next/link'
 import { useState } from 'react';
+import { ArrowRightOnRectangleIcon } from '@heroicons/react/20/solid';
 
 export default function Header(){
     const { user, setAuthOpenedFrom } = useUser();
@@ -44,7 +45,7 @@ export default function Header(){
                     className={`nav-link ${isActive("home") ? "active" : ""}`}
                     onClick={() => setIsMenuOpen(false)}
                 >
-                    ქართული აკორდები
+                    მთავარი გვერდი
                 </Link>
                 <Link 
                     href={""} 
@@ -128,7 +129,7 @@ export default function Header(){
                                     onClick={() => setAuthOpenedFrom('header')}
                                     className={styles.loginButton}
                                 >
-                                    <UserIcon className="w-5 h-5" />
+                                    <ArrowRightOnRectangleIcon className="w-5 h-5" />
                                     <span>{lang._login}</span>
                                 </button>
                             )}
