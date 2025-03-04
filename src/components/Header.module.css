@@ -66,6 +66,19 @@
 .logoLink {
     display: flex;
     align-items: center;
+    text-decoration: none;
+}
+
+.logoText {
+    font-family: 'Charm', cursive;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #96bcef;
+    transition: color 0.2s ease;
+}
+
+.logoLink:hover .logoText {
+    color: #ffffff;
 }
 
 .logoLink img {
@@ -276,5 +289,9 @@
         width: 40px;
         padding: 0.5rem;
         justify-content: center;
+    }
+
+    .logoText {
+        font-size: 1.5rem;
     }
 }

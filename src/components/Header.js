@@ -149,15 +149,15 @@ export default function Header(){
 
 function siteLogo(){
     if(process.env.NEXT_PUBLIC_DOMAIN == "akordebi.ge") {
-        return <img className="w-[200px]" alt="akordebiLogo" src={"/akordebige_logo.svg"} />
+        return <span className={styles.logoText}>akordebi.ge</span>
     }
 
     if(process.env.NEXT_PUBLIC_DOMAIN == "chords365.com") {
-        return <img className="w-[200px]" alt="Chords 365 logo" src={"/chords365.svg"} />
+        return <span className={styles.logoText}>chords365.com</span>
     }
 
     if(process.env.NEXT_PUBLIC_DOMAIN == "dev.akordebi.ge") {
-        return <img className="w-[200px]" alt="akordebiLogo" src={"/devakordebige_logo.svg"} />
+        return <span className={styles.logoText}>akordebi.ge</span>
     }
 }
 
