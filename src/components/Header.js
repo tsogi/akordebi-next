@@ -3,13 +3,16 @@ import { useUser } from "@/utils/useUser";
 import { supabase } from "@/utils/supabase-client";
 import { useRouter } from "next/router";
 import { UserIcon } from '@heroicons/react/20/solid';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import lang from '@/services/lang'
 import uiDb from '@/services/data';
 import Link from 'next/link'
+import { useState } from 'react';
 
 export default function Header(){
     const { user, setAuthOpenedFrom } = useUser();
     const router = useRouter();
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     function isActive(page){
         if(page == "home" && ["/", "/chord/[chordUrl]"].includes(router.pathname)){ 
@@ -36,9 +39,33 @@ export default function Header(){
     function menuPages(){
         if(process.env.NEXT_PUBLIC_DOMAIN == "akordebi.ge") {
             return <>
-                <Link href={"/"} className={` px-[10px] text-gray-500 hover py-1 sm:py-0 ${isActive("home") ? "isActivePage" : ""}`}>ქართული აკორდები</Link>
-                <Link href={""} onClick={handleShopClick} className={`${isActive("guitar-finder") ? "isActivePage" : ""} px-[10px] text-gray-500 hover py-1 sm:py-0`}>გიტარის შემრჩევი AI</Link>
-                <Link href={""} onClick={handleForeignClick} className=" px-[10px] text-gray-500 hover py-1 sm:py-0" >უცხოური აკორდები</Link>
+                <Link 
+                    href={"/"} 
+                    className={`nav-link ${isActive("home") ? "active" : ""}`}
+                    onClick={() => setIsMenuOpen(false)}
+                >
+                    ქართული აკორდები
+                </Link>
+                <Link 
+                    href={""} 
+                    onClick={(e) => {
+                        handleShopClick(e);
+                        setIsMenuOpen(false);
+                    }} 
+                    className={`nav-link ${isActive("guitar-finder") ? "active" : ""}`}
+                >
+                    გიტარის შემრჩევი AI
+                </Link>
+                <Link 
+                    href={""} 
+                    onClick={(e) => {
+                        handleForeignClick(e);
+                        setIsMenuOpen(false);
+                    }} 
+                    className="nav-link"
+                >
+                    უცხოური აკორდები
+                </Link>
             </>
         }
 
@@ -58,57 +85,65 @@ export default function Header(){
         }
     }
 
-    return <header className={`page_container ${styles.headerWrapper}`}>
-            <div className="flex flex-col justify-between items-center py-4 w-[100%]">
-                <div className="flex items-center">
-                    <Link href="/" className="flex justify-center">
-                        {
-                            siteLogo()
-                        }
-                    </Link>
-                </div>
-                
-                <div className="flex flex-wrap justify-center w-[100%]">
-                    <nav className="flex items-center flex-wrap justify-center text-[0.9rem]">
-                        {
-                            menuPages()
-                        }
-                    </nav>
-                    <div className={`${styles.authWrapper}`}>
-                        <div className={`flex text-[#96bcef] border-solid border-[1px] rounded-[4px] px-[12px] py-[5px] border-[#96bcef]`}>
-                            {
-                                user ?
-                                <>
-                                <div>
-                                    {user.email.split('@')[0]}
+    return (
+        <header className={styles.header}>
+            <div className={styles.headerContainer}>
+                <div className={styles.headerTop}>
+                    <div className={styles.logoContainer}>
+                        <Link href="/" className={styles.logoLink}>
+                            {siteLogo()}
+                        </Link>
+                    </div>
+
+                    <div className={styles.headerActions}>
+                        <button 
+                            className={styles.menuButton}
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                            aria-label="Toggle menu"
+                        >
+                            {isMenuOpen ? (
+                                <XMarkIcon className="w-6 h-6" />
+                            ) : (
+                                <Bars3Icon className="w-6 h-6" />
+                            )}
+                        </button>
+                        <div className={styles.authButton}>
+                            {user ? (
+                                <div className={styles.userInfo}>
+                                    <span className={styles.username}>{user.email.split('@')[0]}</span>
+                                    <button
+                                        onClick={async () => {
+                                            const { error } = await supabase.auth.signOut();
+                                            if(error) console.error(error);
+                                            router.reload();
+                                        }}
+                                        className={styles.logoutButton}
+                                        aria-label="Sign out"
+                                    >
+                                        <XMarkIcon className="w-5 h-5" />
+                                    </button>
                                 </div>
-                                <div className={"mx-[3px]"}> - </div>
-                                <button
-                                    onClick={async () => {
-                                        const { error } = await supabase.auth.signOut();
-                                        if(error){
-                                            console.error(error);
-                                        }
-                                        router.reload();
-                                    }}
-                                    className="underline"
+                            ) : (
+                                <button 
+                                    onClick={() => setAuthOpenedFrom('header')}
+                                    className={styles.loginButton}
                                 >
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-                                    </svg>
+                                    <UserIcon className="w-5 h-5" />
+                                    <span>{lang._login}</span>
                                 </button>
-                                </>
-                                :
-                                <div onClick={() => setAuthOpenedFrom('header')} className="flex items-center  cursor-pointer ">
-                                    <UserIcon className="w-[18px] " />
-                                    <span className={`${styles.enterLabel} pl-[5px]`}>{lang._login}</span>
-                                </div>
-                            }
+                            )}
                         </div>
                     </div>
                 </div>
+
+                <div className={`${styles.navContainer} ${isMenuOpen ? styles.menuOpen : ''}`}>
+                    <nav className={styles.nav}>
+                        {menuPages()}
+                    </nav>
+                </div>
             </div>
-    </header>
+        </header>
+    );
 }
 
 
