@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import styles from './NewsModal.module.css';
 
-export default function NewsModal({ message, title, duration = 5, name = 'default' }) {
+export default function NewsModal({ children, title, duration = 5, name = 'default' }) {
   const [showModal, setShowModal] = useState(false);
   const [canClose, setCanClose] = useState(false);
   
@@ -65,7 +65,7 @@ export default function NewsModal({ message, title, duration = 5, name = 'defaul
           )}
         </div>
         <div className={styles.content}>
-          {message}
+          {children}
         </div>
         {!canClose && (
           <div className={styles.timer}>
