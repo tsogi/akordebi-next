@@ -76,7 +76,25 @@ export default function NewsModal({ children, title, duration = 5, name = 'defau
             disabled={!canClose}
           >
             <span>დახურვა</span>
-            {!canClose && <span className={styles.countdown}>{timeLeft}</span>}
+            {!canClose && (
+              <span className={styles.countdown}>
+                <svg className={styles.progressRing} width="30" height="30">
+                  <circle
+                    className={styles.progressRingCircle}
+                    stroke="#4F46E5"
+                    strokeWidth="2"
+                    fill="#1e293b"
+                    r="13"
+                    cx="15"
+                    cy="15"
+                    style={{ 
+                      animation: `${styles.progressRingAnimation} ${duration}s linear forwards`
+                    }}
+                  />
+                </svg>
+                <span className={styles.countdownText}>{timeLeft}</span>
+              </span>
+            )}
           </button>
         </div>
       </div>

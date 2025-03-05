@@ -84,30 +84,38 @@
 
 .countdown {
   position: absolute;
-  top: -8px;
-  right: -8px;
-  background: #EF4444;
-  color: white;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
+  top: -12px;
+  right: -12px;
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.875rem;
-  font-weight: 600;
-  animation: pulse 1s infinite;
 }
 
-@keyframes pulse {
+.countdownText {
+  position: absolute;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: white;
+}
+
+.progressRing {
+  transform: rotate(-90deg);
+}
+
+.progressRingCircle {
+  stroke-linecap: round;
+  stroke-dasharray: 81.68; /* Circumference of circle with r=13 (2 * π * r) */
+  stroke-dashoffset: 0;
+}
+
+@keyframes progressRingAnimation {
   0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
+    stroke-dashoffset: 0;
   }
   100% {
-    transform: scale(1);
+    stroke-dashoffset: 81.68; /* Same as stroke-dasharray */
   }
 }
 
