@@ -24,7 +24,7 @@ export default function App({ Component, pageProps }) {
         <AuthSlideOver />
         <NewsModal 
           title="Welcome to Our New Features!"
-          duration={60}
+          duration={0}
           name="new_features_2024_01"
         >
           <SampleNews />

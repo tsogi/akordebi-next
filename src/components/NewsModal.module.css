@@ -101,13 +101,15 @@
 }
 
 .progressRing {
-  transform: rotate(-90deg);
+  transform: rotate(270deg);
 }
 
 .progressRingCircle {
   stroke-linecap: round;
-  stroke-dasharray: 81.68; /* Circumference of circle with r=13 (2 * π * r) */
+  stroke-dasharray: 81.68;
   stroke-dashoffset: 0;
+  transform-origin: center;
+  transform: rotate(0deg);
 }
 
 @keyframes progressRingAnimation {
@@ -115,7 +117,7 @@
     stroke-dashoffset: 0;
   }
   100% {
-    stroke-dashoffset: 81.68; /* Same as stroke-dasharray */
+    stroke-dashoffset: -81.68;
   }
 }
 
