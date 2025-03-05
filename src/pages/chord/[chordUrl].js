@@ -7,7 +7,6 @@ import EmbedVideo from "@/components/EmbedVideo";
 import Footer from "@/components/Footer";
 import SongVotes from "@/components/SongVotes";
 import db from "@/services/db";
-import uiDb from '@/services/data';
 import styles from "./SongPage.module.css";
 import SongDifficulties from '@/components/SongDifficulties';
 import lang from '@/services/lang';
@@ -237,8 +236,9 @@ export default function SongPage({ song }){
             {
                 song.uploader ?
                 <div className={styles.uploaderWrapper}>
-                    <div>
-                        {lang.chord.uploaded}: {song.uploader}
+                    <div className={styles.uploaderInfo}>
+                        <span>{lang.chord.uploaded}:</span>
+                        <span className={styles.uploaderName}>{song.uploader}</span>
                     </div>
                 </div>
                 :

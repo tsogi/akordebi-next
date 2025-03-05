@@ -58,7 +58,7 @@ const interfaceGeo = {
         chord: "აკორდების",
         hide: "აკორდები",
         appearance: "აკორდები",
-        uploaded: "ატვირთა",
+        uploaded: "აკორდები ატვირთა",
         rate: " შეაფასეთ აკორდების სისწორე",
     },
     upload: {
