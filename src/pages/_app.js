@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { MyUserContextProvider } from '@/utils/useUser';
 import AuthSlideOver from '@/components/AuthSlideOver';
 import GoogleTagManager from '@/components/GoogleAnalytics';
+import NewsModal from '@/components/NewsModal';
 
 export default function App({ Component, pageProps }) {
 
@@ -20,6 +21,12 @@ export default function App({ Component, pageProps }) {
       <MyUserContextProvider>
         <Component {...pageProps} />
         <AuthSlideOver />
+        <NewsModal 
+          title="Welcome to Our New Features!"
+          message="We've added new features to enhance your experience. Check out our improved guitar finder and song recommendations!"
+          duration={40}
+          name="new_features_2024_01"
+        />
       </MyUserContextProvider>
     </SessionContextProvider>
   </>

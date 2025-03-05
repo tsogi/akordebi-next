@@ -396,6 +396,24 @@ class Db{
 
         return results;
     }
+
+    async hasSeenNewsModal(ip, name) {
+        console.log('DB Check - IP:', ip, 'Name:', name); // Debug log
+        const [rows] = await this.pool.execute(
+            'SELECT * FROM news_modal_views WHERE ip = ? AND modal_name = ? AND created_at > DATE_SUB(NOW(), INTERVAL 30 DAY)',
+            [ip, name]
+        );
+        console.log('DB Check result:', rows); // Debug log
+        return rows.length > 0;
+    }
+
+    async markNewsModalAsSeen(ip, name) {
+        await this.pool.execute(
+            'INSERT INTO news_modal_views (ip, modal_name) VALUES (?, ?)',
+            [ip, name]
+        );
+        return true;
+    }
 }
 
 module.exports = new Db();
