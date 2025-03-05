@@ -1,26 +1,20 @@
 import { useState, useEffect } from 'react';
-import { XMarkIcon } from '@heroicons/react/24/outline';
 import styles from './NewsModal.module.css';
 
 export default function NewsModal({ children, title, duration = 5, name = 'default' }) {
   const [showModal, setShowModal] = useState(false);
   const [canClose, setCanClose] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(duration);
   
   useEffect(() => {
     const checkAndShowModal = async () => {
       try {
-        console.log('Checking modal visibility for:', name); // Debug log
         const response = await fetch(`/api/newsModal/check?name=${encodeURIComponent(name)}`);
         const data = await response.json();
         
-        console.log('Modal check response:', data); // Debug log
-        
         if (data.shouldShow) {
           setShowModal(true);
-          // Start the timer for the close button
-          setTimeout(() => {
-            setCanClose(true);
-          }, duration * 1000);
+          setTimeLeft(duration);
         }
       } catch (error) {
         console.error('Error checking modal status:', error);
@@ -29,6 +23,23 @@ export default function NewsModal({ children, title, duration = 5, name = 'defau
 
     checkAndShowModal();
   }, [duration, name]);
+
+  useEffect(() => {
+    if (!showModal) return;
+
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          setCanClose(true);
+          clearInterval(timer);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [showModal]);
 
   const handleClose = async () => {
     if (!canClose) return;
@@ -50,28 +61,24 @@ export default function NewsModal({ children, title, duration = 5, name = 'defau
   if (!showModal) return null;
 
   return (
-    <div className={styles.overlay} onClick={canClose ? handleClose : undefined}>
+    <div className={styles.overlay}>
       <div className={styles.modal} onClick={e => e.stopPropagation()}>
         <div className={styles.header}>
           <h2 className={styles.title}>{title}</h2>
-          {canClose && (
-            <button 
-              className={styles.closeButton}
-              onClick={handleClose}
-              aria-label="Close modal"
-            >
-              <XMarkIcon className={styles.closeIcon} />
-            </button>
-          )}
         </div>
         <div className={styles.content}>
           {children}
         </div>
-        {!canClose && (
-          <div className={styles.timer}>
-            The close button will appear in {duration} seconds
-          </div>
-        )}
+        <div className={styles.footer}>
+          <button 
+            className={`${styles.closeButton} ${canClose ? styles.enabled : styles.disabled}`}
+            onClick={handleClose}
+            disabled={!canClose}
+          >
+            <span>დახურვა</span>
+            {!canClose && <span className={styles.countdown}>{timeLeft}</span>}
+          </button>
+        </div>
       </div>
     </div>
   );

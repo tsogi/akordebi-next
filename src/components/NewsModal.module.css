@@ -45,35 +45,70 @@
   line-height: 1.6;
 }
 
+.footer {
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .closeButton {
-  background: none;
-  border: none;
+  position: relative;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 140px;
+}
+
+.closeButton.disabled {
+  background: rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.6);
+  cursor: not-allowed;
+}
+
+.closeButton.enabled {
+  background: #4F46E5;
+  color: white;
   cursor: pointer;
-  padding: 0.5rem;
+}
+
+.closeButton.enabled:hover {
+  background: #4338CA;
+  transform: translateY(-1px);
+}
+
+.countdown {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #EF4444;
+  color: white;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
-}
-
-.closeButton:hover {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.closeIcon {
-  width: 1.5rem;
-  height: 1.5rem;
-}
-
-.timer {
-  padding: 1rem 1.5rem;
-  color: rgba(255, 255, 255, 0.6);
   font-size: 0.875rem;
-  text-align: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-weight: 600;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 @keyframes slideIn {
@@ -105,8 +140,7 @@
     font-size: 0.9375rem;
   }
 
-  .closeIcon {
-    width: 1.25rem;
-    height: 1.25rem;
+  .closeButton {
+    padding: 0.75rem 1.5rem;
   }
 } 
