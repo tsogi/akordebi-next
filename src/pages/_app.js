@@ -24,7 +24,7 @@ export default function App({ Component, pageProps }) {
         <NewsModal 
           title="Welcome to Our New Features!"
           message="We've added new features to enhance your experience. Check out our improved guitar finder and song recommendations!"
-          duration={40}
+          duration={400}
           name="new_features_2024_01"
         />
       </MyUserContextProvider>
