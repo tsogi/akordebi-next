@@ -24,8 +24,8 @@ export default function App({ Component, pageProps }) {
         <AuthSlideOver />
         <NewsModal 
           title="საიტი განახლდა"
-          duration={0}
-          name="new_features_2024_01"
+          duration={5}
+          name="visual_update_5_march"
         >
           <SampleNews />
         </NewsModal>
