@@ -56,7 +56,7 @@ export default function AuthSlideOver() {
                     </div>
                     <div className="relative mt-6 flex-1 px-4 sm:px-6">
                       <div className="">
-                          <span className="block text-sm font-medium text-gray-900 mt-[12px] mb-[58px]">
+                          <span className="mxedruli block text-sm font-medium text-gray-900 mt-[12px] mb-[58px]">
                             {
                               whyLoginText(authOpenedFrom)
                             }

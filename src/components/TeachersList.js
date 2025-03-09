@@ -4,6 +4,7 @@ import { useUser } from "@/utils/useUser";
 import { Rating } from '@mui/material';
 import CitySelect from "./CitySelect";
 import DeleteIcon from '@mui/icons-material/Delete';
+import { generateRandomId } from '@/utils/generateId';
 
 export default function TeachersList() {
   const { user, setAuthOpenedFrom } = useUser();
@@ -19,6 +20,13 @@ export default function TeachersList() {
   const [formError, setFormError] = useState('');
   const MAX_DESCRIPTION_LENGTH = 350;
   const [expandedDescriptions, setExpandedDescriptions] = useState({});
+  const [tempUserId, setTempUserId] = useState(() => {
+    // Check if window exists (we're in browser)
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('teacherTempId') || '';
+    }
+    return '';
+  });
 
   useEffect(() => {
     loadTeachers();
@@ -61,54 +69,24 @@ export default function TeachersList() {
     }
   }
 
-  async function handleDelete(teacherId) {
-    if (!user) return;
-    
-    if (!confirm('ნამდვილად გსურთ წაშლა?')) return;
-
-    try {
-      const response = await fetch('/api/teachers', {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          teacherId,
-          userId: user.id
-        })
-      });
-
-      if (response.ok) {
-        loadTeachers();
-      } else {
-        console.error('Delete failed');
-      }
-    } catch (error) {
-      console.error('Delete error:', error);
-    }
-  }
-
   function handleSubmit(e) {
     e.preventDefault();
-
-    if (!user) {
-      setAuthOpenedFrom('teachers');
-      return;
-    }
 
     if (!formData.city.trim()) {
       setFormError('აირჩიეთ ქალაქი');
       return;
     }
 
-    // Check mobile number only if it's not empty
     if (formData.mobile.trim() && !/^\d{9}$/.test(formData.mobile)) {
       setFormError('ჩაწერეთ 9ნიშნა მობილურის ნომერი');
       return;
     }
 
-    // Trim description to max length if needed
-    const trimmedDescription = formData.description.slice(0, MAX_DESCRIPTION_LENGTH);
+    const submitUserId = user ? user.id : (tempUserId || generateRandomId());
+    if (!user && !tempUserId && typeof window !== 'undefined') {
+      setTempUserId(submitUserId);
+      localStorage.setItem('teacherTempId', submitUserId);
+    }
 
     fetch('/api/teachers', {
       method: 'POST',
@@ -117,9 +95,9 @@ export default function TeachersList() {
       },
       body: JSON.stringify({
         ...formData,
-        mobile: formData.mobile.trim(), // Ensure we trim any whitespace
-        description: trimmedDescription,
-        userId: user.id
+        mobile: formData.mobile.trim(),
+        description: formData.description.slice(0, MAX_DESCRIPTION_LENGTH),
+        userId: submitUserId
       })
     })
     .then(response => response.json())
@@ -132,6 +110,41 @@ export default function TeachersList() {
     .catch(error => {
       console.error('Error:', error);
     });
+  }
+
+  async function handleDelete(teacherId, teacherUserId) {
+    if (user && user.id !== teacherUserId) return;
+    
+    if (!user && typeof window !== 'undefined') {
+      const storedTempId = localStorage.getItem('teacherTempId');
+      if (!storedTempId || storedTempId !== teacherUserId) {
+        alert('თქვენ არ გაქვთ უფლება წაშალოთ ეს მასწავლებელი');
+        return;
+      }
+    }
+
+    if (!confirm('ნამდვილად გსურთ წაშლა?')) return;
+
+    try {
+      const response = await fetch('/api/teachers', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          teacherId,
+          userId: teacherUserId
+        })
+      });
+
+      if (response.ok) {
+        loadTeachers();
+      } else {
+        console.error('Delete failed');
+      }
+    } catch (error) {
+      console.error('Delete error:', error);
+    }
   }
 
   const toggleDescription = (teacherId) => {
@@ -180,10 +193,10 @@ export default function TeachersList() {
           <div key={teacher.id} className={styles.teacherCard}>
             <div className={styles.teacherHeader}>
               <h3>{teacher.name}</h3>
-              {user && user.id === teacher.userId && (
+              {(user?.id === teacher.userId || (!user && typeof window !== 'undefined' && localStorage.getItem('teacherTempId') === teacher.userId)) && (
                 <button 
                   className={styles.deleteButton}
-                  onClick={() => handleDelete(teacher.id)}
+                  onClick={() => handleDelete(teacher.id, teacher.userId)}
                   aria-label="წაშლა"
                 >
                   <DeleteIcon />
