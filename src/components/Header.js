@@ -48,6 +48,13 @@ export default function Header(){
                     მთავარი გვერდი
                 </Link>
                 <Link 
+                    href="/teachers" 
+                    onClick={() => setIsMenuOpen(false)}
+                    className="nav-link"
+                >
+                    გიტარის მასწავლებლები
+                </Link>
+                <Link 
                     href={""} 
                     onClick={(e) => {
                         handleShopClick(e);
@@ -56,13 +63,6 @@ export default function Header(){
                     className={`nav-link ${isActive("guitar-finder") ? "active" : ""}`}
                 >
                     გიტარის შემრჩევი AI
-                </Link>
-                <Link 
-                    href="/teachers" 
-                    onClick={() => setIsMenuOpen(false)}
-                    className="nav-link"
-                >
-                    გიტარის მასწავლებლები
                 </Link>
                 <Link 
                     href={""} 

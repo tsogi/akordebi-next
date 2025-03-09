@@ -101,7 +101,8 @@ export default function TeachersList() {
       return;
     }
 
-    if (!/^\d{9}$/.test(formData.mobile)) {
+    // Check mobile number only if it's not empty
+    if (formData.mobile.trim() && !/^\d{9}$/.test(formData.mobile)) {
       setFormError('ჩაწერეთ 9ნიშნა მობილურის ნომერი');
       return;
     }
@@ -116,6 +117,7 @@ export default function TeachersList() {
       },
       body: JSON.stringify({
         ...formData,
+        mobile: formData.mobile.trim(), // Ensure we trim any whitespace
         description: trimmedDescription,
         userId: user.id
       })
@@ -220,7 +222,6 @@ export default function TeachersList() {
                 placeholder="მობილური"
                 value={formData.mobile}
                 onChange={e => setFormData({...formData, mobile: e.target.value})}
-                required
               />
               {formError && <div className={styles.error}>{formError}</div>}
               <CitySelect
