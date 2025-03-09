@@ -232,7 +232,7 @@ export default function TeachersList() {
               />
               <input
                 type="text"
-                placeholder="მობილური"
+                placeholder="მობილური(არასავალდებულო)"
                 value={formData.mobile}
                 onChange={e => setFormData({...formData, mobile: e.target.value})}
               />
