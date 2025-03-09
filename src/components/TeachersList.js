@@ -89,7 +89,7 @@ export default function TeachersList() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h1>გიტარის მასწავლებლები</h1>
+        <h1 className=''>გიტარის მასწავლებლები</h1>
         <button 
           className={styles.addButton}
           onClick={() => setShowAddModal(true)}
