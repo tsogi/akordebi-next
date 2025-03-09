@@ -18,6 +18,7 @@ export default function TeachersList() {
     description: ''
   });
   const [formError, setFormError] = useState('');
+  const MAX_DESCRIPTION_LENGTH = 250;
 
   useEffect(() => {
     loadTeachers();
@@ -105,6 +106,9 @@ export default function TeachersList() {
       return;
     }
 
+    // Trim description to max length if needed
+    const trimmedDescription = formData.description.slice(0, MAX_DESCRIPTION_LENGTH);
+
     fetch('/api/teachers', {
       method: 'POST',
       headers: {
@@ -112,6 +116,7 @@ export default function TeachersList() {
       },
       body: JSON.stringify({
         ...formData,
+        description: trimmedDescription,
         userId: user.id
       })
     })
@@ -201,8 +206,12 @@ export default function TeachersList() {
                 value={formData.description}
                 rows={4}
                 onChange={e => setFormData({...formData, description: e.target.value})}
+                maxLength={MAX_DESCRIPTION_LENGTH}
                 required
               />
+              <div className={styles.charCount}>
+                {formData.description.length}/{MAX_DESCRIPTION_LENGTH}
+              </div>
               <button type="submit">დამატება</button>
             </form>
           </div>
