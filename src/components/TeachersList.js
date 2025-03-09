@@ -4,6 +4,7 @@ import { useUser } from "@/utils/useUser";
 import { Rating } from '@mui/material';
 import CustomSelect from "./CustomSelect";
 import CitySelect from "./CitySelect";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function TeachersList() {
   const { user, setAuthOpenedFrom } = useUser();
@@ -59,8 +60,40 @@ export default function TeachersList() {
     }
   }
 
+  async function handleDelete(teacherId) {
+    if (!user) return;
+    
+    if (!confirm('ნამდვილად გსურთ წაშლა?')) return;
+
+    try {
+      const response = await fetch('/api/teachers', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          teacherId,
+          userId: user.id
+        })
+      });
+
+      if (response.ok) {
+        loadTeachers();
+      } else {
+        console.error('Delete failed');
+      }
+    } catch (error) {
+      console.error('Delete error:', error);
+    }
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
+
+    if (!user) {
+      setAuthOpenedFrom('teachers');
+      return;
+    }
 
     if (!/^\d{9}$/.test(formData.mobile)) {
       setFormError('ჩაწერეთ 9 ნიშნა ნომერი');
@@ -72,7 +105,10 @@ export default function TeachersList() {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(formData)
+      body: JSON.stringify({
+        ...formData,
+        userId: user.id
+      })
     })
     .then(response => response.json())
     .then(() => {
@@ -101,7 +137,18 @@ export default function TeachersList() {
       <div className={styles.teachersGrid}>
         {teachers.map(teacher => (
           <div key={teacher.id} className={styles.teacherCard}>
-            <h3>{teacher.name}</h3>
+            <div className={styles.teacherHeader}>
+              <h3>{teacher.name}</h3>
+              {user && user.id === teacher.userId && (
+                <button 
+                  className={styles.deleteButton}
+                  onClick={() => handleDelete(teacher.id)}
+                  aria-label="წაშლა"
+                >
+                  <DeleteIcon />
+                </button>
+              )}
+            </div>
             <p className={styles.city}>{teacher.city}</p>
             <p className={styles.description}>{teacher.description}</p>
             <p className={styles.mobile}>{teacher.mobile}</p>
@@ -121,10 +168,10 @@ export default function TeachersList() {
         <div className={styles.modalOverlay} onClick={() => setShowAddModal(false)}>
           <div className={styles.modal} onClick={e => e.stopPropagation()}>
             <h2>ახალი მასწავლებლის დამატება</h2>
-            <form onSubmit={handleSubmit}>
+            <form className={"mxedruli"} onSubmit={handleSubmit}>
               <input
                 type="text"
-                placeholder="სახელი"
+                placeholder="სახელი და გვარი"
                 value={formData.name}
                 onChange={e => setFormData({...formData, name: e.target.value})}
                 required
@@ -144,8 +191,9 @@ export default function TeachersList() {
                 placeholder="აირჩიეთ ან ჩაწერეთ ქალაქი"
               />
               <textarea
-                placeholder="ჩაწერეთ რა სახის გიტარაზე დაკვრას ასწავლის"
+                placeholder="ჩაწერეთ ინფორმაცია მასწავლებელზე. რა სახის გიტარაზე დაკვრას ასწავლის, ტერიტორიულად სადაა"
                 value={formData.description}
+                rows={4}
                 onChange={e => setFormData({...formData, description: e.target.value})}
                 required
               />

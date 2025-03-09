@@ -438,12 +438,20 @@ class Db{
         return rows.map(row => row.city);
     }
 
-    async addTeacher(name, mobile, city, description) {
+    async addTeacher(name, mobile, city, description, userId) {
         const [result] = await this.pool.execute(
-            'INSERT INTO teachers (name, mobile, city, description) VALUES (?, ?, ?, ?)',
-            [name, mobile, city, description]
+            'INSERT INTO teachers (name, mobile, city, description, userId) VALUES (?, ?, ?, ?, ?)',
+            [name, mobile, city, description, userId]
         );
         return result.insertId;
+    }
+
+    async deleteTeacher(teacherId, userId) {
+        const [result] = await this.pool.execute(
+            'DELETE FROM teachers WHERE id = ? AND userId = ?',
+            [teacherId, userId]
+        );
+        return result.affectedRows > 0;
     }
 
     async rateTeacher(teacherId, userId, rating) {
