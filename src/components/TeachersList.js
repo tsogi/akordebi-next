@@ -95,8 +95,13 @@ export default function TeachersList() {
       return;
     }
 
+    if (!formData.city.trim()) {
+      setFormError('აირჩიეთ ქალაქი');
+      return;
+    }
+
     if (!/^\d{9}$/.test(formData.mobile)) {
-      setFormError('ჩაწერეთ 9 ნიშნა ნომერი');
+      setFormError('ჩაწერეთ 9ნიშნა მობილურის ნომერი');
       return;
     }
 
@@ -150,7 +155,7 @@ export default function TeachersList() {
               )}
             </div>
             <p className={styles.city}>{teacher.city}</p>
-            <p className={styles.description}>{teacher.description}</p>
+            <p className={styles.description + " mxedruli"}>{teacher.description}</p>
             <p className={styles.mobile}>{teacher.mobile}</p>
             <div className={styles.rating}>
               <Rating
@@ -189,6 +194,7 @@ export default function TeachersList() {
                 value={formData.city}
                 onChange={value => setFormData({...formData, city: value})}
                 placeholder="აირჩიეთ ან ჩაწერეთ ქალაქი"
+                required
               />
               <textarea
                 placeholder="ჩაწერეთ ინფორმაცია მასწავლებელზე. რა სახის გიტარაზე დაკვრას ასწავლის, ტერიტორიულად სადაა"
