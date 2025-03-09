@@ -414,6 +414,46 @@ class Db{
         );
         return true;
     }
+
+    async getTeachers() {
+        const [rows] = await this.pool.execute(`
+            SELECT 
+                t.*,
+                ROUND(AVG(tr.rating), 1) as averageRating,
+                COUNT(tr.id) as ratingCount
+            FROM teachers t
+            LEFT JOIN teachers_ratings tr ON t.id = tr.teacher_id
+            GROUP BY t.id
+            ORDER BY t.created_at DESC
+        `);
+        return rows;
+    }
+
+    async getCities() {
+        const [rows] = await this.pool.execute(`
+            SELECT DISTINCT city 
+            FROM teachers 
+            ORDER BY city
+        `);
+        return rows.map(row => row.city);
+    }
+
+    async addTeacher(name, mobile, city, description) {
+        const [result] = await this.pool.execute(
+            'INSERT INTO teachers (name, mobile, city, description) VALUES (?, ?, ?, ?)',
+            [name, mobile, city, description]
+        );
+        return result.insertId;
+    }
+
+    async rateTeacher(teacherId, userId, rating) {
+        await this.pool.execute(
+            `INSERT INTO teachers_ratings (teacher_id, user_id, rating)
+             VALUES (?, ?, ?)
+             ON DUPLICATE KEY UPDATE rating = ?`,
+            [teacherId, userId, rating, rating]
+        );
+    }
 }
 
 module.exports = new Db();

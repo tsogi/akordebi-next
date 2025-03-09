@@ -58,6 +58,13 @@ export default function Header(){
                     გიტარის შემრჩევი AI
                 </Link>
                 <Link 
+                    href="/teachers" 
+                    onClick={() => setIsMenuOpen(false)}
+                    className="nav-link"
+                >
+                    გიტარის მასწავლებლები
+                </Link>
+                <Link 
                     href={""} 
                     onClick={(e) => {
                         handleForeignClick(e);
