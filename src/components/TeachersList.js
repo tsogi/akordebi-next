@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import styles from './TeachersList.module.css';
 import { useUser } from "@/utils/useUser";
 import { Rating } from '@mui/material';
-import CustomSelect from "./CustomSelect";
 import CitySelect from "./CitySelect";
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -18,7 +17,8 @@ export default function TeachersList() {
     description: ''
   });
   const [formError, setFormError] = useState('');
-  const MAX_DESCRIPTION_LENGTH = 250;
+  const MAX_DESCRIPTION_LENGTH = 350;
+  const [expandedDescriptions, setExpandedDescriptions] = useState({});
 
   useEffect(() => {
     loadTeachers();
@@ -132,6 +132,35 @@ export default function TeachersList() {
     });
   }
 
+  const toggleDescription = (teacherId) => {
+    setExpandedDescriptions(prev => ({
+      ...prev,
+      [teacherId]: !prev[teacherId]
+    }));
+  };
+
+  const renderDescription = (teacher) => {
+    if (teacher.description.length <= 100) {
+      return <p className={styles.description + " mxedruli"}>{teacher.description}</p>;
+    }
+
+    return (
+      <>
+        <p className={styles.description + " mxedruli"}>
+          {expandedDescriptions[teacher.id] 
+            ? teacher.description 
+            : teacher.description.substring(0, 100) + '...'}
+        </p>
+        <button 
+          className={"text-[0.7rem]"}
+          onClick={() => toggleDescription(teacher.id)}
+        >
+          {expandedDescriptions[teacher.id] ? 'ნაკლების ჩვენება' : '...მეტის წაკითხვა'}
+        </button>
+      </>
+    );
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -160,7 +189,7 @@ export default function TeachersList() {
               )}
             </div>
             <p className={styles.city}>{teacher.city}</p>
-            <p className={styles.description + " mxedruli"}>{teacher.description}</p>
+            {renderDescription(teacher)}
             <p className={styles.mobile}>{teacher.mobile}</p>
             <div className={styles.rating}>
               <Rating
