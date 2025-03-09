@@ -3,6 +3,7 @@ import styles from './TeachersList.module.css';
 import { useUser } from "@/utils/useUser";
 import { Rating } from '@mui/material';
 import CustomSelect from "./CustomSelect";
+import CitySelect from "./CitySelect";
 
 export default function TeachersList() {
   const { user, setAuthOpenedFrom } = useUser();
@@ -136,12 +137,11 @@ export default function TeachersList() {
                 required
               />
               {formError && <div className={styles.error}>{formError}</div>}
-              <CustomSelect
-                options={cities.map(city => ({ value: city, label: city }))}
+              <CitySelect
+                options={cities}
                 value={formData.city}
                 onChange={value => setFormData({...formData, city: value})}
-                placeholder="აირჩიეთ ქალაქი"
-                allowCustomValue={true}
+                placeholder="აირჩიეთ ან ჩაწერეთ ქალაქი"
               />
               <textarea
                 placeholder="ჩაწერეთ რა სახის გიტარაზე დაკვრას ასწავლის"
