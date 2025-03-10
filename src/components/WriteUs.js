@@ -40,7 +40,6 @@ export default function WriteUs(){
       setText("");
       setShowAlert(true);
     } catch(error){
-      console.log(error);
       setShowError(true);
     } finally {
       setIsSubmitting(false);

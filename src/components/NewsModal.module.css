@@ -153,4 +153,20 @@
   .closeButton {
     padding: 0.75rem 1.5rem;
   }
+}
+
+.actionButton {
+  text-align: center;
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #04524d;
+  color: white;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.actionButton:hover {
+  background-color: #043f3b;
+  transform: translateY(-1px);
 } 

@@ -58,6 +58,21 @@ export default function NewsModal({ children, title, duration = 5, name = 'defau
     }
   };
 
+  const markSeenAndClose = async () => {
+    try {
+      await fetch('/api/newsModal/markSeen', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name })
+      });
+      setShowModal(false);
+    } catch (error) {
+      console.error('Error marking modal as seen:', error);
+    }
+  };
+
   if (!showModal) return null;
 
   return (
@@ -67,7 +82,7 @@ export default function NewsModal({ children, title, duration = 5, name = 'defau
           <h2 className={styles.title}>{title}</h2>
         </div>
         <div className={styles.content}>
-          {children}
+          {typeof children === 'function' ? children(markSeenAndClose) : children}
         </div>
         <div className={styles.footer}>
           <button 

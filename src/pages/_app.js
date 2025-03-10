@@ -6,7 +6,7 @@ import { MyUserContextProvider } from '@/utils/useUser';
 import AuthSlideOver from '@/components/AuthSlideOver';
 import GoogleTagManager from '@/components/GoogleAnalytics';
 import NewsModal from '@/components/NewsModal';
-import SampleNews from '@/components/SampleNews';
+import TeachersNews from '@/components/TeachersNews';
 
 export default function App({ Component, pageProps }) {
 
@@ -23,11 +23,13 @@ export default function App({ Component, pageProps }) {
         <Component {...pageProps} />
         <AuthSlideOver />
         <NewsModal 
-          title="საიტი განახლდა"
+          title="ახალი გვერდი - გიტარის მასწავლებლები"
           duration={5}
-          name="visual_update_5_march"
+          name="teachers_page_launch"
         >
-          <SampleNews />
+          {(markSeenAndClose) => (
+            <TeachersNews onActionClick={markSeenAndClose} />
+          )}
         </NewsModal>
       </MyUserContextProvider>
     </SessionContextProvider>

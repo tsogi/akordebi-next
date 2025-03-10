@@ -225,7 +225,7 @@ export default function TeachersList() {
             <form className={"mxedruli"} onSubmit={handleSubmit}>
               <input
                 type="text"
-                placeholder="სახელი და გვარი"
+                placeholder="მასწავლებლის სახელი/გვარი"
                 value={formData.name}
                 onChange={e => setFormData({...formData, name: e.target.value})}
                 required
@@ -241,11 +241,11 @@ export default function TeachersList() {
                 options={cities}
                 value={formData.city}
                 onChange={value => setFormData({...formData, city: value})}
-                placeholder="აირჩიეთ ან ჩაწერეთ ქალაქი"
+                placeholder="აირჩიეთ ან ჩაწერეთ ქალაქი/სოფელი"
                 required
               />
               <textarea
-                placeholder="ჩაწერეთ ინფორმაცია მასწავლებელზე. რა სახის გიტარაზე დაკვრას ასწავლის, ტერიტორიულად სადაა"
+                placeholder="ჩაწერეთ ინფორმაცია მასწავლებელზე. რას ასწავლის, რამდენი ხანია, ტერიტორიულად სადაა და ა.შ."
                 value={formData.description}
                 rows={4}
                 onChange={e => setFormData({...formData, description: e.target.value})}
