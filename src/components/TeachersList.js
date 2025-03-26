@@ -32,12 +32,18 @@ export default function TeachersList() {
   const [userRatings, setUserRatings] = useState({});
 
   useEffect(() => {
+    // Load teachers and cities only when component mounts
     loadTeachers();
     loadCities();
+  }, []); // Empty dependency array means this runs once on mount
+
+  // Create a separate effect for loading user ratings
+  useEffect(() => {
+    // Only fetch ratings when user is logged in AND we have teachers loaded
     if (user && teachers.length > 0) {
       loadUserRatings();
     }
-  }, [user, teachers]);
+  }, [user, teachers.length]); // Only re-run if user changes or number of teachers changes
 
   async function loadTeachers() {
     const response = await fetch('/api/teachers');
@@ -55,15 +61,25 @@ export default function TeachersList() {
     if (!user) return;
     
     try {
-      const ratings = {};
+      // Only load ratings once when user is available
+      const userIds = {};
       for (const teacher of teachers) {
-        const response = await fetch(`/api/teachers/rate?teacherId=${teacher.id}&userId=${user.id}`);
-        const data = await response.json();
-        if (data) {
-          ratings[teacher.id] = data;
+        if (!userRatings[teacher.id]) { // Only fetch ratings we don't already have
+          const response = await fetch(`/api/teachers/rate?teacherId=${teacher.id}&userId=${user.id}`);
+          const data = await response.json();
+          if (data) {
+            userIds[teacher.id] = data;
+          }
         }
       }
-      setUserRatings(ratings);
+      
+      // Only update state if we have new ratings
+      if (Object.keys(userIds).length > 0) {
+        setUserRatings(prev => ({
+          ...prev,
+          ...userIds
+        }));
+      }
     } catch (error) {
       console.error('Error loading user ratings:', error);
     }
