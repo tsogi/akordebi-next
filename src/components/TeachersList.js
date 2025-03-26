@@ -241,11 +241,15 @@ export default function TeachersList() {
     <div className={styles.container}>
       <div className={styles.header}>
         <h1 className=''>გიტარის მასწავლებლები</h1>
+        <div className="text-center max-w-2xl mx-auto my-4 text-sm text-gray-300">
+          <p className="mb-2 mxedruli">დაამატეთ ან შეაფასეთ ნაცნობი მასწავლებლები რათა შევქმნათ ერთიანი სანდო სია</p>
+        </div>
+        
         <button 
           className={styles.addButton}
           onClick={() => setShowAddModal(true)}
         >
-          დაამატე მასწავლებელი
+          მასწავლებლის დამატება
         </button>
       </div>
 
