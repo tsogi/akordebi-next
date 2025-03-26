@@ -460,6 +460,29 @@ class Db{
              ON DUPLICATE KEY UPDATE rating = ?`,
             [teacherId, userId, rating, rating]
         );
+        
+        // Return updated rating information
+        const [avgResult] = await this.pool.execute(
+            `SELECT 
+                ROUND(AVG(rating), 1) as averageRating,
+                COUNT(id) as ratingCount
+             FROM teachers_ratings 
+             WHERE teacher_id = ?`,
+            [teacherId]
+        );
+        
+        return avgResult.length > 0 ? {
+            averageRating: avgResult[0].averageRating,
+            ratingCount: avgResult[0].ratingCount
+        } : { averageRating: 0, ratingCount: 0 };
+    }
+
+    async getUserTeacherRating(teacherId, userId) {
+        const [rows] = await this.pool.execute(
+            'SELECT rating FROM teachers_ratings WHERE teacher_id = ? AND user_id = ?',
+            [teacherId, userId]
+        );
+        return rows.length > 0 ? rows[0].rating : null;
     }
 }
 

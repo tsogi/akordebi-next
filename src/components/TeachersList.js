@@ -5,6 +5,8 @@ import { Rating } from '@mui/material';
 import CitySelect from "./CitySelect";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { generateRandomId } from '@/utils/generateId';
+import StarIcon from '@mui/icons-material/Star';
+import Tooltip from '@mui/material/Tooltip';
 
 export default function TeachersList() {
   const { user, setAuthOpenedFrom } = useUser();
@@ -27,11 +29,15 @@ export default function TeachersList() {
     }
     return '';
   });
+  const [userRatings, setUserRatings] = useState({});
 
   useEffect(() => {
     loadTeachers();
     loadCities();
-  }, []);
+    if (user && teachers.length > 0) {
+      loadUserRatings();
+    }
+  }, [user, teachers]);
 
   async function loadTeachers() {
     const response = await fetch('/api/teachers');
@@ -45,6 +51,24 @@ export default function TeachersList() {
     setCities(data);
   }
 
+  async function loadUserRatings() {
+    if (!user) return;
+    
+    try {
+      const ratings = {};
+      for (const teacher of teachers) {
+        const response = await fetch(`/api/teachers/rate?teacherId=${teacher.id}&userId=${user.id}`);
+        const data = await response.json();
+        if (data) {
+          ratings[teacher.id] = data;
+        }
+      }
+      setUserRatings(ratings);
+    } catch (error) {
+      console.error('Error loading user ratings:', error);
+    }
+  }
+
   async function handleRating(teacherId, newValue) {
     if (!user) {
       setAuthOpenedFrom('teachers');
@@ -52,7 +76,7 @@ export default function TeachersList() {
     }
 
     try {
-      await fetch('/api/teachers/rate', {
+      const response = await fetch('/api/teachers/rate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -63,7 +87,28 @@ export default function TeachersList() {
           userId: user.id
         })
       });
-      loadTeachers();
+      
+      const result = await response.json();
+      
+      // Update just this teacher in the state
+      setTeachers(prevTeachers => 
+        prevTeachers.map(teacher => 
+          teacher.id === teacherId ? 
+          { 
+            ...teacher, 
+            averageRating: result.teacherRating.averageRating, 
+            ratingCount: result.teacherRating.ratingCount 
+          } : 
+          teacher
+        )
+      );
+      
+      // Update user ratings
+      setUserRatings(prev => ({
+        ...prev,
+        [teacherId]: newValue
+      }));
+      
     } catch (error) {
       console.error('Rating error:', error);
     }
@@ -206,13 +251,25 @@ export default function TeachersList() {
             <p className={styles.city}>{teacher.city}</p>
             {renderDescription(teacher)}
             <p className={styles.mobile}>{teacher.mobile}</p>
-            <div className={styles.rating}>
-              <Rating
-                value={teacher.averageRating}
-                onChange={(event, newValue) => handleRating(teacher.id, newValue)}
-                onClick={() => !user && setAuthOpenedFrom('teachers')}
-              />
-              <span>({teacher.ratingCount})</span>
+            <div className={styles.ratingContainer}>
+              <div className={styles.rating}>
+                <Rating
+                  value={userRatings[teacher.id] || 0}
+                  onChange={(event, newValue) => handleRating(teacher.id, newValue)}
+                  onClick={() => !user && setAuthOpenedFrom('teachers')}
+                  precision={0.5}
+                  emptyIcon={<StarIcon style={{ opacity: 0.55, color: 'grey' }} fontSize="inherit" />}
+                />
+                {/* {user && userRatings[teacher.id] ? (
+                  <Tooltip title="შენი შეფასება">
+                    <span className={styles.userRatingLabel}>შენი: {userRatings[teacher.id]}</span>
+                  </Tooltip>
+                ) : null} */}
+              </div>
+              <div className={styles.ratingInfo}>
+                <span className={styles.averageRating}>{teacher.averageRating || 0}</span>
+                <span className={styles.ratingCount}>({teacher.ratingCount || 0})</span>
+              </div>
             </div>
           </div>
         ))}
