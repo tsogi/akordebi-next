@@ -257,7 +257,6 @@ export default function TeachersList() {
                   value={userRatings[teacher.id] || 0}
                   onChange={(event, newValue) => handleRating(teacher.id, newValue)}
                   onClick={() => !user && setAuthOpenedFrom('teachers')}
-                  precision={0.5}
                   emptyIcon={<StarIcon style={{ opacity: 0.55, color: 'grey' }} fontSize="inherit" />}
                 />
                 {/* {user && userRatings[teacher.id] ? (
