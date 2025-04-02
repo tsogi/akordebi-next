@@ -3,9 +3,9 @@ import styles from './ProductCard.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, compact = true }) {
   return (
-    <div className={styles.productCard}>
+    <div className={`${styles.productCard} ${compact ? styles.compactCard : ''}`}>
       <div className={styles.productImageContainer}>
         <div className={styles.productImageWrapper}>
           <Image 
@@ -19,13 +19,17 @@ export default function ProductCard({ product }) {
       </div>
       <div className={styles.productInfo}>
         <h3 className={styles.productName}>{product.name}</h3>
-        <p className={styles.productCategory}>{product.category}</p>
-        <p className={styles.productPrice}>{product.price}</p>
+        {!compact && <p className={styles.productCategory}>{product.category}</p>}
+        <p className={styles.productPrice}>{product.price} ₾</p>
         <div className={styles.productActions}>
           <Link href={`/shop/product/${product.id}`}>
-            <button className={styles.viewDetailsButton}>დეტალების ნახვა</button>
+            <button className={styles.viewDetailsButton}>
+              {compact ? 'დეტალები' : 'დეტალების ნახვა'}
+            </button>
           </Link>
-          <button className={styles.addToCartButton}>კალათაში დამატება</button>
+          {!compact && (
+            <button className={styles.addToCartButton}>კალათაში დამატება</button>
+          )}
         </div>
       </div>
     </div>

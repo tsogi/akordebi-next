@@ -2,8 +2,8 @@ const shopProducts = {
   classicGuitars: [
     {
       id: "classic-1",
-      name: "Yamaha C40 კლასიკური გიტარა",
-      price: "550₾",
+      name: "Yamaha C40",
+      price: "550",
       description: "შესანიშნავი საწყისი კლასიკური გიტარა დამწყებთათვის. ნაძვის ხის ზედაპირით და მაღალი ხარისხის სიმებით.",
       thumbnail: "/images/shop/c40.jpg",
       category: "კლასიკური გიტარა",
@@ -11,19 +11,10 @@ const shopProducts = {
     },
     {
       id: "classic-2",
-      name: "Cordoba C5 კლასიკური გიტარა",
-      price: "990₾",
+      name: "Cordoba C5",
+      price: "990",
       description: "მაღალი ხარისხის კლასიკური გიტარა კედრის ხის ზედაპირით და მუქი პალისანდრის გრიფით.",
       thumbnail: "/images/shop/c40.jpg",
-      category: "კლასიკური გიტარა",
-      inStock: true
-    },
-    {
-      id: "classic-3",
-      name: "Martinez MC-58S კლასიკური გიტარა",
-      price: "420₾",
-      description: "ხელმისაწვდომი კლასიკური გიტარა ღია ფერის ნაძვის ზედაპირით, იდეალურია დამწყებთათვის.",
-      thumbnail: "/images/shop/martinez-mc58s.jpg",
       category: "კლასიკური გიტარა",
       inStock: true
     }
@@ -31,8 +22,8 @@ const shopProducts = {
   acousticGuitars: [
     {
       id: "acoustic-1",
-      name: "Fender CD-60S აკუსტიკური გიტარა",
-      price: "650₾",
+      name: "Fender CD-60S",
+      price: "650",
       description: "მაგარი ხმის აკუსტიკური გიტარა ნაძვის ხის ზედაპირით და მაჰაგონის გვერდებით, მდიდარი ჟღერადობით.",
       thumbnail: "/images/shop/fender-cd60s.jpg",
       category: "აკუსტიკური გიტარა",
@@ -40,28 +31,19 @@ const shopProducts = {
     },
     {
       id: "acoustic-2",
-      name: "Yamaha FG800 აკუსტიკური გიტარა",
-      price: "730₾",
+      name: "Yamaha FG800",
+      price: "730",
       description: "ყველაზე გაყიდვადი აკუსტიკური გიტარა ძლიერი ბასებით და ბალანსირებული ჟღერადობით.",
       thumbnail: "/images/shop/yamaha-fg800.jpg",
       category: "აკუსტიკური გიტარა",
       inStock: true
     },
-    {
-      id: "acoustic-3",
-      name: "Taylor Academy 10e ელექტრო-აკუსტიკური გიტარა",
-      price: "1400₾",
-      description: "პრემიუმ კლასის ელექტრო-აკუსტიკური გიტარა ჩაშენებული ეკვალაიზერით და Taylor-ის უმაღლესი ხარისხის ჟღერადობით.",
-      thumbnail: "/images/shop/taylor-academy.jpg",
-      category: "აკუსტიკური გიტარა",
-      inStock: true
-    }
   ],
   accessories: [
     {
       id: "acc-1",
       name: "Dunlop მედიატორები (5 ცალი)",
-      price: "15₾",
+      price: "15",
       description: "პროფესიონალური მედიატორების ნაკრები, სხვადასხვა სისქით, იდეალური სხვადასხვა სტილის დაკვრისთვის.",
       thumbnail: "/images/shop/dunlop-picks.jpg",
       category: "აქსესუარები",

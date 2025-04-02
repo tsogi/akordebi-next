@@ -3,8 +3,8 @@
   padding-bottom: 60px;
 }
 
-.shopContainer {
-  padding-top: 30px;
+.categoryTitle {
+  margin-bottom: 5px;
 }
 
 .shopHero {
@@ -102,8 +102,8 @@
 
 .productsGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 25px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
 }
 
 .productCardWrapper {
@@ -111,6 +111,12 @@
 }
 
 /* Responsive styles */
+@media screen and (max-width: 1400px) {
+  .productsGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 @media screen and (max-width: 1200px) {
   .productsGrid {
     grid-template-columns: repeat(3, 1fr);
@@ -130,9 +136,17 @@
     font-size: 1.1rem;
   }
   
+  .shopIntro {
+    flex-direction: column;
+  }
+  
+  .shopIntroText {
+    margin-bottom: 15px;
+  }
+  
   .productsGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
   }
   
   .deliveryInfo {
@@ -141,7 +155,7 @@
   }
   
   .deliveryBadge {
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
 }
 
@@ -155,10 +169,22 @@
   }
   
   .productsGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
   }
   
   .productsDescription {
     font-size: 0.95rem;
+  }
+  
+  .categoryTitle {
+    font-size: 1.3rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .productsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
   }
 } 

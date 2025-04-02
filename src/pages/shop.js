@@ -9,13 +9,6 @@ import shopProducts from '@/data/shopProducts';
 export default function Shop() {
   const { classicGuitars, acousticGuitars, accessories } = shopProducts;
   
-  // Combine all products into a single array
-  const allProducts = [
-    ...classicGuitars,
-    ...acousticGuitars,
-    ...accessories
-  ];
-  
   return (
     <>
       <Head>
@@ -28,12 +21,36 @@ export default function Shop() {
       
       <main className={styles.shopMain}>
         <div className={`page_container ${styles.shopContainer}`}>
+          <p className={styles.productsDescription}>
+            Akordebi.ge გთავაზობთ საგულდაგულოდ შერჩეულ და გატესტილ ყველაზე გაყიდვად გიტარებს და აქსესუარებს
+          </p>
+          
           <section className={styles.productsSection}>
-            <p className={styles.productsDescription}>
-              Akordebi.ge გთავაზობთ საგულდაგულოდ შერჩეულ და გატესტილ ყველაზე გაყიდვად გიტარებს და აქსესუარებს
-            </p>
+            <h2 className={styles.categoryTitle}>კლასიკური გიტარები</h2>
             <div className={styles.productsGrid}>
-              {allProducts.map(product => (
+              {classicGuitars.map(product => (
+                <div key={product.id} className={styles.productCardWrapper}>
+                  <ProductCard product={product} />
+                </div>
+              ))}
+            </div>
+          </section>
+          
+          <section className={styles.productsSection}>
+            <h2 className={styles.categoryTitle}>აკუსტიკური გიტარები</h2>
+            <div className={styles.productsGrid}>
+              {acousticGuitars.map(product => (
+                <div key={product.id} className={styles.productCardWrapper}>
+                  <ProductCard product={product} />
+                </div>
+              ))}
+            </div>
+          </section>
+          
+          <section className={styles.productsSection}>
+            <h2 className={styles.categoryTitle}>აქსესუარები</h2>
+            <div className={styles.productsGrid}>
+              {accessories.map(product => (
                 <div key={product.id} className={styles.productCardWrapper}>
                   <ProductCard product={product} />
                 </div>

@@ -161,4 +161,63 @@
     padding: 8px 12px;
     font-size: 0.9rem;
   }
+}
+
+/* Compact card styles - optimized for mobile */
+.compactCard {
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.compactCard:hover {
+  transform: translateY(-2px);
+}
+
+.compactCard .productInfo {
+  padding: 8px;
+}
+
+.compactCard .productName {
+  font-size: 0.85rem;
+  margin: 0 0 4px 0;
+  height: 32px;
+}
+
+.compactCard .productPrice {
+  font-size: 1rem;
+  margin: 4px 0 6px 0;
+}
+
+.compactCard .viewDetailsButton {
+  padding: 6px 8px;
+  font-size: 0.8rem;
+  min-height: unset;
+}
+
+.compactCard .productActions {
+  gap: 5px;
+}
+
+/* Responsive styles for compact view */
+@media screen and (max-width: 768px) {
+  .compactCard .productName {
+    font-size: 0.8rem;
+    height: 30px;
+  }
+  
+  .compactCard .productPrice {
+    font-size: 0.9rem;
+    margin: 3px 0 5px 0;
+  }
+  
+  .compactCard .viewDetailsButton {
+    padding: 5px 6px;
+    font-size: 0.75rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .compactCard .productInfo {
+    padding: 6px;
+  }
 } 
