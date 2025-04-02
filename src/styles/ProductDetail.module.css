@@ -1,0 +1,304 @@
+.productDetailMain {
+  min-height: calc(100vh - 200px);
+  padding: 40px 0 60px;
+}
+
+.productDetailContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  font-family: "Noto Sans Georgian", "BPG Caps", sans-serif;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+.breadcrumbLink {
+  color: #f2ac2b;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.breadcrumbLink:hover {
+  color: #e09c1e;
+  text-decoration: underline;
+}
+
+.breadcrumbSeparator {
+  margin: 0 10px;
+}
+
+.breadcrumbCurrent {
+  max-width: 500px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.productDetail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  background-color: #2a3249;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.productImageContainer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background-color: #212740;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fallbackImage {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #2d3450, #1e2338);
+}
+
+.fallbackImageContent {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: #f2ac2b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.productNameInitial {
+  font-size: 4rem;
+  font-weight: 700;
+  color: #212740;
+}
+
+.productInfo {
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+.productName {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  font-family: "Noto Sans Georgian", "BPG Caps", sans-serif;
+}
+
+.productCategory {
+  font-size: 1rem;
+  color: #f2ac2b;
+  margin: 0 0 15px 0;
+  font-family: "Noto Sans Georgian", "BPG Caps", sans-serif;
+}
+
+.productPrice {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0 0 30px 0;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: "Noto Sans Georgian", "BPG Caps", sans-serif;
+}
+
+.productDescription {
+  margin-bottom: 25px;
+}
+
+.descriptionTitle {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0 0 15px 0;
+  font-family: "Noto Sans Georgian", "BPG Caps", sans-serif;
+}
+
+.descriptionText {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: "Noto Sans Georgian", "BPG Caps", sans-serif;
+}
+
+.deliveryInfo {
+  display: flex;
+  align-items: center;
+  background-color: rgba(33, 39, 64, 0.5);
+  padding: 15px 20px;
+  border-radius: 12px;
+  border-left: 4px solid #f2ac2b;
+  margin: 25px 0;
+}
+
+.deliveryBadge {
+  display: inline-block;
+  background-color: #f2ac2b;
+  color: #212740;
+  padding: 8px 16px;
+  font-weight: 700;
+  border-radius: 6px;
+  margin-right: 15px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  font-family: "Noto Sans Georgian", "BPG Caps", sans-serif;
+}
+
+.deliveryText {
+  color: white;
+  font-size: 0.95rem;
+  margin: 0;
+  line-height: 1.5;
+  font-family: "Noto Sans Georgian", "BPG Caps", sans-serif;
+}
+
+.qualityInfo {
+  margin-bottom: 30px;
+}
+
+.qualityTitle {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0 0 15px 0;
+  font-family: "Noto Sans Georgian", "BPG Caps", sans-serif;
+}
+
+.qualityText {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: "Noto Sans Georgian", "BPG Caps", sans-serif;
+}
+
+.productActions {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: auto;
+}
+
+.addToCartButton, 
+.backToShopButton {
+  padding: 14px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  border: none;
+  font-size: 1.1rem;
+  font-family: "Noto Sans Georgian", "BPG Caps", sans-serif;
+}
+
+.addToCartButton {
+  background-color: #f2ac2b;
+  color: #212740;
+}
+
+.addToCartButton:hover {
+  background-color: #e09c1e;
+}
+
+.backToShopButton {
+  background-color: transparent;
+  color: white;
+  border: 1px solid #f2ac2b;
+}
+
+.backToShopButton:hover {
+  background-color: rgba(242, 172, 43, 0.2);
+}
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
+.loadingSpinner {
+  width: 60px;
+  height: 60px;
+  border: 5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  border-top-color: #f2ac2b;
+  animation: spin 1s infinite ease-in-out;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive styles */
+@media screen and (max-width: 900px) {
+  .productDetail {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .productImageContainer {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .fallbackImageContent {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .productNameInitial {
+    font-size: 3rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .productDetailMain {
+    padding: 20px 0 40px;
+  }
+  
+  .breadcrumbs {
+    margin-bottom: 20px;
+    font-size: 0.8rem;
+  }
+  
+  .productDetail {
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  .productName {
+    font-size: 1.5rem;
+  }
+  
+  .productPrice {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+  }
+  
+  .deliveryInfo {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .deliveryBadge {
+    margin-bottom: 10px;
+  }
+  
+  .addToCartButton, 
+  .backToShopButton {
+    padding: 12px 16px;
+    font-size: 1rem;
+  }
+} 

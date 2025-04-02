@@ -23,6 +23,10 @@ export default function Header(){
         if(page == "guitar-finder" && router.pathname == "/guitar-finder"){
             return true;
         }
+        
+        if(page == "shop" && router.pathname == "/shop"){
+            return true;
+        }
     }
 
     async function handleShopClick(e){
@@ -53,6 +57,13 @@ export default function Header(){
                     className="nav-link"
                 >
                     გიტარის მასწავლებლები
+                </Link>
+                <Link 
+                    href="/shop" 
+                    onClick={() => setIsMenuOpen(false)}
+                    className={`nav-link ${isActive("shop") ? "active" : ""}`}
+                >
+                    გიტარის მაღაზია
                 </Link>
                 <Link 
                     href={""} 
@@ -87,7 +98,7 @@ export default function Header(){
             return <>
                 <Link href={"/"} className=" px-[10px]  text-gray-500 hover py-1 sm:py-0" >აკორდები</Link>
                 <Link href={"/"} className=" px-[10px]  text-gray-500 hover py-1 sm:py-0" >ტაბები</Link>
-                <Link href={"/"} className=" px-[10px]  text-gray-500 hover py-1 sm:py-0" >გიტარის მაღაზია</Link>
+                <Link href="/shop" className={` px-[10px] text-gray-500 hover py-1 sm:py-0 ${isActive("shop") ? "active" : ""}`}>გიტარის მაღაზია</Link>
                 <Link href={"/"} className=" px-[10px]  text-gray-500 hover py-1 sm:py-0" >უცხოური სიმღერები</Link>
             </>
         }
