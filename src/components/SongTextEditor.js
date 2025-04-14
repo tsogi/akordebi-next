@@ -10,7 +10,6 @@ import styles from "./SongTextEditor.module.css";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import MusicOffIcon from '@mui/icons-material/MusicOff';
-import ImageIcon from '@mui/icons-material/Image';
 import lang from '@/services/lang'
 // Todo if song url has / in it we get wrong url and page can't be opened https://akordebi.ge/chord/chiti-werili/gia_toidze
 
@@ -402,7 +401,7 @@ return (
                 <Button
                     variant="contained"
                     color="secondary"
-                    startIcon={<ImageIcon />}
+                    startIcon={<AddIcon />}
                     onClick={() => { addLine("image") }}
                 >
                     {lang.upload.add_image_button || "Add Image"}
@@ -426,7 +425,8 @@ return (
     </Modal>
     <Modal open={imageUploadOpen} onClose={handleImageUploadClose}>
       <div style={{ position: 'absolute', width: 400, backgroundColor: "#004aad", borderRadius: "4px", padding: "35px", top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
-        <Typography variant="h6">{lang.upload.upload_image || "Upload Image"}</Typography>
+        {/* <Typography variant="h6">{lang.upload.upload_image || "Upload Image"}</Typography> */}
+        <Typography variant="h8">{lang.upload.upload_image_instructions || "Upload Image"}</Typography>
         <input
           type="file"
           accept="image/*"
