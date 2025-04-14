@@ -204,6 +204,10 @@ export default function SongPage({ song }){
                         if(line.type == "break") {
                             return breakLine(index);
                         }
+                        
+                        if(line.type == "image") {
+                            return imageLine(line.value, index);
+                        }
                     })
                     :
                     null
@@ -373,6 +377,17 @@ function breakLine(index){
 
 function chorusLine(line, index){
     return renderLine(line, index)
+}
+
+function imageLine(value, index){
+    return <div key={index} className={`${styles.lineWrapper} ${styles.image}`}>
+        <img 
+            src={value} 
+            alt="ტაბი ან ნოტის ფოტო" 
+            className={styles.tabImage}
+            style={{ maxWidth: '100%', margin: "2px 0" }} 
+        />
+    </div>
 }
 
 export async function getServerSideProps(ctx) {
