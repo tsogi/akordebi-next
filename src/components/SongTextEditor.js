@@ -10,6 +10,7 @@ import styles from "./SongTextEditor.module.css";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import MusicOffIcon from '@mui/icons-material/MusicOff';
+import ImageIcon from '@mui/icons-material/Image';
 import lang from '@/services/lang'
 // Todo if song url has / in it we get wrong url and page can't be opened https://akordebi.ge/chord/chiti-werili/gia_toidze
 
@@ -30,7 +31,9 @@ const PoemEditor = ({onSongTextChange, _lines = []}) => {
   const [open, setOpen] = useState(false);
   const [selectedChord, setselectedChord] = useState('');
   const [lineType, setLineType] = useState('');
-
+  const [imageUploadOpen, setImageUploadOpen] = useState(false);
+  
+  const fileInputRef = useRef(null);
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -60,6 +63,12 @@ const PoemEditor = ({onSongTextChange, _lines = []}) => {
 
     if(type == "break") {
         newLine.value = "";
+    }
+
+    if(type == "image") {
+        newLine.value = "";
+        setImageUploadOpen(true);
+        setSelectedLineIndex(lines.length);  // Set index to the position where new line will be added
     }
 
     setLines([...lines, newLine]);
@@ -196,6 +205,10 @@ const handleClose = () => {
   setOpen(false);
 };
 
+const handleImageUploadClose = () => {
+  setImageUploadOpen(false);
+};
+
 const handleNumberChange = event => {
   setselectedChord(event.target.value);
 };
@@ -212,6 +225,25 @@ const handleSave = () => {
 
   setLines(newLines);
   setOpen(false);
+};
+
+const handleImageUpload = (event) => {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const base64Image = e.target.result;
+      
+      // Update the value of the appropriate line with the base64 image
+      const newLines = [...lines];
+      newLines[selectedLineIndex].value = base64Image;
+      
+      setLines(newLines);
+      setImageUploadOpen(false);
+    };
+    
+    reader.readAsDataURL(file);
+  }
 };
 
 return (
@@ -279,7 +311,7 @@ return (
                     null
                 }
                 {
-                    ["break", "rightHand"].includes(line.type) ?
+                    ["break", "rightHand", "image"].includes(line.type) ?
                     <div className={styles.actionPlace}></div>
                     :
                     null
@@ -328,6 +360,18 @@ return (
                 :
                 null
             }
+            {
+                line.type == "image" && line.value ?
+                <div className={styles.imageContainer}>
+                  <img 
+                    src={line.value} 
+                    alt="Uploaded tab or music note" 
+                    style={{ maxWidth: '100%', marginTop: '10px' }} 
+                  />
+                </div>
+                :
+                null
+            }
           </div>
         )}
       </Box>
@@ -354,6 +398,16 @@ return (
                     {lang.upload.add_string_button}
                 </Button>
             </div>
+            <div className={styles.poemActionBtn}>
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    startIcon={<ImageIcon />}
+                    onClick={() => { addLine("image") }}
+                >
+                    {lang.upload.add_image_button || "Add Image"}
+                </Button>
+            </div>
         </div>
     </Box>
     <Modal open={open} onClose={handleClose}>
@@ -368,6 +422,24 @@ return (
              {lang.upload.editor_save}
           </Button>
         
+      </div>
+    </Modal>
+    <Modal open={imageUploadOpen} onClose={handleImageUploadClose}>
+      <div style={{ position: 'absolute', width: 400, backgroundColor: "#004aad", borderRadius: "4px", padding: "35px", top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+        <Typography variant="h6">{lang.upload.upload_image || "Upload Image"}</Typography>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageUpload}
+          style={{
+            display: 'block',
+            margin: '20px 0',
+            color: 'white'
+          }}
+        />
+        <Button variant="contained" color="primary" onClick={handleImageUploadClose}>
+          {lang.upload.cancel || "Cancel"}
+        </Button>
       </div>
     </Modal>
   </div>
