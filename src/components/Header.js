@@ -58,13 +58,13 @@ export default function Header(){
                 >
                     გიტარის მასწავლებლები
                 </Link>
-                <Link 
+                {/* <Link 
                     href="/shop" 
                     onClick={() => setIsMenuOpen(false)}
                     className={`nav-link ${isActive("shop") ? "active" : ""}`}
                 >
                     გიტარის მაღაზია
-                </Link>
+                </Link> */}
                 <Link 
                     href={""} 
                     onClick={(e) => {
@@ -98,7 +98,7 @@ export default function Header(){
             return <>
                 <Link href={"/"} className=" px-[10px]  text-gray-500 hover py-1 sm:py-0" >აკორდები</Link>
                 <Link href={"/"} className=" px-[10px]  text-gray-500 hover py-1 sm:py-0" >ტაბები</Link>
-                <Link href="/shop" className={` px-[10px] text-gray-500 hover py-1 sm:py-0 ${isActive("shop") ? "active" : ""}`}>გიტარის მაღაზია</Link>
+                {/* <Link href="/shop" className={` px-[10px] text-gray-500 hover py-1 sm:py-0 ${isActive("shop") ? "active" : ""}`}>გიტარის მაღაზია</Link> */}
                 <Link href={"/"} className=" px-[10px]  text-gray-500 hover py-1 sm:py-0" >უცხოური სიმღერები</Link>
             </>
         }

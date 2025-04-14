@@ -6,6 +6,7 @@ import styles from '@/styles/ProductDetail.module.css';
 import shopProducts from '@/data/shopProducts';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 export default function ProductDetail() {
   const router = useRouter();
@@ -61,19 +62,32 @@ export default function ProductDetail() {
           
           <div className={styles.productDetail}>
             <div className={styles.productImageContainer}>
-              <div className={styles.fallbackImage}>
-                <div className={styles.fallbackImageContent}>
-                  <span className={styles.productNameInitial}>
-                    {product.name.charAt(0)}
-                  </span>
+              {product.thumbnail ? (
+                <Image 
+                  src={product.thumbnail} 
+                  alt={product.name}
+                  width={500}
+                  height={500}
+                  className={styles.productImage}
+                  priority
+                />
+              ) : (
+                <div className={styles.fallbackImage}>
+                  <div className={styles.fallbackImageContent}>
+                    <span className={styles.productNameInitial}>
+                      {product.name.charAt(0)}{
+                        product.thumbnail
+                      }
+                    </span>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
             
             <div className={styles.productInfo}>
               <h1 className={styles.productName}>{product.name}</h1>
               <p className={styles.productCategory}>{product.category}</p>
-              <p className={styles.productPrice}>{product.price}</p>
+              <p className={styles.productPrice}>{product.price}₾</p>
               
               <div className={styles.productDescription}>
                 <h2 className={styles.descriptionTitle}>პროდუქტის აღწერა</h2>

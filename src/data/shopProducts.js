@@ -1,9 +1,9 @@
 const shopProducts = {
   classicGuitars: [
     {
-      id: "classic-1",
-      name: "Yamaha C40",
-      price: "550",
+      id: "yamaha-c40m",
+      name: "Yamaha C40M",
+      price: "395",
       description: "შესანიშნავი საწყისი კლასიკური გიტარა დამწყებთათვის. ნაძვის ხის ზედაპირით და მაღალი ხარისხის სიმებით.",
       thumbnail: "/images/shop/c40.jpg",
       category: "კლასიკური გიტარა",
