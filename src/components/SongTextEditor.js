@@ -10,7 +10,8 @@ import styles from "./SongTextEditor.module.css";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import MusicOffIcon from '@mui/icons-material/MusicOff';
-import lang from '@/services/lang'
+import CircularProgress from '@mui/material/CircularProgress';
+import lang from '@/services/lang';
 // Todo if song url has / in it we get wrong url and page can't be opened https://akordebi.ge/chord/chiti-werili/gia_toidze
 
 const css = {
@@ -31,6 +32,7 @@ const PoemEditor = ({onSongTextChange, _lines = []}) => {
   const [selectedChord, setselectedChord] = useState('');
   const [lineType, setLineType] = useState('');
   const [imageUploadOpen, setImageUploadOpen] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   
   const fileInputRef = useRef(null);
   const inputRef = useRef(null);
@@ -226,22 +228,59 @@ const handleSave = () => {
   setOpen(false);
 };
 
-const handleImageUpload = (event) => {
+const handleImageUpload = async (event) => {
   const file = event.target.files[0];
   if (file) {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const base64Image = e.target.result;
+    setIsUploading(true);
+    try {
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        const base64Image = e.target.result;
+        
+        // Generate a unique filename
+        const extension = file.name.split('.').pop().toLowerCase();
+        const fileName = `tab_${Date.now()}.${extension}`;
+        
+        // Upload the image via API
+        const response = await fetch('/api/uploadImage', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            image: base64Image,
+            fileName: fileName
+          }),
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+          console.error('Upload error details:', data);
+          
+          // Special handling for S3 redirect errors
+          if (data.code === 'PermanentRedirect' && data.endpoint) {
+            throw new Error(`Incorrect S3 endpoint. Please update AWS_ENDPOINT in your environment variables to: https://${data.endpoint}`);
+          }
+          
+          throw new Error(data.details || data.error || 'Failed to upload image');
+        }
+        
+        // Update the value of the appropriate line with the S3 URL
+        const newLines = [...lines];
+        newLines[selectedLineIndex].value = data.url;
+        
+        setLines(newLines);
+        setIsUploading(false);
+        setImageUploadOpen(false);
+      };
       
-      // Update the value of the appropriate line with the base64 image
-      const newLines = [...lines];
-      newLines[selectedLineIndex].value = base64Image;
-      
-      setLines(newLines);
-      setImageUploadOpen(false);
-    };
-    
-    reader.readAsDataURL(file);
+      reader.readAsDataURL(file);
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      setIsUploading(false);
+      alert(`Image upload failed: ${error.message}. Please try again.`);
+    }
   }
 };
 
@@ -425,21 +464,31 @@ return (
     </Modal>
     <Modal open={imageUploadOpen} onClose={handleImageUploadClose}>
       <div style={{ position: 'absolute', width: 400, backgroundColor: "#004aad", borderRadius: "4px", padding: "35px", top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
-        {/* <Typography variant="h6">{lang.upload.upload_image || "Upload Image"}</Typography> */}
-        <Typography variant="h8">{lang.upload.upload_image_instructions || "Upload Image"}</Typography>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageUpload}
-          style={{
-            display: 'block',
-            margin: '20px 0',
-            color: 'white'
-          }}
-        />
-        <Button variant="contained" color="primary" onClick={handleImageUploadClose}>
-          {lang.upload.cancel || "Cancel"}
-        </Button>
+        <Typography variant="h6">{lang.upload.upload_image || "Upload Image"}</Typography>
+        {isUploading ? (
+          <div style={{ display: 'flex', justifyContent: 'center', margin: '20px 0' }}>
+            <CircularProgress style={{ color: 'white' }} />
+            <Typography style={{ marginLeft: '10px', color: 'white' }}>
+              {lang.upload.uploading || "Uploading..."}
+            </Typography>
+          </div>
+        ) : (
+          <>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+              style={{
+                display: 'block',
+                margin: '20px 0',
+                color: 'white'
+              }}
+            />
+            <Button variant="contained" color="primary" onClick={handleImageUploadClose}>
+              {lang.upload.cancel || "Cancel"}
+            </Button>
+          </>
+        )}
       </div>
     </Modal>
   </div>

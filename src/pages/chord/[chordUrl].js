@@ -386,6 +386,7 @@ function imageLine(value, index){
             alt="ტაბი ან ნოტის ფოტო" 
             className={styles.tabImage}
             style={{ maxWidth: '100%', margin: "2px 0" }} 
+            loading="lazy"
         />
     </div>
 }
