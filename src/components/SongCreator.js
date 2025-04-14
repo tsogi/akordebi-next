@@ -103,15 +103,21 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
         }
 
         let containsChord = false;
+        let containsImage = false;
+        
         for(let line of data.songText) {
-            if(["text", "chorus"].includes(line.type) && line.chords.length) {
+            if(["text", "chorus"].includes(line.type) && line.chords && line.chords.length) {
                 containsChord = true;
+                break;
+            }
+            if(line.type === "image" && line.value) {
+                containsImage = true;
                 break;
             }
         }
 
-        if(!containsChord) {
-            return "მონიშნეთ აკორდები. ამისათვის ასოს თავზე დააჭირეთ პლიუს ნიშანს";
+        if(!containsChord && !containsImage) {
+            return "მონიშნეთ აკორდები ან დაამატეთ ტაბის სურათი. აკორდების მოსანიშნად ასოს თავზე დააჭირეთ პლიუს ნიშანს";
         }
 
         return false;
