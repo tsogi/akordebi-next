@@ -64,7 +64,7 @@ const interfaceGeo = {
     upload: {
         cancel: "გაუქმება",
         add_image_button: "ტაბის/ნოტის დამატება",
-        upload_image: "ფოტოს ატვირთვა",
+        upload_image: "ტაბის ან ნოტის ფოტოს ატვირთვა",
         upload_image_instructions: "ატვირთეთ ტაბის ან ნოტის ფოტო",
         publish: `სიმღერის ${process.env.NEXT_PUBLIC_DOMAIN}-ზე გამოსაქვეყნებლად შეავსეთ ველები და ატვირთეთ ტექსტი პლიუს(+) ღილაკების მეშვეობით. ამ გვერდის ბოლოში შეგიძლიათ ნახოთ `,
         publish2: "თანხის გამოსამუშავებლად გაეცანით ", 

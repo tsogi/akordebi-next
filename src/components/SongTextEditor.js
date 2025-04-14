@@ -464,7 +464,7 @@ return (
     </Modal>
     <Modal open={imageUploadOpen} onClose={handleImageUploadClose}>
       <div style={{ position: 'absolute', width: 400, backgroundColor: "#004aad", borderRadius: "4px", padding: "35px", top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
-        <Typography variant="h6">{lang.upload.upload_image || "Upload Image"}</Typography>
+        <Typography variant="h8">{lang.upload.upload_image || "Upload Image"}</Typography>
         {isUploading ? (
           <div style={{ display: 'flex', justifyContent: 'center', margin: '20px 0' }}>
             <CircularProgress style={{ color: 'white' }} />
