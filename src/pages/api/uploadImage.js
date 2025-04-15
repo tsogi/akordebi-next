@@ -3,7 +3,7 @@ import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 export const config = {
   api: {
     bodyParser: {
-      sizeLimit: '4mb', // Set the maximum file size
+      sizeLimit: '10mb', // Set the maximum file size
     },
   },
 };
