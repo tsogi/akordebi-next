@@ -182,6 +182,7 @@ class Db{
                 songs.searchWords, 
                 songs.videoLesson, 
                 songs.id, 
+                songs.notation_format,
                 songs.uploaderUserId as analyticId,
                 songs.confirmed, 
                 IFNULL(authors_agg.authors, "") as authors, 

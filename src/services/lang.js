@@ -1,4 +1,7 @@
 const interfaceGeo = {
+    _tabs: "ტაბები",
+    _notes: "ნოტები",
+    _chords: "აკორდები",
     _metaTitle: "გიტარის აკორდები | gitaris akordebi",
     _metaDescription: "ქართული სიმღერების გიტარის აკორდები | Guitar chords of Georgian songs",
     _searchText: "ჩაწერეთ სიმღერა ან ავტორი",

@@ -289,7 +289,7 @@ code {
 
 .songsList {
     margin: 0 auto;
-    margin-top: 35px;
+    margin-top: 10px;
     display: flex;
     flex-wrap: wrap;
 }

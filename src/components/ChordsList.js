@@ -13,6 +13,7 @@ import { HeartIcon } from '@heroicons/react/20/solid';
 import { useUser } from "@/utils/useUser";
 import CustomSelect from "./CustomSelect";
 import UploadSongBtn from "./UploadSongBtn";
+import { MusicalNoteIcon, QueueListIcon, DocumentTextIcon } from '@heroicons/react/24/outline';
 
 const resultsPerPage = 20;
 
@@ -29,6 +30,9 @@ export default function ChordsList({ initialSongs }){
     );
     const[filterLessoned, setFilterLessoned] = useState(
         router.query.lessoned ? router.query.lessoned : false
+    );
+    const[notationFormat, setNotationFormat] = useState(
+        router.query.notation ? router.query.notation : "chords"
     );
     const[sortBy, setSortBy] = useState(
         router.query.sort ? router.query.sort : "default"
@@ -66,20 +70,21 @@ export default function ChordsList({ initialSongs }){
     useEffect(() => {
         applyFilters();
         updateUrlParameters();
-    }, [currentPage, sortBy, filterFavorites, filterLessoned, filterConfirmed]);
+    }, [currentPage, sortBy, filterFavorites, filterLessoned, filterConfirmed, notationFormat]);
 
     useEffect(() => {
         applyFilters();
     }, [initialSongs]);
 
     function writeParametersToState(){
-        const { page: urlPage, sort: urlSort, favorites: urlFavorites,  lessoned: urlLessoned, confirmed: urlConfirmed } = router.query;
+        const { page: urlPage, sort: urlSort, favorites: urlFavorites,  lessoned: urlLessoned, confirmed: urlConfirmed, notation: urlNotation } = router.query;
         
         if(urlPage) setCurrentPage(Number(urlPage));
         if(urlSort) setSortBy(urlSort);
         if(urlLessoned) setFilterLessoned(urlLessoned === 'true');
         if(urlFavorites) setFilterFavorites(urlFavorites === 'true');
         if(urlConfirmed) setFilterConfirmed(urlConfirmed === 'true');
+        if(urlNotation) setNotationFormat(urlNotation);
     }
     
     function updateUrlParameters(){
@@ -91,7 +96,8 @@ export default function ChordsList({ initialSongs }){
             sort: sortBy,
             lessoned: filterLessoned,
             favorites: filterFavorites,
-            confirmed: filterConfirmed
+            confirmed: filterConfirmed,
+            notation: notationFormat
           }
         }, undefined, { scroll: false });
     }
@@ -121,6 +127,10 @@ export default function ChordsList({ initialSongs }){
 
         if(filterFavorites) {
             songs = songs.filter((song) => { return song.isFavorite })
+        }
+        
+        if(notationFormat !== "all") {
+            songs = songs.filter((song) => { return song.notation_format === notationFormat });
         }
 
         if (sortBy === "likes") {
@@ -206,6 +216,11 @@ export default function ChordsList({ initialSongs }){
         }, 10);
     }
 
+    function handleNotationFormatChange(format) {
+        setCurrentPage(1);
+        setNotationFormat(format);
+    }
+
     return <div className={"page_container"}>
         <div className="flex flex-col md:flex-row justify-between items-center w-full gap-6 mb-8">
             <div className={`${styles.searchComponent} w-full md:w-1/2`}>
@@ -240,6 +255,55 @@ export default function ChordsList({ initialSongs }){
                 </div>
             </div>
         </div>
+        
+        <div className="flex justify-center overflow-x-auto">
+            <div className="inline-flex rounded-lg shadow-sm bg-gray-100 dark:bg-gray-800 p-1 max-w-full">
+                <button
+                    onClick={() => handleNotationFormatChange("chords")}
+                    className={`flex items-center justify-center space-x-2 px-4 py-2 text-sm rounded-md transition-all whitespace-nowrap ${
+                        notationFormat === "chords"
+                            ? "bg-white dark:bg-gray-700 shadow text-blue-600 dark:text-blue-400"
+                            : "text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+                    }`}
+                >
+                    <MusicalNoteIcon className="w-5 h-5" />
+                    <span>{lang._chords}</span>
+                </button>
+                <button
+                    onClick={() => handleNotationFormatChange("tabs")}
+                    className={`flex items-center justify-center space-x-2 px-4 py-2 text-sm rounded-md transition-all whitespace-nowrap ${
+                        notationFormat === "tabs"
+                            ? "bg-white dark:bg-gray-700 shadow text-blue-600 dark:text-blue-400"
+                            : "text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+                    }`}
+                >
+                    <QueueListIcon className="w-5 h-5" />
+                    <span>{lang._tabs}</span>
+                </button>
+                {/* <button
+                    onClick={() => handleNotationFormatChange("notes")}
+                    className={`flex items-center justify-center space-x-2 px-4 py-2 text-sm rounded-md transition-all whitespace-nowrap ${
+                        notationFormat === "notes"
+                            ? "bg-white dark:bg-gray-700 shadow text-blue-600 dark:text-blue-400"
+                            : "text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+                    }`}
+                >
+                    <DocumentTextIcon className="w-5 h-5" />
+                    <span>Notes</span>
+                </button> */}
+                {/* <button
+                    onClick={() => handleNotationFormatChange("all")}
+                    className={`flex items-center justify-center px-4 py-2 text-sm rounded-md transition-all whitespace-nowrap ${
+                        notationFormat === "all"
+                            ? "bg-white dark:bg-gray-700 shadow text-blue-600 dark:text-blue-400"
+                            : "text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+                    }`}
+                >
+                    <span>All</span>
+                </button> */}
+            </div>
+        </div>
+        
         <main className={"songsList"}>
             {
                 displayedSongs.map(song => {
