@@ -187,13 +187,13 @@ code {
 
 @media only screen and (min-width: 576px) {
   .page_container {
-    width: 540px;
+    width: 100%;
   }
 }
 
 @media only screen and (min-width: 768px) {
   .page_container {
-    width: 720px;
+    width: 100%;
   }
 }
 
