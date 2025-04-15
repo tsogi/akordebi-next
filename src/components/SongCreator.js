@@ -8,17 +8,19 @@ import DB from "@/services/data";
 import SongTextEditor from "@/components/SongTextEditor";
 import Snackbar from '@mui/material/Snackbar';
 import lang from '@/services/lang'
+import CustomSelect from "@/components/CustomSelect";
 
 const css = {
     textInput: "h-[50px] pl-5 text-white w-full bg-[rgba(255,255,255,.05)] shadow-[inset 12px 12px 30px rgba(53,123,230,.2)]"
 }
 
-export default function SongCreator({ _songName = "", _authors = [], _songText = [], _videoLesson = "", _songId = null, _uploader = "" }){
+export default function SongCreator({ _songName = "", _authors = [], _songText = [], _videoLesson = "", _songId = null, _uploader = "", _notationFormat = "chords" }){
     const [songName, setSongName] = React.useState(_songName);
     const [authors, setAuthors] = React.useState(_authors);
     const [songText, setSongText] = React.useState(_songText);
     const [videoLesson, setVideoLesson] = React.useState(_videoLesson);
     const [uploader, setUploader] = React.useState(_uploader);
+    const [notationFormat, setNotationFormat] = React.useState(_notationFormat);
     const [saving, setSaving] = React.useState(false);
     const [snackOpen, setSnackOpen] = React.useState(false);
     const [snackSeverity, setSnackSeverity] = React.useState();
@@ -29,7 +31,12 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
         const queryParams = new URLSearchParams(window.location.search);
         const passValue = queryParams.get('pass');
         setPass(passValue);
-    }, []);
+        
+        // Check if _notationFormat is passed from props
+        if (_notationFormat) {
+            setNotationFormat(_notationFormat);
+        }
+    }, [_notationFormat]);
     
     function handleSongNameChange(event) {
         let name = event.target.value;
@@ -49,6 +56,11 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
         setUploader(uploader);
     }
 
+    function handleNotationFormatChange(event) {
+        let format = event.target.value;
+        setNotationFormat(format);
+    }
+
     function handleSnackClose(){
         setSnackOpen(false);
     }
@@ -58,7 +70,17 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
             setSaving(true);
             let rawText = getRawText(songText);
 
-            let data = { pass, uploader, name: songName.trim(), authors, songText, rawText, videoLesson, id: _songId }
+            let data = { 
+                pass, 
+                uploader, 
+                name: songName.trim(), 
+                authors, 
+                songText, 
+                rawText, 
+                videoLesson, 
+                id: _songId,
+                notation_format: notationFormat 
+            }
 
             let error = validationError(data);
             if(error) {
@@ -147,6 +169,22 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
             </div>
             <div className={ styles.uploader }>
                 <input className={css.textInput} type="text" value={uploader} onChange={handleUploaderChange} style={{ width: "100%" }} placeholder={lang.upload.uploader_name} />
+            </div>
+            <div className={ styles.notationFormat + " mt-[50px]" }>
+                <div className="flex items-center mb-2">
+                    <span className="text-white mr-2">აირჩიეთ ტიპი:</span>
+                    <div className="flex-1">
+                        <CustomSelect
+                            options={[
+                                { label: "აკორდები", value: "chords" },
+                                { label: "ტაბები", value: "tabs" },
+                                // { label: "ნოტები", value: "notes" }
+                            ]}
+                            value={notationFormat}
+                            onChange={handleNotationFormatChange}
+                        />
+                    </div>
+                </div>
             </div>
             <div className={styles.textEditor}>
                 <SongTextEditor _lines={songText} onSongTextChange={setSongText} />

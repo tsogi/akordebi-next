@@ -89,6 +89,7 @@ class Db{
                 songs.searchWords, 
                 songs.name, 
                 songs.body, 
+                songs.notation_format,
                 GROUP_CONCAT(DISTINCT authors.name ORDER BY authors.name) AS authors,
                 MAX(IF(favorite_songs.user_id IS NOT NULL AND favorite_songs.song_id = songs.id, TRUE, FALSE)) AS isFavorite
             FROM songs
@@ -256,7 +257,7 @@ class Db{
 
         let authors = await this.storeAuthors(authorNames);
 
-        let song = { name: data.name, url: data.url, body: data.songText, text: data.rawText, videoLesson: data.videoLesson, searchWords: data.searchWords, uploader: data.uploader, userId: data.userId }
+        let song = { name: data.name, url: data.url, body: data.songText, text: data.rawText, videoLesson: data.videoLesson, searchWords: data.searchWords, uploader: data.uploader, userId: data.userId, notation_format: data.notation_format }
         let songId = await this.storeSongToDb(song);
 
         await this.storeSongAuthors(authors.map(el => el.id), songId);
@@ -271,7 +272,7 @@ class Db{
 
         await this.deleteSongAuthors(data.id);
 
-        let song = { name: data.name, url: data.url, body: data.songText, text: data.rawText, videoLesson: data.videoLesson, searchWords: data.searchWords, uploader: data.uploader, userId: data.userId }
+        let song = { name: data.name, url: data.url, body: data.songText, text: data.rawText, videoLesson: data.videoLesson, searchWords: data.searchWords, uploader: data.uploader, userId: data.userId, notation_format: data.notation_format }
         await this.updateSongToDb(song, data.id);
 
         await this.storeSongAuthors(authors.map(el => el.id), data.id);
@@ -355,11 +356,11 @@ class Db{
 
     async storeSongToDb(song){
         let query = `
-            insert into songs (name, url, body, text, videoLesson, searchWords, uploader, uploaderUserId)
-            values (?, ?, ?, ?, ?, ?, ?, ?)
+            insert into songs (name, url, body, text, videoLesson, searchWords, uploader, uploaderUserId, notation_format)
+            values (?, ?, ?, ?, ?, ?, ?, ?, ?)
         `;
 
-        let [results] = await this.pool.execute(query, [song.name, song.url, song.body, song.text, song.videoLesson, song.searchWords, song.uploader, song.userId])
+        let [results] = await this.pool.execute(query, [song.name, song.url, song.body, song.text, song.videoLesson, song.searchWords, song.uploader, song.userId, song.notation_format])
 
         return results.insertId
     }
@@ -367,11 +368,11 @@ class Db{
     async updateSongToDb(song, id){
         let query = `
             update songs 
-            set name = ?, url = ?, body = ?, text = ?, videoLesson = ?, searchWords = ?, uploader = ?
+            set name = ?, url = ?, body = ?, text = ?, videoLesson = ?, searchWords = ?, uploader = ?, notation_format = ?
             where id = ?
         `;
 
-        await this.pool.execute(query, [song.name, song.url, song.body, song.text, song.videoLesson, song.searchWords, song.uploader, id])
+        await this.pool.execute(query, [song.name, song.url, song.body, song.text, song.videoLesson, song.searchWords, song.uploader, song.notation_format, id])
 
         return true;
     }
