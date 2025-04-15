@@ -17,7 +17,7 @@ const interfaceGeo = {
     _till: "მდე.",
     _totally: "სულ",
     _song: 'სიმღერა',
-    _footer_designBy: "საიტის ავტორი",
+    _footer_designBy: "საიტის ავტორი და დეველოპერი",
     _footer_tsogi: "ნიკა ცოგიაიძე",
     _footer_input: 'აკორდების ძებნა',
     _footer_input_placeholder: 'მოგვწერეთ იდეები, შენიშვნები, მოსაზრებები',
