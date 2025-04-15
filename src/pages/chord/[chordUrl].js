@@ -101,7 +101,7 @@ export default function SongPage({ song }){
         <Head>
             <title>{`${song.name} - ${lang._guitar_chords}`}</title>
             <meta name="description" content={ `${song.searchWords}` } />
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
             <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         </Head>
         <Header />    

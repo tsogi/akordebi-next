@@ -12,7 +12,7 @@ const TermsOfService = () => {
     <Head>
         <title>{lang._footer_terms}</title>
         <meta name="description" content={lang._footer_terms} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     </Head>
     <Header />

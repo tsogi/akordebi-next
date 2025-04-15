@@ -14,7 +14,7 @@ export default function Home({ initialSongs }) {
       <Head>
         <title>{lang._metaTitle}</title>
         <meta name="description" content={lang._metaDescription} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
       </Head>
       <Header />
