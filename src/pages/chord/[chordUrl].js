@@ -100,9 +100,14 @@ export default function SongPage({ song }){
     }
 
     const handleSubscribe = () => {
-        // Placeholder for subscription logic
+        // Redirect to subscription page or open payment modal
         console.log('User clicked subscribe');
-        // Here you would redirect to payment/subscription page
+        
+        // Example implementation - could redirect to a payment page
+        // window.location.href = '/subscription';
+        
+        // Or you could implement your payment processing logic here
+        // This is just a placeholder
     };
 
     return <>

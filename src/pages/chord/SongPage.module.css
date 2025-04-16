@@ -550,3 +550,9 @@
     -webkit-backdrop-filter: blur(4px);
     pointer-events: none;
 }
+
+@media (max-width: 480px) {
+    .blurredContent {
+        top: 40%;
+    }
+}
