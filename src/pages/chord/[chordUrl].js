@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import EmbedVideo from "@/components/EmbedVideo";
 import Footer from "@/components/Footer";
 import SongVotes from "@/components/SongVotes";
+import SubscriptionPrompt from "@/components/SubscriptionPrompt";
 import db from "@/services/db";
 import styles from "./SongPage.module.css";
 import SongDifficulties from '@/components/SongDifficulties';
@@ -19,6 +20,7 @@ export default function SongPage({ song }){
     const [fontSize, setFontSize] = useState(16);
     const [scrollSpeed, setScrollSpeed] = useState(0);
     const [showChords, setShowChords ] = useState(false);
+    const [isPremium, setIsPremium] = useState(false);
 
     useEffect(() => {
         scroll();
@@ -96,6 +98,12 @@ export default function SongPage({ song }){
 
         // await uiDb.logEvent("show_chords");
     }
+
+    const handleSubscribe = () => {
+        // Placeholder for subscription logic
+        console.log('User clicked subscribe');
+        // Here you would redirect to payment/subscription page
+    };
 
     return <>
         <Head>
@@ -183,6 +191,11 @@ export default function SongPage({ song }){
                 }
             </div>
             <main className={`${styles.songBody} mxedruli`} style={{fontSize}}>
+                {!isPremium && (
+                    <div className={styles.blurredContent}>
+                        <SubscriptionPrompt onSubscribe={handleSubscribe} />
+                    </div>
+                )}
                 {
                     song?.body ? song.body.map((line, index) => {
                         if(line.type == "rightHand") {
