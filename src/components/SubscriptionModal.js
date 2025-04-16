@@ -2,42 +2,64 @@ import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { useUser } from '@/utils/useUser';
-import { supabase } from '@/utils/supabase-client';
+import { useRouter } from 'next/router';
 
 export default function SubscriptionModal({ open, setOpen }) {
   const [isActivated, setIsActivated] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   const { user } = useUser();
+  const router = useRouter();
 
   const handleActivateClick = async () => {
     if (!user) return;
     
     try {
-      // Update user's subscription status
-      const { data, error } = await supabase
-        .from('users')
-        .update({
-          payment_date: new Date().toISOString(),
-          payment_confirmed: false
-        })
-        .eq('email', user.email);
-        
-      if (error) {
-        console.error('Error updating subscription:', error);
-        return;
+      setIsLoading(true);
+      setError(null);
+      
+      // Send request to the API endpoint
+      const response = await fetch('/api/subscription/activate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to activate subscription');
       }
       
-      // Change to activated state
+      // Success - change to activated state
       setIsActivated(true);
       
-      // Optional: You could also refresh user data or trigger other actions here
+      // Force a refresh after a successful activation to update the UI
+      // This will reload the page and fetch fresh user details
+      setTimeout(() => {
+        router.reload();
+      }, 1500);
+      
     } catch (err) {
       console.error('Error processing activation:', err);
+      setError(err.message || 'An error occurred while activating your subscription');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    
+    // If activated, reload the page to ensure the user sees the full content
+    if (isActivated) {
+      router.reload();
     }
   };
 
   return (
     <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" className="relative z-20" onClose={setOpen}>
+      <Dialog as="div" className="relative z-20" onClose={handleClose}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -66,7 +88,7 @@ export default function SubscriptionModal({ open, setOpen }) {
                   <button
                     type="button"
                     className="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none"
-                    onClick={() => setOpen(false)}
+                    onClick={handleClose}
                   >
                     <span className="sr-only">Close</span>
                     <XMarkIcon className="h-6 w-6" aria-hidden="true" />
@@ -95,6 +117,12 @@ export default function SubscriptionModal({ open, setOpen }) {
                             <span className="font-medium">5 ლარი</span>
                           </div>
                         </div>
+                        
+                        {error && (
+                          <div className="mt-4 p-3 bg-red-50 border border-red-200 text-red-700 rounded-md text-sm">
+                            {error}
+                          </div>
+                        )}
                       </>
                     ) : (
                       <p className="text-gray-700 text-base leading-6 mb-6">
@@ -108,16 +136,17 @@ export default function SubscriptionModal({ open, setOpen }) {
                   {!isActivated ? (
                     <button
                       type="button"
-                      className="w-full rounded-md bg-[#5286ed] px-3.5 py-2.5 text-center text-base font-semibold text-white shadow-sm hover:bg-[#3a5d97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5286ed]"
+                      className="w-full rounded-md bg-[#5286ed] px-3.5 py-2.5 text-center text-base font-semibold text-white shadow-sm hover:bg-[#3a5d97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5286ed] disabled:opacity-70 disabled:cursor-not-allowed"
                       onClick={handleActivateClick}
+                      disabled={isLoading}
                     >
-                      გააქტიურება
+                      {isLoading ? 'მიმდინარეობს...' : 'გააქტიურება'}
                     </button>
                   ) : (
                     <button
                       type="button"
                       className="w-full rounded-md bg-green-500 px-3.5 py-2.5 text-center text-base font-semibold text-white shadow-sm hover:bg-green-600"
-                      onClick={() => setOpen(false)}
+                      onClick={handleClose}
                     >
                       დახურვა
                     </button>

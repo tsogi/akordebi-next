@@ -486,6 +486,62 @@ class Db{
         );
         return rows.length > 0 ? rows[0].rating : null;
     }
+
+    async getUserSubscription(userId) {
+        try {
+            const [rows] = await this.pool.execute(`
+                SELECT payment_date, payment_confirmed 
+                FROM users 
+                WHERE id = ?
+            `, [userId]);
+            
+            if (rows.length === 0) {
+                return { hasSubscription: false };
+            }
+            
+            const data = rows[0];
+            
+            return {
+                // Only require payment_date to be set for a valid subscription
+                hasSubscription: !!data.payment_date,
+                paymentDate: data.payment_date,
+                isConfirmed: data.payment_confirmed,
+            };
+        } catch (error) {
+            console.error('Error getting user subscription:', error);
+            return { hasSubscription: false };
+        }
+    }
+
+    async updateUserSubscription(userId, paymentConfirmed = false) {
+        try {
+            const [result] = await this.pool.execute(`
+                UPDATE users 
+                SET payment_date = NOW(), payment_confirmed = ? 
+                WHERE id = ?
+            `, [paymentConfirmed ? 1 : 0, userId]);
+            
+            return { success: result.affectedRows > 0 };
+        } catch (error) {
+            console.error('Error updating user subscription:', error);
+            return { success: false, error };
+        }
+    }
+
+    async activateUserSubscription(userId) {
+        try {
+            const [result] = await this.pool.execute(`
+                UPDATE users 
+                SET payment_date = NOW(), payment_confirmed = 0
+                WHERE id = ?
+            `, [userId]);
+            
+            return { success: result.affectedRows > 0 };
+        } catch (error) {
+            console.error('Error activating user subscription:', error);
+            return { success: false, error };
+        }
+    }
 }
 
 module.exports = new Db();

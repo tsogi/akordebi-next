@@ -14,6 +14,7 @@ import lang from '@/services/lang';
 import Favorite from '@/components/Favorite';
 import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
 import { MinusIcon, PlusIcon, EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
+import { useUser } from '@/utils/useUser';
 let intervalId;
 
 export default function SongPage({ song }){
@@ -21,6 +22,16 @@ export default function SongPage({ song }){
     const [scrollSpeed, setScrollSpeed] = useState(0);
     const [showChords, setShowChords ] = useState(false);
     const [isPremium, setIsPremium] = useState(false);
+    const { user, userDetails } = useUser();
+
+    useEffect(() => {
+        // Check if user has a valid subscription - only require payment_date to be set
+        if (userDetails && userDetails.payment_date) {
+            setIsPremium(true);
+        } else {
+            setIsPremium(false);
+        }
+    }, [userDetails]);
 
     useEffect(() => {
         scroll();
