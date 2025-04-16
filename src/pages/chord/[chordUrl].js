@@ -100,14 +100,8 @@ export default function SongPage({ song }){
     }
 
     const handleSubscribe = () => {
-        // Redirect to subscription page or open payment modal
+        // This is now handled directly in the SubscriptionPrompt component
         console.log('User clicked subscribe');
-        
-        // Example implementation - could redirect to a payment page
-        // window.location.href = '/subscription';
-        
-        // Or you could implement your payment processing logic here
-        // This is just a placeholder
     };
 
     return <>
