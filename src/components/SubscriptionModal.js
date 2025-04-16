@@ -34,11 +34,8 @@ export default function SubscriptionModal({ open, setOpen }) {
       // Success - change to activated state
       setIsActivated(true);
       
-      // Force a refresh after a successful activation to update the UI
-      // This will reload the page and fetch fresh user details
-      setTimeout(() => {
-        router.reload();
-      }, 1500);
+      // No longer automatically refreshing the page
+      // Let the user read the success message and decide when to close
       
     } catch (err) {
       console.error('Error processing activation:', err);
@@ -51,7 +48,8 @@ export default function SubscriptionModal({ open, setOpen }) {
   const handleClose = () => {
     setOpen(false);
     
-    // If activated, reload the page to ensure the user sees the full content
+    // If the subscription was activated, refresh the page when closing
+    // to ensure the user sees the full content
     if (isActivated) {
       router.reload();
     }
@@ -125,9 +123,16 @@ export default function SubscriptionModal({ open, setOpen }) {
                         )}
                       </>
                     ) : (
-                      <p className="text-gray-700 text-base leading-6 mb-6">
-                        გამოწერა გააქტიურებულია, ამიერიდან შეგიძლიათ ისარგებლოთ akordebi.ge-ს სრული ფუნქციონალით. თუ გადარიცხვა არ დადასტურდა გამოწერა გაგიუქმდებათ.
-                      </p>
+                      <div className="text-center">
+                        <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-4">
+                          <svg className="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
+                        <p className="text-gray-700 text-base leading-6 mb-6">
+                          გამოწერა გააქტიურებულია, ამიერიდან შეგიძლიათ ისარგებლოთ akordebi.ge-ს სრული ფუნქციონალით. თუ გადარიცხვა არ დადასტურდა გამოწერა გაგიუქმდებათ.
+                        </p>
+                      </div>
                     )}
                   </div>
                 </div>
