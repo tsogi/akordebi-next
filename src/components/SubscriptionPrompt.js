@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useUser } from '@/utils/useUser';
 import { supabase } from '@/utils/supabase-client';
-import { Auth } from "@supabase/auth-ui-react";
-import { ThemeSupa } from "@supabase/auth-ui-shared";
 import SubscriptionModal from './SubscriptionModal';
 import lang from '@/services/lang';
 import dataClient from '@/services/data';
