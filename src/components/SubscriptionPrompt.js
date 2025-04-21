@@ -38,6 +38,8 @@ const SubscriptionPrompt = ({ onSubscribe }) => {
   };
 
   const handleSubscribeClick = () => {
+    // Log the subscribe click event
+    dataClient.logEvent('subscribe_click', 'From subscription prompt');
     setIsModalOpen(true);
     if (onSubscribe) onSubscribe();
   };

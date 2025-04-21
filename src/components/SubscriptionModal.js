@@ -3,6 +3,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { useUser } from '@/utils/useUser';
 import { useRouter } from 'next/router';
+import dataClient from '@/services/data';
 
 export default function SubscriptionModal({ open, setOpen }) {
   const [isActivated, setIsActivated] = useState(false);
@@ -17,6 +18,9 @@ export default function SubscriptionModal({ open, setOpen }) {
 
   const handleActivateClick = async () => {
     if (!user) return;
+    
+    // Log the activation attempt
+    dataClient.logEvent('subscription_activate_click', 'User clicked activate subscription button');
     
     try {
       setIsLoading(true);
