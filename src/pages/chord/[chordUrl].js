@@ -1,7 +1,7 @@
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { useEffect, useState } from "react";
 import Head from 'next/head';
-import FbComments from "@/components/FbComments";
+// import FbComments from "@/components/FbComments";
 import Header from "@/components/Header";
 import EmbedVideo from "@/components/EmbedVideo";
 import Footer from "@/components/Footer";
@@ -281,9 +281,9 @@ export default function SongPage({ song }){
                 :
                 null
             } */}
-            <div className={styles.fbComments}>
+            {/* <div className={styles.fbComments}>
                 <FbComments href={`akordebi.ge/songPage/${song.id}`} />
-            </div>
+            </div> */}
         </div>
         <Footer />
     </>

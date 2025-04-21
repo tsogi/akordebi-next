@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { useUser } from '@/utils/useUser';
@@ -8,6 +8,10 @@ export default function SubscriptionModal({ open, setOpen }) {
   const [isActivated, setIsActivated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [copyStatus, setCopyStatus] = useState({
+    account: false,
+    email: false
+  });
   const { user } = useUser();
   const router = useRouter();
 
@@ -53,6 +57,17 @@ export default function SubscriptionModal({ open, setOpen }) {
     if (isActivated) {
       router.reload();
     }
+  };
+
+  const handleCopy = (text, type) => {
+    navigator.clipboard.writeText(text).then(() => {
+      setCopyStatus(prev => ({ ...prev, [type]: true }));
+      
+      // Reset after 2 seconds
+      setTimeout(() => {
+        setCopyStatus(prev => ({ ...prev, [type]: false }));
+      }, 2000);
+    });
   };
 
   return (
@@ -106,17 +121,39 @@ export default function SubscriptionModal({ open, setOpen }) {
                         </p>
                         
                         <div className="mt-8 bg-gray-50 p-4 rounded-md mxedruli text-black">
-                          <div className="flex flex-col justify-between mb-2">
-                            <span className="text-gray-600">ანგარიშის ნომერი:</span>
-                            <span className="font-medium">GE16BG0000000315160700</span>
+                          <div className="flex justify-between items-center mb-2">
+                            <div className="flex flex-col">
+                              <span className="text-gray-600">ანგარიშის ნომერი:</span>
+                              <div className="flex items-center">
+                                <span className="font-medium mr-2">GE16BG0000000315160700</span>
+                                <span 
+                                  onClick={() => handleCopy("GE16BG0000000315160700", "account")}
+                                  className={`text-sm cursor-pointer transition-colors ${copyStatus.account ? "text-green-600" : "text-blue-500 hover:text-blue-700"}`}
+                                >
+                                  {copyStatus.account ? "Copied" : "Copy"}
+                                </span>
+                              </div>
+                            </div>
                           </div>
-                          <div className="flex flex-col justify-between mb-2">
-                            <span className="text-gray-600">დანიშნულება:</span>
-                            <span className="font-medium">{user?.email}</span>
+                          <div className="flex justify-between items-center mb-2">
+                            <div className="flex flex-col">
+                              <span className="text-gray-600">დანიშნულება:</span>
+                              <div className="flex items-center">
+                                <span className="font-medium mr-2">{user?.email}</span>
+                                <span 
+                                  onClick={() => handleCopy(user?.email, "email")}
+                                  className={`text-sm cursor-pointer transition-colors ${copyStatus.email ? "text-green-600" : "text-blue-500 hover:text-blue-700"}`}
+                                >
+                                  {copyStatus.email ? "Copied" : "Copy"}
+                                </span>
+                              </div>
+                            </div>
                           </div>
-                          <div className="flex flex-col justify-between">
-                            <span className="text-gray-600">თანხა:</span>
-                            <span className="font-medium">5 ლარი</span>
+                          <div className="flex justify-between items-center">
+                            <div className="flex flex-col">
+                              <span className="text-gray-600">თანხა:</span>
+                              <span className="font-medium">5 ლარი</span>
+                            </div>
                           </div>
                         </div>
                         
@@ -133,7 +170,7 @@ export default function SubscriptionModal({ open, setOpen }) {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                           </svg>
                         </div>
-                        <p className="text-gray-700 text-base leading-6 mb-6">
+                        <p className="text-gray-700 text-base leading-6 mb-6 mxedruli">
                           გამოწერა გააქტიურებულია, ამიერიდან შეგიძლიათ ისარგებლოთ akordebi.ge-ს სრული ფუნქციონალით. თუ გადარიცხვა არ დადასტურდა გამოწერა გაგიუქმდებათ.
                         </p>
                       </div>
