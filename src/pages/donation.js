@@ -9,12 +9,6 @@ import { useState } from 'react';
 const TermsOfService = () => {
   const [copySuccess, setCopySuccess] = useState('');
 
-  useEffect(() => {
-    (async () => {
-      await db.logEvent("donation_page_opened");
-    })();
-  }, []);
-
   const handleCopy = () => {
     const accountNumber = 'GE16BG0000000366014987';
 

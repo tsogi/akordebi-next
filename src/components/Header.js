@@ -31,7 +31,7 @@ export default function Header(){
 
     async function handleShopClick(e){
         e.preventDefault();
-        await uiDb.logEvent("guitar_finder_link_click");
+        // await uiDb.logEvent("guitar_finder_link_click");
         router.push("/guitar-finder");
     }
 

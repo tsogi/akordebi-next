@@ -218,11 +218,11 @@ export default function GuitarQuiz() {
     const questionText = questions[currentQuestion].question.en;
     const selectedOption = questions[currentQuestion].options.find(opt => opt.value === answer);
     const answerText = selectedOption ? selectedOption.label.en : answer;
-    await uiDb.logEvent("guitar_finder_answer", { 
-      question: questionText,
-      answer: answerText,
-      questionIndex: currentQuestion
-    });
+    // await uiDb.logEvent("guitar_finder_answer", { 
+    //   question: questionText,
+    //   answer: answerText,
+    //   questionIndex: currentQuestion
+    // });
 
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
@@ -258,13 +258,13 @@ export default function GuitarQuiz() {
         setRecommendation(recommendationData);
         
         // Log the successful recommendation
-        await uiDb.logEvent("guitar_finder_recommendation", {
-          name: recommendationData.name,
-          price: recommendationData.price,
-          thumbnail: recommendationData.thumbnail || 'no-image',
-          link: recommendationData.link,
-          summary: data.summary
-        });
+        // await uiDb.logEvent("guitar_finder_recommendation", {
+        //   name: recommendationData.name,
+        //   price: recommendationData.price,
+        //   thumbnail: recommendationData.thumbnail || 'no-image',
+        //   link: recommendationData.link,
+        //   summary: data.summary
+        // });
         
       } catch (err) {
         const errorMessage = 'Failed to get recommendation. Please try again.';
@@ -272,9 +272,9 @@ export default function GuitarQuiz() {
         console.error('Error:', err);
         
         // Log the error
-        await uiDb.logEvent("guitar_finder_error", {
-          error: err.message || errorMessage
-        });
+        // await uiDb.logEvent("guitar_finder_error", {
+        //   error: err.message || errorMessage
+        // });
       } finally {
         setIsLoading(false);
       }
@@ -340,11 +340,11 @@ export default function GuitarQuiz() {
                     rel="noopener noreferrer" 
                     className={styles.viewButton}
                     onClick={async () => {
-                      await uiDb.logEvent("guitar_finder_shop_link_click", {
-                        guitarName: recommendation.name,
-                        price: recommendation.price,
-                        link: recommendation.link
-                      });
+                      // await uiDb.logEvent("guitar_finder_shop_link_click", {
+                      //   guitarName: recommendation.name,
+                      //   price: recommendation.price,
+                      //   link: recommendation.link
+                      // });
                     }}
                   >
                     ონლაინ მაღაზიაში ნახვა
