@@ -22,7 +22,7 @@ export default function App({ Component, pageProps }) {
       <MyUserContextProvider>
         <Component {...pageProps} />
         <AuthSlideOver />
-        <NewsModal 
+        {/* <NewsModal 
           title="ახალი გვერდი - გიტარის მასწავლებლები"
           duration={5}
           name="teachers_page_launch"
@@ -30,7 +30,7 @@ export default function App({ Component, pageProps }) {
           {(markSeenAndClose) => (
             <TeachersNews onActionClick={markSeenAndClose} />
           )}
-        </NewsModal>
+        </NewsModal> */}
       </MyUserContextProvider>
     </SessionContextProvider>
   </>
