@@ -41,6 +41,8 @@ export default function ChordsList({ initialSongs }){
         router.query.page ? Number(router.query.page) : 1
     );
     const[paginationCount, setPaginationCount] = useState(0);
+    const[chordsCount, setChordsCount] = useState(0);
+    const[tabsCount, setTabsCount] = useState(0);
 
 
         
@@ -74,7 +76,18 @@ export default function ChordsList({ initialSongs }){
 
     useEffect(() => {
         applyFilters();
+        countSongsByType();
     }, [initialSongs]);
+
+    function countSongsByType() {
+        if (!initialSongs) return;
+        
+        const chords = initialSongs.filter(song => song.notation_format === "chords").length;
+        const tabs = initialSongs.filter(song => song.notation_format === "tabs").length;
+        
+        setChordsCount(chords);
+        setTabsCount(tabs);
+    }
 
     function writeParametersToState(){
         const { page: urlPage, sort: urlSort, favorites: urlFavorites,  lessoned: urlLessoned, confirmed: urlConfirmed, notation: urlNotation } = router.query;
@@ -267,7 +280,7 @@ export default function ChordsList({ initialSongs }){
                     }`}
                 >
                     <MusicalNoteIcon className="w-5 h-5" />
-                    <span>{lang._chords}</span>
+                    <span>{lang._chords} ({chordsCount})</span>
                 </button>
                 <button
                     onClick={() => handleNotationFormatChange("tabs")}
@@ -278,7 +291,7 @@ export default function ChordsList({ initialSongs }){
                     }`}
                 >
                     <QueueListIcon className="w-5 h-5" />
-                    <span>{lang._tabs}</span>
+                    <span>{lang._tabs} ({tabsCount})</span>
                 </button>
                 {/* <button
                     onClick={() => handleNotationFormatChange("notes")}
