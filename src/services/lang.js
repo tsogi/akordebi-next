@@ -55,6 +55,9 @@ const interfaceGeo = {
         favoritesBtn: '"ფავორიტების" ფუნქციის გამოსაყენებლად გთხოვთ შეხვიდეთ სისტემაში',
         uploadSongBtn: 'სიმღერის საიტზე ასატვირთად გთხოვთ შეხვიდეთ სისტემაში'
     },
+    subscriptionPrompt: {
+        title: "გამოწერა",
+    },
     chord: {
         font: "ფონტი",
         autoScroll: "ავტო-სქროლი",

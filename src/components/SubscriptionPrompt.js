@@ -4,6 +4,7 @@ import { supabase } from '@/utils/supabase-client';
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import SubscriptionModal from './SubscriptionModal';
+import lang from '@/services/lang';
 
 const SubscriptionPrompt = ({ onSubscribe }) => {
   const { user, setAuthOpenedFrom } = useUser();
@@ -22,7 +23,7 @@ const SubscriptionPrompt = ({ onSubscribe }) => {
     <>
       <div className="absolute top-20 left-0 right-0 z-10 flex justify-center pointer-events-all">
         <div className="bg-white p-5 rounded-lg shadow-lg border-2 border-[#5286ed] text-center w-full max-w-xs sm:max-w-sm mx-4">
-          <h3 className="text-xl font-bold text-gray-800 mb-3">Full Access Required</h3>
+          <h3 className="text-xl font-bold text-gray-800 mb-3 capital">{lang.subscriptionPrompt.title}</h3>
           
           {!user ? (
             <>

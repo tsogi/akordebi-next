@@ -101,17 +101,21 @@ export default function SubscriptionModal({ open, setOpen }) {
                   <div className="mt-6">
                     {!isActivated ? (
                       <>
-                        <p className="text-gray-700 text-base leading-6 mb-6">
-                          გამოწერა არის ძალიან მარტივი და გაგიაქტიურდებათ მომენტალურად. გადარიცხეთ თანხა ნებისმიერი ბანკიდან საქართველოს ბანკის ანგარიშზე <span className="font-medium text-[#5286ed]">GE16BG0000000315160700</span>. დანიშნულებაში აუცილებლად ჩაწერეთ თქვენი მეილი akordebi.ge-ზე. თანხის გადარიცხვის შემდეგ დააჭირეთ ღილაკს გააქტიურება.
+                        <p className="text-gray-700 text-base leading-6 mb-6 mxedruli">
+                          გამოწერა არის ძალიან მარტივი და გაგიაქტიურდებათ მომენტალურად. გადარიცხეთ თანხა ნებისმიერი ბანკიდან საქართველოს ბანკის ანგარიშზე. დანიშნულებაში აუცილებლად ჩაწერეთ თქვენი მეილი akordebi.ge-ზე. თანხის გადარიცხვის შემდეგ დააჭირეთ ღილაკს გააქტიურება.
                         </p>
                         
-                        <div className="mt-8 bg-gray-50 p-4 rounded-md">
-                          <div className="flex justify-between mb-2">
-                            <span className="text-gray-600">თქვენი ელ-ფოსტა:</span>
+                        <div className="mt-8 bg-gray-50 p-4 rounded-md mxedruli text-black">
+                          <div className="flex flex-col justify-between mb-2">
+                            <span className="text-gray-600">ანგარიშის ნომერი:</span>
+                            <span className="font-medium">GE16BG0000000315160700</span>
+                          </div>
+                          <div className="flex flex-col justify-between mb-2">
+                            <span className="text-gray-600">დანიშნულება:</span>
                             <span className="font-medium">{user?.email}</span>
                           </div>
-                          <div className="flex justify-between">
-                            <span className="text-gray-600">გადასახდელი თანხა:</span>
+                          <div className="flex flex-col justify-between">
+                            <span className="text-gray-600">თანხა:</span>
                             <span className="font-medium">5 ლარი</span>
                           </div>
                         </div>
