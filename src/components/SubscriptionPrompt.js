@@ -32,16 +32,56 @@ const SubscriptionPrompt = ({ onSubscribe }) => {
   const { user, setAuthOpenedFrom } = useUser();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showCustomAuth, setShowCustomAuth] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [paymentError, setPaymentError] = useState(null);
 
   const handleLoginClick = () => {
     setAuthOpenedFrom('subscription');
   };
 
-  const handleSubscribeClick = () => {
+  const handleSubscribeClick = async () => {
     // Log the subscribe click event
     dataClient.logEvent('subscribe_click', 'From subscription prompt');
-    setIsModalOpen(true);
+    
     if (onSubscribe) onSubscribe();
+    
+    // Check if user email is the special test email
+    if (user && user.email === "tsogiaidze1@gmail.com") {
+      try {
+        setIsLoading(true);
+        setPaymentError(null);
+        
+        // Call our new API route to initiate the BOG payment
+        const response = await fetch('/api/payment/initiate-bog-payment', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(data.error || 'Failed to initiate payment');
+        }
+        
+        // Redirect to the payment gateway URL
+        if (data.redirectUrl) {
+          window.location.href = data.redirectUrl;
+        } else {
+          throw new Error('No redirect URL received from payment service');
+        }
+        
+      } catch (error) {
+        console.error('Payment initiation error:', error);
+        setPaymentError(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
+      // For all other users, just show the modal
+      setIsModalOpen(true);
+    }
   };
   
   // Use client-side only rendering for the auth component to prevent hydration issues
@@ -116,10 +156,17 @@ const SubscriptionPrompt = ({ onSubscribe }) => {
               
               <button 
                 onClick={handleSubscribeClick}
-                className="bg-[#5286ed] hover:bg-[#4a6da7] text-white font-medium py-2 px-6 rounded-md transition-colors w-full"
+                disabled={isLoading}
+                className={`bg-[#5286ed] hover:bg-[#4a6da7] text-white font-medium py-2 px-6 rounded-md transition-colors w-full ${isLoading ? 'opacity-70 cursor-not-allowed' : ''}`}
               >
-                გამოწერა
+                {isLoading ? 'გთხოვთ მოიცადოთ...' : 'გამოწერა'}
               </button>
+              
+              {paymentError && (
+                <p className="text-red-500 text-sm mt-2">
+                  დაფიქსირდა შეცდომა: {paymentError}
+                </p>
+              )}
             </>
           )}
         </div>

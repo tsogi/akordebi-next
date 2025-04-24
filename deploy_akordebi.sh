@@ -8,7 +8,7 @@ cp .env.production.local.akordebi .env.production.local
 npm run build
 
 # Create docker image .tar for intel
-docker buildx build --platform linux/amd64 -t akordebi:1.3 --output "type=docker,dest=./akordebi.tar" .
+docker buildx build --platform linux/amd64 -t akordebi:1.4 --output "type=docker,dest=./akordebi.tar" .
 
 # Upload docker image .tar to ssh
 scp -i /users/nika/.ssh/id_rsa_ubuntu_server ./akordebi.tar nika@tsogi.net:/var/projects
