@@ -59,11 +59,11 @@ export default async function handler(req, res) {
         external_order_id: externalOrderId,
         purchase_units: {
           currency: 'GEL',
-          total_amount: 0.1, // 5 GEL
+          total_amount: 5, // 5 GEL
           basket: [
             {
               quantity: 1,
-              unit_price: 0.1,
+              unit_price: 5,
               product_id: 'gamowera'
             }
           ]
@@ -81,9 +81,6 @@ export default async function handler(req, res) {
       console.error('Failed to create BOG payment order', orderData);
       return res.status(500).json({ error: 'Failed to create payment' });
     }
-
-    // Activate subscription with payment_confirmed=0 (will be confirmed via callback)
-    // await db.activateUserSubscription(user.id);
 
     // Return the redirect URL to the client
     return res.status(200).json({ 
