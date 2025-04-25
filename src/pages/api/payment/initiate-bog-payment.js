@@ -83,7 +83,7 @@ export default async function handler(req, res) {
     }
 
     // Activate subscription with payment_confirmed=0 (will be confirmed via callback)
-    await db.activateUserSubscription(user.id);
+    // await db.activateUserSubscription(user.id);
 
     // Return the redirect URL to the client
     return res.status(200).json({ 

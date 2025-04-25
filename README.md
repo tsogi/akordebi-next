@@ -6,6 +6,7 @@
 
 # Useful commands
 select * from users where payment_date is not null;
+update users set payment_date = null and payment_confirmed = 1 where email = "tsogiaidze1@gmail.com";
 select * from users where email = "snowdze@gmail.com";
 UPDATE users SET payment_confirmed = 1 WHERE email IN ("tsogiaidze1@gmail.com", 'snowdze@gmail.com', 'davidkodan@gmail.com', 'lashachaki25@gmail.com', 'shotimachavariani12@gmail.com');
 UPDATE users SET payment_date = NULL WHERE email NOT IN ("tsogiaidze1@gmail.com", 'snowdze@gmail.com', 'davidkodan@gmail.com', 'lashachaki25@gmail.com', 'shotimachavariani12@gmail.com');

@@ -76,7 +76,7 @@ const SubscriptionPrompt = ({ onSubscribe }) => {
         console.error('Payment initiation error:', error);
         setPaymentError(error.message);
       } finally {
-        setIsLoading(false);
+        // setIsLoading(false);
       }
     } else {
       // For all other users, just show the modal
@@ -159,7 +159,7 @@ const SubscriptionPrompt = ({ onSubscribe }) => {
                 disabled={isLoading}
                 className={`bg-[#5286ed] hover:bg-[#4a6da7] text-white font-medium py-2 px-6 rounded-md transition-colors w-full ${isLoading ? 'opacity-70 cursor-not-allowed' : ''}`}
               >
-                {isLoading ? 'გთხოვთ მოიცადოთ...' : 'გამოწერა'}
+                {isLoading ? 'გთხოვთ მოიცადოთ...' : 'გადახდა ბარათით'}
               </button>
               
               {paymentError && (
