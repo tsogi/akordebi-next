@@ -542,6 +542,16 @@ class Db{
             return { success: false, error };
         }
     }
+
+    async storeBogPayment(email, status, paymentDetails) {
+        // Convert any undefined values to null to avoid SQL errors
+        const sanitizedEmail = email === undefined ? null : email;
+        const sanitizedStatus = status === undefined ? null : status;
+        const sanitizedDetails = paymentDetails === undefined ? null : paymentDetails;
+        
+        await this.pool.execute('INSERT INTO bog_payments (email, status, bog_body) VALUES (?, ?, ?)', 
+            [sanitizedEmail, sanitizedStatus, sanitizedDetails]);
+    }
 }
 
 module.exports = new Db();
