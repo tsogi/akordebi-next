@@ -46,7 +46,7 @@ const SubscriptionPrompt = ({ onSubscribe }) => {
     if (onSubscribe) onSubscribe();
     
     // Check if user email is the special test email
-    if (user && user.email === "tsogiaidze1@gmail.com") {
+    if (user) {
       try {
         setIsLoading(true);
         setPaymentError(null);

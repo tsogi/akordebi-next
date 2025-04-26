@@ -26,9 +26,10 @@ export default function PaymentFail() {
           </svg>
         </div>
         <h1 className="text-2xl font-bold text-gray-800 mb-4">გადახდა ვერ შესრულდა</h1>
-        <p className="text-gray-600 mb-6 mxedruli">
-          სამწუხაროდ, გადახდის პროცესი შეწყდა ან ვერ დასრულდა. გთხოვთ სცადოთ მოგვიანებით ან დაუკავშირდეთ ადმინისტრაციას tsogiaidze1@gmail.com
-        </p>
+        <div className="text-gray-600 mb-6 mxedruli text-left">
+          <p>პირველ რიგში დარწმუნდით რომ ბარათის ნომერი, მოქმედების ვადა და CVV კოდი სწორად ჩაწერეთ.</p>
+          <p>გთხოვთ სცადოთ მოგვიანებით ან დაუკავშირდეთ ადმინისტრაციას tsogiaidze1@gmail.com.</p>
+        </div>
         <button 
           onClick={goToHomePage}
           className="mt-4 px-6 py-2 bg-red-500 text-white font-medium rounded-md hover:bg-red-600 transition-colors"
