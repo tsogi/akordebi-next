@@ -2,6 +2,7 @@ import styles from "./Footer.module.css";
 import { useEffect } from "react";
 import WriteUs from "./WriteUs";
 import lang from '@/services/lang'
+import Link from "next/link";
 
 export default function Footer(){
   useEffect(() => {
@@ -42,6 +43,10 @@ export default function Footer(){
               <a className={styles.quickLink} href="/legal/terms">
                 <span className={styles.linksDivider}></span>
                 {lang._footer_terms}
+              </a>
+              <a className={styles.quickLink} href="/legal/refunds">
+                <span className={styles.linksDivider}></span>
+                {lang._footer_refunds}
               </a>
               <a className={styles.quickLink} href="/legal/privacy">
                 <span className={styles.linksDivider}></span>

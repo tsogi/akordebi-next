@@ -189,11 +189,11 @@ export default function SongPage({ song }){
                 }
             </div>
             <main className={`${styles.songBody} mxedruli`} style={{fontSize}}>
-                {!isPremium && (
+                {/* {!isPremium && (
                     <div className={styles.blurredContent}>
                         <SubscriptionPrompt onSubscribe={handleSubscribe} />
                     </div>
-                )}
+                )} */}
                 {
                     song?.body ? song.body.map((line, index) => {
                         if(line.type == "rightHand") {

@@ -20,7 +20,7 @@ const interfaceGeo = {
     _till: "მდე.",
     _totally: "სულ",
     _song: 'სიმღერა',
-    _footer_designBy: "საიტის ავტორი და დეველოპერი",
+    _footer_designBy: "ავტორი და დეველოპერი",
     _footer_tsogi: "ნიკა ცოგიაიძე",
     _footer_input: 'აკორდების ძებნა',
     _footer_input_placeholder: 'მოგვწერეთ იდეები, შენიშვნები, მოსაზრებები',
@@ -125,7 +125,8 @@ const interfaceGeo = {
         rightHand: `ჩაწერეთ მარჯვენა ხელის ინსტრუქცია. მაგალითად: 
 ბანი დაბლა დაბლა მაღლა დაბლა მაღლა ან ბანი ↓ ↓ ↑ ↓ ↑ ან ბანი 3 2 1 2 3`
     },
-    _search: "ძებნა"
+    _search: "ძებნა",
+    _footer_refunds: "დაბრუნება"
 }
 
 const interfaceEng = {
@@ -238,7 +239,8 @@ const interfaceEng = {
         rightHand: `Enter instructions for right hand. Example: 
 Bass Down Down Up Down Up or Bass ↓ ↓ ↑ ↓ ↑ or Bass 3 2 1 2 3`
     },
-    _search: "Search"
+    _search: "Search",
+    _footer_refunds: "Refunds"
 }
 
 let words = interfaceGeo;
