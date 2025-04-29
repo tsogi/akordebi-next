@@ -7,6 +7,7 @@ import AuthSlideOver from '@/components/AuthSlideOver';
 import GoogleTagManager from '@/components/GoogleAnalytics';
 import NewsModal from '@/components/NewsModal';
 import TeachersNews from '@/components/TeachersNews';
+import { LanguageProvider } from '@/context/LanguageContext';
 
 export default function App({ Component, pageProps }) {
 
@@ -20,17 +21,19 @@ export default function App({ Component, pageProps }) {
       initialSession={pageProps.initialSession}
     >
       <MyUserContextProvider>
-        <Component {...pageProps} />
-        <AuthSlideOver />
-        {/* <NewsModal 
-          title="ახალი გვერდი - გიტარის მასწავლებლები"
-          duration={5}
-          name="teachers_page_launch"
-        >
-          {(markSeenAndClose) => (
-            <TeachersNews onActionClick={markSeenAndClose} />
-          )}
-        </NewsModal> */}
+        <LanguageProvider>
+          <Component {...pageProps} />
+          <AuthSlideOver />
+          {/* <NewsModal 
+            title="ახალი გვერდი - გიტარის მასწავლებლები"
+            duration={5}
+            name="teachers_page_launch"
+          >
+            {(markSeenAndClose) => (
+              <TeachersNews onActionClick={markSeenAndClose} />
+            )}
+          </NewsModal> */}
+        </LanguageProvider>
       </MyUserContextProvider>
     </SessionContextProvider>
   </>

@@ -1,19 +1,21 @@
+'use client';
+
 import styles from "./Header.module.css";
 import { useUser } from "@/utils/useUser";
 import { supabase } from "@/utils/supabase-client";
 import { useRouter } from "next/router";
-import { UserIcon } from '@heroicons/react/20/solid';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import lang from '@/services/lang'
 import uiDb from '@/services/data';
 import Link from 'next/link'
 import { useState } from 'react';
 import { ArrowRightOnRectangleIcon } from '@heroicons/react/20/solid';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function Header(){
     const { user, setAuthOpenedFrom } = useUser();
     const router = useRouter();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { lang, toggleLanguage, language } = useLanguage();
 
     function isActive(page){
         if(page == "home" && ["/", "/chord/[chordUrl]"].includes(router.pathname)){ 
@@ -41,6 +43,14 @@ export default function Header(){
         router.push("https://chords365.com");
     }
 
+    function languageSwitcher() {
+        return (
+            <button onClick={toggleLanguage} className={styles.languageSwitcher} aria-label="Toggle language">
+                {language === 'geo' ? '🇬🇧' : '🇬🇪'}
+            </button>
+        );
+    }
+
     function menuPages(){
         if(process.env.NEXT_PUBLIC_DOMAIN == "akordebi.ge") {
             return <>
@@ -49,14 +59,14 @@ export default function Header(){
                     className={`nav-link ${isActive("home") ? "active" : ""}`}
                     onClick={() => setIsMenuOpen(false)}
                 >
-                    მთავარი გვერდი
+                    {lang.main_page}
                 </Link>
                 <Link 
                     href="/teachers" 
                     onClick={() => setIsMenuOpen(false)}
                     className="nav-link"
                 >
-                    გიტარის მასწავლებლები
+                    {lang.teachers}
                 </Link>
                 {/* <Link 
                     href="/shop" 
@@ -73,7 +83,7 @@ export default function Header(){
                     }} 
                     className={`nav-link ${isActive("guitar-finder") ? "active" : ""}`}
                 >
-                    გიტარის შემრჩევი AI
+                    {lang.guitar_finder}
                 </Link>
                 <Link 
                     href={""} 
@@ -83,7 +93,7 @@ export default function Header(){
                     }} 
                     className="nav-link"
                 >
-                    უცხოური აკორდები
+                    {lang.foreign_songs}
                 </Link>
             </>
         }
@@ -115,6 +125,7 @@ export default function Header(){
                     </div>
 
                     <div className={styles.headerActions}>
+                        {languageSwitcher()}
                         <button 
                             className={styles.menuButton}
                             onClick={() => setIsMenuOpen(!isMenuOpen)}

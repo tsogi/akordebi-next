@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import db from '@/services/data';
 import styles from "./SearchSongs.module.css";
-import lang from '@/services/lang'
+import { useLanguage } from '@/context/LanguageContext';
 
 const SearchSong = ({ onSearch }) => {
   const [searchText, setSearchText] = useState('');
   const [isSearching, setIsSearching] = useState(false);
+  const { lang } = useLanguage();
 
   const handleSearch = async () => {
     if (!searchText.trim()) return;
