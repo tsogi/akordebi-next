@@ -7,7 +7,7 @@ import AuthorsEditor from '@/components/AuthorsEditor';
 import DB from "@/services/data";
 import SongTextEditor from "@/components/SongTextEditor";
 import Snackbar from '@mui/material/Snackbar';
-import lang from '@/services/lang'
+import { useLanguage } from '@/context/LanguageContext';
 import CustomSelect from "@/components/CustomSelect";
 
 const css = {
@@ -26,6 +26,7 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
     const [snackSeverity, setSnackSeverity] = React.useState();
     const [snackMessage, setSnackMessage] = React.useState("");
     const [pass, setPass] = React.useState("");
+    const { lang } = useLanguage();
 
     React.useEffect(() => {
         const queryParams = new URLSearchParams(window.location.search);

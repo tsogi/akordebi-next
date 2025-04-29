@@ -4,9 +4,11 @@ import Head from 'next/head';
 import Footer from '@/components/Footer';
 import RefundsGeo from '@/components/RefundsGeo';
 import RefundsEng from '@/components/RefundsEng';
-import lang from '@/services/lang';
+import { useLanguage } from '@/context/LanguageContext';
 
 const RefundPolicy = () => {
+  const { lang } = useLanguage();
+
   return (
     <>
     <Head>

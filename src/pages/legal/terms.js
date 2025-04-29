@@ -4,9 +4,10 @@ import Head from 'next/head';
 import Footer from '@/components/Footer';
 import TermsGeo from '@/components/TermsGeo';
 import TermsEng from '@/components/TermsEng';
-import lang from '@/services/lang';
+import { useLanguage } from '@/context/LanguageContext';
 
 const TermsOfService = () => {
+  const { lang } = useLanguage();
   return (
     <>
     <Head>

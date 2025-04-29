@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./WriteUs.module.css";
-import lang from '@/services/lang'
+import { useLanguage } from '@/context/LanguageContext';
 import Alert from "./Alert";
 import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
 
@@ -9,6 +9,7 @@ export default function WriteUs(){
   const [showAlert,setShowAlert] = useState(false);
   const [showError,setShowError] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { lang } = useLanguage();
 
   const handleInputChange = (event) => {
     setText(event.target.value);

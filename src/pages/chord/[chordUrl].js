@@ -10,11 +10,11 @@ import SubscriptionPrompt from "@/components/SubscriptionPrompt";
 import db from "@/services/db";
 import styles from "./SongPage.module.css";
 import SongDifficulties from '@/components/SongDifficulties';
-import lang from '@/services/lang';
 import Favorite from '@/components/Favorite';
 import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
 import { MinusIcon, PlusIcon, EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import { useUser } from '@/utils/useUser';
+import { useLanguage } from '@/context/LanguageContext';
 let intervalId;
 
 export default function SongPage({ song }){
@@ -23,6 +23,7 @@ export default function SongPage({ song }){
     const [showChords, setShowChords ] = useState(false);
     const [isPremium, setIsPremium] = useState(false);
     const { user, userDetails } = useUser();
+    const { lang } = useLanguage();
 
     useEffect(() => {
         // Check if user has a valid subscription - only require payment_date to be set
@@ -290,6 +291,8 @@ function coupletChordsLine(chords, index, showChords){
 }
 
 function rightHandLine(content, index){
+    const { lang } = useLanguage();
+
     return <div key={index} className={`${styles.lineWrapper} ${styles.rightHand}`}>
         <div className={styles.rightHandLabel}>{lang.rightHand}</div>
         <div className={styles.rightHandText}>
@@ -477,12 +480,4 @@ function addCoupletChords(song){
     song.body = newLines;
 
     return song;
-}
-
-function showHideText(showChords){
-    if(process.env.NEXT_PUBLIC_LANG == "geo") {
-        return `${lang.chord.chord} ${showChords ? lang.chord.hide : lang.chord.appearance}`;
-    }
-
-    return `${showChords ? lang.chord.hide : lang.chord.appearance} ${lang.chord.chord}`;
 }

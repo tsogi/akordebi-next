@@ -4,9 +4,11 @@ import Head from 'next/head';
 import Footer from '@/components/Footer';
 import PrivacyGeo from '@/components/PrivacyGeo';
 import PrivacyEng from '@/components/PrivacyEng';
-import lang from '@/services/lang';
+import { useLanguage } from '@/context/LanguageContext';
 
 const PrivacyPolicy = () => {
+  const { lang } = useLanguage();
+
   return (
     <>
     <Head>

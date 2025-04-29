@@ -8,18 +8,18 @@ import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import Pagination from "./Pagination";
 import { useRouter } from 'next/router';
 import db from '@/services/data';
-import lang from '@/services/lang'
 import { HeartIcon } from '@heroicons/react/20/solid';
 import { useUser } from "@/utils/useUser";
 import CustomSelect from "./CustomSelect";
 import UploadSongBtn from "./UploadSongBtn";
 import { MusicalNoteIcon, QueueListIcon, DocumentTextIcon } from '@heroicons/react/24/outline';
-
+import { useLanguage } from '@/context/LanguageContext';
 const resultsPerPage = 20;
 
 export default function ChordsList({ initialSongs }){
     const router = useRouter();
     const { user, setAuthOpenedFrom } = useUser();
+    const { lang } = useLanguage();
 
     const[displayedSongs, setDisplayedSongs] = useState([]);
     const[filterConfirmed, setFilterConfirmed] = useState(

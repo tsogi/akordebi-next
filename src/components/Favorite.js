@@ -3,12 +3,13 @@ import { HeartIcon } from '@heroicons/react/24/solid';
 import { HeartIcon as HeartOutline } from '@heroicons/react/24/outline';
 import styles from './Favorite.module.css';
 import { useUser } from '@/utils/useUser';
-import lang from '@/services/lang';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function Favorite({ song, size = 'medium', showLabel = false }) {
   const [isFavorite, setIsFavorite] = useState(song.isFavorite ?? false);
   const { user, setAuthOpenedFrom } = useUser();
   const [isLoading, setIsLoading] = useState(false);
+  const { lang } = useLanguage();
 
   useEffect(() => {
     setIsFavorite(song.isFavorite ?? false);

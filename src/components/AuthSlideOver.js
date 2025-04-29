@@ -5,11 +5,12 @@ import { supabase } from "@/utils/supabase-client";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { useUser } from "@/utils/useUser";
-import lang from "@/services/lang";
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function AuthSlideOver() {
   const { authOpenedFrom, setAuthOpenedFrom } = useUser();
   const [open, setOpen] = useState(!!authOpenedFrom);
+  const { lang } = useLanguage();
 
   useEffect(() => {
     setOpen(!!authOpenedFrom);
@@ -86,6 +87,8 @@ export default function AuthSlideOver() {
 }
 
 function whyLoginText(authOpenedFrom){
+  const { lang } = useLanguage();
+
   if(authOpenedFrom == "header"){
     return lang._auth.enterBtn;
   }

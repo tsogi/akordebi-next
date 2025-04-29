@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from "react";
-import styles from "./SongDifficulties.module.css";
 import CustomSelect from "./CustomSelect";
-import lang from '@/services/lang';
+import { useLanguage } from '@/context/LanguageContext';
 
-const difficulties = [
-  { label: lang.difficulty.select, value: "-1"},
-  { label: lang.difficulty.very_easy, value: 1 },
-  { label: lang.difficulty.easy, value: 2 },
-  { label: lang.difficulty.medium, value: 3 },
-  { label: lang.difficulty.hard, value: 4 },
-  { label: lang.difficulty.very_hard, value: 5 },
-];
+function getDifficulties(){
+  const { lang } = useLanguage();
+  return [
+    { label: lang.difficulty.select, value: "-1"},
+    { label: lang.difficulty.very_easy, value: 1 },
+    { label: lang.difficulty.easy, value: 2 },
+    { label: lang.difficulty.medium, value: 3 },
+    { label: lang.difficulty.hard, value: 4 },
+    { label: lang.difficulty.very_hard, value: 5 },
+  ];
+}
 
 const SongDifficulties = (props) => {
   const [existingDifficulty, setExistingDifficulty] = useState(null);
   const [selectedDifficulty, setSelectedDifficulty] = useState(-1);
+  const { lang } = useLanguage();
 
   useEffect(() => {
     refreshDifficultyPlugin();
@@ -47,7 +50,7 @@ const SongDifficulties = (props) => {
   };
 
   return (
-      <CustomSelect value={selectedDifficulty} onChange={handleChange} options={difficulties} />
+      <CustomSelect value={selectedDifficulty} onChange={handleChange} options={getDifficulties()} />
   );
 };
 

@@ -3,12 +3,12 @@ import Header from '@/components/Header'
 import ChordsList from '@/components/ChordsList'
 import Footer from '@/components/Footer'
 import db from '@/services/db'
-import uiDb from '@/services/data';
-import { useEffect } from 'react'
-import lang from '@/services/lang'
+import { useLanguage } from '@/context/LanguageContext';
 import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
 
 export default function Home({ initialSongs }) {
+  const { lang } = useLanguage();
+
   return (
     <>
       <Head>

@@ -6,10 +6,11 @@ import CitySelect from "./CitySelect";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { generateRandomId } from '@/utils/generateId';
 import StarIcon from '@mui/icons-material/Star';
-import Tooltip from '@mui/material/Tooltip';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function TeachersList() {
   const { user, setAuthOpenedFrom } = useUser();
+  const { lang } = useLanguage();
   const [teachers, setTeachers] = useState([]);
   const [cities, setCities] = useState([]);
   const [showAddModal, setShowAddModal] = useState(false);
@@ -134,12 +135,12 @@ export default function TeachersList() {
     e.preventDefault();
 
     if (!formData.city.trim()) {
-      setFormError('აირჩიეთ ქალაქი');
+      setFormError(lang.select_city);
       return;
     }
 
     if (formData.mobile.trim() && !/^\d{9}$/.test(formData.mobile)) {
-      setFormError('ჩაწერეთ 9ნიშნა მობილურის ნომერი');
+      setFormError(lang.enter_9_digit_mobile);
       return;
     }
 
@@ -231,7 +232,7 @@ export default function TeachersList() {
           className={"text-[0.7rem]"}
           onClick={() => toggleDescription(teacher.id)}
         >
-          {expandedDescriptions[teacher.id] ? 'ნაკლების ჩვენება' : '...მეტის წაკითხვა'}
+          {expandedDescriptions[teacher.id] ? lang.less : lang.more }
         </button>
       </>
     );
@@ -240,16 +241,16 @@ export default function TeachersList() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h1 className=''>გიტარის მასწავლებლები</h1>
+        <h1 className=''>{lang.teachers}</h1>
         <div className="text-center max-w-2xl mx-auto my-4 text-sm text-gray-300">
-          <p className="mb-2 mxedruli">დაამატეთ ან შეაფასეთ ნაცნობი მასწავლებლები რათა შევქმნათ ერთიანი სანდო სია</p>
+          <p className="mb-2 mxedruli">{lang.add_or_rate_teachers}</p>
         </div>
         
         <button 
           className={styles.addButton}
           onClick={() => setShowAddModal(true)}
         >
-          მასწავლებლის დამატება
+          {lang.add_teacher}
         </button>
       </div>
 
@@ -262,7 +263,7 @@ export default function TeachersList() {
                 <button 
                   className={styles.deleteButton}
                   onClick={() => handleDelete(teacher.id, teacher.userId)}
-                  aria-label="წაშლა"
+                  aria-label={lang.delete}
                 >
                   <DeleteIcon />
                 </button>
@@ -297,18 +298,18 @@ export default function TeachersList() {
       {showAddModal && (
         <div className={styles.modalOverlay} onClick={() => setShowAddModal(false)}>
           <div className={styles.modal} onClick={e => e.stopPropagation()}>
-            <h2>ახალი მასწავლებლის დამატება</h2>
+            <h2>{lang.add_teacher}</h2>
             <form className={"mxedruli"} onSubmit={handleSubmit}>
               <input
                 type="text"
-                placeholder="მასწავლებლის სახელი/გვარი"
+                placeholder={lang.teacher_name}
                 value={formData.name}
                 onChange={e => setFormData({...formData, name: e.target.value})}
                 required
               />
               <input
                 type="text"
-                placeholder="მობილური(არასავალდებულო)"
+                placeholder={lang.mobile}
                 value={formData.mobile}
                 onChange={e => setFormData({...formData, mobile: e.target.value})}
               />
@@ -317,11 +318,11 @@ export default function TeachersList() {
                 options={cities}
                 value={formData.city}
                 onChange={value => setFormData({...formData, city: value})}
-                placeholder="აირჩიეთ ან ჩაწერეთ ქალაქი/სოფელი"
+                placeholder={lang.select_city}
                 required
               />
               <textarea
-                placeholder="ჩაწერეთ ინფორმაცია მასწავლებელზე. რას ასწავლის, რამდენი ხანია, ტერიტორიულად სადაა და ა.შ."
+                placeholder={lang.teacher_info}
                 value={formData.description}
                 rows={4}
                 onChange={e => setFormData({...formData, description: e.target.value})}
@@ -331,7 +332,7 @@ export default function TeachersList() {
               <div className={styles.charCount}>
                 {formData.description.length}/{MAX_DESCRIPTION_LENGTH}
               </div>
-              <button type="submit">დამატება</button>
+              <button type="submit">{lang.add_teacher}</button>
             </form>
           </div>
         </div>

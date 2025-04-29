@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import Header from '@/components/Header';
 import Head from 'next/head';
 import Footer from '@/components/Footer';
-import lang from '@/services/lang';
-import db from '@/services/data';
+import { useLanguage } from '@/context/LanguageContext';
 import { useState } from 'react';
 
 const TermsOfService = () => {
   const [copySuccess, setCopySuccess] = useState('');
+  const { lang } = useLanguage();
 
   const handleCopy = () => {
     const accountNumber = 'GE16BG0000000366014987';

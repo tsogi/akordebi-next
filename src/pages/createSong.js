@@ -3,9 +3,11 @@ import styles from "./createSong.module.css";
 import Head from "next/head";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import lang from '@/services/lang'
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function CreateSong(){
+    const { lang } = useLanguage();
+
     return <>
         <Head>
             <title>{`სიმღერის ატვირთვა - Upload new song`}</title>

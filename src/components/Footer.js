@@ -1,10 +1,12 @@
 import styles from "./Footer.module.css";
 import { useEffect } from "react";
 import WriteUs from "./WriteUs";
-import lang from '@/services/lang'
+import { useLanguage } from '@/context/LanguageContext';
 import Link from "next/link";
 
 export default function Footer(){
+  const { lang } = useLanguage();
+
   useEffect(() => {
     if(process.env.NEXT_PUBLIC_DOMAIN == "akordebi.ge"){
       const script = document.createElement('script');
@@ -31,13 +33,13 @@ export default function Footer(){
               {process.env.NEXT_PUBLIC_DOMAIN === "akordebi.ge" && (
                 <a className={styles.quickLink} href="/teachers">
                   <span className={styles.linksDivider}></span>
-                  გიტარის მასწავლებლები
+                  {lang.teachers}
                 </a>
               )}
               {process.env.NEXT_PUBLIC_DOMAIN === "akordebi.ge" && (
                 <a className={styles.quickLink} href="/guitar-finder">
                   <span className={styles.linksDivider}></span>
-                  გიტარის შემრჩევი AI
+                  {lang.guitar_finder}
                 </a>
               )}
               <a className={styles.quickLink} href="/legal/terms">

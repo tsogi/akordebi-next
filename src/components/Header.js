@@ -46,7 +46,7 @@ export default function Header(){
     function languageSwitcher() {
         return (
             <button onClick={toggleLanguage} className={styles.languageSwitcher} aria-label="Toggle language">
-                {language === 'geo' ? '🇬🇧' : '🇬🇪'}
+                {language === 'geo' ? '🇺🇸' : '🇬🇪'}
             </button>
         );
     }

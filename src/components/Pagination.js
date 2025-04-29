@@ -1,6 +1,6 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import styles from "./Pagination.module.css";
-import lang from '@/services/lang'
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function Pagination({ 
   currentPage = 1, 
@@ -10,7 +10,7 @@ export default function Pagination({
   onPreviousClick = () => {}, 
   goToPage = () => {}
 }) {
-  
+  const { lang } = useLanguage();
   const totalPages = Math.ceil(totalResults / resultsPerPage);
 
   const getPageNumbers = () => {
@@ -92,6 +92,8 @@ export default function Pagination({
 }
 
 function paginationMeta(currentPage, totalResults){
+  const { lang } = useLanguage();
+
   if(process.env.NEXT_PUBLIC_LANG == "geo") {
     return <p className="text-sm text-white">
         {lang._isShown} 

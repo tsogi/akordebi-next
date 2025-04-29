@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useUser } from '@/utils/useUser';
 import { supabase } from '@/utils/supabase-client';
 import SubscriptionModal from './SubscriptionModal';
-import lang from '@/services/lang';
+import { useLanguage } from '@/context/LanguageContext';
 import dataClient from '@/services/data';
 
 // Custom button component that will replace the Google sign-in button
 const GoogleSignInButton = ({ onClick }) => {
+  const { lang } = useLanguage();
+
   return (
     <button
       onClick={(e) => {
@@ -34,6 +36,7 @@ const SubscriptionPrompt = ({ onSubscribe }) => {
   const [showCustomAuth, setShowCustomAuth] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [paymentError, setPaymentError] = useState(null);
+  const { lang } = useLanguage();
 
   const handleLoginClick = () => {
     setAuthOpenedFrom('subscription');

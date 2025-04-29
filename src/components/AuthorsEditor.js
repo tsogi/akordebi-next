@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import { Tooltip } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import styles from "./AuthorsEditor.module.css";
-import lang from "@/services/lang";
+import { useLanguage } from '@/context/LanguageContext';
 
 const css = {
     textInput: "h-[50px] pl-5 text-white w-full bg-[rgba(255,255,255,.05)] shadow-[inset 12px 12px 30px rgba(53,123,230,.2)]"
@@ -11,6 +11,7 @@ const css = {
 
 const AuthorsEditor = ({ onAuthorsChange, _authors = [{ id: 1, name: '' }] }) => {
   const [authors, setAuthors] = useState(_authors);
+  const { lang } = useLanguage();
 
   const addInput = () => {
     const newInput = { id: authors.length + 1, name: '' };

@@ -1,4 +1,14 @@
 const interfaceGeo = {
+    teacher_info: "ჩაწერეთ ინფორმაცია მასწავლებელზე. რას ასწავლის, რამდენი ხანია, ტერიტორიულად სადაა და ა.შ.",
+    teacher_name: "მასწავლებლის სახელი/გვარი",
+    delete: "წაშლა",
+    add_teacher: "მასწავლებლის დამატება",
+    add_or_rate_teachers: "დაამატეთ ან შეაფასეთ ნაცნობი მასწავლებლები რათა შევქმნათ ერთიანი სანდო სია",
+    more: "მეტის ჩვენება",
+    less: "ნაკლების ჩვენება",
+    enter_9_digit_mobile: "ჩაწერეთ 9ნიშნა მობილურის ნომერი",
+    mobile: "მობილური",
+    select_city: "აირჩიეთ ქალაქი",
     teachers: "გიტარის მასწავლებლები",
     guitar_finder: "გიტარის შემრჩევი AI",
     foreign_songs: "უცხოური აკორდები",
@@ -134,10 +144,20 @@ const interfaceGeo = {
 }
 
 const interfaceEng = {
+    teacher_info: "Write information about the teacher. What he teaches, how long he has been teaching, where he is located and etc.",
+    teacher_name: "Teacher name",
+    delete: "Delete",
+    add_teacher: "Add Teacher",
+    add_or_rate_teachers: "Add or rate teachers to create a single list of teachers",
+    more: "Show More",
+    less: "Show Less",
+    enter_9_digit_mobile: "Enter 9 digit mobile number",
+    mobile: "Mobile",
+    select_city: "Select city",
     guitar_finder: "Guitar Finder",
     foreign_songs: "Foreign Songs",
     main_page: "Homepage",
-    teachers: "Teachers",
+    teachers: "Guitar Teachers",
     _tabs: "Tabs",
     _notes: "Notes",
     _chords: "Chords",
@@ -185,7 +205,7 @@ const interfaceEng = {
     },
     favorites: {
         add: "Add to favorites",
-        remove: "Remove from favorites"
+        remove: "Remove"
     },
     _auth: {
         login: "Log in",

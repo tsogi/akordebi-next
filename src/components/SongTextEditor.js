@@ -11,7 +11,8 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import MusicOffIcon from '@mui/icons-material/MusicOff';
 import CircularProgress from '@mui/material/CircularProgress';
-import lang from '@/services/lang';
+import { useLanguage } from '@/context/LanguageContext';
+
 // Todo if song url has / in it we get wrong url and page can't be opened https://akordebi.ge/chord/chiti-werili/gia_toidze
 
 const css = {
@@ -20,6 +21,7 @@ const css = {
 
 const PoemEditor = ({onSongTextChange, _lines = []}) => {
   const [lines, setLines] = useState(_lines);
+  const { lang } = useLanguage();
 
   useEffect(() => {
     onSongTextChange(lines);
@@ -496,6 +498,8 @@ return (
 };
 
 function getTextAreaPlaceholder(type) {
+  const { lang } = useLanguage();
+
   if(type == "rightHand") {
     return lang.placeholder.rightHand;
   }

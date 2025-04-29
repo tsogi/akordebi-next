@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import styles from './GuitarQuiz.module.css';
 import Image from 'next/image';
-import uiDb from '@/services/data';
 
 const questions = [
   {

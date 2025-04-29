@@ -1,11 +1,12 @@
 import styles from "./ChordsList.module.css";
 import { useUser } from '@/utils/useUser';
-import lang from "@/services/lang";
+import { useLanguage } from '@/context/LanguageContext';
 import { useRouter } from 'next/router';
 
 export default function UploadSongBtn(){
     const { user, setAuthOpenedFrom } = useUser();
     const router = useRouter();
+    const { lang } = useLanguage();
 
     function handleUploadSongClick(){
         if (!user){
