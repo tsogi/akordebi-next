@@ -132,7 +132,7 @@ export default function Header(){
                     </div>
 
                     <div className={styles.headerActions}>
-                        {/* {languageSwitcher()} */}
+                        {languageSwitcher()}
                         <button 
                             className={styles.menuButton}
                             onClick={() => setIsMenuOpen(!isMenuOpen)}

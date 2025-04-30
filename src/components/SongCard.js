@@ -7,8 +7,38 @@ import styles from "./SongCard.module.css";
 import { useUser } from '@/utils/useUser';
 import Link from 'next/link';
 import Favorite from "./Favorite";
+import { useLanguage } from '@/context/LanguageContext';
+
+// Georgian to Latin transliteration mapping
+const georgianToLatinMap = {
+    'ა': 'a', 'ბ': 'b', 'გ': 'g', 'დ': 'd', 'ე': 'e', 'ვ': 'v', 'ზ': 'z', 
+    'თ': 't', 'ი': 'i', 'კ': 'k', 'ლ': 'l', 'მ': 'm', 'ნ': 'n', 'ო': 'o', 
+    'პ': 'p', 'ჟ': 'zh', 'რ': 'r', 'ს': 's', 'ტ': 't', 'უ': 'u', 'ფ': 'p', 
+    'ქ': 'k', 'ღ': 'gh', 'ყ': 'q', 'შ': 'sh', 'ჩ': 'ch', 'ც': 'ts', 'ძ': 'dz', 
+    'წ': 'ts', 'ჭ': 'ch', 'ხ': 'kh', 'ჯ': 'j', 'ჰ': 'h'
+};
+
+// Function to convert Georgian text to Latin
+const convertGeorgianToLatin = (text) => {
+    if (!text) return '';
+    
+    return Array.from(text).map(char => {
+        // Convert both lowercase and uppercase Georgian letters
+        const lowerChar = char.toLowerCase();
+        const latinChar = georgianToLatinMap[lowerChar];
+        
+        // If the character exists in our map, convert it
+        // Otherwise, keep the original character
+        if (latinChar) {
+            // Preserve original case if possible
+            return char === lowerChar ? latinChar : latinChar.toUpperCase();
+        }
+        return char;
+    }).join('');
+};
 
 export default function SongCard({ song }){
+    const { language } = useLanguage();
     const { user, setAuthOpenedFrom } = useUser();
     const [isFavorite, setIsFavorite] = React.useState(song.isFavorite?? false);
 
@@ -44,15 +74,21 @@ export default function SongCard({ song }){
         }
     } , [user, song.id, localStorage.getItem("addSongToFavorites")]);
 
+    // Get song name and author(s) in either Georgian or Latin based on language
+    const displaySongName = language === "eng" ? convertGeorgianToLatin(song.name) : song.name;
+    const displayAuthors = language === "eng" 
+        ? song.authors.map(author => convertGeorgianToLatin(author))
+        : song.authors;
+
     return (
         <article key={song.id} className={"songItemWrapper"}>
             <div className={styles.songCard}>
                 <Link href={`/chord/${song.url}`} className={styles.songLink}>
                     <div className={styles.songContent}>
                         <div className={styles.songDetails}>
-                            <h2 className={`${styles.songName} capital`}>{song.name}</h2>
+                            <h2 className={`${styles.songName} capital`}>{displaySongName}</h2>
                             <div className={styles.authors}>
-                                {song.authors.map(author => (
+                                {displayAuthors.map(author => (
                                     <h4 key={author} className={styles.author}>{author}</h4>
                                 ))}
                             </div>
