@@ -8,34 +8,7 @@ import { useUser } from '@/utils/useUser';
 import Link from 'next/link';
 import Favorite from "./Favorite";
 import { useLanguage } from '@/context/LanguageContext';
-
-// Georgian to Latin transliteration mapping
-const georgianToLatinMap = {
-    'ა': 'a', 'ბ': 'b', 'გ': 'g', 'დ': 'd', 'ე': 'e', 'ვ': 'v', 'ზ': 'z', 
-    'თ': 't', 'ი': 'i', 'კ': 'k', 'ლ': 'l', 'მ': 'm', 'ნ': 'n', 'ო': 'o', 
-    'პ': 'p', 'ჟ': 'zh', 'რ': 'r', 'ს': 's', 'ტ': 't', 'უ': 'u', 'ფ': 'f', 
-    'ქ': 'q', 'ღ': 'gh', 'ყ': 'y', 'შ': 'sh', 'ჩ': 'ch', 'ც': 'ts', 'ძ': 'dz', 
-    'წ': 'w', 'ჭ': 'ch', 'ხ': 'kh', 'ჯ': 'j', 'ჰ': 'h'
-};
-
-// Function to convert Georgian text to Latin
-const convertGeorgianToLatin = (text) => {
-    if (!text) return '';
-    
-    return Array.from(text).map(char => {
-        // Convert both lowercase and uppercase Georgian letters
-        const lowerChar = char.toLowerCase();
-        const latinChar = georgianToLatinMap[lowerChar];
-        
-        // If the character exists in our map, convert it
-        // Otherwise, keep the original character
-        if (latinChar) {
-            // Preserve original case if possible
-            return char === lowerChar ? latinChar : latinChar.toUpperCase();
-        }
-        return char;
-    }).join('');
-};
+import { transliterateWithCapital, transliterateWithCapitalizedWords } from '@/utils/transliteration';
 
 export default function SongCard({ song }){
     const { language } = useLanguage();
@@ -76,16 +49,10 @@ export default function SongCard({ song }){
 
     // Get song name and author(s) in either Georgian or Latin based on language
     const displaySongName = language === "eng" 
-        ? convertGeorgianToLatin(song.name).charAt(0).toUpperCase() + convertGeorgianToLatin(song.name).slice(1)
+        ? transliterateWithCapital(song.name)
         : song.name;
     const displayAuthors = language === "eng" 
-        ? song.authors.map(author => {
-            // Capitalize each word in the author name
-            return convertGeorgianToLatin(author)
-                .split(' ')
-                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                .join(' ');
-        })
+        ? song.authors.map(author => transliterateWithCapitalizedWords(author))
         : song.authors;
 
     return (

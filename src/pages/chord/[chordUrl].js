@@ -15,6 +15,7 @@ import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
 import { MinusIcon, PlusIcon, EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import { useUser } from '@/utils/useUser';
 import { useLanguage } from '@/context/LanguageContext';
+import { transliterateWithCapital, transliterateWithCapitalizedWords } from '@/utils/transliteration';
 let intervalId;
 
 export default function SongPage({ song }){
@@ -23,7 +24,16 @@ export default function SongPage({ song }){
     const [showChords, setShowChords ] = useState(false);
     const [isPremium, setIsPremium] = useState(false);
     const { user, userDetails } = useUser();
-    const { lang } = useLanguage();
+    const { lang, language } = useLanguage();
+
+    // Get song name and author(s) in either Georgian or Latin based on language
+    const displaySongName = language === "eng" 
+        ? transliterateWithCapital(song?.name)
+        : song?.name;
+    
+    const displayAuthors = language === "eng" && song?.authors
+        ? song.authors.map(author => transliterateWithCapitalizedWords(author))
+        : song?.authors;
 
     useEffect(() => {
         // Check if user has a valid subscription - only require payment_date to be set
@@ -106,7 +116,7 @@ export default function SongPage({ song }){
 
     return <>
         <Head>
-            <title>{`${song.name} - ${lang._guitar_chords}`}</title>
+            <title>{`${displaySongName} - ${lang._guitar_chords}`}</title>
             <meta name="description" content={ `${song.searchWords}` } />
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
             <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -178,11 +188,11 @@ export default function SongPage({ song }){
                     <Favorite song={song} showLabel={true} />
                 </div>
             </div>
-            <h2 className={`${styles.songName} capital`}>{song?.name}</h2>
+            <h2 className={`${styles.songName} capital`}>{displaySongName}</h2>
             <div className={styles.songAuthors}>
                 {
-                    song?.authors ?
-                    song.authors.map((author) => {
+                    displayAuthors ?
+                    displayAuthors.map((author) => {
                         return <h4 key={author} className={styles.songAuthor}>{author}</h4>
                     })
                     :
