@@ -264,7 +264,11 @@ export default function SongPage({ song }){
                 <div className={styles.uploaderWrapper}>
                     <div className={styles.uploaderInfo}>
                         <span>{lang.chord.uploaded}:</span>
-                        <span className={styles.uploaderName}>{song.uploader}</span>
+                        <span className={styles.uploaderName}>
+                            {language === "eng" 
+                                ? transliterateWithCapitalizedWords(song.uploader)
+                                : song.uploader}
+                        </span>
                     </div>
                 </div>
                 :
