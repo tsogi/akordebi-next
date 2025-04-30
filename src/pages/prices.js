@@ -11,19 +11,19 @@ export default function Prices() {
   const [isAnnual, setIsAnnual] = useState(false);
 
   const handleSubscribe = () => {
-    alert("გადახდები დროებით გათიშულია, გთხოვთ სცადოთ მოგვიანებით");
+    alert(lang.price.payments_disabled);
   };
 
   return (
     <>
       <Head>
-        <title>ფასები - Akordebi.ge</title>
-        <meta name="description" content="Akordebi.ge პაკეტები და ფასები" />
+        <title>{lang.price.title}</title>
+        <meta name="description" content={lang.price.meta_description} />
       </Head>
       <Header />
       
       <main className="container mx-auto px-4 py-12 max-w-6xl">
-        <h1 className="text-3xl md:text-4xl font-bold text-center mb-12">ჩვენი პაკეტები</h1>
+        <h1 className="text-3xl md:text-4xl font-bold text-center mb-12">{lang.price.our_packages}</h1>
         
         <div className="flex flex-col md:flex-row gap-8 justify-center items-stretch">
           {/* Free Plan */}
@@ -43,11 +43,10 @@ export default function Prices() {
             
             <div className="mb-6 relative text-center">
               <span className="inline-block px-3 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 mb-3">
-                სასწავლო
+                {lang.price.learning}
               </span>
-              {/* <h2 className="text-2xl font-bold mb-2">სასწავლო</h2> */}
-              <p className="text-xl font-bold text-green-600">უფასო</p>
-              <p className="text-gray-500 mt-2">დაიწყე სწავლა დღესვე</p>
+              <p className="text-xl font-bold text-green-600">{lang.price.free}</p>
+              <p className="text-gray-500 mt-2">{lang.price.start_learning}</p>
             </div>
             
             <ul className="space-y-4 mb-8 flex-grow text-[#16a34a] mxedruli">
@@ -55,42 +54,37 @@ export default function Prices() {
                 <svg className="h-6 w-6 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
-                <span>ყველა სიმღერა ნახევრად</span>
+                <span>{lang.price.free_features.half_songs}</span>
               </li>
               <li className="flex items-start">
                 <svg className="h-6 w-6 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
-                <span>ყველა ტაბი ნახევრად</span>
+                <span>{lang.price.free_features.half_tabs}</span>
               </li>
               <li className="flex items-start">
                 <svg className="h-6 w-6 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
-                <span>ფავორიტებში შენახვა</span>
+                <span>{lang.price.free_features.save_favorites}</span>
               </li>
               <li className="flex items-start">
                 <svg className="h-6 w-6 text-green-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
-                <span>გიტარის მასწავლებლები</span>
+                <span>{lang.price.free_features.guitar_teachers}</span>
               </li>
             </ul>
             
             <button 
               className="mt-auto w-full py-3 px-4 bg-white text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-all duration-200 border border-gray-200 shadow-sm"
             >
-              მიმდინარე პაკეტი
+              {lang.price.current_package}
             </button>
           </div>
           
           {/* Premium Plan */}
           <div className="relative rounded-xl overflow-hidden p-6 md:p-8 w-full md:w-1/2 max-w-md flex flex-col transition-all duration-300 hover:translate-y-[-4px] shadow-xl bg-gradient-to-br from-blue-50 via-white to-indigo-50 border border-blue-200">
-            {/* Premium badge */}
-            {/* <div className="absolute -right-12 top-5 rotate-45 bg-blue-600 text-white py-1.5 w-44 text-center font-medium text-sm shadow-md z-10">
-              რეკომენდებული
-            </div> */}
-            
             {/* Background music-themed pattern */}
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
               <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
@@ -107,11 +101,10 @@ export default function Prices() {
             
             <div className="mb-6 relative text-center">
               <span className="inline-block px-3 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800 mb-3">
-                პრემიუმი
+                {lang.price.premium}
               </span>
-              {/* <h2 className="text-2xl font-bold mb-2">პრემიუმი</h2> */}
-              <p className="text-xl font-bold text-blue-600">5 ლარი / თვეში</p>
-              <p className="text-gray-500 mt-2">სრული წვდომა ყველა ფუნქციაზე</p>
+              <p className="text-xl font-bold text-blue-600">{lang.price.premium_price}</p>
+              <p className="text-gray-500 mt-2">{lang.price.full_access}</p>
             </div>
             
             <ul className="space-y-4 mb-8 flex-grow text-[#2563eb] mxedruli">
@@ -119,31 +112,31 @@ export default function Prices() {
                 <svg className="h-6 w-6 text-blue-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
-                <span>ყველაფერი უფასოში</span>
+                <span>{lang.price.premium_features.all_free}</span>
               </li>
               <li className="flex items-start">
                 <svg className="h-6 w-6 text-blue-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
-                <span>სიმღერები სრულად</span>
+                <span>{lang.price.premium_features.full_songs}</span>
               </li>
               <li className="flex items-start">
                 <svg className="h-6 w-6 text-blue-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
-                <span>ტაბები სრულად</span>
+                <span>{lang.price.premium_features.full_tabs}</span>
               </li>
               <li className="flex items-start">
                 <svg className="h-6 w-6 text-blue-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
-                <span>გიტარის შემრჩევი AI</span>
+                <span>{lang.price.premium_features.guitar_ai}</span>
               </li>
               <li className="flex items-start">
                 <svg className="h-6 w-6 text-blue-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
-                <span>არანაირი რეკლამა</span>
+                <span>{lang.price.premium_features.no_ads}</span>
               </li>
             </ul>
             
@@ -151,13 +144,13 @@ export default function Prices() {
               onClick={handleSubscribe}
               className="mt-auto w-full py-3 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-200 shadow-md"
             >
-              გააქტიურება
+              {lang.price.activate}
             </button>
           </div>
         </div>
         
         <div className="mt-12 text-center text-gray-600">
-          <p>კითხვები? <a href="mailto:tsogiaidze1@gmail.com" className="text-blue-600 hover:underline">დაგვიკავშირდით</a></p>
+          <p>{lang.price.questions} <a href="mailto:tsogiaidze1@gmail.com" className="text-blue-600 hover:underline">{lang.price.contact_us}</a></p>
         </div>
       </main>
       <Footer />

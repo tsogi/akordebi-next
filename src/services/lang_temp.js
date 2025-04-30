@@ -141,7 +141,38 @@ const interfaceGeo = {
 ბანი დაბლა დაბლა მაღლა დაბლა მაღლა ან ბანი ↓ ↓ ↑ ↓ ↑ ან ბანი 3 2 1 2 3`
     },
     _search: "ძებნა",
-    _footer_refunds: "დაბრუნება"
+    _footer_refunds: "დაბრუნება",
+    
+    // Price page translations
+    price: {
+        title: "ფასები - Akordebi.ge",
+        meta_description: "Akordebi.ge პაკეტები და ფასები",
+        our_packages: "ჩვენი პაკეტები",
+        learning: "სასწავლო",
+        free: "უფასო",
+        start_learning: "დაიწყე სწავლა დღესვე",
+        current_package: "მიმდინარე პაკეტი",
+        premium: "პრემიუმი",
+        premium_price: "5 ლარი / თვეში",
+        full_access: "სრული წვდომა ყველა ფუნქციაზე",
+        activate: "გააქტიურება",
+        questions: "კითხვები?",
+        contact_us: "დაგვიკავშირდით",
+        free_features: {
+            half_songs: "ყველა სიმღერა ნახევრად",
+            half_tabs: "ყველა ტაბი ნახევრად",
+            save_favorites: "ფავორიტებში შენახვა",
+            guitar_teachers: "გიტარის მასწავლებლები"
+        },
+        premium_features: {
+            all_free: "ყველაფერი უფასოში",
+            full_songs: "სიმღერები სრულად",
+            full_tabs: "ტაბები სრულად",
+            guitar_ai: "გიტარის შემრჩევი AI",
+            no_ads: "არანაირი რეკლამა"
+        },
+        payments_disabled: "გადახდები დროებით გათიშულია, გთხოვთ სცადოთ მოგვიანებით"
+    }
 }
 
 const interfaceEng = {
@@ -273,7 +304,38 @@ const interfaceEng = {
 Bass Down Down Up Down Up or Bass ↓ ↓ ↑ ↓ ↑ or Bass 3 2 1 2 3`
     },
     _search: "Search",
-    _footer_refunds: "Refunds"
+    _footer_refunds: "Refunds",
+    
+    // Price page translations
+    price: {
+        title: "Prices - Akordebi.ge",
+        meta_description: "Akordebi.ge packages and prices",
+        our_packages: "Our Packages",
+        learning: "Learning",
+        free: "Free",
+        start_learning: "Start learning today",
+        current_package: "Current Package",
+        premium: "Premium",
+        premium_price: "5 GEL / month",
+        full_access: "Full access to all features",
+        activate: "Activate",
+        questions: "Questions?",
+        contact_us: "Contact us",
+        free_features: {
+            half_songs: "All songs partially",
+            half_tabs: "All tabs partially",
+            save_favorites: "Save to favorites",
+            guitar_teachers: "Guitar teachers"
+        },
+        premium_features: {
+            all_free: "Everything in free",
+            full_songs: "Full songs",
+            full_tabs: "Full tabs",
+            guitar_ai: "Guitar Finder AI",
+            no_ads: "No advertisements"
+        },
+        payments_disabled: "Payments are temporarily disabled, please try again later"
+    }
 }
 
 // Export both language interfaces
