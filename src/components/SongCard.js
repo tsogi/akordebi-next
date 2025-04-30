@@ -13,9 +13,9 @@ import { useLanguage } from '@/context/LanguageContext';
 const georgianToLatinMap = {
     'ა': 'a', 'ბ': 'b', 'გ': 'g', 'დ': 'd', 'ე': 'e', 'ვ': 'v', 'ზ': 'z', 
     'თ': 't', 'ი': 'i', 'კ': 'k', 'ლ': 'l', 'მ': 'm', 'ნ': 'n', 'ო': 'o', 
-    'პ': 'p', 'ჟ': 'zh', 'რ': 'r', 'ს': 's', 'ტ': 't', 'უ': 'u', 'ფ': 'p', 
-    'ქ': 'k', 'ღ': 'gh', 'ყ': 'q', 'შ': 'sh', 'ჩ': 'ch', 'ც': 'ts', 'ძ': 'dz', 
-    'წ': 'ts', 'ჭ': 'ch', 'ხ': 'kh', 'ჯ': 'j', 'ჰ': 'h'
+    'პ': 'p', 'ჟ': 'zh', 'რ': 'r', 'ს': 's', 'ტ': 't', 'უ': 'u', 'ფ': 'f', 
+    'ქ': 'q', 'ღ': 'gh', 'ყ': 'y', 'შ': 'sh', 'ჩ': 'ch', 'ც': 'ts', 'ძ': 'dz', 
+    'წ': 'w', 'ჭ': 'ch', 'ხ': 'kh', 'ჯ': 'j', 'ჰ': 'h'
 };
 
 // Function to convert Georgian text to Latin
@@ -75,9 +75,17 @@ export default function SongCard({ song }){
     } , [user, song.id, localStorage.getItem("addSongToFavorites")]);
 
     // Get song name and author(s) in either Georgian or Latin based on language
-    const displaySongName = language === "eng" ? convertGeorgianToLatin(song.name) : song.name;
+    const displaySongName = language === "eng" 
+        ? convertGeorgianToLatin(song.name).charAt(0).toUpperCase() + convertGeorgianToLatin(song.name).slice(1)
+        : song.name;
     const displayAuthors = language === "eng" 
-        ? song.authors.map(author => convertGeorgianToLatin(author))
+        ? song.authors.map(author => {
+            // Capitalize each word in the author name
+            return convertGeorgianToLatin(author)
+                .split(' ')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ');
+        })
         : song.authors;
 
     return (
