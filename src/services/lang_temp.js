@@ -83,6 +83,9 @@ const interfaceGeo = {
         rate: " შეაფასეთ აკორდების სისწორე",
     },
     upload: {
+        select_type: "აირჩიეთ ტიპი:",
+        chords: "აკორდები",
+        tabs: "ტაბები",
         cancel: "გაუქმება",
         add_image_button: "ტაბის/ნოტის დამატება",
         upload_image: "ტაბის ან ნოტის ფოტოს ატვირთვა",
@@ -257,6 +260,10 @@ const interfaceEng = {
         rate: "Evaluate correctness of chords",
     },
     upload: {
+        chords: "Chords",
+        tabs: "Tabs",
+        select_type: "Select type:",
+        cancel: "Cancel",
         publish: `In order to upload new song chord to ${process.env.NEXT_PUBLIC_DOMAIN} you should fill out the fields and upload song text using plus(+) buttons. At the end of this page you can find `,
         publish2: "In order to earn money please read ", 
         video_Instructions: "video instructions for upload",

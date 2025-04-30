@@ -173,12 +173,12 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
             </div>
             <div className={ styles.notationFormat + " mt-[50px]" }>
                 <div className="flex items-center mb-2">
-                    <span className="text-white mr-2">აირჩიეთ ტიპი:</span>
+                    <span className="text-white mr-2">{lang.upload.select_type}</span>
                     <div className="flex-1">
                         <CustomSelect
                             options={[
-                                { label: "აკორდები", value: "chords" },
-                                { label: "ტაბები", value: "tabs" },
+                                { label: lang.upload.chords, value: "chords" },
+                                { label: lang.upload.tabs, value: "tabs" },
                                 // { label: "ნოტები", value: "notes" }
                             ]}
                             value={notationFormat}
