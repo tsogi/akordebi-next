@@ -15,7 +15,7 @@ import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
 import { MinusIcon, PlusIcon, EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import { useUser } from '@/utils/useUser';
 import { useLanguage } from '@/context/LanguageContext';
-import { transliterateWithCapital, transliterateWithCapitalizedWords } from '@/utils/transliteration';
+import { transliterateWithCapital, transliterateWithCapitalizedWords, convertGeorgianToLatin } from '@/utils/transliteration';
 let intervalId;
 
 export default function SongPage({ song }){
@@ -319,12 +319,26 @@ function rightHandLine(content, index){
     </div>
 }
 
+function renderCharacter(character){
+    const { language } = useLanguage();
+
+    if(character == " ") {
+        return '\u00A0';
+    }
+
+    if(language === "eng") {
+        return convertGeorgianToLatin(character);
+    }
+
+    return character;
+}
+
 function renderLine(line, index){
     return <div key={index} className={`lineWrapper ${line.type}`}>
     {
         line.value.split("").map((character, index) => {
             return <div key={index} className={styles.textBit}>
-                <div className={styles.character}>{character == " " ? '\u00A0' : character}</div>
+                <div className={styles.character}>{renderCharacter(character)}</div>
                 {
                     line.chords[index] ?
                     <>
