@@ -7,7 +7,7 @@ import RefundsEng from '@/components/RefundsEng';
 import { useLanguage } from '@/context/LanguageContext';
 
 const RefundPolicy = () => {
-  const { lang } = useLanguage();
+  const { lang, language } = useLanguage();
 
   return (
     <>
@@ -20,7 +20,7 @@ const RefundPolicy = () => {
     <Header />
       <div className='page_container'>
         {
-          process.env.NEXT_PUBLIC_LANG == "geo" ?
+          language == "geo" ?
           <RefundsGeo />
           :
           <RefundsEng />
