@@ -7,7 +7,7 @@ import PrivacyEng from '@/components/PrivacyEng';
 import { useLanguage } from '@/context/LanguageContext';
 
 const PrivacyPolicy = () => {
-  const { lang } = useLanguage();
+  const { lang, language } = useLanguage();
 
   return (
     <>
@@ -20,7 +20,7 @@ const PrivacyPolicy = () => {
     <Header />
       <div className='page_container'>
         {
-          process.env.NEXT_PUBLIC_LANG == "geo" ?
+          language == "geo" ?
           <PrivacyGeo />
           :
           <PrivacyEng />

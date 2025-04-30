@@ -7,7 +7,7 @@ import TermsEng from '@/components/TermsEng';
 import { useLanguage } from '@/context/LanguageContext';
 
 const TermsOfService = () => {
-  const { lang } = useLanguage();
+  const { lang, language } = useLanguage();
   return (
     <>
     <Head>
@@ -19,7 +19,7 @@ const TermsOfService = () => {
     <Header />
       <div className='page_container'>
         {
-          process.env.NEXT_PUBLIC_LANG == "geo" ?
+          language == "geo" ?
           <TermsGeo />
           :
           <TermsEng />

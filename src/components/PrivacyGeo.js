@@ -1,7 +1,7 @@
 export default function PrivacyGeo(){
     return <div style={{ padding: '20px' }}>
     <h1 style={{ marginBottom: "5px" }}>კონფიდენციალურობის პოლიტიკა {process.env.NEXT_PUBLIC_DOMAIN}-სთვის</h1>
-    <p><strong>ბოლო განახლება:</strong> 1 იანვარი 2024</p>
+    <p><strong>ბოლო განახლება:</strong> 30 აპრილი 2025</p>
    
     <section className="mt-[30px]">
       <strong>შესავალი</strong>

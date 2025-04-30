@@ -1,7 +1,7 @@
 export default function TermsGeo(){
     return <div style={{ padding: '20px' }}>
     <strong>მომსახურების პირობები {process.env.NEXT_PUBLIC_DOMAIN}-სთვის</strong>
-    <p className="mxedruli"><strong>ბოლო განახლება: </strong>27 აპრილი 2024</p>
+    <p className="mxedruli"><strong>ბოლო განახლება: </strong>27 აპრილი 2025</p>
     <br></br>
     <strong>პირობების მიღება</strong>
     <p className="mxedruli">{process.env.NEXT_PUBLIC_DOMAIN}-ზე წვდომით და გამოყენებით თქვენ ეთანხმებით ამ მომსახურების პირობებს და ჩვენს კონფიდენციალურობის პოლიტიკას. თუ არ ეთანხმებით ამ პირობებს, არ უნდა გამოიყენოთ ან შეხვიდეთ ამ ვებსაიტზე.</p>

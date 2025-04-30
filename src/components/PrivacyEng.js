@@ -1,7 +1,7 @@
 export default function PrivacyGeo(){
     return <div style={{ padding: '20px' }}>
       <h1>Privacy Policy for {process.env.NEXT_PUBLIC_DOMAIN}</h1>
-      <p><strong>Last Updated:</strong> 1 Jan 2024</p>
+      <p><strong>Last Updated:</strong> 30 Apr 2025</p>
       
       <section className="mt-[30px]">
         <strong>Introduction</strong>

@@ -1,7 +1,7 @@
 export default function TermsGeo(){
     return <div style={{ padding: '20px' }}>
       <h1>Terms of Service for {process.env.NEXT_PUBLIC_DOMAIN}</h1>
-      <p><strong>Last Updated:</strong> 1 Jan 2024</p>
+      <p><strong>Last Updated:</strong> 27 Apr 2025</p>
       <br></br>
       <strong>Acceptance of Terms</strong>
       <p>By accessing and using {process.env.NEXT_PUBLIC_DOMAIN}, you agree to be bound by these Terms of Service ("Terms") and our Privacy Policy. If you do not agree to these Terms, you should not use or access this website.</p>
