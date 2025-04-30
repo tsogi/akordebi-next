@@ -24,6 +24,7 @@
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/typography": "^0.5.10",
     "fuse.js": "^6.6.2",
+    "js-cookie": "^3.0.5",
     "mysql2": "^3.9.2",
     "next": "13.2.0",
     "node-pushover": "^1.0.0",

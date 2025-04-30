@@ -62,6 +62,13 @@ export default function Header(){
                     {lang.main_page}
                 </Link>
                 <Link 
+                    href="/prices" 
+                    onClick={() => setIsMenuOpen(false)}
+                    className="nav-link"
+                >
+                    {lang.prices || "ფასები"}
+                </Link>
+                <Link 
                     href="/teachers" 
                     onClick={() => setIsMenuOpen(false)}
                     className="nav-link"

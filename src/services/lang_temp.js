@@ -1,4 +1,5 @@
 const interfaceGeo = {
+    prices: "ფასები",
     teacher_info: "ჩაწერეთ ინფორმაცია მასწავლებელზე. რას ასწავლის, რამდენი ხანია, ტერიტორიულად სადაა და ა.შ.",
     teacher_name: "მასწავლებლის სახელი/გვარი",
     delete: "წაშლა",
@@ -22,7 +23,7 @@ const interfaceGeo = {
     _searchLabel: "აკორდების ძებნა",
     _filterPopularity: "პოპულარობით",
     _filterQuality: "ხარისხით",
-    _filterDifficulty: "სირთულით",
+    _filterDifficulty: "სიმარტივით",
     _videoIconTitle: "მიჩვენე მხოლოდ გაკვეთილით",
     _verifyIconTitle: "მიჩვენე მხოლოდ დამოწმებული",
     _favoriteIconTitle: "მიჩვენე მხოლოდ ჩემი ფავორიტები",
@@ -144,6 +145,7 @@ const interfaceGeo = {
 }
 
 const interfaceEng = {
+    prices: "Prices",
     teacher_info: "Write information about the teacher. What he teaches, how long he has been teaching, where he is located and etc.",
     teacher_name: "Teacher name",
     delete: "Delete",
