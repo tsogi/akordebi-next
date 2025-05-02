@@ -148,6 +148,7 @@ const interfaceGeo = {
     
     // Price page translations
     price: {
+        month: "თვე",
         title: "ფასები - Akordebi.ge",
         meta_description: "Akordebi.ge პაკეტები და ფასები",
         our_packages: "ჩვენი პაკეტები",
@@ -171,7 +172,6 @@ const interfaceGeo = {
             all_free: "ყველაფერი უფასოში",
             full_songs: "სიმღერები სრულად",
             full_tabs: "ტაბები სრულად",
-            guitar_ai: "გიტარის შემრჩევი AI",
             no_ads: "არანაირი რეკლამა"
         },
         payments_disabled: "გადახდები დროებით გათიშულია, გთხოვთ სცადოთ მოგვიანებით"
@@ -315,6 +315,7 @@ Bass Down Down Up Down Up or Bass ↓ ↓ ↑ ↓ ↑ or Bass 3 2 1 2 3`
     
     // Price page translations
     price: {
+        month: "Month",
         title: "Prices - Akordebi.ge",
         meta_description: "Akordebi.ge packages and prices",
         our_packages: "Our Packages",
@@ -338,7 +339,6 @@ Bass Down Down Up Down Up or Bass ↓ ↓ ↑ ↓ ↑ or Bass 3 2 1 2 3`
             all_free: "Everything in free",
             full_songs: "Full songs",
             full_tabs: "Full tabs",
-            guitar_ai: "Guitar Finder AI",
             no_ads: "No advertisements"
         },
         payments_disabled: "Payments are temporarily disabled, please try again later"
