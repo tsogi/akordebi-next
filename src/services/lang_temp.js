@@ -160,7 +160,7 @@ const interfaceGeo = {
         full_access: "სრული წვდომა ყველა ფუნქციაზე",
         activate: "გააქტიურება",
         questions: "კითხვები?",
-        contact_us: "დაგვიკავშირდით",
+        contact_us: "მოგვწერეთ",
         free_features: {
             half_songs: "ყველა სიმღერა ნახევრად",
             half_tabs: "ყველა ტაბი ნახევრად",

@@ -25,9 +25,6 @@ export default function Footer(){
     return <footer className={styles.footerWrapper}>
       <div className={`${styles.topGeWrapper} page_container flex flex-col items-center`}>
         <div className="w-[100%] flex items-center justify-between px-[10px] flex-wrap">
-          <div className={`${styles.feedback}`}>
-            <WriteUs />
-          </div>
           <div className={styles.linksAndCopyright}>
             <div className={`${styles.quickLinks} text-[#98b9fa] text-[0.8rem] flex flex-wrap items-center mb-[10px]`}>
               <a className={styles.quickLink} href="/prices">
@@ -66,6 +63,12 @@ export default function Footer(){
                 <span className={styles.linksDivider}></span>
                 {lang._footer_add_song}
               </a>
+            </div>
+            <div className={`${styles.feedback}`}>
+              <div className="mt-12 text-center text-gray-600 text-[0.8rem]">
+                <p>{lang.price.questions} <a href="mailto:tsogiaidze1@gmail.com" className="text-blue-600 hover:underline">{lang.price.contact_us}</a></p>
+              </div>
+              {/* <WriteUs /> */}
             </div>
             <div className={`${styles.copyright} text-[#035fda]`}>© {lang._footer_designBy}<span> </span><a className="text-[#f2ac2b] underline" href="https://tsogi.net">{lang._footer_tsogi}</a>
             </div>

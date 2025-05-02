@@ -149,9 +149,6 @@ export default function Prices() {
           </div>
         </div>
         
-        <div className="mt-12 text-center text-gray-600">
-          <p>{lang.price.questions} <a href="mailto:tsogiaidze1@gmail.com" className="text-blue-600 hover:underline">{lang.price.contact_us}</a></p>
-        </div>
       </main>
       <Footer />
     </>
