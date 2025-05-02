@@ -29,6 +29,14 @@ export default function Header(){
         if(page == "shop" && router.pathname == "/shop"){
             return true;
         }
+
+        if(page == "prices" && router.pathname == "/prices"){
+            return true;
+        }
+
+        if(page == "teachers" && router.pathname == "/teachers"){
+            return true;
+        }
     }
 
     async function handleShopClick(e){
@@ -82,7 +90,7 @@ export default function Header(){
                 >
                     გიტარის მაღაზია
                 </Link> */}
-                <Link 
+                {/* <Link 
                     href={""} 
                     onClick={(e) => {
                         handleShopClick(e);
@@ -91,8 +99,8 @@ export default function Header(){
                     className={`nav-link ${isActive("guitar-finder") ? "active" : ""}`}
                 >
                     {lang.guitar_finder}
-                </Link>
-                <Link 
+                </Link> */}
+                {/* <Link 
                     href={""} 
                     onClick={(e) => {
                         handleForeignClick(e);
@@ -101,7 +109,7 @@ export default function Header(){
                     className="nav-link"
                 >
                     {lang.foreign_songs}
-                </Link>
+                </Link> */}
             </>
         }
 

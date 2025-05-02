@@ -22,7 +22,7 @@ export default async function handler(req, res) {
 
     if(body.order_status.key === "completed") {
         await db.pool.execute(
-          'UPDATE users SET payment_date = NOW(), payment_confirmed = ? WHERE email = ?',
+          'UPDATE users SET payment_date = NOW(), paid_until = DATE_ADD(NOW(), INTERVAL 1 MONTH), payment_confirmed = ? WHERE email = ?',
           [1, email]
         );
         await sendNotification("Successful payment: " + email);

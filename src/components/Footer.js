@@ -40,12 +40,12 @@ export default function Footer(){
                   {lang.teachers}
                 </a>
               )}
-              {process.env.NEXT_PUBLIC_DOMAIN === "akordebi.ge" && (
+              {/* {process.env.NEXT_PUBLIC_DOMAIN === "akordebi.ge" && (
                 <a className={styles.quickLink} href="/guitar-finder">
                   <span className={styles.linksDivider}></span>
                   {lang.guitar_finder}
                 </a>
-              )}
+              )} */}
               <a className={styles.quickLink} href="/legal/terms">
                 <span className={styles.linksDivider}></span>
                 {lang._footer_terms}

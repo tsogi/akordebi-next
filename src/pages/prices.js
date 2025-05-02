@@ -126,12 +126,12 @@ export default function Prices() {
                 </svg>
                 <span>{lang.price.premium_features.full_tabs}</span>
               </li>
-              <li className="flex items-start">
+              {/* <li className="flex items-start">
                 <svg className="h-6 w-6 text-blue-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
                 <span>{lang.price.premium_features.guitar_ai}</span>
-              </li>
+              </li> */}
               <li className="flex items-start">
                 <svg className="h-6 w-6 text-blue-500 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
