@@ -24,7 +24,7 @@
 }
 
 .quickLinks {
-    justify-content: right;
+    justify-content: center;
 }
 
 .quickLink {
@@ -33,7 +33,10 @@
 }
 
 .linksAndCopyright{
-    width: 40%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .copyright {
