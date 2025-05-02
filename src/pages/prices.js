@@ -8,7 +8,6 @@ import Footer from '@/components/Footer';
 
 export default function Prices() {
   const { lang } = useLanguage();
-  const [isAnnual, setIsAnnual] = useState(false);
 
   const handleSubscribe = () => {
     alert(lang.price.payments_disabled);
@@ -53,7 +52,8 @@ export default function Prices() {
               ))}
             </ul>
             
-            <button className="mt-auto w-full py-4 px-6 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 font-semibold rounded-xl hover:bg-gray-50 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600 shadow-sm">
+            <button 
+              className="mt-auto w-full py-4 px-6 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 font-semibold rounded-xl border border-gray-200 dark:border-gray-600 shadow-sm">
               {lang.price.current_package}
             </button>
           </div>
