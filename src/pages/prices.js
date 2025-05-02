@@ -25,7 +25,7 @@ export default function Prices() {
       <main className="container mx-auto px-4 py-8 md:py-16 max-w-7xl">
         <div className="flex flex-col md:flex-row gap-8 justify-center items-stretch max-w-5xl mx-auto">
           {/* Free Plan */}
-          <div className="relative rounded-2xl overflow-hidden p-6 md:p-8 w-full md:w-1/2 flex flex-col transition-all duration-300 hover:translate-y-[-8px] shadow-lg hover:shadow-xl bg-gradient-to-br from-[#f8fafc] via-white to-[#f1f5f9] dark:from-gray-800 dark:via-gray-700 dark:to-gray-800 border border-gray-200 dark:border-gray-700">
+          <div className="relative rounded-2xl overflow-hidden p-6 md:p-8 w-full md:w-1/2 flex flex-col shadow-lg bg-gradient-to-br from-[#f8fafc] via-white to-[#f1f5f9] dark:from-gray-800 dark:via-gray-700 dark:to-gray-800 border border-gray-200 dark:border-gray-700">
             {/* Decorative elements */}
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-green-500"></div>
             <div className="absolute top-0 right-0 w-20 h-20 transform translate-x-10 -translate-y-10">
@@ -42,8 +42,8 @@ export default function Prices() {
             
             <ul className="space-y-4 mb-8 flex-grow">
               {lang.price.free_features && Object.entries(lang.price.free_features).map(([key, feature]) => (
-                <li key={key} className="flex items-start group">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mr-3 group-hover:bg-green-200 transition-colors">
+                <li key={key} className="flex items-start">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mr-3">
                     <svg className="h-4 w-4 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
@@ -53,13 +53,13 @@ export default function Prices() {
               ))}
             </ul>
             
-            <button className="mt-auto w-full py-4 px-6 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 font-semibold rounded-xl hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200 border border-gray-200 dark:border-gray-600 shadow-sm">
+            <button className="mt-auto w-full py-4 px-6 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 font-semibold rounded-xl hover:bg-gray-50 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600 shadow-sm">
               {lang.price.current_package}
             </button>
           </div>
           
           {/* Premium Plan */}
-          <div className="relative rounded-2xl overflow-hidden p-6 md:p-8 w-full md:w-1/2 flex flex-col transition-all duration-300 hover:translate-y-[-8px] shadow-xl hover:shadow-2xl bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-blue-900/20 dark:via-gray-800 dark:to-indigo-900/20 border border-blue-100 dark:border-blue-900/50">
+          <div className="relative rounded-2xl overflow-hidden p-6 md:p-8 w-full md:w-1/2 flex flex-col shadow-xl bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-blue-900/20 dark:via-gray-800 dark:to-indigo-900/20 border border-blue-100 dark:border-blue-900/50">
             {/* Decorative elements */}
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-indigo-500"></div>
             <div className="absolute top-0 right-0 w-20 h-20 transform translate-x-10 -translate-y-10">
@@ -86,8 +86,8 @@ export default function Prices() {
             
             <ul className="space-y-4 mb-8 flex-grow">
               {lang.price.premium_features && Object.entries(lang.price.premium_features).map(([key, feature]) => (
-                <li key={key} className="flex items-start group">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mr-3 group-hover:bg-blue-200 transition-colors">
+                <li key={key} className="flex items-start">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mr-3">
                     <svg className="h-4 w-4 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
@@ -99,7 +99,7 @@ export default function Prices() {
             
             <button 
               onClick={handleSubscribe}
-              className="mt-auto w-full py-4 px-6 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-xl transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-[1.02] active:scale-[0.98]"
+              className="mt-auto w-full py-4 px-6 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg"
             >
               {lang.price.activate}
             </button>
