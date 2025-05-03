@@ -127,7 +127,8 @@ const SubscriptionPrompt = ({ onSubscribe }) => {
           ) : (
             <>
               <p className="text-gray-600 mb-4 text-sm">
-                აკორდების/ტაბების სრულად სანახავად გამოიწერეთ akordebi.ge
+                akordebi.ge-ს შენარჩუნება და გაუმჯობესება საჭიროებს ყოველთვიურ ხარჯებს. ამიტომ გადავწყვიტეთ დავაწესოთ ყოველთვიური გადასახადი რომელიც ცალკეული ადამიანისთვის მიზერულია, ხოლო ჩვენ მოგვცემს შესაძლებლობას დავამატოთ სიმღერები(ტაბები) და ახალი ფუნქციონალი
+                {/* აკორდების/ტაბების სრულად სანახავად გამოიწერეთ akordebi.ge */}
               </p>
               
               <div className="bg-gray-100 p-3 rounded-md mb-4">
@@ -140,7 +141,13 @@ const SubscriptionPrompt = ({ onSubscribe }) => {
                     <svg className="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    სრული აკორდები და ტაბები
+                    სრული აკორდები
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    სრული ტაბები
                   </li>
                   <li className="flex items-center">
                     <svg className="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
