@@ -105,9 +105,9 @@ const SubscriptionPrompt = ({ onSubscribe }) => {
     <>
       <div className="absolute top-20 left-0 right-0 z-10 flex justify-center pointer-events-all px-4 sm:px-6">
         <div className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-gray-100 text-center w-full max-w-xs sm:max-w-sm animate-fadeIn">
-          <div className="relative overflow-hidden">
+          <div className="relative overflow-hidden rounded-t-2xl">
             {/* Premium Banner */}
-            <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
+            <div className="w-full h-1.5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
             
             <div className="py-6 px-4">
               <h3 className="text-2xl font-bold text-gray-800 mb-3 capital">{lang.subscriptionPrompt.title}</h3>
