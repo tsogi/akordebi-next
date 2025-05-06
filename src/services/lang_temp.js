@@ -243,6 +243,9 @@ const interfaceEng = {
         add: "Add to favorites",
         remove: "Remove"
     },
+    subscriptionPrompt: {
+        title: "Subscribtion",
+    },
     _auth: {
         login: "Log in",
         enterBtn: 'After logging in you will be able to use additional features like "Add to favorites"',
