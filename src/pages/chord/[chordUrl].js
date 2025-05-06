@@ -22,8 +22,7 @@ export default function SongPage({ song }){
     const [fontSize, setFontSize] = useState(16);
     const [scrollSpeed, setScrollSpeed] = useState(0);
     const [showChords, setShowChords ] = useState(false);
-    const [isPremium, setIsPremium] = useState(false);
-    const { user, userDetails } = useUser();
+    const { isPremium } = useUser();
     const { lang, language } = useLanguage();
 
     // Get song name and author(s) in either Georgian or Latin based on language
@@ -34,15 +33,6 @@ export default function SongPage({ song }){
     const displayAuthors = language === "eng" && song?.authors
         ? song.authors.map(author => transliterateWithCapitalizedWords(author))
         : song?.authors;
-
-    useEffect(() => {
-        // Check if user has a valid subscription - only require payment_date to be set
-        if (userDetails && userDetails.payment_date) {
-            setIsPremium(true);
-        } else {
-            setIsPremium(false);
-        }
-    }, [userDetails]);
 
     useEffect(() => {
         scroll();

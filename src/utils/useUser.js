@@ -12,6 +12,7 @@ export const MyUserContextProvider = ({ children }) => {
   const [isLoadingData, setIsloadingData] = useState(false);
   const [userDetails, setUserDetails] = useState(null);
   const [authOpenedFrom, setAuthOpenedFrom] = useState(null);
+  const [isPremium, setIsPremium] = useState(false);
 
   useEffect(() => {
     const initializeUserDetails = async () => {
@@ -26,11 +27,14 @@ export const MyUserContextProvider = ({ children }) => {
 
         if (foundUserDetails) {
           setUserDetails(foundUserDetails);
+          // Set premium status based on payment_date existence
+          setIsPremium(!!foundUserDetails.payment_date);
         }
 
         setIsloadingData(false);
       } else if (!user && !isLoadingUser && !isLoadingData) {
         setUserDetails(null);
+        setIsPremium(false);
       }
     };
 
@@ -50,6 +54,7 @@ export const MyUserContextProvider = ({ children }) => {
     isLoading: isLoadingUser || isLoadingData,
     authOpenedFrom,
     setAuthOpenedFrom,
+    isPremium,
   };
 
   return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>;
