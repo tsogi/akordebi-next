@@ -2,6 +2,7 @@ import * as React from 'react';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import Badge from '@mui/material/Badge';
+import Tooltip from '@mui/material/Tooltip';
 import { ThumbUp } from '@mui/icons-material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import styles from "./SongCard.module.css";
@@ -12,9 +13,25 @@ import { useLanguage } from '@/context/LanguageContext';
 import { transliterateWithCapital, transliterateWithCapitalizedWords } from '@/utils/transliteration';
 
 export default function SongCard({ song }){
-    const { language } = useLanguage();
+    const { language, lang } = useLanguage();
     const { user, setAuthOpenedFrom } = useUser();
     const [isFavorite, setIsFavorite] = React.useState(song.isFavorite?? false);
+    const [openTooltip, setOpenTooltip] = React.useState({
+        video: false,
+        views: false,
+        difficulty: false, 
+        likes: false
+    });
+
+    // Function to handle tooltip open
+    const handleTooltipOpen = (tooltipName) => {
+        setOpenTooltip({...openTooltip, [tooltipName]: true});
+        
+        // Auto-close after 1 second
+        setTimeout(() => {
+            setOpenTooltip(prevState => ({...prevState, [tooltipName]: false}));
+        }, 1000);
+    };
 
     React.useEffect(() => {
         setIsFavorite(song.isFavorite?? false);
@@ -60,9 +77,22 @@ export default function SongCard({ song }){
         <article key={song.id} className={"songItemWrapper"}>
             <div className={styles.songCard}>
                 {song.videoLesson && (
-                    <div className={styles.videoCornerIcon}>
-                        <OndemandVideoIcon style={{ color: "#9ebeff" }} />
-                    </div>
+                    <Tooltip 
+                        title="Video lesson available"
+                        placement="top"
+                        open={openTooltip.video}
+                        classes={{
+                            tooltip: styles.customTooltip,
+                            arrow: styles.customArrow,
+                        }}
+                    >
+                        <div 
+                            className={styles.videoCornerIcon}
+                            onClick={() => handleTooltipOpen('video')}
+                        >
+                            <OndemandVideoIcon style={{ color: "#9ebeff" }} />
+                        </div>
+                    </Tooltip>
                 )}
                 
                 <Link href={`/chord/${song.url}`} className={styles.songLink}>
@@ -91,22 +121,62 @@ export default function SongCard({ song }){
                     </div>
                     
                     <div className={styles.songMetaRight}>
-                        {renderDifficultyBars(song.difficulty)}
+                        <Tooltip 
+                            title="Song difficulty level"
+                            placement="top"
+                            open={openTooltip.difficulty}
+                            classes={{
+                                tooltip: styles.customTooltip,
+                                arrow: styles.customArrow,
+                            }}
+                        >
+                            <div 
+                                onClick={() => handleTooltipOpen('difficulty')}
+                            >
+                                {renderDifficultyBars(song.difficulty)}
+                            </div>
+                        </Tooltip>
                         
                         <div className={styles.metaIcons}>
-                            <div className={styles.viewsCountWrapper}>
-                                <div className={styles.viewsCount}>
-                                    <VisibilityIcon style={{ color: "#fff", marginRight: "5px" }} />
-                                    <span>{song.view_count || "0"}</span>
+                            <Tooltip 
+                                title="Number of views"
+                                placement="top"
+                                open={openTooltip.views}
+                                classes={{
+                                    tooltip: styles.customTooltip,
+                                    arrow: styles.customArrow,
+                                }}
+                            >
+                                <div 
+                                    className={styles.viewsCountWrapper}
+                                    onClick={() => handleTooltipOpen('views')}
+                                >
+                                    <div className={styles.viewsCount}>
+                                        <VisibilityIcon style={{ color: "#fff", marginRight: "5px" }} />
+                                        <span>{song.view_count || "0"}</span>
+                                    </div>
                                 </div>
-                            </div>
+                            </Tooltip>
                             
-                            <div className={styles.votesSumWrapper}>
-                                <div className={styles.likesCount}>
-                                    <ThumbUp style={{ color: "#fff", marginRight: "5px" }} />
-                                    <span>{song.voteSum || "0"}</span>
+                            <Tooltip 
+                                title="Number of likes"
+                                placement="top"
+                                open={openTooltip.likes}
+                                classes={{
+                                    tooltip: styles.customTooltip,
+                                    arrow: styles.customArrow,
+                                }}
+                            >
+                                <div 
+                                    className={styles.votesSumWrapper}
+                                    onClick={() => handleTooltipOpen('likes')}
+                                >
+                                    <div className={styles.likesCount}>
+                                        <ThumbUp style={{ color: "#fff", marginRight: "5px" }} />
+                                        <span>{song.voteSum || "0"}</span>
+                                    </div>
                                 </div>
-                            </div>
+                            </Tooltip>
                         </div>
                     </div>
                 </div>
