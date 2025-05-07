@@ -5,13 +5,18 @@ import Header from '@/components/Header';
 import { useState } from 'react';
 import Head from 'next/head';
 import Footer from '@/components/Footer';
+import SubscriptionPrompt from '@/components/SubscriptionPrompt';
 
 export default function Prices() {
   const { lang } = useLanguage();
+  const [showSubscriptionPrompt, setShowSubscriptionPrompt] = useState(false);
 
   const handleSubscribe = () => {
-    alert(lang.price.payments_disabled);
+    setShowSubscriptionPrompt(true);
   };
+
+  const customUnauthenticatedText = 'აკორდების/ტაბების სრულად სანახავად გაიარეთ მარტივი ავტორიზაცია 1 კლიკით და გამოიწერეთ akordebi.ge';
+  const customAuthenticatedText = 'თქვენს მიერ არჩეული პრემიუმ გამოწერის გასააქტიურებლად გადაიხადეთ 5 ლარი თვეში';
 
   return (
     <>
@@ -106,6 +111,26 @@ export default function Prices() {
           </div>
         </div>
       </main>
+      
+      {showSubscriptionPrompt && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center"
+          onClick={() => setShowSubscriptionPrompt(false)}
+        >
+          <div 
+            className="relative w-full max-w-md" 
+            onClick={(e) => e.stopPropagation()}
+          >
+            <SubscriptionPrompt 
+              unauthenticatedText={customUnauthenticatedText}
+              authenticatedText={customAuthenticatedText}
+              source="prices_page"
+              inModal={true}
+            />
+          </div>
+        </div>
+      )}
+      
       <Footer />
     </>
   );

@@ -31,7 +31,8 @@ const GoogleSignInButton = ({ onClick }) => {
 const SubscriptionPrompt = ({
   unauthenticatedText = 'აკორდების/ტაბების სრულად სანახავად გაიარეთ მარტივი ავტორიზაცია 1 კლიკით და შემდეგ გამოიწერეთ akordebi.ge',
   authenticatedText = 'აკორდების/ტაბების სრულად სანახავად გამოიწერეთ akordebi.ge',
-  source = 'subscription_prompt'
+  source = 'subscription_prompt',
+  inModal = false
 }) => {
   const { user, setAuthOpenedFrom } = useUser();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -105,7 +106,7 @@ const SubscriptionPrompt = ({
 
   return (
     <>
-      <div className="absolute top-20 left-0 right-0 z-10 flex justify-center pointer-events-all px-4 sm:px-6">
+      <div className={`${inModal ? '' : 'absolute top-20 left-0 right-0'} z-10 flex justify-center pointer-events-all px-4 sm:px-6`}>
         <div className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-gray-100 text-center w-full max-w-xs sm:max-w-sm animate-fadeIn">
           <div className="relative overflow-hidden rounded-t-2xl">
             {/* Premium Banner */}
