@@ -28,7 +28,11 @@ const GoogleSignInButton = ({ onClick }) => {
   );
 };
 
-const SubscriptionPrompt = () => {
+const SubscriptionPrompt = ({
+  unauthenticatedText = 'აკორდების/ტაბების სრულად სანახავად გაიარეთ მარტივი ავტორიზაცია 1 კლიკით და შემდეგ გამოიწერეთ akordebi.ge',
+  authenticatedText = 'აკორდების/ტაბების სრულად სანახავად გამოიწერეთ akordebi.ge',
+  source = 'subscription_prompt'
+}) => {
   const { user, setAuthOpenedFrom } = useUser();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showCustomAuth, setShowCustomAuth] = useState(false);
@@ -42,7 +46,7 @@ const SubscriptionPrompt = () => {
 
   const handleSubscribeClick = async () => {
     // Log the subscribe click event
-    dataClient.logEvent('subscribe_click', 'From subscription prompt');
+    // dataClient.logEvent('subscribe_click', `From ${source}`);
     
     // Check if user email is the special test email
     if (user) {
@@ -113,7 +117,7 @@ const SubscriptionPrompt = () => {
               {!user ? (
                 <>
                   <p className="text-gray-600 mb-6 leading-relaxed">
-                    აკორდების/ტაბების სრულად სანახავად გაიარეთ მარტივი ავტორიზაცია 1 კლიკით და შემდეგ გამოიწერეთ akordebi.ge
+                    {unauthenticatedText}
                   </p>
                   <div className="mt-4">
                     {!showCustomAuth ? (
@@ -126,8 +130,7 @@ const SubscriptionPrompt = () => {
               ) : (
                 <>
                   <p className="text-gray-600 mb-6 leading-relaxed text-sm">
-                    აკორდების/ტაბების სრულად სანახავად გამოიწერეთ akordebi.ge
-                    {/* akordebi.ge-ს შენარჩუნება და გაუმჯობესება საჭიროებს ყოველთვიურ ხარჯებს. ამიტომ გადავწყვიტეთ დავაწესოთ ყოველთვიური გადასახადი რომელიც ცალკეული ადამიანისთვის მიზერულია, ხოლო ჩვენ მოგვცემს შესაძლებლობას დავამატოთ სიმღერები(ტაბები) და ახალი ფუნქციონალი */}
+                    {authenticatedText}
                   </p>
                   
                   {/* Price Tag */}
