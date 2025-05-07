@@ -183,6 +183,7 @@ class Db{
                 songs.searchWords, 
                 songs.videoLesson, 
                 songs.id, 
+                songs.view_count,
                 songs.notation_format,
                 songs.uploaderUserId as analyticId,
                 songs.confirmed, 

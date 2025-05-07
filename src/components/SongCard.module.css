@@ -196,3 +196,22 @@
     align-items: center;
     justify-content: center;
 }
+
+.viewsCountWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.viewsCount {
+    display: flex;
+    align-items: center;
+    background-color: rgba(70, 178, 202, 0.3);
+    border-radius: 20px;
+    padding: 3px 8px;
+    color: white;
+    font-weight: 500;
+}
+
+.viewsCount svg {
+    font-size: 18px;
+}

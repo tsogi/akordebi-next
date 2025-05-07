@@ -3,6 +3,7 @@ import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import Badge from '@mui/material/Badge';
 import { ThumbUp } from '@mui/icons-material';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import styles from "./SongCard.module.css";
 import { useUser } from '@/utils/useUser';
 import Link from 'next/link';
@@ -93,6 +94,13 @@ export default function SongCard({ song }){
                         {renderDifficultyBars(song.difficulty)}
                         
                         <div className={styles.metaIcons}>
+                            <div className={styles.viewsCountWrapper}>
+                                <div className={styles.viewsCount}>
+                                    <VisibilityIcon style={{ color: "#fff", marginRight: "5px" }} />
+                                    <span>{song.view_count || "0"}</span>
+                                </div>
+                            </div>
+                            
                             <div className={styles.votesSumWrapper}>
                                 <div className={styles.likesCount}>
                                     <ThumbUp style={{ color: "#fff", marginRight: "5px" }} />
