@@ -28,7 +28,7 @@ const GoogleSignInButton = ({ onClick }) => {
   );
 };
 
-const SubscriptionPrompt = ({ onSubscribe }) => {
+const SubscriptionPrompt = () => {
   const { user, setAuthOpenedFrom } = useUser();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showCustomAuth, setShowCustomAuth] = useState(false);
@@ -43,8 +43,6 @@ const SubscriptionPrompt = ({ onSubscribe }) => {
   const handleSubscribeClick = async () => {
     // Log the subscribe click event
     dataClient.logEvent('subscribe_click', 'From subscription prompt');
-    
-    if (onSubscribe) onSubscribe();
     
     // Check if user email is the special test email
     if (user) {
@@ -112,7 +110,7 @@ const SubscriptionPrompt = ({ onSubscribe }) => {
             <div className="py-6 px-4">
               <h3 className="text-2xl font-bold text-gray-800 mb-3 capital">{lang.subscriptionPrompt.title}</h3>
               
-              {!user ? (
+              {user ? (
                 <>
                   <p className="text-gray-600 mb-6 leading-relaxed">
                     აკორდების/ტაბების სრულად სანახავად გაიარეთ მარტივი ავტორიზაცია 1 კლიკით და შემდეგ გამოიწერეთ akordebi.ge

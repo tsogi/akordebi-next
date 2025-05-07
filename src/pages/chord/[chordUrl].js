@@ -99,11 +99,6 @@ export default function SongPage({ song }){
         setShowChords(true);
     }
 
-    const handleSubscribe = () => {
-        // This is now handled directly in the SubscriptionPrompt component
-        console.log('User clicked subscribe');
-    };
-
     return <>
         <Head>
             <title>{`${displaySongName} - ${lang._guitar_chords}`}</title>
@@ -192,7 +187,7 @@ export default function SongPage({ song }){
             <main className={`${styles.songBody} mxedruli`} style={{fontSize}}>
                 {!isPremium && (
                     <div className={styles.blurredContent}>
-                        <SubscriptionPrompt onSubscribe={handleSubscribe} />
+                        <SubscriptionPrompt />
                     </div>
                 )}
                 {
