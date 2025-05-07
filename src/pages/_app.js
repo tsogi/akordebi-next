@@ -8,6 +8,7 @@ import GoogleTagManager from '@/components/GoogleAnalytics';
 import NewsModal from '@/components/NewsModal';
 import TeachersNews from '@/components/TeachersNews';
 import { LanguageProvider } from '@/context/LanguageContext';
+import GoogleAdSense from '@/components/GoogleAdSense';
 
 export default function App({ Component, pageProps }) {
 
@@ -33,6 +34,7 @@ export default function App({ Component, pageProps }) {
               <TeachersNews onActionClick={markSeenAndClose} />
             )}
           </NewsModal> */}
+          <GoogleAdSense />
         </LanguageProvider>
       </MyUserContextProvider>
     </SessionContextProvider>
