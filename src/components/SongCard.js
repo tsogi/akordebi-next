@@ -78,7 +78,7 @@ export default function SongCard({ song }){
             <div className={styles.songCard}>
                 {song.videoLesson && (
                     <Tooltip 
-                        title="Video lesson available"
+                        title={lang.songCard.videoTooltip}
                         placement="top"
                         open={openTooltip.video}
                         classes={{
@@ -122,7 +122,7 @@ export default function SongCard({ song }){
                     
                     <div className={styles.songMetaRight}>
                         <Tooltip 
-                            title="Song difficulty level"
+                            title={lang.songCard.difficultyTooltip}
                             placement="top"
                             open={openTooltip.difficulty}
                             classes={{
@@ -139,7 +139,7 @@ export default function SongCard({ song }){
                         
                         <div className={styles.metaIcons}>
                             <Tooltip 
-                                title="Number of views"
+                                title={lang.songCard.viewsTooltip}
                                 placement="top"
                                 open={openTooltip.views}
                                 classes={{
@@ -159,7 +159,7 @@ export default function SongCard({ song }){
                             </Tooltip>
                             
                             <Tooltip 
-                                title="Number of likes"
+                                title={lang.songCard.likesTooltip}
                                 placement="top"
                                 open={openTooltip.likes}
                                 classes={{

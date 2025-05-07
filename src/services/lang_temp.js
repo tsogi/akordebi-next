@@ -82,6 +82,12 @@ const interfaceGeo = {
         uploaded: "აკორდები ატვირთა",
         rate: " შეაფასეთ აკორდების სისწორე",
     },
+    songCard: {
+        videoTooltip: "ვიდეო გაკვეთილი",
+        difficultyTooltip: "სირთულე",
+        viewsTooltip: "ნახვები",
+        likesTooltip: "მოწონება"
+    },
     upload: {
         select_type: "აირჩიეთ ტიპი:",
         chords: "აკორდები",
@@ -261,6 +267,12 @@ const interfaceEng = {
         appearance: "Show",
         uploaded: "Uploaded by",
         rate: "Evaluate correctness of chords",
+    },
+    songCard: {
+        videoTooltip: "Video lesson",
+        difficultyTooltip: "Difficulty",
+        viewsTooltip: "Views",
+        likesTooltip: "Likes"
     },
     upload: {
         chords: "Chords",
