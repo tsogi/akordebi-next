@@ -441,6 +441,9 @@ export async function getServerSideProps(ctx) {
     }
 
     if (song) {
+        // Increment the view count for this song
+        await db.incrementSongViewCount(song.id);
+        
         song = addCoupletChords(song)
     } else {
         return {

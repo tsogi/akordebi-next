@@ -543,6 +543,21 @@ class Db{
         }
     }
 
+    async incrementSongViewCount(songId) {
+        try {
+            const [result] = await this.pool.execute(`
+                UPDATE songs 
+                SET view_count = view_count + 1 
+                WHERE id = ?
+            `, [songId]);
+            
+            return { success: result.affectedRows > 0 };
+        } catch (error) {
+            console.error('Error incrementing song view count:', error);
+            return { success: false, error };
+        }
+    }
+
     async storeBogPayment(email, status, paymentDetails) {
         // Convert any undefined values to null to avoid SQL errors
         const sanitizedEmail = email === undefined ? null : email;
