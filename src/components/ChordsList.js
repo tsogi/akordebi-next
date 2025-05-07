@@ -10,7 +10,6 @@ import { HeartIcon } from '@heroicons/react/20/solid';
 import { useUser } from "@/utils/useUser";
 import CustomSelect from "./CustomSelect";
 import UploadSongBtn from "./UploadSongBtn";
-import { MusicalNoteIcon, QueueListIcon } from '@heroicons/react/24/outline';
 import { useLanguage } from '@/context/LanguageContext';
 const resultsPerPage = 20;
 
@@ -272,51 +271,32 @@ export default function ChordsList({ initialSongs }){
             </div>
         </div>
         
-        <div className="flex justify-center overflow-x-auto">
-            <div className="inline-flex rounded-lg shadow-sm bg-gray-100 dark:bg-gray-800 p-1 max-w-full">
+        <div className="flex justify-center overflow-x-auto mb-6">
+            <div className="inline-flex rounded-lg shadow-md bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-900 p-1.5 max-w-full">
                 <button
                     onClick={() => handleNotationFormatChange("chords")}
-                    className={`flex items-center justify-center space-x-2 px-4 py-2 text-sm rounded-md transition-all whitespace-nowrap ${
+                    className={`flex items-center justify-center space-x-2 px-5 py-2.5 text-sm font-medium rounded-md transition-all duration-200 whitespace-nowrap ${
                         notationFormat === "chords"
-                            ? "bg-white dark:bg-gray-700 shadow text-blue-600 dark:text-blue-400"
-                            : "text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+                            ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg"
+                            : "text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-gray-700"
                     }`}
                 >
-                    <MusicalNoteIcon className="w-5 h-5" />
+                    <img src="/guitar_icon.svg" className={`w-5 h-5 ${notationFormat === "chords" ? "text-white" : "text-blue-500 dark:text-blue-300"}`} />
+                    {/* <GuitarIcon className={`w-5 h-5 ${notationFormat === "chords" ? "text-white" : "text-blue-500 dark:text-blue-300"}`} /> */}
                     <span>{lang._chords} ({chordsCount})</span>
                 </button>
                 <button
                     onClick={() => handleNotationFormatChange("tabs")}
-                    className={`flex items-center justify-center space-x-2 px-4 py-2 text-sm rounded-md transition-all whitespace-nowrap ${
+                    className={`flex items-center justify-center space-x-2 px-5 py-2.5 text-sm font-medium rounded-md transition-all duration-200 whitespace-nowrap ${
                         notationFormat === "tabs"
-                            ? "bg-white dark:bg-gray-700 shadow text-blue-600 dark:text-blue-400"
-                            : "text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+                            ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg"
+                            : "text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-gray-700"
                     }`}
                 >
-                    <QueueListIcon className="w-5 h-5" />
+                    <img src="/guitar_icon.svg" className={`w-5 h-5 ${notationFormat === "tabs" ? "text-white" : "text-blue-500 dark:text-blue-300"}`} />
+                    {/* <GuitarIcon className={`w-5 h-5 ${notationFormat === "tabs" ? "text-white" : "text-blue-500 dark:text-blue-300"}`} /> */}
                     <span>{lang._tabs} ({tabsCount})</span>
                 </button>
-                {/* <button
-                    onClick={() => handleNotationFormatChange("notes")}
-                    className={`flex items-center justify-center space-x-2 px-4 py-2 text-sm rounded-md transition-all whitespace-nowrap ${
-                        notationFormat === "notes"
-                            ? "bg-white dark:bg-gray-700 shadow text-blue-600 dark:text-blue-400"
-                            : "text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
-                    }`}
-                >
-                    <DocumentTextIcon className="w-5 h-5" />
-                    <span>Notes</span>
-                </button> */}
-                {/* <button
-                    onClick={() => handleNotationFormatChange("all")}
-                    className={`flex items-center justify-center px-4 py-2 text-sm rounded-md transition-all whitespace-nowrap ${
-                        notationFormat === "all"
-                            ? "bg-white dark:bg-gray-700 shadow text-blue-600 dark:text-blue-400"
-                            : "text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
-                    }`}
-                >
-                    <span>All</span>
-                </button> */}
             </div>
         </div>
         
