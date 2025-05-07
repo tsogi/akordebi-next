@@ -58,6 +58,12 @@ export default function SongCard({ song }){
     return (
         <article key={song.id} className={"songItemWrapper"}>
             <div className={styles.songCard}>
+                {song.videoLesson && (
+                    <div className={styles.videoCornerIcon}>
+                        <OndemandVideoIcon style={{ color: "#9ebeff" }} />
+                    </div>
+                )}
+                
                 <Link href={`/chord/${song.url}`} className={styles.songLink}>
                     <div className={styles.songContent}>
                         <div className={styles.songDetails}>
@@ -87,12 +93,6 @@ export default function SongCard({ song }){
                         {renderDifficultyBars(song.difficulty)}
                         
                         <div className={styles.metaIcons}>
-                            {song.videoLesson && (
-                                <div className={styles.videoLessonIcon}>
-                                    <OndemandVideoIcon style={{ color: "#9ebeff" }} />
-                                </div>
-                            )}
-                            
                             <div className={styles.votesSumWrapper}>
                                 <div className={styles.likesCount}>
                                     <ThumbUp style={{ color: "#fff", marginRight: "5px" }} />
