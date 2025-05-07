@@ -4,15 +4,13 @@ import SongCard from "./SongCard";
 import { Tooltip } from '@mui/material';
 import SearchSongs from "./SearchSongs";
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
-import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import Pagination from "./Pagination";
 import { useRouter } from 'next/router';
-import db from '@/services/data';
 import { HeartIcon } from '@heroicons/react/20/solid';
 import { useUser } from "@/utils/useUser";
 import CustomSelect from "./CustomSelect";
 import UploadSongBtn from "./UploadSongBtn";
-import { MusicalNoteIcon, QueueListIcon, DocumentTextIcon } from '@heroicons/react/24/outline';
+import { MusicalNoteIcon, QueueListIcon } from '@heroicons/react/24/outline';
 import { useLanguage } from '@/context/LanguageContext';
 const resultsPerPage = 20;
 
@@ -153,6 +151,10 @@ export default function ChordsList({ initialSongs }){
         if (sortBy === "difficulty") {
             songs = songs.sort((a, b) => a.difficulty - b.difficulty);
         }
+        
+        if (sortBy === "views") {
+            songs = songs.sort((a, b) => (b.view_count || 0) - (a.view_count || 0));
+        }
 
         setPaginationCount(songs.length);
 
@@ -245,7 +247,8 @@ export default function ChordsList({ initialSongs }){
                         options={[
                             { label: lang._filterQuality, value: "default" }, 
                             { label: lang._filterPopularity, value: "likes" }, 
-                            { label: lang._filterDifficulty, value: "difficulty" }
+                            { label: lang._filterDifficulty, value: "difficulty" },
+                            { label: lang._filterViews, value: "views" }
                         ]} 
                         value={sortBy} 
                         onChange={handleSortChange} 
