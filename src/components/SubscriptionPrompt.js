@@ -47,7 +47,7 @@ const SubscriptionPrompt = ({
 
   const handleSubscribeClick = async () => {
     // Log the subscribe click event
-    // dataClient.logEvent('subscribe_click', `From ${source}`);
+    await dataClient.logEvent('subscribe_click', `From ${source}`);
     
     // Check if user email is the special test email
     if (user) {
@@ -117,7 +117,7 @@ const SubscriptionPrompt = ({
               
               {!user ? (
                 <>
-                  <p className="text-gray-600 mb-6 leading-relaxed">
+                  <p className="text-gray-600 mb-6 leading-relaxed mxedruli">
                     {unauthenticatedText}
                   </p>
                   <div className="mt-4">
@@ -130,7 +130,7 @@ const SubscriptionPrompt = ({
                 </>
               ) : (
                 <>
-                  <p className="text-gray-600 mb-6 leading-relaxed text-sm">
+                  <p className="text-gray-600 mb-6 leading-relaxed mxedruli text-sm">
                     {authenticatedText}
                   </p>
                   

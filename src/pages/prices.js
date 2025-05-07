@@ -15,8 +15,8 @@ export default function Prices() {
     setShowSubscriptionPrompt(true);
   };
 
-  const customUnauthenticatedText = 'აკორდების/ტაბების სრულად სანახავად გაიარეთ მარტივი ავტორიზაცია 1 კლიკით და გამოიწერეთ akordebi.ge';
-  const customAuthenticatedText = 'თქვენს მიერ არჩეული პრემიუმ გამოწერის გასააქტიურებლად გადაიხადეთ 5 ლარი თვეში';
+  const customUnauthenticatedText = 'პრემიუმ პაკეტის გასააქტიურებლად გაიარეთ მარტივი Gmail ავტორიზაცია 1 კლიკით და შემდეგ ხელახლა დააჭირეთ გააქტიურებას';
+  const customAuthenticatedText = 'დააჭირეთ გადახდას და მიყევით ბანკის ინსტრუქციას';
 
   return (
     <>
