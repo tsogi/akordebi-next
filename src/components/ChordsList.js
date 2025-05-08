@@ -40,6 +40,7 @@ export default function ChordsList({ initialSongs }){
     const[paginationCount, setPaginationCount] = useState(0);
     const[chordsCount, setChordsCount] = useState(0);
     const[tabsCount, setTabsCount] = useState(0);
+    const[fanduriCount, setFanduriCount] = useState(0);
 
 
         
@@ -81,9 +82,11 @@ export default function ChordsList({ initialSongs }){
         
         const chords = initialSongs.filter(song => song.notation_format === "chords").length;
         const tabs = initialSongs.filter(song => song.notation_format === "tabs").length;
+        const fanduri = initialSongs.filter(song => song.notation_format === "fanduri").length;
         
         setChordsCount(chords);
         setTabsCount(tabs);
+        setFanduriCount(fanduri);
     }
 
     function writeParametersToState(){
@@ -272,30 +275,51 @@ export default function ChordsList({ initialSongs }){
         </div>
         
         <div className="flex justify-center overflow-x-auto mb-6">
-            <div className="inline-flex rounded-lg shadow-md bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-900 p-1.5 max-w-full">
+            <div className="inline-flex rounded-lg shadow-md bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-900 p-1 max-w-full">
                 <button
                     onClick={() => handleNotationFormatChange("chords")}
-                    className={`flex items-center justify-center space-x-2 px-5 py-2.5 text-sm font-medium rounded-md transition-all duration-200 whitespace-nowrap ${
+                    className={`flex items-center justify-center space-x-1 px-2 py-1.5 text-xs font-medium rounded-md transition-all duration-200 whitespace-nowrap ${
                         notationFormat === "chords"
                             ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg"
-                            : "text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-gray-700"
+                            : "text-gray-700 dark:text-gray-200 hover:bg-blue-100 dark:hover:bg-gray-700"
                     }`}
                 >
-                    <img src="/guitar_icon.svg" className={`w-5 h-5 ${notationFormat === "chords" ? "text-white" : "text-blue-500 dark:text-blue-300"}`} />
-                    {/* <GuitarIcon className={`w-5 h-5 ${notationFormat === "chords" ? "text-white" : "text-blue-500 dark:text-blue-300"}`} /> */}
+                    <img 
+                        src="/guitar_icon.svg"
+                        className="w-4 h-4" 
+                        alt="Guitar icon"
+                    />
                     <span>{lang._chords} ({chordsCount})</span>
                 </button>
                 <button
                     onClick={() => handleNotationFormatChange("tabs")}
-                    className={`flex items-center justify-center space-x-2 px-5 py-2.5 text-sm font-medium rounded-md transition-all duration-200 whitespace-nowrap ${
+                    className={`flex items-center justify-center space-x-1 px-2 py-1.5 text-xs font-medium rounded-md transition-all duration-200 whitespace-nowrap ${
                         notationFormat === "tabs"
                             ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg"
-                            : "text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-gray-700"
+                            : "text-gray-700 dark:text-gray-200 hover:bg-blue-100 dark:hover:bg-gray-700"
                     }`}
                 >
-                    <img src="/guitar_icon.svg" className={`w-5 h-5 ${notationFormat === "tabs" ? "text-white" : "text-blue-500 dark:text-blue-300"}`} />
-                    {/* <GuitarIcon className={`w-5 h-5 ${notationFormat === "tabs" ? "text-white" : "text-blue-500 dark:text-blue-300"}`} /> */}
+                    <img 
+                        src="/guitar_icon.svg" 
+                        className={`w-4 h-4 ${notationFormat === "tabs" ? "brightness-[1.75] contrast-[0.7]" : ""}`} 
+                        alt="Guitar icon"
+                    />
                     <span>{lang._tabs} ({tabsCount})</span>
+                </button>
+                <button
+                    onClick={() => handleNotationFormatChange("fanduri")}
+                    className={`flex items-center justify-center space-x-1 px-2 py-1.5 text-xs font-medium rounded-md transition-all duration-200 whitespace-nowrap ${
+                        notationFormat === "fanduri"
+                            ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg"
+                            : "text-gray-700 dark:text-gray-200 hover:bg-blue-100 dark:hover:bg-gray-700"
+                    }`}
+                >
+                    <img 
+                        src="/fanduri_icon.png" 
+                        className={`w-4 h-4 ${notationFormat === "fanduri" ? "brightness-[1.75] contrast-[0.7]" : ""}`} 
+                        alt="Fanduri icon"
+                    />
+                    <span>{lang._chords} ({fanduriCount})</span>
                 </button>
             </div>
         </div>

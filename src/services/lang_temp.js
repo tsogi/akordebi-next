@@ -15,6 +15,7 @@ const interfaceGeo = {
     foreign_songs: "უცხოური აკორდები",
     main_page: "მთავარი გვერდი",
     _tabs: "ტაბები",
+    _fanduri: "ფანდური",
     _notes: "ნოტები",
     _chords: "აკორდები",
     _metaTitle: "გიტარის აკორდები | gitaris akordebi",
@@ -92,6 +93,7 @@ const interfaceGeo = {
     upload: {
         select_type: "აირჩიეთ ტიპი:",
         chords: "აკორდები",
+        fanduri: "ფანდური",
         tabs: "ტაბები",
         cancel: "გაუქმება",
         add_image_button: "ტაბის/ნოტის დამატება",
@@ -202,6 +204,7 @@ const interfaceEng = {
     main_page: "Homepage",
     teachers: "Guitar Teachers",
     _tabs: "Tabs",
+    _fanduri: "Fanduri",
     _notes: "Notes",
     _chords: "Chords",
     _metaTitle: "Clean guitar chords",
@@ -279,6 +282,7 @@ const interfaceEng = {
     upload: {
         chords: "Chords",
         tabs: "Tabs",
+        fanduri: "Fanduri",
         select_type: "Select type:",
         cancel: "Cancel",
         publish: `In order to upload new song chord to ${process.env.NEXT_PUBLIC_DOMAIN} you should fill out the fields and upload song text using plus(+) buttons. At the end of this page you can find `,

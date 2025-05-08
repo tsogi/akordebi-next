@@ -179,6 +179,7 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
                             options={[
                                 { label: lang.upload.chords, value: "chords" },
                                 { label: lang.upload.tabs, value: "tabs" },
+                                { label: lang.upload.fanduri, value: "fanduri" },
                                 // { label: "ნოტები", value: "notes" }
                             ]}
                             value={notationFormat}
