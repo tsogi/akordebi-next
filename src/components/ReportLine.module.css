@@ -23,7 +23,9 @@
 }
 
 .modalOverlay {
+    color: black;
     position: fixed;
+    font-style: normal;
     top: 0;
     left: 0;
     right: 0;
@@ -87,6 +89,7 @@
 
 .textarea {
     width: 100%;
+    background-color: white;
     padding: 12px;
     border: 1px solid #ddd;
     border-radius: 6px;

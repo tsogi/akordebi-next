@@ -43,7 +43,7 @@ export default function ReportLine({ lineNumber, lineText, songUrl }) {
                         setSubmitted(false);
                         setReportText('');
                     }, 300);
-                }, 2000);
+                }, 5000);
             } else {
                 throw new Error('Failed to submit report');
             }
@@ -83,7 +83,7 @@ export default function ReportLine({ lineNumber, lineText, songUrl }) {
                                 <p>{lang?.report?.success || 'Thank you for your report!'}</p>
                             </div>
                         ) : (
-                            <form onSubmit={handleSubmit} className='color: black;'>
+                            <form onSubmit={handleSubmit} className='text-black'>
                                 <div className={styles.linePreview}>
                                     <p><strong>{lang?.report?.linePreview || 'სტრიქონი'}:</strong> {lineText}</p>
                                 </div>
@@ -93,7 +93,7 @@ export default function ReportLine({ lineNumber, lineText, songUrl }) {
                                         className={styles.textarea}
                                         value={reportText}
                                         onChange={(e) => setReportText(e.target.value)}
-                                        placeholder="გთხოვთ აღწეროთ რა არის შეცდომით ამ სტრიქონზე და გვითხარით როგორ უნდა იყოს სწორად"
+                                        placeholder={lang.report.placeholder}
                                         rows={5}
                                         required
                                     />

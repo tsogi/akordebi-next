@@ -75,6 +75,15 @@ const interfaceGeo = {
     subscriptionPrompt: {
         title: "გამოწერა",
     },
+    report: {
+        title: "შეცდომის დაფიქსირება",
+        success: "მადლობა, შეცდომა დაფიქსირდა!",
+        linePreview: "სტრიქონი",
+        cancel: "გაუქმება",
+        submit: "გაგზავნა",
+        submitting: "იგზავნება...",
+        placeholder: "გთხოვთ აღწეროთ რა არის შეცდომით ამ სტრიქონზე და გვითხრათ როგორ უნდა იყოს სწორად"
+    },
     chord: {
         font: "ფონტი",
         autoScroll: "ავტო-სქროლი",
@@ -256,6 +265,15 @@ const interfaceEng = {
     },
     subscriptionPrompt: {
         title: "Subscribtion",
+    },
+    report: {
+        title: "Report an Issue",
+        success: "Thank you for your report!",
+        linePreview: "Line",
+        cancel: "Cancel",
+        submit: "Submit",
+        submitting: "Submitting...",
+        placeholder: "Please describe what's wrong with this line and tell us how it should be correctly"
     },
     _auth: {
         login: "Log in",
