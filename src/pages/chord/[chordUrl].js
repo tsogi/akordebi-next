@@ -300,6 +300,7 @@ function rightHandLine(content, index){
                     return previous += current;
                 }, "")
             }
+        <span className='reportWrapper'></span>
         </div>
     </div>
 }
@@ -346,6 +347,7 @@ function renderLine(line, index){
             </div>
         })
     }
+    <div className='reportWrapper'></div>
     </div>
 }
 
