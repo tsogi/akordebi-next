@@ -568,6 +568,23 @@ class Db{
         await this.pool.execute('INSERT INTO bog_payments (email, status, bog_body) VALUES (?, ?, ?)', 
             [sanitizedEmail, sanitizedStatus, sanitizedDetails]);
     }
+
+    async storeReport(lineNumber, lineText, songUrl, reportText, ip) {
+        const query = `
+            INSERT INTO reports (line_number, line_text, song_url, report_text, ip, created_at)
+            VALUES (?, ?, ?, ?, ?, NOW())
+        `;
+
+        const [result] = await this.pool.execute(query, [
+            lineNumber, 
+            lineText, 
+            songUrl, 
+            reportText, 
+            ip
+        ]);
+
+        return result.insertId;
+    }
 }
 
 module.exports = new Db();

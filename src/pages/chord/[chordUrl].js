@@ -7,6 +7,7 @@ import EmbedVideo from "@/components/EmbedVideo";
 import Footer from "@/components/Footer";
 import SongVotes from "@/components/SongVotes";
 import SubscriptionPrompt from "@/components/SubscriptionPrompt";
+import ReportLine from "@/components/ReportLine";
 import db from "@/services/db";
 import styles from "./SongPage.module.css";
 import SongDifficulties from '@/components/SongDifficulties';
@@ -300,7 +301,9 @@ function rightHandLine(content, index){
                     return previous += current;
                 }, "")
             }
-        <span className='reportWrapper'></span>
+        <span className='reportWrapper'>
+            <ReportLine lineNumber={index} lineText={content} />
+        </span>
         </div>
     </div>
 }
@@ -347,7 +350,9 @@ function renderLine(line, index){
             </div>
         })
     }
-    <div className='reportWrapper'></div>
+    <div className='reportWrapper'>
+        <ReportLine lineNumber={index} lineText={line.value} />
+    </div>
     </div>
 }
 
@@ -415,6 +420,9 @@ function imageLine(value, index){
             style={{ maxWidth: '100%', margin: "2px 0" }} 
             loading="lazy"
         />
+        <div className='reportWrapper'>
+            <ReportLine lineNumber={index} lineText="Tab or note image" />
+        </div>
     </div>
 }
 
