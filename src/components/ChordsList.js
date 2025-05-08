@@ -286,7 +286,7 @@ export default function ChordsList({ initialSongs }){
                 >
                     <img 
                         src="/guitar_icon.svg"
-                        className="w-4 h-4" 
+                        className={`w-4 h-4 ${notationFormat === "chords" ? "brightness-[1.75] contrast-[0.7]" : ""}`} 
                         alt="Guitar icon"
                     />
                     <span>{lang._chords} ({chordsCount})</span>
