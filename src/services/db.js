@@ -611,8 +611,8 @@ class Db{
 
             // Get related songs with preference to:
             // 1. Songs by the same author(s)
-            // 2. Songs with higher view counts
-            // 3. Confirmed songs
+            // 2. Songs with higher vote counts (likes)
+            // 3. Songs with higher view counts
             const [rows] = await this.pool.execute(`
                 SELECT 
                     songs.name, 
@@ -620,9 +620,9 @@ class Db{
                     songs.id,
                     songs.notation_format,
                     songs.view_count,
-                    songs.confirmed,
                     songs.videoLesson,
-                    IFNULL(authors_agg.authors, "") as authors
+                    IFNULL(authors_agg.authors, "") as authors,
+                    IFNULL(votes_count.vote_sum, 0) as vote_sum
                 FROM songs
                 LEFT JOIN authors_songs ON songs.id = authors_songs.song_id
                 LEFT JOIN (
@@ -633,13 +633,20 @@ class Db{
                     JOIN authors ON authors_songs.author_id = authors.id
                     GROUP BY authors_songs.song_id
                 ) AS authors_agg ON songs.id = authors_agg.song_id
+                LEFT JOIN (
+                    SELECT 
+                        song_id,
+                        SUM(vote) as vote_sum
+                    FROM votes
+                    GROUP BY song_id
+                ) AS votes_count ON songs.id = votes_count.song_id
                 WHERE songs.id != ?
                 ${authorFilter}
                 GROUP BY songs.id
                 ORDER BY 
-                    songs.confirmed DESC,
+                    votes_count.vote_sum DESC,
                     songs.view_count DESC
-                LIMIT 10
+                LIMIT 6
             `, [songId]);
 
             // Process the author list for each song
