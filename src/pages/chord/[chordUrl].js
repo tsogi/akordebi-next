@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import SongVotes from "@/components/SongVotes";
 import SubscriptionPrompt from "@/components/SubscriptionPrompt";
 import ReportLine from "@/components/ReportLine";
+import RelatedSongs from "@/components/RelatedSongs";
 import db from "@/services/db";
 import styles from "./SongPage.module.css";
 import SongDifficulties from '@/components/SongDifficulties';
@@ -19,7 +20,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { transliterateWithCapital, transliterateWithCapitalizedWords, convertGeorgianToLatin } from '@/utils/transliteration';
 let intervalId;
 
-export default function SongPage({ song }){
+export default function SongPage({ song, relatedSongs }){
     const [fontSize, setFontSize] = useState(16);
     const [scrollSpeed, setScrollSpeed] = useState(0);
     const [showChords, setShowChords ] = useState(false);
@@ -260,6 +261,9 @@ export default function SongPage({ song }){
                 :
                 null
             }
+
+            <RelatedSongs songs={relatedSongs} />
+            
             {/* {
                 process.env.NEXT_PUBLIC_DOMAIN == "akordebi.ge" ?
                 <div className="mt-[40px]">
@@ -449,17 +453,21 @@ export async function getServerSideProps(ctx) {
         // Increment the view count for this song
         await db.incrementSongViewCount(song.id);
         
+        // Get related songs
+        const relatedSongs = await db.getRelatedSongs(song.id);
+        
         song = addCoupletChords(song)
+
+        return {
+            props: {
+                song,
+                relatedSongs
+            },
+        }
     } else {
         return {
             notFound: true,
         }
-    }
-  
-    return {
-      props: {
-        song
-      },
     }
 }
 

@@ -585,6 +585,74 @@ class Db{
 
         return result.insertId;
     }
+
+    async getRelatedSongs(songId) {
+        try {
+            // Get the current song to find related songs with similar authors
+            const currentSong = await this.getSongById(songId);
+            let authorFilter = '';
+            
+            if (currentSong && currentSong.authors && currentSong.authors.length > 0) {
+                // If the current song has authors, find songs with the same authors
+                const authorIdsQuery = `
+                    SELECT author_id 
+                    FROM authors_songs 
+                    WHERE song_id = ?
+                `;
+                const [authorRows] = await this.pool.execute(authorIdsQuery, [songId]);
+                
+                if (authorRows.length > 0) {
+                    const authorIds = authorRows.map(row => row.author_id);
+                    authorFilter = `
+                        OR authors_songs.author_id IN (${authorIds.join(',')})
+                    `;
+                }
+            }
+
+            // Get related songs with preference to:
+            // 1. Songs by the same author(s)
+            // 2. Songs with higher view counts
+            // 3. Confirmed songs
+            const [rows] = await this.pool.execute(`
+                SELECT 
+                    songs.name, 
+                    songs.url, 
+                    songs.id,
+                    songs.notation_format,
+                    songs.view_count,
+                    songs.confirmed,
+                    songs.videoLesson,
+                    IFNULL(authors_agg.authors, "") as authors
+                FROM songs
+                LEFT JOIN authors_songs ON songs.id = authors_songs.song_id
+                LEFT JOIN (
+                    SELECT 
+                        authors_songs.song_id,
+                        GROUP_CONCAT(authors.name) AS authors
+                    FROM authors_songs
+                    JOIN authors ON authors_songs.author_id = authors.id
+                    GROUP BY authors_songs.song_id
+                ) AS authors_agg ON songs.id = authors_agg.song_id
+                WHERE songs.id != ?
+                ${authorFilter}
+                GROUP BY songs.id
+                ORDER BY 
+                    songs.confirmed DESC,
+                    songs.view_count DESC
+                LIMIT 10
+            `, [songId]);
+
+            // Process the author list for each song
+            for(let row of rows) {
+                row.authors = row.authors ? [...new Set(row.authors.split(","))] : [];
+            }
+
+            return rows;
+        } catch (error) {
+            console.error('Error getting related songs:', error);
+            return [];
+        }
+    }
 }
 
 module.exports = new Db();

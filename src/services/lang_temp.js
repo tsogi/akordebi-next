@@ -92,12 +92,14 @@ const interfaceGeo = {
         appearance: "აკორდები",
         uploaded: "აკორდები ატვირთა",
         rate: " შეაფასეთ აკორდების სისწორე",
+        relatedSongs: "მსგავსი სიმღერები",
     },
     songCard: {
         videoTooltip: "ვიდეო გაკვეთილი",
         difficultyTooltip: "სირთულე",
         viewsTooltip: "ნახვები",
-        likesTooltip: "მოწონება"
+        likesTooltip: "მოწონება",
+        verifiedTooltip: "დამოწმებული"
     },
     upload: {
         select_type: "აირჩიეთ ტიპი:",
@@ -283,19 +285,21 @@ const interfaceEng = {
         uploadSongBtn: 'In order to upload song to the website please log in to the system'
     },
     chord: {
-        font: "Font size",
-        autoScroll: "Auto scroll",
-        chord: "chords",
+        font: "Font",
+        autoScroll: "Auto-scroll",
+        chord: "Chords",
         hide: "Hide",
         appearance: "Show",
         uploaded: "Uploaded by",
-        rate: "Evaluate correctness of chords",
+        rate: "Rate chord accuracy",
+        relatedSongs: "Related Songs",
     },
     songCard: {
         videoTooltip: "Video lesson",
         difficultyTooltip: "Difficulty",
         viewsTooltip: "Views",
-        likesTooltip: "Likes"
+        likesTooltip: "Likes",
+        verifiedTooltip: "Verified"
     },
     upload: {
         chords: "Chords",
