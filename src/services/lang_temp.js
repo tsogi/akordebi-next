@@ -92,7 +92,7 @@ const interfaceGeo = {
         appearance: "აკორდები",
         uploaded: "აკორდები ატვირთა",
         rate: " შეაფასეთ აკორდების სისწორე",
-        relatedSongs: "მსგავსი სიმღერები",
+        relatedSongs: "მსგავსი აკორდები",
     },
     songCard: {
         videoTooltip: "ვიდეო გაკვეთილი",
@@ -292,7 +292,7 @@ const interfaceEng = {
         appearance: "Show",
         uploaded: "Uploaded by",
         rate: "Rate chord accuracy",
-        relatedSongs: "Related Songs",
+        relatedSongs: "Related Chords",
     },
     songCard: {
         videoTooltip: "Video lesson",
