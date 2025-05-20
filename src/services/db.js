@@ -609,7 +609,7 @@ class Db{
                 }
             }
 
-            // Get related songs with preference to:
+            // Get 50 related songs with preference to:
             // 1. Songs by the same author(s)
             // 2. Songs with higher vote counts (likes)
             // 3. Songs with higher view counts
@@ -646,7 +646,7 @@ class Db{
                 ORDER BY 
                     votes_count.vote_sum DESC,
                     songs.view_count DESC
-                LIMIT 6
+                LIMIT 50
             `, [songId]);
 
             // Process the author list for each song
@@ -654,7 +654,9 @@ class Db{
                 row.authors = row.authors ? [...new Set(row.authors.split(","))] : [];
             }
 
-            return rows;
+            // Shuffle the array and return 6 random songs
+            const shuffledSongs = [...rows].sort(() => 0.5 - Math.random());
+            return shuffledSongs.slice(0, 6);
         } catch (error) {
             console.error('Error getting related songs:', error);
             return [];
