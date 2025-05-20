@@ -7,7 +7,6 @@ services:
     network_mode: "host"  # This allows nginx to access localhost
     volumes:
       - ./default:/etc/nginx/conf.d/default.conf
-      - /etc/letsencrypt:/etc/letsencrypt:ro
 
   akordebi:
     image: akordebi:1.4

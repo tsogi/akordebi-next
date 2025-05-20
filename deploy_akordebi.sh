@@ -11,9 +11,11 @@ npm run build
 docker buildx build --platform linux/amd64 -t akordebi:1.4 --output "type=docker,dest=./akordebi.tar" .
 
 # Upload docker image .tar to ssh
+# scp -i ./backups/server_keys.pem ./backups//backup_19.sql ubuntu@18.153.218.239:/var/projects
 scp -i /users/nika/.ssh/id_rsa_ubuntu_server ./akordebi.tar nika@tsogi.net:/var/projects
 
 # Connect to the machine and run docker image
+# ssh -i ./backups/server_keys.pem ubuntu@18.153.218.239
 ssh -i /users/nika/.ssh/id_rsa_ubuntu_server nika@tsogi.net << EOF
 
     # Navigating to the directory
