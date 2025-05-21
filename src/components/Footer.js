@@ -4,10 +4,12 @@ import WriteUs from "./WriteUs";
 import { useLanguage } from '@/context/LanguageContext';
 import { useShoppingCart } from '@/context/ShoppingCartContext';
 import Link from "next/link";
+import { useRouter } from 'next/router';
 
 export default function Footer(){
   const { lang } = useLanguage();
   const { getTotalItems, getTotalPrice } = useShoppingCart();
+  const router = useRouter();
 
   useEffect(() => {
     if(process.env.NEXT_PUBLIC_DOMAIN == "akordebi.ge"){
@@ -26,6 +28,7 @@ export default function Footer(){
 
   const totalItems = getTotalItems();
   const totalPrice = getTotalPrice();
+  const isCartPage = router.pathname === '/shop/cart';
 
   return <footer className={styles.footerWrapper}>
     <div className={`${styles.topGeWrapper} page_container flex flex-col items-center`}>
@@ -79,7 +82,7 @@ export default function Footer(){
           </div>
         </div>
       </div>
-      {totalItems > 0 && (
+      {totalItems > 0 && !isCartPage && (
         <Link href="/shop/cart"
           className="fixed left-0 right-0 bottom-4 mx-auto w-[95vw] max-w-md z-50 px-0 flex justify-center"
           style={{ pointerEvents: 'auto' }}
