@@ -29,7 +29,9 @@ export default async function handler(req, res) {
                 return;
             }
 
-            if(dbSong.uploaderUserId != data.userId && data.pass != process.env.ADMIN_PASS) {
+            if(process.env.NEXT_PUBLIC_ADMINS_EDIT_SONG.includes(user.email) || dbSong.uploaderUserId == data.userId) {
+
+            }else {
                 response2.error = "თქვენ არ შეგიძლიათ სხვისი შექმნილი სიმღერის შეცვლა";
                 res.json(response2);
                 return;
