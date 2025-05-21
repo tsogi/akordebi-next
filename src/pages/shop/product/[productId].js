@@ -7,10 +7,12 @@ import shopProducts from '@/data/shopProducts';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import { useShoppingCart } from '@/context/ShoppingCartContext';
 
 export default function ProductDetail() {
   const router = useRouter();
   const { productId } = router.query;
+  const { addToCart } = useShoppingCart();
   
   // Find the product in our data
   let product = null;
@@ -39,6 +41,10 @@ export default function ProductDetail() {
       </>
     );
   }
+
+  const handleAddToCart = () => {
+    addToCart(product);
+  };
   
   return (
     <>
@@ -75,9 +81,7 @@ export default function ProductDetail() {
                 <div className={styles.fallbackImage}>
                   <div className={styles.fallbackImageContent}>
                     <span className={styles.productNameInitial}>
-                      {product.name.charAt(0)}{
-                        product.thumbnail
-                      }
+                      {product.name.charAt(0)}
                     </span>
                   </div>
                 </div>
@@ -94,27 +98,26 @@ export default function ProductDetail() {
                 <p className={styles.descriptionText}>{product.description}</p>
               </div>
               
-              <div className={styles.deliveryInfo}>
+              {/* <div className={styles.deliveryInfo}>
                 <div className={styles.deliveryBadge}>
                   იმავე დღეს მიწოდება
                 </div>
                 <p className={styles.deliveryText}>
                   შეკვეთის განთავსების შემთხვევაში 21:00 საათამდე, მიიღებთ პროდუქტს იმავე დღეს!
                 </p>
-              </div>
-              
-              <div className={styles.qualityInfo}>
-                <h2 className={styles.qualityTitle}>ხარისხის გარანტია</h2>
-                <p className={styles.qualityText}>
-                  ყველა ჩვენი პროდუქტი შერჩეულია და შემოწმებულია პროფესიონალი მუსიკოსების მიერ.
-                  თითოეული ინსტრუმენტი გამოირჩევა უმაღლესი ხარისხით და საუკეთესო ჟღერადობით.
-                </p>
-              </div>
+              </div> */}
               
               <div className={styles.productActions}>
-                <button className={styles.addToCartButton}>კალათაში დამატება</button>
-                <Link href="/shop">
-                  <button className={styles.backToShopButton}>მაღაზიაში დაბრუნება</button>
+                <button 
+                  onClick={handleAddToCart}
+                  className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-200 mb-4"
+                >
+                  კალათაში დამატება
+                </button>
+                <Link href="/shop" className='flex justify-center'>
+                  <button className="w-full border border-gray-300 py-3 px-6 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                    მაღაზიაში დაბრუნება
+                  </button>
                 </Link>
               </div>
             </div>
