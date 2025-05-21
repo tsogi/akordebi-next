@@ -42,8 +42,13 @@ export default function ChordsList({ initialSongs }){
     const[tabsCount, setTabsCount] = useState(0);
     const[fanduriCount, setFanduriCount] = useState(0);
 
+    const handleDeleteSong = (songId) => {
+        // Remove the song from both initialSongs and displayedSongs
+        initialSongs = initialSongs.filter(song => song.id !== songId);
+        setDisplayedSongs(prevSongs => prevSongs.filter(song => song.id !== songId));
+        setPaginationCount(prev => prev - 1);
+    };
 
-        
     // async function handleYamahaClick(){
     //     try {
     //     let msg = `akordebi.ge: yamaha banner clicked`;
@@ -327,7 +332,7 @@ export default function ChordsList({ initialSongs }){
         <main className={"songsList"}>
             {
                 displayedSongs.map(song => {
-                    return <SongCard key={song.id} song={song} />
+                    return <SongCard key={song.id} song={song} onDelete={handleDeleteSong} />
                 })
             }
             <aside className={"songItemWrapper"}>

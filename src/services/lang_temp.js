@@ -98,8 +98,11 @@ const interfaceGeo = {
         videoTooltip: "ვიდეო გაკვეთილი",
         difficultyTooltip: "სირთულე",
         viewsTooltip: "ნახვები",
-        likesTooltip: "მოწონება",
-        verifiedTooltip: "დამოწმებული"
+        likesTooltip: "მოწონებები",
+        verifiedTooltip: "დამოწმებული",
+        deleteTooltip: "სიმღერის წაშლა",
+        deleteConfirm: "დარწმუნებული ხართ რომ გსურთ ამ სიმღერის წაშლა?",
+        deleteSuccess: "სიმღერა წარმატებით წაიშალა"
     },
     upload: {
         select_type: "აირჩიეთ ტიპი:",
@@ -299,7 +302,10 @@ const interfaceEng = {
         difficultyTooltip: "Difficulty",
         viewsTooltip: "Views",
         likesTooltip: "Likes",
-        verifiedTooltip: "Verified"
+        verifiedTooltip: "Verified",
+        deleteTooltip: "Delete song",
+        deleteConfirm: "Are you sure you want to delete this song?",
+        deleteSuccess: "Song was successfully deleted"
     },
     upload: {
         chords: "Chords",

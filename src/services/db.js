@@ -662,6 +662,19 @@ class Db{
             return [];
         }
     }
+
+    async deleteSong(songId) {
+        // First delete related records
+        // await this.pool.execute('DELETE FROM authors_songs WHERE song_id = ?', [songId]);
+        await this.pool.execute('DELETE FROM favorite_songs WHERE song_id = ?', [songId]);
+        await this.pool.execute('DELETE FROM votes WHERE song_id = ?', [songId]);
+        await this.pool.execute('DELETE FROM difficulties WHERE song_id = ?', [songId]);
+        
+        // Then delete the song
+        const [result] = await this.pool.execute('DELETE FROM songs WHERE id = ?', [songId]);
+        
+        return result.affectedRows > 0;
+    }
 }
 
 module.exports = new Db();
