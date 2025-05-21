@@ -29,7 +29,7 @@ export default async function handler(req, res) {
                 return;
             }
 
-            if(process.env.NEXT_PUBLIC_ADMINS_EDIT_SONG.includes(user.email) || dbSong.uploaderUserId == data.userId) {
+            if(process.env.NEXT_PUBLIC_CAN_EDIT_SONG.includes(user.email) || dbSong.uploaderUserId == data.userId) {
 
             }else {
                 response2.error = "თქვენ არ შეგიძლიათ სხვისი შექმნილი სიმღერის შეცვლა";
