@@ -441,7 +441,7 @@ return (
             <div className={styles.poemActionBtn}>
                 <Button
                     variant="contained"
-                    color="secondary"
+                    // color="secondary"
                     startIcon={<AddIcon />}
                     onClick={() => { addLine("image") }}
                 >
