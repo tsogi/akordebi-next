@@ -45,6 +45,10 @@ export default function Footer(){
                 {lang.teachers}
               </a>
             )}
+            <a className={styles.quickLink} href="/chords_library">
+              <span className={styles.linksDivider}></span>
+              {lang._footer_chords_library}
+            </a>
             {/* {process.env.NEXT_PUBLIC_DOMAIN === "akordebi.ge" && (
               <a className={styles.quickLink} href="/guitar-finder">
                 <span className={styles.linksDivider}></span>
