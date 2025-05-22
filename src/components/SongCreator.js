@@ -9,7 +9,7 @@ import SongTextEditor from "@/components/SongTextEditor";
 import Snackbar from '@mui/material/Snackbar';
 import { useLanguage } from '@/context/LanguageContext';
 import CustomSelect from "@/components/CustomSelect";
-import { getNotation } from "@/utils/notations";
+import { getNotation, notations } from "@/utils/notations";
 
 const css = {
     textInput: "h-[50px] pl-5 text-white w-full bg-[rgba(255,255,255,.05)] shadow-[inset 12px 12px 30px rgba(53,123,230,.2)]"
@@ -209,12 +209,10 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
                     <span className="text-white mr-2">{lang.upload.select_type}</span>
                     <div className="flex-1">
                         <CustomSelect
-                            options={[
-                                { label: lang.upload.chords, value: "chords" },
-                                { label: lang.upload.tabs, value: "tabs" },
-                                { label: lang.upload.fanduri, value: "fanduri" },
-                                // { label: "ნოტები", value: "notes" }
-                            ]}
+                            options={notations.map(notation => ({
+                                label: notation.name,
+                                value: notation.code
+                            }))}
                             value={notationFormat}
                             onChange={handleNotationFormatChange}
                         />
