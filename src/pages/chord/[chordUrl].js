@@ -18,6 +18,7 @@ import { MinusIcon, PlusIcon, EyeIcon, EyeSlashIcon } from '@heroicons/react/24/
 import { useUser } from '@/utils/useUser';
 import { useLanguage } from '@/context/LanguageContext';
 import { transliterateWithCapital, transliterateWithCapitalizedWords, convertGeorgianToLatin } from '@/utils/transliteration';
+import { getNotation } from '@/utils/notations';
 let intervalId;
 
 export default function SongPage({ song, relatedSongs }){
@@ -199,15 +200,15 @@ export default function SongPage({ song, relatedSongs }){
                         }
 
                         if(line.type == "coupletChords") {
-                            return coupletChordsLine(line.list, index, showChords);
+                            return coupletChordsLine(line.list, index, showChords, song.notation.chordsDir);
                         }
 
                         if(line.type == "text") {
-                            return coupletLine(line, index);
+                            return coupletLine(line, index, song.notation.chordsDir);
                         }
                         
                         if(line.type == "chorus") {
-                            return chorusLine(line, index);
+                            return chorusLine(line, index, song.notation.chordsDir);
                         }
 
                         if(line.type == "break") {
@@ -282,12 +283,12 @@ export default function SongPage({ song, relatedSongs }){
     </>
 }
 
-function coupletChordsLine(chords, index, showChords){
+function coupletChordsLine(chords, index, showChords, chordsDir){
     return <div key={index} className={`${styles.lineWrapper} ${styles.coupletChords}`}>
         <div className={styles.coupletChordsList} style={{ display: showChords ? "flex" : "none" }}>
             {
                 chords.map(chord => {
-                    return <img className={styles.coupletChordImg} onError = {() => { this.style.display = 'none' }} src={ findChordImage(chord) } />
+                    return <img className={styles.coupletChordImg} onError = {() => { this.style.display = 'none' }} src={ findChordImage(chord, chordsDir) } />
                 })
             }
         </div>
@@ -326,7 +327,7 @@ function renderCharacter(character){
     return character;
 }
 
-function renderLine(line, index){
+function renderLine(line, index, chordsDir){
     return <div key={index} className={`lineWrapper ${line.type}`}>
     {
         line.value.split("").map((character, index) => {
@@ -345,7 +346,7 @@ function renderLine(line, index){
                                     currentTarget.src="";
                                 }}
 
-                            src={ findChordImage(line.chords[index]) } />
+                            src={ findChordImage(line.chords[index], chordsDir) } />
                         </div>
                     </>
                     :
@@ -360,13 +361,13 @@ function renderLine(line, index){
     </div>
 }
 
-function findChordImage(code){
+function findChordImage(code, chordsDir){
     code = code.replace("/", "-");
     code = code.replace(":", "-");
     code = code.replace("#", "_");
     code = encodeURIComponent(code);
 
-    let chordImage = `/chords/${code}.png`;
+    let chordImage = `${chordsDir}/${code}.png`;
     
     return chordImage;
 }
@@ -403,16 +404,16 @@ async function handleChordClick(event, chord){
     }
 }
 
-function coupletLine(line, index){
-    return renderLine(line, index)
+function coupletLine(line, index, chordsDir){
+    return renderLine(line, index, chordsDir)
 }
 
 function breakLine(index){
     return <div key={index} className={`lineWrapper break`}></div>
 }
 
-function chorusLine(line, index){
-    return renderLine(line, index)
+function chorusLine(line, index, chordsDir){
+    return renderLine(line, index, chordsDir)
 }
 
 function imageLine(value, index){
@@ -455,6 +456,8 @@ export async function getServerSideProps(ctx) {
         
         // Get related songs
         const relatedSongs = await db.getRelatedSongs(song.id);
+
+        song = attachNotation(song);
         
         song = addCoupletChords(song)
 
@@ -469,6 +472,13 @@ export async function getServerSideProps(ctx) {
             notFound: true,
         }
     }
+}
+
+function attachNotation(song){
+    const notation = getNotation(song.notation_format);
+    song.notation = notation;
+
+    return song;
 }
 
 function addCoupletChords(song){
