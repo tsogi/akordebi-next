@@ -9,6 +9,7 @@ import SongTextEditor from "@/components/SongTextEditor";
 import Snackbar from '@mui/material/Snackbar';
 import { useLanguage } from '@/context/LanguageContext';
 import CustomSelect from "@/components/CustomSelect";
+import { getNotation } from "@/utils/notations";
 
 const css = {
     textInput: "h-[50px] pl-5 text-white w-full bg-[rgba(255,255,255,.05)] shadow-[inset 12px 12px 30px rgba(53,123,230,.2)]"
@@ -83,7 +84,7 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
                 notation_format: notationFormat 
             }
 
-            let error = validationError(data);
+            let error = await validationError(data);
             if(error) {
                 setSaving(false);
                 updateSnackData("warning", error, true);
@@ -117,7 +118,8 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
         setSnackOpen(open);
     }
 
-    function validationError(data){
+    async function validationError(data){
+        console.log(data);
         if(!data.name) {
             return "სიმღერის სახელის ჩაწერა აუცილებელია";
         }
@@ -127,6 +129,13 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
 
         let containsChord = false;
         let containsImage = false;
+        let missingChords = new Set();
+        
+        // Get the notation directory from notations.js
+        const notation = getNotation(data.notation_format);
+        if (!notation) {
+            return "არასწორი ნოტაციის ფორმატი";
+        }
         
         for(let line of data.songText) {
             if(["text", "chorus"].includes(line.type) && line.chords && line.chords.length) {
@@ -141,6 +150,30 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
 
         if(!containsChord && !containsImage) {
             return "მონიშნეთ აკორდები ან დაამატეთ ტაბის სურათი. აკორდების მოსანიშნად ასოს თავზე დააჭირეთ პლიუს ნიშანს";
+        }
+
+        // Check if all chord files exist
+        for(let line of data.songText) {
+            if(["text", "chorus"].includes(line.type) && line.chords && line.chords.length) {
+                for (let chord of line.chords) {
+                    if (chord && chord.trim()) {
+                        const chordFile = `${notation.chordsDir}/${chord.trim()}.png`;
+                        try {
+                            const response = await fetch(chordFile, { method: 'HEAD' });
+                            if (!response.ok) {
+                                missingChords.add(chord.trim());
+                            }
+                        } catch (e) {
+                            missingChords.add(chord.trim());
+                        }
+                    }
+                }
+            }
+        }
+
+        if (missingChords.size > 0) {
+            const missingChordsList = Array.from(missingChords).join(", ");
+            return `${notation.name} ${missingChordsList} ვერ მოიძებნა სისტემაში, გთხოვთ გამოიყენოთ ალტერნატიული, გავრცელებული აკორდი. აკორდების სრული სია შეგიძლიათ ნახოთ შემდეგ ბმულზე: ${process.env.NEXT_PUBLIC_DOMAIN}/chords_library`;
         }
 
         return false;
