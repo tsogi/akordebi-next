@@ -198,6 +198,12 @@ const interfaceGeo = {
             no_ads: "არანაირი რეკლამა"
         },
         payments_disabled: "გადახდები დროებით გათიშულია, გთხოვთ სცადოთ მოგვიანებით"
+    },
+    chords_library: {
+        title: "აკორდების ბიბლიოთეკა",
+        guitar: "გიტარა",
+        fanduri: "ფანდური",
+        no_chords: "აკორდები ვერ მოიძებნა"
     }
 }
 
@@ -391,6 +397,12 @@ Bass Down Down Up Down Up or Bass ↓ ↓ ↑ ↓ ↑ or Bass 3 2 1 2 3`
             no_ads: "No advertisements"
         },
         payments_disabled: "Payments are temporarily disabled, please try again later"
+    },
+    chords_library: {
+        title: "Chords Library",
+        guitar: "Guitar",
+        fanduri: "Fanduri",
+        no_chords: "No chords found"
     }
 }
 
