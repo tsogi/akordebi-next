@@ -9,6 +9,12 @@ export default function ChordsLibrary() {
     const [chords, setChords] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    const handleTabChange = (tab) => {
+        setActiveTab(tab);
+        setChords([]); // Clear previous chords
+        setLoading(true); // Reset loading state
+    };
+
     useEffect(() => {
         const fetchChords = async () => {
             try {
@@ -41,7 +47,7 @@ export default function ChordsLibrary() {
                 <div className="flex justify-center mb-8">
                     <div className="inline-flex rounded-lg bg-gray-800 p-1">
                         <button
-                            onClick={() => setActiveTab('guitar')}
+                            onClick={() => handleTabChange('guitar')}
                             className={`px-4 py-2 rounded-lg transition-all ${
                                 activeTab === 'guitar'
                                     ? 'bg-blue-600 text-white'
@@ -51,7 +57,7 @@ export default function ChordsLibrary() {
                             {lang.chords_library.guitar}
                         </button>
                         <button
-                            onClick={() => setActiveTab('fanduri')}
+                            onClick={() => handleTabChange('fanduri')}
                             className={`px-4 py-2 rounded-lg transition-all ${
                                 activeTab === 'fanduri'
                                     ? 'bg-blue-600 text-white'
