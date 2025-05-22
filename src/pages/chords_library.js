@@ -33,6 +33,14 @@ export default function ChordsLibrary() {
         fetchChords();
     }, [activeTab]);
 
+    // Format chord name by replacing file extension and special characters
+    const formatChordName = (chordFileName) => {
+        return chordFileName
+            .replace('.png', '')
+            .replace(/_/g, '#')
+            .replace(/-/g, '/');
+    };
+
     return (
         <>
             <Head>
@@ -88,7 +96,7 @@ export default function ChordsLibrary() {
                                 <div className="bg-white relative w-full aspect-square mb-2">
                                     <Image
                                         src={`/chords/${activeTab}/${chord}`}
-                                        alt={chord.replace('.png', '')}
+                                        alt={formatChordName(chord)}
                                         width={200}
                                         height={200}
                                         className="object-contain"
@@ -96,7 +104,7 @@ export default function ChordsLibrary() {
                                     />
                                 </div>
                                 <span className="text-sm text-gray-300">
-                                    {chord.replace('.png', '')}
+                                    {formatChordName(chord)}
                                 </span>
                             </div>
                         ))}
