@@ -83,7 +83,7 @@ export default function ChordsLibrary() {
                                 key={chord}
                                 className="bg-gray-800 rounded-lg p-4 flex flex-col items-center hover:bg-gray-700 transition-colors"
                             >
-                                <div className="relative w-full aspect-square mb-2">
+                                <div className="bg-white relative w-full aspect-square mb-2">
                                     <Image
                                         src={`/chords/${activeTab}/${chord}`}
                                         alt={chord.replace('.png', '')}
