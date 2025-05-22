@@ -129,7 +129,7 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
 
         let containsChord = false;
         let containsImage = false;
-        let missingChords = new Set();
+        let uniqueChords = new Set();
         
         // Get the notation directory from notations.js
         const notation = getNotation(data.notation_format);
@@ -140,7 +140,12 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
         for(let line of data.songText) {
             if(["text", "chorus"].includes(line.type) && line.chords && line.chords.length) {
                 containsChord = true;
-                break;
+                // Collect unique chords
+                for (let chord of line.chords) {
+                    if (chord && chord.trim()) {
+                        uniqueChords.add(chord.trim());
+                    }
+                }
             }
             if(line.type === "image" && line.value) {
                 containsImage = true;
@@ -152,22 +157,17 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
             return "მონიშნეთ აკორდები ან დაამატეთ ტაბის სურათი. აკორდების მოსანიშნად ასოს თავზე დააჭირეთ პლიუს ნიშანს";
         }
 
-        // Check if all chord files exist
-        for(let line of data.songText) {
-            if(["text", "chorus"].includes(line.type) && line.chords && line.chords.length) {
-                for (let chord of line.chords) {
-                    if (chord && chord.trim()) {
-                        const chordFile = `${notation.chordsDir}/${chord.trim()}.png`;
-                        try {
-                            const response = await fetch(chordFile, { method: 'HEAD' });
-                            if (!response.ok) {
-                                missingChords.add(chord.trim());
-                            }
-                        } catch (e) {
-                            missingChords.add(chord.trim());
-                        }
-                    }
+        // Check if all unique chord files exist
+        let missingChords = new Set();
+        for (let chord of uniqueChords) {
+            const chordFile = `${notation.chordsDir}/${chord}.png`;
+            try {
+                const response = await fetch(chordFile, { method: 'HEAD' });
+                if (!response.ok) {
+                    missingChords.add(chord);
                 }
+            } catch (e) {
+                missingChords.add(chord);
             }
         }
 

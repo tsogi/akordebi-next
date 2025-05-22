@@ -1,4 +1,4 @@
-const notations = [
+export const notations = [
     { code: "chords", name: "გიტარის აკორდები", chordsDir: "/chords/guitar"},
     { code: "tabs", name: "გიტარის ტაბები", chordsDir: "/chords/guitar" },
     { code: "fanduri", name: "ფანდურის აკორდები", chordsDir: "/chords/fanduri" },
