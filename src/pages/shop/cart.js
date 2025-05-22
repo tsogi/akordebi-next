@@ -8,7 +8,32 @@ import Link from 'next/link';
 import styles from '@/styles/Shop.module.css';
 
 export default function ShoppingCart() {
-  const { cart, removeFromCart, updateQuantity, getTotalPrice } = useShoppingCart();
+  const { cart, removeFromCart, updateQuantity, getTotalPrice, isMounted } = useShoppingCart();
+
+  // Show loading state during hydration
+  if (!isMounted) {
+    return (
+      <>
+        <Head>
+          <title>კალათა | აკორდები.გე</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+          <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        </Head>
+        <Header />
+        <main className={styles.shopMain}>
+          <div className={`page_container ${styles.shopContainer}`}>
+            <div className="text-center py-12">
+              <div className="animate-pulse">
+                <div className="h-8 bg-gray-700 rounded w-1/4 mx-auto mb-4"></div>
+                <div className="h-4 bg-gray-700 rounded w-1/2 mx-auto"></div>
+              </div>
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </>
+    );
+  }
 
   if (cart.length === 0) {
     return (

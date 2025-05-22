@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 
 export default function Footer(){
   const { lang } = useLanguage();
-  const { getTotalItems, getTotalPrice } = useShoppingCart();
+  const { getTotalItems, getTotalPrice, isMounted } = useShoppingCart();
   const router = useRouter();
 
   useEffect(() => {
@@ -82,7 +82,7 @@ export default function Footer(){
           </div>
         </div>
       </div>
-      {totalItems > 0 && !isCartPage && (
+      {isMounted && totalItems > 0 && !isCartPage && (
         <Link href="/shop/cart"
           className="fixed left-0 right-0 bottom-4 mx-auto w-[95vw] max-w-md z-50 px-0 flex justify-center"
           style={{ pointerEvents: 'auto' }}

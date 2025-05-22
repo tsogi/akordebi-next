@@ -2,11 +2,22 @@ import { createContext, useContext, useState, useEffect } from 'react';
 
 const ShoppingCartContext = createContext();
 
+// Helper function to get initial cart state from localStorage
+const getInitialCart = () => {
+  if (typeof window !== 'undefined') {
+    const savedCart = localStorage.getItem('shoppingCart');
+    return savedCart ? JSON.parse(savedCart) : [];
+  }
+  return [];
+};
+
 export function ShoppingCartProvider({ children }) {
   const [cart, setCart] = useState([]);
+  const [isMounted, setIsMounted] = useState(false);
 
+  // Handle hydration
   useEffect(() => {
-    // Load cart from localStorage on initial render
+    setIsMounted(true);
     const savedCart = localStorage.getItem('shoppingCart');
     if (savedCart) {
       setCart(JSON.parse(savedCart));
@@ -14,9 +25,15 @@ export function ShoppingCartProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    // Save cart to localStorage whenever it changes
-    localStorage.setItem('shoppingCart', JSON.stringify(cart));
-  }, [cart]);
+    // Only save to localStorage after component is mounted
+    if (isMounted) {
+      if (cart.length > 0) {
+        localStorage.setItem('shoppingCart', JSON.stringify(cart));
+      } else {
+        localStorage.removeItem('shoppingCart');
+      }
+    }
+  }, [cart, isMounted]);
 
   const addToCart = (product) => {
     setCart(prevCart => {
@@ -62,7 +79,8 @@ export function ShoppingCartProvider({ children }) {
       removeFromCart,
       updateQuantity,
       getTotalItems,
-      getTotalPrice
+      getTotalPrice,
+      isMounted
     }}>
       {children}
     </ShoppingCartContext.Provider>
