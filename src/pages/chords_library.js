@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import Head from 'next/head';
 import Image from 'next/image';
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export default function ChordsLibrary() {
     const { lang } = useLanguage();
@@ -37,8 +39,8 @@ export default function ChordsLibrary() {
                 <title>{lang.chords_library.title}</title>
                 <meta name="description" content={lang.chords_library.title} />
             </Head>
-
-            <main className="min-h-screen bg-gray-900 text-white p-4">
+            <Header />
+            <main className="min-h-screen text-white p-4">
                 <h1 className="text-2xl md:text-3xl font-bold text-center mb-8">
                     {lang.chords_library.title}
                 </h1>
@@ -101,6 +103,7 @@ export default function ChordsLibrary() {
                     </div>
                 )}
             </main>
+            <Footer />
         </>
     );
 } 
