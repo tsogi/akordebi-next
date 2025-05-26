@@ -9,7 +9,7 @@ ssh -i /users/nika/.ssh/id_rsa_ubuntu_server -t nika@tsogi.net "docker exec -it 
 
 select * from users where payment_date is not null;
 
-UPDATE users SET paid_until = "2025-05-26 12:04:25" WHERE email = "janelag25@gmail.com";
+UPDATE users SET payment_date = "2025-05-24 12:34:00", payment_confirmed = 1, paid_until = "2025-06-24 12:34:00" WHERE email = "demurishvililuka4@gmail.com";
 
 UPDATE users 
 SET paid_until = DATE_ADD(payment_date, INTERVAL 1 MONTH)

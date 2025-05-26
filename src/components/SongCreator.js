@@ -160,7 +160,10 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
         // Check if all unique chord files exist
         let missingChords = new Set();
         for (let chord of uniqueChords) {
-            const chordFile = `${notation.chordsDir}/${chord}.png`;
+            // Create a web-safe filename
+            // Replace / with _ and # with sharp (or another safe replacement)
+            const safeChordName = chord.replace(/\//g, '-').replace(/#/g, '_');
+            const chordFile = `${notation.chordsDir}/${safeChordName}.png`;
             try {
                 const response = await fetch(chordFile, { method: 'HEAD' });
                 if (!response.ok) {
