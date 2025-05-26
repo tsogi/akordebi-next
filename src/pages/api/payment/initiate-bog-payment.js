@@ -59,11 +59,11 @@ export default async function handler(req, res) {
         external_order_id: externalOrderId,
         purchase_units: {
           currency: 'GEL',
-          total_amount: 5, // 5 GEL
+          total_amount: 3, // 3 GEL
           basket: [
             {
               quantity: 1,
-              unit_price: 5,
+              unit_price: 3,
               product_id: 'gamowera'
             }
           ]

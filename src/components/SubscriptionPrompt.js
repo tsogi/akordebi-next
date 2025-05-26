@@ -136,7 +136,7 @@ const SubscriptionPrompt = ({
                   
                   {/* Price Tag */}
                   <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-4 rounded-xl mb-6 transform hover:scale-[1.02] transition-transform duration-300">
-                    <div className="text-2xl font-bold text-blue-600">5 ლარი / თვეში</div>
+                    <div className="text-2xl font-bold text-blue-600">3 ლარი / თვეში</div>
                     <div className="text-blue-500/80 text-sm mt-1">ნებისმიერი ბანკის ბარათით</div>
                   </div>
                   
