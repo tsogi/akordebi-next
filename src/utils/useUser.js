@@ -27,8 +27,9 @@ export const MyUserContextProvider = ({ children }) => {
 
         if (foundUserDetails) {
           setUserDetails(foundUserDetails);
-          // Set premium status based on payment_date existence
-          setIsPremium(!!foundUserDetails.payment_date);
+          // Set premium status based on paid_until date
+          const isPaidUntilValid = foundUserDetails.paid_until && new Date(foundUserDetails.paid_until) > new Date();
+          setIsPremium(isPaidUntilValid);
         }
 
         setIsloadingData(false);

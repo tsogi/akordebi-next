@@ -491,7 +491,7 @@ class Db{
     async getUserSubscription(userId) {
         try {
             const [rows] = await this.pool.execute(`
-                SELECT payment_date, payment_confirmed 
+                SELECT paid_until, payment_confirmed 
                 FROM users 
                 WHERE id = ?
             `, [userId]);
@@ -501,11 +501,11 @@ class Db{
             }
             
             const data = rows[0];
+            const isSubscriptionValid = data.paid_until && new Date(data.paid_until) > new Date();
             
             return {
-                // Only require payment_date to be set for a valid subscription
-                hasSubscription: !!data.payment_date,
-                paymentDate: data.payment_date,
+                hasSubscription: isSubscriptionValid,
+                paidUntil: data.paid_until,
                 isConfirmed: data.payment_confirmed,
             };
         } catch (error) {
@@ -516,11 +516,15 @@ class Db{
 
     async updateUserSubscription(userId, paymentConfirmed = false) {
         try {
+            // Set paid_until to 1 year from now
+            const oneYearFromNow = new Date();
+            oneYearFromNow.setFullYear(oneYearFromNow.getFullYear() + 1);
+            
             const [result] = await this.pool.execute(`
                 UPDATE users 
-                SET payment_date = NOW(), payment_confirmed = ? 
+                SET paid_until = ?, payment_confirmed = ? 
                 WHERE id = ?
-            `, [paymentConfirmed ? 1 : 0, userId]);
+            `, [oneYearFromNow, paymentConfirmed ? 1 : 0, userId]);
             
             return { success: result.affectedRows > 0 };
         } catch (error) {
@@ -531,11 +535,15 @@ class Db{
 
     async activateUserSubscription(userId) {
         try {
+            // Set paid_until to 1 year from now
+            const oneYearFromNow = new Date();
+            oneYearFromNow.setFullYear(oneYearFromNow.getFullYear() + 1);
+            
             const [result] = await this.pool.execute(`
                 UPDATE users 
-                SET payment_date = NOW(), payment_confirmed = 0
+                SET paid_until = ?, payment_confirmed = 0
                 WHERE id = ?
-            `, [userId]);
+            `, [oneYearFromNow, userId]);
             
             return { success: result.affectedRows > 0 };
         } catch (error) {

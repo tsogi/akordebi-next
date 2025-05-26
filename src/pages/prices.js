@@ -83,7 +83,7 @@ export default function Prices() {
                 {lang.price.premium}
               </span>
               <div className="flex items-baseline mb-2">
-                <h2 className="text-3xl font-bold text-gray-900 dark:text-white">{'5₾'}</h2>
+                <h2 className="text-3xl font-bold text-gray-900 dark:text-white">{`${process.env.NEXT_PUBLIC_MONTHLY_COST}₾`}</h2>
                 <span className="text-gray-500 dark:text-gray-400 ml-2">/{lang.price.month}</span>
               </div>
               <p className="text-gray-600 dark:text-gray-300">{lang.price.full_access}</p>
