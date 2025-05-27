@@ -6,17 +6,27 @@ function EmbedVideo({url}){
         if(url.includes("youtube.com") || url.includes("youtu.be")) {
             try {
                 let videoCode;
-                if (url.includes("youtube.com")) {
-                    videoCode = url.split("v=")[1].split("&")[0];
+                // Clean up the URL first - take only the first part if there are multiple URLs concatenated
+                const cleanUrl = url.split('https')[0] + 'https' + url.split('https')[1];
+                
+                if (cleanUrl.includes("youtube.com")) {
+                    // Extract video code using regex to be more robust
+                    const match = cleanUrl.match(/[?&]v=([^&]+)/);
+                    videoCode = match ? match[1] : null;
                 } else {
                     // Handle youtu.be format
-                    videoCode = url.split("youtu.be/")[1].split("?")[0];
+                    const match = cleanUrl.match(/youtu\.be\/([^?]+)/);
+                    videoCode = match ? match[1] : null;
+                }
+
+                if (!videoCode) {
+                    return url;
                 }
 
                 let newUrl = `https://youtube.com/embed/${videoCode}`;
-
                 return newUrl;
             } catch(error){
+                console.error("Error parsing YouTube URL:", error);
                 return url;
             }
         }

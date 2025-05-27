@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './ReportLine.module.css';
 import CloseIcon from '@mui/icons-material/Close';
 import FlagIcon from '@mui/icons-material/Flag';
@@ -13,6 +13,9 @@ export default function ReportLine({ lineNumber, lineText, songUrl }) {
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
+    useEffect(() => {
+        console.log(lineText, lineText.length);
+    }, [lineText]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -53,6 +56,10 @@ export default function ReportLine({ lineNumber, lineText, songUrl }) {
             setIsSubmitting(false);
         }
     };
+
+    if (lineText.length === 0) {
+        return null;
+    }
 
     return (
         <div className={styles.reportContainer}>
