@@ -236,12 +236,12 @@
     <priority>0.756</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/asetia_qurdi_katsis_bedi-k._chavchanidze_bidzina_kvernadze</loc>
+    <loc>https://akordebi.ge/chord/mtvare-mgzavrebi</loc>
     <changefreq>monthly</changefreq>
     <priority>0.755</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/mtvare-mgzavrebi</loc>
+    <loc>https://akordebi.ge/chord/asetia_qurdi_katsis_bedi-k._chavchanidze_bidzina_kvernadze</loc>
     <changefreq>monthly</changefreq>
     <priority>0.754</priority>
   </url>
@@ -391,32 +391,32 @@
     <priority>0.725</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/alal_me-rusa_morchiladze</loc>
+    <loc>https://akordebi.ge/chord/gudanis_jvari-aluda</loc>
     <changefreq>monthly</changefreq>
     <priority>0.724</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/gudanis_jvari-aluda</loc>
+    <loc>https://akordebi.ge/chord/ai_dunia</loc>
     <changefreq>monthly</changefreq>
     <priority>0.723</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/ai_dunia</loc>
+    <loc>https://akordebi.ge/chord/iagundi</loc>
     <changefreq>monthly</changefreq>
     <priority>0.722</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/iagundi</loc>
+    <loc>https://akordebi.ge/chord/me_vzivar_navshi-niaz_diasamidze_da_33a</loc>
     <changefreq>monthly</changefreq>
     <priority>0.721</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/me_vzivar_navshi-niaz_diasamidze_da_33a</loc>
+    <loc>https://akordebi.ge/chord/chito-gvrito-mimino</loc>
     <changefreq>monthly</changefreq>
     <priority>0.720</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/chito-gvrito-mimino</loc>
+    <loc>https://akordebi.ge/chord/alal_me-rusa_morchiladze</loc>
     <changefreq>monthly</changefreq>
     <priority>0.719</priority>
   </url>
@@ -611,32 +611,32 @@
     <priority>0.681</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/daghamebulkhar</loc>
+    <loc>https://akordebi.ge/chord/300_aragveli</loc>
     <changefreq>monthly</changefreq>
     <priority>0.680</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/ra_kargia_churchkhela</loc>
+    <loc>https://akordebi.ge/chord/daghamebulkhar</loc>
     <changefreq>monthly</changefreq>
     <priority>0.679</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/ar_momiparavs,mipovnia</loc>
+    <loc>https://akordebi.ge/chord/ra_kargia_churchkhela</loc>
     <changefreq>monthly</changefreq>
     <priority>0.678</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/saqartvelos_mananebo</loc>
+    <loc>https://akordebi.ge/chord/ar_momiparavs,mipovnia</loc>
     <changefreq>monthly</changefreq>
     <priority>0.677</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/orghani_78_(A_MAJOR)</loc>
+    <loc>https://akordebi.ge/chord/saqartvelos_mananebo</loc>
     <changefreq>monthly</changefreq>
     <priority>0.676</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/300_aragveli</loc>
+    <loc>https://akordebi.ge/chord/orghani_78_(A_MAJOR)</loc>
     <changefreq>monthly</changefreq>
     <priority>0.675</priority>
   </url>
@@ -3391,123 +3391,128 @@
     <priority>0.125</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/kvlav_mertskhlebi_moqargaven_zetsas-otar_ramishvili</loc>
+    <loc>https://akordebi.ge/chord/shenma_survilma_damlia</loc>
     <changefreq>monthly</changefreq>
     <priority>0.124</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/me_ghmerts_shevavedre_sheni_siyvaruli-jemal_sefiashvili_medea_dzidziguri</loc>
+    <loc>https://akordebi.ge/chord/kvlav_mertskhlebi_moqargaven_zetsas-otar_ramishvili</loc>
     <changefreq>monthly</changefreq>
     <priority>0.123</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/sheni_trfobis_balakhi_var</loc>
+    <loc>https://akordebi.ge/chord/me_ghmerts_shevavedre_sheni_siyvaruli-jemal_sefiashvili_medea_dzidziguri</loc>
     <changefreq>monthly</changefreq>
     <priority>0.122</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/are-mare_moqargula-nato_gelashvili</loc>
+    <loc>https://akordebi.ge/chord/sheni_trfobis_balakhi_var</loc>
     <changefreq>monthly</changefreq>
     <priority>0.121</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/nostalgia</loc>
+    <loc>https://akordebi.ge/chord/are-mare_moqargula-nato_gelashvili</loc>
     <changefreq>monthly</changefreq>
     <priority>0.120</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/saghamo_khans_paemanze</loc>
+    <loc>https://akordebi.ge/chord/nostalgia</loc>
     <changefreq>monthly</changefreq>
     <priority>0.119</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/ra_damaviwyebs_shens_lamaz_tvalebs</loc>
+    <loc>https://akordebi.ge/chord/saghamo_khans_paemanze</loc>
     <changefreq>monthly</changefreq>
     <priority>0.118</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/pawawina_samotkhe-giorgi_tsabadze</loc>
+    <loc>https://akordebi.ge/chord/ra_damaviwyebs_shens_lamaz_tvalebs</loc>
     <changefreq>monthly</changefreq>
     <priority>0.117</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/quchashi_ertkhel-nino_qatamadze</loc>
+    <loc>https://akordebi.ge/chord/pawawina_samotkhe-giorgi_tsabadze</loc>
     <changefreq>monthly</changefreq>
     <priority>0.116</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/o,ar_minda,rom_guli_gatkino-dato_khujadze</loc>
+    <loc>https://akordebi.ge/chord/quchashi_ertkhel-nino_qatamadze</loc>
     <changefreq>monthly</changefreq>
     <priority>0.115</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/gogonav_shenma_tvalebma</loc>
+    <loc>https://akordebi.ge/chord/o,ar_minda,rom_guli_gatkino-dato_khujadze</loc>
     <changefreq>monthly</changefreq>
     <priority>0.114</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/mskhali-ara</loc>
+    <loc>https://akordebi.ge/chord/gogonav_shenma_tvalebma</loc>
     <changefreq>monthly</changefreq>
     <priority>0.113</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/jan_aia</loc>
+    <loc>https://akordebi.ge/chord/mskhali-ara</loc>
     <changefreq>monthly</changefreq>
     <priority>0.112</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/chemo_kargo_qveyana-musikis_avtori:_revaz_laghidze,_teqstis_avtori:_ilia_chavchavadze</loc>
+    <loc>https://akordebi.ge/chord/jan_aia</loc>
     <changefreq>monthly</changefreq>
     <priority>0.111</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/gaaqrole_meetlev-musikis_avtori:_boris_shkhiani_teqstis_avtori:_n._velijanashvili</loc>
+    <loc>https://akordebi.ge/chord/chemo_kargo_qveyana-musikis_avtori:_revaz_laghidze,_teqstis_avtori:_ilia_chavchavadze</loc>
     <changefreq>monthly</changefreq>
     <priority>0.110</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/mifrinavs_dro</loc>
+    <loc>https://akordebi.ge/chord/gaaqrole_meetlev-musikis_avtori:_boris_shkhiani_teqstis_avtori:_n._velijanashvili</loc>
     <changefreq>monthly</changefreq>
     <priority>0.109</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/rom_ar_dauchknos_suli_dardebma-otar_ramishvili</loc>
+    <loc>https://akordebi.ge/chord/mifrinavs_dro</loc>
     <changefreq>monthly</changefreq>
     <priority>0.108</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/sadghats_shors-vakis_parki</loc>
+    <loc>https://akordebi.ge/chord/rom_ar_dauchknos_suli_dardebma-otar_ramishvili</loc>
     <changefreq>monthly</changefreq>
     <priority>0.107</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/tbilisis_mzes-forte</loc>
+    <loc>https://akordebi.ge/chord/sadghats_shors-vakis_parki</loc>
     <changefreq>monthly</changefreq>
     <priority>0.106</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/dekemberi,dekemberi-merab_sefashvili</loc>
+    <loc>https://akordebi.ge/chord/tbilisis_mzes-forte</loc>
     <changefreq>monthly</changefreq>
     <priority>0.105</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/chadrakis_dafa-roma_rtskhiladze</loc>
+    <loc>https://akordebi.ge/chord/dekemberi,dekemberi-merab_sefashvili</loc>
     <changefreq>monthly</changefreq>
     <priority>0.104</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/yelsabami_lalisferi</loc>
+    <loc>https://akordebi.ge/chord/chadrakis_dafa-roma_rtskhiladze</loc>
     <changefreq>monthly</changefreq>
     <priority>0.103</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/chari-rama-_moitatses_tamar-qali</loc>
+    <loc>https://akordebi.ge/chord/yelsabami_lalisferi</loc>
     <changefreq>monthly</changefreq>
     <priority>0.102</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/chord/chaghara_tbiliso_chemo-kompozitori:_eter_chelidze_•_teqstis_avtori:_irakli_abashidze</loc>
+    <loc>https://akordebi.ge/chord/chari-rama-_moitatses_tamar-qali</loc>
     <changefreq>monthly</changefreq>
     <priority>0.101</priority>
+  </url>
+  <url>
+    <loc>https://akordebi.ge/chord/chaghara_tbiliso_chemo-kompozitori:_eter_chelidze_•_teqstis_avtori:_irakli_abashidze</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.100</priority>
   </url>
 </urlset>

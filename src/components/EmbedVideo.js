@@ -3,9 +3,15 @@ import styles from  "./EmbedVideo.module.css";
 
 function EmbedVideo({url}){
     function parseVideoUrl(url){
-        if(url.includes("youtube.com")) {
+        if(url.includes("youtube.com") || url.includes("youtu.be")) {
             try {
-                let videoCode = url.split("v=")[1].split("&")[0];
+                let videoCode;
+                if (url.includes("youtube.com")) {
+                    videoCode = url.split("v=")[1].split("&")[0];
+                } else {
+                    // Handle youtu.be format
+                    videoCode = url.split("youtu.be/")[1].split("?")[0];
+                }
 
                 let newUrl = `https://youtube.com/embed/${videoCode}`;
 
@@ -22,10 +28,10 @@ function EmbedVideo({url}){
         <iframe
             width="100%"
             height="100%"
-        src={parseVideoUrl(url)}
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-        title="Embedded youtube"
+            src={parseVideoUrl(url)}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            title="Embedded youtube"
         />
     </div>
 }
