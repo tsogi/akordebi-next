@@ -13,7 +13,7 @@ export default function NotationSwitcher({
     const currentTab = currentGroup?.tabs.find(t => t.code === notationFormat) || currentGroup?.tabs[0];
 
     return (
-        <div className="mb-4 w-full">
+        <div className="mb-4 w-full px-2.5">
             <div className="flex flex-col rounded-xl shadow-lg bg-gradient-to-r from-gray-800/90 to-gray-900/90 backdrop-blur-sm p-1 border border-gray-700/50">
                 {/* Group selector */}
                 <div className="flex overflow-x-auto">
@@ -52,8 +52,8 @@ export default function NotationSwitcher({
                                     onClick={() => onNotationFormatChange(tab.code)}
                                     className={`flex items-center justify-center px-2.5 py-1.5 text-xs font-medium rounded-md transition-all duration-200 whitespace-nowrap flex-1 ${
                                         notationFormat === tab.code
-                                            ? "bg-gradient-to-r from-blue-500/90 to-indigo-600/90 text-white shadow-md"
-                                            : "text-gray-200 hover:bg-gray-700/50"
+                                            ? "bg-gradient-to-r from-indigo-500/90 to-purple-600/90 text-white shadow-md"
+                                            : "text-gray-300 hover:bg-gray-700/50"
                                     }`}
                                 >
                                     <span>{tab.name}</span>
