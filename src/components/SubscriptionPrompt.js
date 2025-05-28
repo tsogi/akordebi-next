@@ -55,6 +55,11 @@ const SubscriptionPrompt = ({
         setIsLoading(true);
         setPaymentError(null);
         
+        // Store current page URL in localStorage before redirecting
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('return_page_url', window.location.href);
+        }
+        
         // Call our new API route to initiate the BOG payment
         const response = await fetch('/api/payment/initiate-bog-payment', {
           method: 'POST',
