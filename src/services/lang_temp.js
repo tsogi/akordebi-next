@@ -182,7 +182,7 @@ const interfaceGeo = {
         current_package: "მიმდინარე პაკეტი",
         premium: "პრემიუმი",
         premium_price: process.env.NEXT_PUBLIC_MONTHLY_COST + " ლარი / თვეში",
-        full_access: "სრული წვდომა ყველა ფუნქციაზე",
+        full_access: "სრული წვდომა საიტზე",
         activate: "გააქტიურება",
         questions: "კითხვები?",
         contact_us: "მოგვწერეთ",

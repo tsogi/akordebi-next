@@ -6,10 +6,12 @@ import { useState } from 'react';
 import Head from 'next/head';
 import Footer from '@/components/Footer';
 import SubscriptionPrompt from '@/components/SubscriptionPrompt';
+import { useUser } from '@/utils/useUser';
 
 export default function Prices() {
   const { lang } = useLanguage();
   const [showSubscriptionPrompt, setShowSubscriptionPrompt] = useState(false);
+  const { isPremium, userDetails } = useUser();
 
   const handleSubscribe = () => {
     setShowSubscriptionPrompt(true);
@@ -17,6 +19,16 @@ export default function Prices() {
 
   const customUnauthenticatedText = 'პრემიუმ პაკეტის გასააქტიურებლად გაიარეთ მარტივი Gmail ავტორიზაცია 1 კლიკით და შემდეგ ხელახლა დააჭირეთ გააქტიურებას';
   const customAuthenticatedText = 'დააჭირეთ გადახდას და მიყევით ბანკის ინსტრუქციას';
+
+  // Format date as DD.MM.YYYY
+  let premiumUntil = '';
+  if (userDetails?.paid_until) {
+    const date = new Date(userDetails.paid_until);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    premiumUntil = `${day}.${month}.${year}`;
+  }
 
   return (
     <>
@@ -57,10 +69,13 @@ export default function Prices() {
               ))}
             </ul>
             
-            <button 
-              className="mt-auto w-full py-4 px-6 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 font-semibold rounded-xl border border-gray-200 dark:border-gray-600 shadow-sm">
-              {lang.price.current_package}
-            </button>
+            {!isPremium && (
+              <button 
+                className="mt-auto w-full py-4 px-6 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 font-semibold rounded-xl border border-gray-200 dark:border-gray-600 shadow-sm"
+              >
+                {lang.price.current_package}
+              </button>
+            )}
           </div>
           
           {/* Premium Plan */}
@@ -104,9 +119,18 @@ export default function Prices() {
             
             <button 
               onClick={handleSubscribe}
-              className="mt-auto w-full py-4 px-6 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg"
+              className={`mt-auto w-full py-4 px-6 font-semibold rounded-xl shadow-md hover:shadow-lg ${isPremium ? 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 border border-blue-400' : 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white'}`}
+              disabled={isPremium}
             >
-              {lang.price.activate}
+              {isPremium 
+                ? (
+                    <>
+                      მიმდინარე პაკეტი
+                      <br />
+                      <span className="text-sm opacity-75">{premiumUntil}-მდე</span>
+                    </>
+                  )
+                : lang.price.activate}
             </button>
           </div>
         </div>
