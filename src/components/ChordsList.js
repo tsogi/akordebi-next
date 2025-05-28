@@ -11,6 +11,7 @@ import { useUser } from "@/utils/useUser";
 import CustomSelect from "./CustomSelect";
 import UploadSongBtn from "./UploadSongBtn";
 import { useLanguage } from '@/context/LanguageContext';
+import NotationSwitcher from "./NotationSwitcher";
 const resultsPerPage = 20;
 
 export default function ChordsList({ initialSongs }){
@@ -38,9 +39,6 @@ export default function ChordsList({ initialSongs }){
         router.query.page ? Number(router.query.page) : 1
     );
     const[paginationCount, setPaginationCount] = useState(0);
-    const[chordsCount, setChordsCount] = useState(0);
-    const[tabsCount, setTabsCount] = useState(0);
-    const[fanduriCount, setFanduriCount] = useState(0);
 
     const handleDeleteSong = (songId) => {
         // Remove the song from both initialSongs and displayedSongs
@@ -79,20 +77,7 @@ export default function ChordsList({ initialSongs }){
 
     useEffect(() => {
         applyFilters();
-        countSongsByType();
     }, [initialSongs]);
-
-    function countSongsByType() {
-        if (!initialSongs) return;
-        
-        const chords = initialSongs.filter(song => song.notation_format === "chords").length;
-        const tabs = initialSongs.filter(song => song.notation_format === "tabs").length;
-        const fanduri = initialSongs.filter(song => song.notation_format === "fanduri").length;
-        
-        setChordsCount(chords);
-        setTabsCount(tabs);
-        setFanduriCount(fanduri);
-    }
 
     function writeParametersToState(){
         const { page: urlPage, sort: urlSort, favorites: urlFavorites,  lessoned: urlLessoned, confirmed: urlConfirmed, notation: urlNotation } = router.query;
@@ -279,55 +264,10 @@ export default function ChordsList({ initialSongs }){
             </div>
         </div>
         
-        <div className="flex justify-center overflow-x-auto mb-6">
-            <div className="inline-flex rounded-lg shadow-md bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-900 p-1 max-w-full">
-                <button
-                    onClick={() => handleNotationFormatChange("chords")}
-                    className={`flex items-center justify-center space-x-1 px-2 py-1.5 text-xs font-medium rounded-md transition-all duration-200 whitespace-nowrap ${
-                        notationFormat === "chords"
-                            ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg"
-                            : "text-gray-700 dark:text-gray-200 hover:bg-blue-100 dark:hover:bg-gray-700"
-                    }`}
-                >
-                    <img 
-                        src="/guitar_icon.svg"
-                        className={`w-4 h-4 ${notationFormat === "chords" ? "brightness-[1.75] contrast-[0.7]" : ""}`} 
-                        alt="Guitar icon"
-                    />
-                    <span>{lang._chords} ({chordsCount})</span>
-                </button>
-                <button
-                    onClick={() => handleNotationFormatChange("tabs")}
-                    className={`flex items-center justify-center space-x-1 px-2 py-1.5 text-xs font-medium rounded-md transition-all duration-200 whitespace-nowrap ${
-                        notationFormat === "tabs"
-                            ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg"
-                            : "text-gray-700 dark:text-gray-200 hover:bg-blue-100 dark:hover:bg-gray-700"
-                    }`}
-                >
-                    <img 
-                        src="/guitar_icon.svg" 
-                        className={`w-4 h-4 ${notationFormat === "tabs" ? "brightness-[1.75] contrast-[0.7]" : ""}`} 
-                        alt="Guitar icon"
-                    />
-                    <span>{lang._tabs} ({tabsCount})</span>
-                </button>
-                <button
-                    onClick={() => handleNotationFormatChange("fanduri")}
-                    className={`flex items-center justify-center space-x-1 px-2 py-1.5 text-xs font-medium rounded-md transition-all duration-200 whitespace-nowrap ${
-                        notationFormat === "fanduri"
-                            ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg"
-                            : "text-gray-700 dark:text-gray-200 hover:bg-blue-100 dark:hover:bg-gray-700"
-                    }`}
-                >
-                    <img 
-                        src="/fanduri_icon.png" 
-                        className={`w-4 h-4 ${notationFormat === "fanduri" ? "brightness-[1.75] contrast-[0.7]" : ""}`} 
-                        alt="Fanduri icon"
-                    />
-                    <span>{lang._chords} ({fanduriCount})</span>
-                </button>
-            </div>
-        </div>
+        <NotationSwitcher 
+            notationFormat={notationFormat}
+            onNotationFormatChange={handleNotationFormatChange}
+        />
         
         <main className={"songsList"}>
             {
