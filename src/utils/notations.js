@@ -1,9 +1,3 @@
-export const notations_old = [
-    { code: "chords", category: "guitar", name: "გიტარის აკორდები", chordsDir: "/chords/guitar"},
-    { code: "tabs", category: "guitar", name: "გიტარის ტაბები", chordsDir: "/chords/guitar" },
-    { code: "fanduri", category: "fanduri", name: "ფანდურის აკორდები", chordsDir: "/chords/fanduri" },
-];
-
 export const notations = [
     { 
         name: "გიტარა", 
@@ -15,7 +9,7 @@ export const notations = [
     },
     {
         name: "ფანდური", 
-        icon: "/icons/fanduri.svg",
+        icon: "/fanduri_icon.png",
         tabs: [
             { code: "fanduri", category: "fanduri", name: "ფანდურის აკორდები", chordsDir: "/chords/fanduri" },
         ] 
