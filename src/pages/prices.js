@@ -44,7 +44,7 @@ export default function Prices() {
               <p className="text-gray-600 dark:text-gray-300">{lang.price.start_learning}</p>
             </div>
             
-            <ul className="space-y-4 mb-8 flex-grow">
+            <ul className="space-y-4 mb-8 flex-grow mxedruli">
               {lang.price.free_features && Object.entries(lang.price.free_features).map(([key, feature]) => (
                 <li key={key} className="flex items-start">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mr-3">
@@ -89,7 +89,7 @@ export default function Prices() {
               <p className="text-gray-600 dark:text-gray-300">{lang.price.full_access}</p>
             </div>
             
-            <ul className="space-y-4 mb-8 flex-grow">
+            <ul className="space-y-4 mb-8 flex-grow mxedruli">
               {lang.price.premium_features && Object.entries(lang.price.premium_features).map(([key, feature]) => (
                 <li key={key} className="flex items-start">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mr-3">

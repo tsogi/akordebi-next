@@ -189,14 +189,14 @@ const interfaceGeo = {
         free_features: {
             half_songs: "ყველა სიმღერა ნახევრად",
             half_tabs: "ყველა ტაბი ნახევრად",
-            save_favorites: "ფავორიტებში შენახვა",
             guitar_teachers: "გიტარის მასწავლებლები"
         },
         premium_features: {
-            all_free: "ყველაფერი უფასოში",
-            full_songs: "სიმღერები სრულად",
-            full_tabs: "ტაბები სრულად",
-            no_ads: "არანაირი რეკლამა"
+            "all_chords": 'ყველა აკორდი სრულად',
+            "all_tabs": 'ყველა ტაბი სრულად',
+            "add_to_favorites": 'ფავორიტებში შენახვა',
+            "no_ads": 'არანაირი რეკლამა',
+            "full_functionality": 'სრული ფუნქციონალი',
         },
         payments_disabled: "გადახდები დროებით გათიშულია, გთხოვთ სცადოთ მოგვიანებით"
     },
@@ -389,14 +389,14 @@ Bass Down Down Up Down Up or Bass ↓ ↓ ↑ ↓ ↑ or Bass 3 2 1 2 3`
         free_features: {
             half_songs: "All songs partially",
             half_tabs: "All tabs partially",
-            save_favorites: "Save to favorites",
             guitar_teachers: "Guitar teachers"
         },
         premium_features: {
-            all_free: "Everything in free",
-            full_songs: "Full songs",
-            full_tabs: "Full tabs",
-            no_ads: "No advertisements"
+            "all_chords": 'All chords',
+            "all_tabs": 'All tabs',
+            "add_to_favorites": 'Add to favorites',
+            "no_ads": 'No ads',
+            "full_functionality": 'Full functionality',
         },
         payments_disabled: "Payments are temporarily disabled, please try again later"
     },

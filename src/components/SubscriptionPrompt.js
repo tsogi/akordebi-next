@@ -147,10 +147,11 @@ const SubscriptionPrompt = ({
                   
                   {/* Benefits */}
                   <div className="mb-6">
-                    <ul className="text-left space-y-3">
+                    <ul className="text-left space-y-3 mxedruli">
                       {[
-                        'სრული აკორდები',
-                        'სრული ტაბები',
+                        'ყველა აკორდი სრულად',
+                        'ყველა ტაბი სრულად',
+                        'ფავორიტებში შენახვა',
                         'არანაირი რეკლამა',
                         'სრული ფუნქციონალი'
                       ].map((benefit, index) => (
