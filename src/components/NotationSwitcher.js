@@ -13,7 +13,7 @@ export default function NotationSwitcher({
     const currentTab = currentGroup?.tabs.find(t => t.code === notationFormat) || currentGroup?.tabs[0];
 
     return (
-        <div className="mb-4 w-full px-2.5">
+        <div className="mb-4 w-full px-2.5 md:px-0 md:max-w-[500px] md:mx-auto">
             <div className="flex flex-col rounded-xl shadow-lg bg-gradient-to-r from-gray-800/90 to-gray-900/90 backdrop-blur-sm p-1 border border-gray-700/50">
                 {/* Group selector */}
                 <div className="flex overflow-x-auto">
