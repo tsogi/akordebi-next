@@ -18,7 +18,7 @@ import { MinusIcon, PlusIcon, EyeIcon, EyeSlashIcon } from '@heroicons/react/24/
 import { useUser } from '@/utils/useUser';
 import { useLanguage } from '@/context/LanguageContext';
 import { transliterateWithCapital, transliterateWithCapitalizedWords, convertGeorgianToLatin } from '@/utils/transliteration';
-import { getNotation } from '@/utils/notations';
+import { getNotation, notations } from '@/utils/notations';
 let intervalId;
 
 export default function SongPage({ song, relatedSongs }){
@@ -475,7 +475,7 @@ export async function getServerSideProps(ctx) {
 }
 
 function attachNotation(song){
-    const notation = getNotation(song.notation_format);
+    const notation = getNotation(song.notation_format) || notations[0];
     song.notation = notation;
 
     return song;
