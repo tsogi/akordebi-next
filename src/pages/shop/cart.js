@@ -74,7 +74,7 @@ export default function ShoppingCart() {
           
           <div className="space-y-4">
             {cart.map((item) => (
-              <div key={item.id} className="backdrop-blur bg-[#232a44cc] rounded-xl shadow p-4 flex flex-col gap-2 sm:flex-row sm:items-center">
+              <div key={item.id} className="backdrop-blur bg-[#232a44cc] rounded-xl shadow p-4 flex flex-col gap-2 sm:flex-row sm:items-center border border-gray-700/30">
                 <div className="flex items-center gap-4 w-full">
                   <div className="flex-shrink-0 w-24 h-24 relative rounded-lg overflow-hidden bg-gray-800">
                     {item.thumbnail ? (
