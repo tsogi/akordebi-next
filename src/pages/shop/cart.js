@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -6,9 +6,74 @@ import { useShoppingCart } from '@/context/ShoppingCartContext';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from '@/styles/Shop.module.css';
+import ConfirmDialog from '@/components/ConfirmDialog';
 
 export default function ShoppingCart() {
-  const { cart, removeFromCart, updateQuantity, getTotalPrice, isMounted } = useShoppingCart();
+  const { cart, removeFromCart, updateQuantity, getTotalPrice, isMounted, clearCart } = useShoppingCart();
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    address: '',
+    comment: ''
+  });
+  const [showErrorDialog, setShowErrorDialog] = useState(false);
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [id]: value
+    }));
+  };
+
+  const handleSubmit = async () => {
+    // Validate required fields
+    if (!formData.name.trim() || !formData.phone.trim() || !formData.address.trim()) {
+      setShowErrorDialog(true);
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('/api/orders/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          address: formData.address,
+          products: cart,
+          totalAmount: getTotalPrice()
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit order');
+      }
+
+      // Clear cart and form
+      clearCart();
+      setFormData({
+        name: '',
+        phone: '',
+        address: '',
+        comment: ''
+      });
+      
+      // Show success message
+      setShowSuccessDialog(true);
+    } catch (error) {
+      console.error('Error submitting order:', error);
+      setShowErrorDialog(true);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   // Show loading state during hydration
   if (!isMounted) {
@@ -132,30 +197,42 @@ export default function ShoppingCart() {
               <span className="text-2xl font-bold text-blue-300">{getTotalPrice()}₾</span>
             </div>
             
-            <div className="space-y-4 mb-6">
+            <div className="space-y-4 mb-6 mxedruli">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">სახელი</label>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
+                  სახელი <span className="text-red-500">*</span>
+                </label>
                 <input
                   type="text"
                   id="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
                   className="w-full bg-gray-800/50 border border-gray-700 rounded-lg px-4 py-2 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
               
               <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-1">მობილური</label>
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-1">
+                  მობილური <span className="text-red-500">*</span>
+                </label>
                 <input
                   type="tel"
                   id="phone"
+                  value={formData.phone}
+                  onChange={handleInputChange}
                   className="w-full bg-gray-800/50 border border-gray-700 rounded-lg px-4 py-2 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
               
               <div>
-                <label htmlFor="address" className="block text-sm font-medium text-gray-300 mb-1">მისამართი</label>
+                <label htmlFor="address" className="block text-sm font-medium text-gray-300 mb-1">
+                  მისამართი <span className="text-red-500">*</span>
+                </label>
                 <input
                   type="text"
                   id="address"
+                  value={formData.address}
+                  onChange={handleInputChange}
                   className="w-full bg-gray-800/50 border border-gray-700 rounded-lg px-4 py-2 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
@@ -164,6 +241,8 @@ export default function ShoppingCart() {
                 <label htmlFor="comment" className="block text-sm font-medium text-gray-300 mb-1">კომენტარი</label>
                 <textarea
                   id="comment"
+                  value={formData.comment}
+                  onChange={handleInputChange}
                   rows="3"
                   className="w-full bg-gray-800/50 border border-gray-700 rounded-lg px-4 py-2 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
                 ></textarea>
@@ -171,8 +250,12 @@ export default function ShoppingCart() {
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="flex-1 bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-200">
-                შეკვეთის გაფორმება
+              <button 
+                onClick={handleSubmit}
+                disabled={isSubmitting || cart.length === 0}
+                className="flex-1 bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? 'მიმდინარეობს...' : 'შეკვეთის გაფორმება'}
               </button>
               <Link href="/shop" className="flex-1">
                 <button className="w-full border border-gray-700 py-3 px-6 rounded-lg hover:bg-gray-800 text-gray-100 transition-colors duration-200">
@@ -183,6 +266,22 @@ export default function ShoppingCart() {
           </div>
         </div>
       </main>
+      
+      <ConfirmDialog
+        open={showErrorDialog}
+        setOpen={setShowErrorDialog}
+        message="სახელის, მობილურის და მისამართის ჩაწერა სავალდებულოა"
+        type="error"
+        onConfirm={() => setShowErrorDialog(false)}
+      />
+
+      <ConfirmDialog
+        open={showSuccessDialog}
+        setOpen={setShowSuccessDialog}
+        message="თქვენი შეკვეთა მიღებულია, დაგიკავშირდებით რამდენიმე წუთში"
+        type="success"
+        onConfirm={() => setShowSuccessDialog(false)}
+      />
       
       <Footer />
     </>

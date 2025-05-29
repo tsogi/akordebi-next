@@ -69,7 +69,17 @@ export function ShoppingCartProvider({ children }) {
   };
 
   const getTotalPrice = () => {
-    return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+    return cart.reduce((total, item) => {
+      const price = parseFloat(item.price.replace('₾', ''));
+      return total + (price * item.quantity);
+    }, 0);
+  };
+
+  const clearCart = () => {
+    setCart([]);
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('shoppingCart');
+    }
   };
 
   return (
@@ -80,6 +90,7 @@ export function ShoppingCartProvider({ children }) {
       updateQuantity,
       getTotalItems,
       getTotalPrice,
+      clearCart,
       isMounted
     }}>
       {children}
