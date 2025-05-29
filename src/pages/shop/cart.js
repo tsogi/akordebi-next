@@ -132,15 +132,53 @@ export default function ShoppingCart() {
               <span className="text-2xl font-bold text-blue-300">{getTotalPrice()}₾</span>
             </div>
             
+            <div className="space-y-4 mb-6">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">სახელი</label>
+                <input
+                  type="text"
+                  id="name"
+                  className="w-full bg-gray-800/50 border border-gray-700 rounded-lg px-4 py-2 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+              
+              <div>
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-1">მობილური</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  className="w-full bg-gray-800/50 border border-gray-700 rounded-lg px-4 py-2 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+              
+              <div>
+                <label htmlFor="address" className="block text-sm font-medium text-gray-300 mb-1">მისამართი</label>
+                <input
+                  type="text"
+                  id="address"
+                  className="w-full bg-gray-800/50 border border-gray-700 rounded-lg px-4 py-2 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+              
+              <div>
+                <label htmlFor="comment" className="block text-sm font-medium text-gray-300 mb-1">კომენტარი</label>
+                <textarea
+                  id="comment"
+                  rows="3"
+                  className="w-full bg-gray-800/50 border border-gray-700 rounded-lg px-4 py-2 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                ></textarea>
+              </div>
+            </div>
+            
             <div className="flex flex-col sm:flex-row gap-4">
+              <button className="flex-1 bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-200">
+                შეკვეთის გაფორმება
+              </button>
               <Link href="/shop" className="flex-1">
                 <button className="w-full border border-gray-700 py-3 px-6 rounded-lg hover:bg-gray-800 text-gray-100 transition-colors duration-200">
                   მაღაზიაში დაბრუნება
                 </button>
               </Link>
-              <button className="flex-1 bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-200">
-                შეკვეთის გაფორმება
-              </button>
             </div>
           </div>
         </div>
