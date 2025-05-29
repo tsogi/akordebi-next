@@ -7,8 +7,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from '@/styles/Shop.module.css';
 import ConfirmDialog from '@/components/ConfirmDialog';
+import { useRouter } from 'next/router';
 
 export default function ShoppingCart() {
+  const router = useRouter();
   const { cart, removeFromCart, updateQuantity, getTotalPrice, isMounted, clearCart } = useShoppingCart();
   const [formData, setFormData] = useState({
     name: '',
@@ -55,15 +57,6 @@ export default function ShoppingCart() {
       if (!response.ok) {
         throw new Error('Failed to submit order');
       }
-
-      // Clear cart and form
-      clearCart();
-      setFormData({
-        name: '',
-        phone: '',
-        address: '',
-        comment: ''
-      });
       
       // Show success message
       setShowSuccessDialog(true);
@@ -73,6 +66,20 @@ export default function ShoppingCart() {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleSuccessDialogClose = () => {
+    setShowSuccessDialog(false);
+    // Clear cart and form
+    clearCart();
+    setFormData({
+      name: '',
+      phone: '',
+      address: '',
+      comment: ''
+    });
+    // Redirect to home page
+    router.push('/');
   };
 
   // Show loading state during hydration
@@ -255,7 +262,7 @@ export default function ShoppingCart() {
                 disabled={isSubmitting || cart.length === 0}
                 className="flex-1 bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isSubmitting ? 'მიმდინარეობს...' : 'შეკვეთის გაფორმება'}
+                {isSubmitting ? 'მიმდინარეობს...' : 'შეკვეთის გაგზავნა'}
               </button>
               <Link href="/shop" className="flex-1">
                 <button className="w-full border border-gray-700 py-3 px-6 rounded-lg hover:bg-gray-800 text-gray-100 transition-colors duration-200">
@@ -280,7 +287,7 @@ export default function ShoppingCart() {
         setOpen={setShowSuccessDialog}
         message="თქვენი შეკვეთა მიღებულია, დაგიკავშირდებით რამდენიმე წუთში"
         type="success"
-        onConfirm={() => setShowSuccessDialog(false)}
+        onConfirm={handleSuccessDialogClose}
       />
       
       <Footer />

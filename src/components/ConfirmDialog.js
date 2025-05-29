@@ -35,14 +35,14 @@ const ConfirmDialog = ({ open, setOpen, message, onConfirm, type = "error" }) =>
                             onClick={handleCancel}
                             className={`px-4 py-2 text-sm font-medium rounded-md ${type === "error" ? "text-red-700 bg-red-100 hover:bg-red-200" : "text-blue-700 bg-blue-100 hover:bg-blue-200"} focus:outline-none focus:ring-2 focus:ring-offset-2 ${type === "error" ? "focus:ring-red-500" : "focus:ring-blue-500"}`}
                         >
-                            Cancel
+                            გათიშვა
                         </button>
                         <button
                             type="button"
                             onClick={handleConfirm}
                             className={`px-4 py-2 text-sm font-medium rounded-md text-white ${type === "error" ? "bg-red-600 hover:bg-red-700" : "bg-blue-600 hover:bg-blue-700"} focus:outline-none focus:ring-2 focus:ring-offset-2 ${type === "error" ? "focus:ring-red-500" : "focus:ring-blue-500"}`}
                         >
-                            Confirm
+                            დადასტურება
                         </button>
                     </div>
                 </div>
