@@ -15,14 +15,7 @@ export default function ProductDetail() {
   const { addToCart } = useShoppingCart();
   
   // Find the product in our data
-  let product = null;
-  let allProducts = [
-    ...shopProducts.classicGuitars,
-    ...shopProducts.acousticGuitars,
-    ...shopProducts.accessories
-  ];
-  
-  product = allProducts.find(p => p.id === productId);
+  const product = Object.values(shopProducts).find(p => p.id === productId);
   
   // If the product is not found or page is still loading
   if (!product) {

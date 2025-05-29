@@ -1,5 +1,4 @@
-const shopProducts = {
-  classicGuitars: [
+const shopProducts = [
     {
       id: "yamaha-c40m",
       name: "Yamaha C40M",
@@ -17,9 +16,7 @@ const shopProducts = {
       thumbnail: "/images/shop/c40.jpg",
       category: "კლასიკური გიტარა",
       inStock: true
-    }
-  ],
-  acousticGuitars: [
+    },
     {
       id: "acoustic-1",
       name: "Fender CD-60S",
@@ -38,8 +35,6 @@ const shopProducts = {
       category: "აკუსტიკური გიტარა",
       inStock: true
     },
-  ],
-  accessories: [
     {
       id: "acc-1",
       name: "Dunlop მედიატორები (5 ცალი)",
@@ -121,6 +116,5 @@ const shopProducts = {
       inStock: true
     }
   ]
-};
 
 export default shopProducts; 
