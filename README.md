@@ -5,7 +5,7 @@
 5. Run the app: `npm run dev`
 
 # Useful commands
-ssh -i /users/nika/.ssh/id_rsa_ubuntu_server -t nika@tsogi.net "docker exec -it de4c9f863b32 mysql -u root -p"
+ssh -i /Users/nika/Projects/akordebi.ge/akordebi_ec2.pem -t ubuntu@18.153.218.239 "docker exec -it dd2d4a9e00e5 mysql -u root -p"
 
 select * from users where payment_date is not null;
 

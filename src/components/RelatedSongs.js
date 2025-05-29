@@ -1,5 +1,6 @@
 import { useLanguage } from '@/context/LanguageContext';
 import { transliterateWithCapital, transliterateWithCapitalizedWords } from '@/utils/transliteration';
+import { formatCount } from '@/utils/formatCount';
 import Link from 'next/link';
 import styles from './RelatedSongs.module.css';
 
@@ -9,17 +10,6 @@ export default function RelatedSongs({ songs }) {
   if (!songs || songs.length === 0) {
     return null;
   }
-
-  // Function to format view counts with proper formatting (e.g., 1000 -> 1K)
-  const formatCount = (count) => {
-    if (!count) return 0;
-    
-    if (count >= 1000) {
-      return `${(count / 1000).toFixed(1)}K`.replace('.0K', 'K');
-    }
-    
-    return count;
-  };
 
   return (
     <div className={styles.relatedSongsContainer}>

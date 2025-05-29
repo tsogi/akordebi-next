@@ -11,6 +11,7 @@ import Link from 'next/link';
 import Favorite from "./Favorite";
 import { useLanguage } from '@/context/LanguageContext';
 import { transliterateWithCapital, transliterateWithCapitalizedWords } from '@/utils/transliteration';
+import { formatCount } from '@/utils/formatCount';
 import Alert from './Alert';
 import ConfirmDialog from './ConfirmDialog';
 import { TrashIcon } from '@heroicons/react/20/solid';
@@ -204,7 +205,7 @@ export default function SongCard({ song, onDelete }){
                                 >
                                     <div className={styles.viewsCount}>
                                         <VisibilityIcon style={{ color: "#fff", marginRight: "5px" }} />
-                                        <span>{song.view_count || "0"}</span>
+                                        <span>{formatCount(song.view_count) || "0"}</span>
                                     </div>
                                 </div>
                             </Tooltip>
