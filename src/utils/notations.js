@@ -3,15 +3,17 @@ export const notations = [
         name: "გიტარა", 
         icon: "/icons/guitar.svg",
         tabs: [
-            { code: "chords", category: "guitar", name: "გიტარის აკორდები", chordsDir: "/chords/guitar"},
-            { code: "tabs", category: "guitar", name: "გიტარის ტაბები", chordsDir: "/chords/guitar" },
+            { code: "chords", category: "guitar", name: "აკორდები", chordsDir: "/chords/guitar"},
+            { code: "tabs", category: "guitar", name: "ტაბები", chordsDir: "/chords/guitar" },
+            { code: "guitar_lessons", category: "guitar", name: "გაკვეთილები", chordsDir: "/chords/guitar" },
         ] 
     },
     {
         name: "ფანდური", 
         icon: "/fanduri_icon.png",
         tabs: [
-            { code: "fanduri", category: "fanduri", name: "ფანდურის აკორდები", chordsDir: "/chords/fanduri" },
+            { code: "fanduri", category: "fanduri", name: "აკორდები", chordsDir: "/chords/fanduri" },
+            { code: "fanduri_lessons", category: "fanduri", name: "გაკვეთილებები", chordsDir: "/chords/fanduri" },
         ] 
     }
 ]
