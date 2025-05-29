@@ -194,6 +194,14 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
         return text;
     }
 
+    // Get all available notation options
+    const notationOptions = notations.flatMap(category => 
+        category.tabs.map(tab => ({
+            label: `${category.name} - ${tab.name}`,
+            value: tab.code
+        }))
+    );
+
     return <>
             <div className={ styles.inputName }>
                 <input className={css.textInput} type="text" value={songName} onChange={handleSongNameChange} style={{ width: "100%" }} placeholder={lang.upload.song_name_input} />
@@ -212,10 +220,7 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
                     <span className="text-white mr-2">{lang.upload.select_type}</span>
                     <div className="flex-1">
                         <CustomSelect
-                            options={notations.map(notation => ({
-                                label: notation.name,
-                                value: notation.code
-                            }))}
+                            options={notationOptions}
                             value={notationFormat}
                             onChange={handleNotationFormatChange}
                         />

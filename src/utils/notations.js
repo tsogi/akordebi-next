@@ -16,8 +16,16 @@ export const notations = [
     }
 ]
 
-export function getNotation(code){
-    const notation = notations.find(notation => notation.code === code);
-
-    return notation;
+export function getNotation(code) {
+    // Find the category and tab that matches the code
+    for (const category of notations) {
+        const tab = category.tabs.find(tab => tab.code === code);
+        if (tab) {
+            return {
+                ...category,
+                ...tab
+            };
+        }
+    }
+    return null;
 }

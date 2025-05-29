@@ -475,7 +475,10 @@ export async function getServerSideProps(ctx) {
 }
 
 function attachNotation(song){
-    const notation = getNotation(song.notation_format) || notations[0];
+    const notation = getNotation(song.notation_format) || {
+        ...notations[0],
+        ...notations[0].tabs[0]
+    };
     song.notation = notation;
 
     return song;
