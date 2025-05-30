@@ -89,6 +89,7 @@ class Db{
                 songs.searchWords, 
                 songs.name, 
                 songs.body, 
+                songs.uploaderUserId,
                 songs.notation_format,
                 GROUP_CONCAT(DISTINCT authors.name ORDER BY authors.name) AS authors,
                 MAX(IF(favorite_songs.user_id IS NOT NULL AND favorite_songs.song_id = songs.id, TRUE, FALSE)) AS isFavorite
@@ -185,7 +186,7 @@ class Db{
                 songs.id, 
                 songs.view_count,
                 songs.notation_format,
-                songs.uploaderUserId as analyticId,
+                songs.uploaderUserId,
                 songs.confirmed, 
                 IFNULL(authors_agg.authors, "") as authors, 
                 IFNULL(votes_agg.votes, "") as votes,

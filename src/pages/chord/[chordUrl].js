@@ -25,7 +25,7 @@ export default function SongPage({ song, relatedSongs }){
     const [fontSize, setFontSize] = useState(16);
     const [scrollSpeed, setScrollSpeed] = useState(0);
     const [showChords, setShowChords ] = useState(false);
-    const { isPremium } = useUser();
+    const { isPremium, user } = useUser();
     const { lang, language } = useLanguage();
 
     // Get song name and author(s) in either Georgian or Latin based on language
@@ -188,7 +188,7 @@ export default function SongPage({ song, relatedSongs }){
                 }
             </div>
             <main className={`${styles.songBody} mxedruli`} style={{fontSize}}>
-                {!isPremium && (
+                {!isPremium && user?.id !== song.uploaderUserId && (
                     <div className={styles.blurredContent}>
                         <SubscriptionPrompt />
                     </div>

@@ -119,7 +119,6 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
     }
 
     async function validationError(data){
-        console.log(data);
         if(!data.name) {
             return "სიმღერის სახელის ჩაწერა აუცილებელია";
         }

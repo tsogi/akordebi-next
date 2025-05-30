@@ -13,9 +13,6 @@ export default function ReportLine({ lineNumber, lineText, songUrl }) {
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
-    useEffect(() => {
-        console.log(lineText, lineText.length);
-    }, [lineText]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
