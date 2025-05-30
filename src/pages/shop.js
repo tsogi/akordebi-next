@@ -42,15 +42,6 @@ export default function Shop() {
               </span>
               <span className="font-medium">იმავე დღეს მიწოდება</span>
             </div>
-            <div className="bg-gradient-to-r from-green-500 to-teal-600 text-white px-2 py-1 rounded-lg shadow-md flex items-center text-xs">
-              <span className="mr-1">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
-                  <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1v-5h2.05a2.5 2.5 0 014.9 0H19a1 1 0 001-1V8a1 1 0 00-.293-.707l-2-2A1 1 0 0017 5h-1V4a1 1 0 00-1-1H3z" />
-                </svg>
-              </span>
-              <span className="font-medium">რეგიონებში გაგზავნა</span>
-            </div>
             <div className="bg-gradient-to-r from-purple-500 to-pink-600 text-white px-2 py-1 rounded-lg shadow-md flex items-center text-xs">
               <span className="mr-1">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
@@ -60,13 +51,26 @@ export default function Shop() {
               </span>
               <span className="font-medium">ადგილზე გადახდა</span>
             </div>
+            <div className="bg-gradient-to-r from-green-500 to-teal-600 text-white px-2 py-1 rounded-lg shadow-md flex items-center text-xs">
+              <span className="mr-1">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+                  <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1v-5h2.05a2.5 2.5 0 014.9 0H19a1 1 0 001-1V8a1 1 0 00-.293-.707l-2-2A1 1 0 0017 5h-1V4a1 1 0 00-1-1H3z" />
+                </svg>
+              </span>
+              <span className="font-medium">რეგიონებში გაგზავნა</span>
+            </div>
+            
           </section>
           
           {Object.entries(productsByCategory).map(([category, products]) => (
-            <section key={category} className={styles.productsSection}>
-              <h2 className={styles.categoryTitle}>
-                {category}
-              </h2>
+            <section key={category} className="mb-12">
+              <div className="flex items-center gap-3 mb-3">
+                <h2 className="text-lg font-medium text-gray-300 tracking-wide">
+                  {category}
+                </h2>
+                <div className="flex-grow h-px bg-gradient-to-r from-gray-700 to-transparent"></div>
+              </div>
               <div className={styles.productsGrid}>
                 {products.map(product => (
                   <div key={product.id} className={styles.productCardWrapper}>
