@@ -63,7 +63,7 @@ class Db{
     // Todo Most of the code in getSong(), getSongByUrl(), getSongByName() are duplicated. Fix DRY
     async getSong(songId){
         const [rows,fields] = await this.pool.execute(`
-            select songs.id, songs.videoLesson, songs.uploader, songs.searchWords, songs.name, songs.body, GROUP_CONCAT(authors.name) as authors from songs 
+            select songs.id, songs.videoLesson, songs.url, songs.uploader, songs.searchWords, songs.name, songs.body, GROUP_CONCAT(authors.name) as authors from songs 
             left join authors_songs on songs.id = authors_songs.song_id
             left join authors on authors_songs.author_id = authors.id
             where songs.id = ?
@@ -85,6 +85,7 @@ class Db{
             SELECT 
                 songs.id, 
                 songs.videoLesson, 
+                songs.url,
                 songs.uploader, 
                 songs.searchWords, 
                 songs.name, 

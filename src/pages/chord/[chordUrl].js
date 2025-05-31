@@ -104,10 +104,28 @@ export default function SongPage({ song, relatedSongs }){
 
     return <>
         <Head>
-            <title>{`${displaySongName} - ${lang._guitar_chords}`}</title>
+            <title>{`${displaySongName} - ${song.notation.page_title}`}</title>
             <meta name="description" content={ `${song.searchWords}` } />
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
             <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+            
+            {/* Open Graph meta tags for better social sharing */}
+            <meta property="og:title" content={`${displaySongName} - ${song.notation.page_title}`} />
+            <meta property="og:description" content={song.searchWords} />
+            <meta property="og:type" content="article" />
+            <meta property="og:url" content={`${process.env.NEXT_PUBLIC_DOMAIN}/chord/${song.url}`} />
+            
+            {/* Twitter Card meta tags */}
+            <meta name="twitter:card" content="summary" />
+            <meta name="twitter:title" content={`${displaySongName} - ${song.notation.page_title}`} />
+            <meta name="twitter:description" content={song.searchWords} />
+            
+            {/* Canonical URL to prevent duplicate content issues */}
+            <link rel="canonical" href={`${process.env.NEXT_PUBLIC_DOMAIN}/chord/${song.url}`} />
+            
+            {/* Additional meta tags for better SEO */}
+            <meta name="keywords" content={`${displaySongName}, ${displayAuthors?.join(', ')}, ${song.notation.page_title}, chords, music, აკორდები, ტაბები, გაკვეთილებები`} />
+            <meta name="author" content={song.uploader || 'Akordebi.ge'} />
         </Head>
         <Header />    
         <div className={`${styles.songPage} page_container noselect`}>
@@ -288,7 +306,7 @@ function coupletChordsLine(chords, index, showChords, chordsDir){
         <div className={styles.coupletChordsList} style={{ display: showChords ? "flex" : "none" }}>
             {
                 chords.map(chord => {
-                    return <img className={styles.coupletChordImg} onError = {() => { this.style.display = 'none' }} src={ findChordImage(chord, chordsDir) } />
+                    return <img className={styles.coupletChordImg} onError = {(e) => { e.target.style.display = 'none' }} src={ findChordImage(chord, chordsDir) } />
                 })
             }
         </div>
