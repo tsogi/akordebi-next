@@ -16,6 +16,24 @@ export default function Home({ initialSongs }) {
         <meta name="description" content={lang._metaDescription} />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        
+        {/* Open Graph meta tags for better social sharing */}
+        <meta property="og:title" content={lang._metaTitle} />
+        <meta property="og:description" content={lang._metaDescription} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={process.env.NEXT_PUBLIC_DOMAIN} />
+        
+        {/* Twitter Card meta tags */}
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content={lang._metaTitle} />
+        <meta name="twitter:description" content={lang._metaDescription} />
+        
+        {/* Canonical URL to prevent duplicate content issues */}
+        <link rel="canonical" href={process.env.NEXT_PUBLIC_DOMAIN} />
+        
+        {/* Additional meta tags for better SEO */}
+        <meta name="keywords" content="გიტარა, ფანდური, აკორდები, ტაბები, ნოტები, გაკვეთილები | gitara, fanduri, akordebi, tabebi, notebi, gakvetilebi" />
+        <meta name="author" content="Akordebi.ge" />
       </Head>
       <Header />
       <div className="songsPage">
