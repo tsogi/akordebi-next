@@ -402,9 +402,8 @@
 
 .characteristics {
   margin: 2rem 0;
-  padding: 1.5rem;
-  background-color: #f8f9fa;
-  border-radius: 12px;
+  background-color: transparent;
+  border-radius: 0;
 }
 
 .characteristicsTitle {
@@ -427,7 +426,7 @@
   background-color: transparent;
   border-radius: 0;
   box-shadow: none;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
 .characteristicItem:last-child {
@@ -435,22 +434,21 @@
 }
 
 .characteristicName {
-  color: #4a5568;
+  color: #e5e7eb;
   font-weight: 500;
   font-size: 1rem;
   margin-bottom: 0.25rem;
 }
 
 .characteristicValue {
-  color: #1a1a1a;
+  color: #fff;
   font-weight: 600;
-  font-size: 1.08rem;
+  /* font-size: 1.08rem; */
 }
 
 @media (max-width: 768px) {
   .characteristics {
     margin: 1.5rem 0;
-    padding: 1.25rem;
   }
 
   .characteristicsTitle {

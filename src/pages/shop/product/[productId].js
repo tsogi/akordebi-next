@@ -151,17 +151,16 @@ export default function ProductDetail() {
               
               <div className={styles.productDescription}>
                 {/* <h2 className={styles.descriptionTitle}>პროდუქტის აღწერა</h2> */}
-                <p className={styles.descriptionText}>{product.description}</p>
+                <p className={`${styles.descriptionText} mtavruli`}>{product.description}</p>
               </div>
               
               {product.characteristics && product.characteristics.length > 0 && (
                 <div className={styles.characteristics}>
-                  <h2 className={styles.characteristicsTitle}>მახასიათებლები</h2>
                   <div className={styles.characteristicsGrid}>
                     {product.characteristics.map((char, index) => (
                       <div key={index} className={styles.characteristicItem}>
                         <span className={styles.characteristicName}>{char.name}</span>
-                        <span className={styles.characteristicValue}>{char.value}</span>
+                        <span className={`${styles.characteristicValue} mxedruli`}>{char.value}</span>
                       </div>
                     ))}
                   </div>
