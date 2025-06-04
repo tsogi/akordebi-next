@@ -16,6 +16,11 @@ const shopProducts = [
         "/images/shop/c40_bl_8.jpg",
         "/images/shop/c40_bl_9.jpg",
       ],
+      characteristics: [
+        { "name": "ზომა", "value": "4/4 სრული" },
+        { "name": "ზედაპირი", "value": "ნაძვი, პრიალა დამუშავებით" },
+        { "name": "გრიფი", "value": "ვარდის ხე, მატოვი" },
+      ],
       category: "კლასიკური გიტარა",
       inStock: true
     },
@@ -26,6 +31,8 @@ const shopProducts = [
       description: "მაღალი ხარისხის კლასიკური გიტარა კედრის ხის ზედაპირით და მუქი პალისანდრის გრიფით.",
       thumbnail: "/images/shop/c40_bl_1.jpg",
       images: [
+      ],
+      characteristics: [
       ],
       category: "კლასიკური გიტარა",
       inStock: true
@@ -38,6 +45,8 @@ const shopProducts = [
       thumbnail: "/images/shop/fender-cd60s.jpg",
       images: [
       ],
+      characteristics: [
+      ],
       category: "აკუსტიკური გიტარა",
       inStock: true
     },
@@ -49,6 +58,8 @@ const shopProducts = [
       thumbnail: "/images/shop/yamaha-fg800.jpg",
       images: [
       ],
+      characteristics: [
+      ],
       category: "აკუსტიკური გიტარა",
       inStock: true
     },
@@ -59,6 +70,8 @@ const shopProducts = [
       description: "პროფესიონალური მედიატორების ნაკრები, სხვადასხვა სისქით, იდეალური სხვადასხვა სტილის დაკვრისთვის.",
       thumbnail: "/images/shop/dunlop-picks.jpg",
       images: [
+      ],
+      characteristics: [
       ],
       category: "აქსესუარები",
       subCategory: "მედიატორი",
@@ -72,6 +85,8 @@ const shopProducts = [
       thumbnail: "/images/shop/korg-ca50.jpg",
       images: [
       ],
+      characteristics: [
+      ],
       category: "აქსესუარები",
       subCategory: "ტიუნერი",
       inStock: true
@@ -83,6 +98,8 @@ const shopProducts = [
       description: "მაღალი ხარისხის, ადვილად გამოსაყენებელი კაპო სწრაფი ტონალური ცვლილებებისთვის.",
       thumbnail: "/images/shop/kyser-capo.jpg",
       images: [
+      ],
+      characteristics: [
       ],
       category: "აქსესუარები",
       subCategory: "კაპო",
@@ -96,6 +113,8 @@ const shopProducts = [
       thumbnail: "/images/shop/levys-strap.jpg",
       images: [
       ],
+      characteristics: [
+      ],
       category: "აქსესუარები",
       subCategory: "სამხრე ქამარი",
       inStock: true
@@ -107,6 +126,8 @@ const shopProducts = [
       description: "დაბალნილი, გამძლე ჩანთა თქვენი კლასიკური გიტარის უსაფრთხო ტრანსპორტირებისთვის.",
       thumbnail: "/images/shop/gator-case.jpg",
       images: [
+      ],
+      characteristics: [
       ],
       category: "აქსესუარები",
       subCategory: "ჩანთა",
@@ -120,6 +141,8 @@ const shopProducts = [
       thumbnail: "/images/shop/daddario-ej45.jpg",
       images: [
       ],
+      characteristics: [
+      ],
       category: "აქსესუარები",
       subCategory: "კლასიკური სიმები",
       inStock: true
@@ -132,6 +155,8 @@ const shopProducts = [
       thumbnail: "/images/shop/elixir-strings.jpg",
       images: [
       ],
+      characteristics: [
+      ],
       category: "აქსესუარები",
       subCategory: "აკუსტიკური სიმები",
       inStock: true
@@ -143,6 +168,8 @@ const shopProducts = [
       description: "მყარი და სტაბილური სადგამი თქვენი გიტარისთვის, ადვილი დაკეცვის მექანიზმით.",
       thumbnail: "/images/shop/hercules-stand.jpg",
       images: [
+      ],
+      characteristics: [
       ],
       category: "აქსესუარები",
       subCategory: "სადგამი",
