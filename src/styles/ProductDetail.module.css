@@ -52,13 +52,110 @@
 .productImageContainer {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  background-color: #212740;
+  max-width: 500px;
+  margin: 0 auto;
   border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
+  /* background: #f8f8f8; */
+}
+
+.productSlider {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.slideContainer {
+  position: relative;
+  width: 100%;
+  padding-top: 100%; /* 1:1 Aspect Ratio */
+}
+
+.productImage {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.productImage:hover {
+  transform: scale(1.02);
+}
+
+/* Slick Slider Customization */
+.slider :global(.slick-prev),
+.slider :global(.slick-next) {
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.slider :global(.slick-prev) {
+  left: 10px;
+}
+
+.slider :global(.slick-next) {
+  right: 10px;
+}
+
+.slider :global(.slick-prev:before),
+.slider :global(.slick-next:before) {
+  color: #333;
+  font-size: 20px;
+}
+
+.slider :global(.slick-dots) {
+  bottom: 10px;
+}
+
+.slider :global(.slick-dots li button:before) {
+  color: #fff;
+  opacity: 0.5;
+}
+
+.slider :global(.slick-dots li.slick-active button:before) {
+  color: #fff;
+  opacity: 1;
+}
+
+/* Lightbox Customization */
+.lightbox :global(.yarl__container) {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.lightbox :global(.yarl__slide) {
+  background: transparent;
+}
+
+.lightbox :global(.yarl__thumbnails_thumbnail) {
+  border: 2px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.lightbox :global(.yarl__thumbnails_thumbnail_active) {
+  border-color: #3b82f6;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .productImageContainer {
+    max-width: 100%;
+  }
+
+  .slider :global(.slick-prev),
+  .slider :global(.slick-next) {
+    display: none !important;
+  }
+
+  .slider :global(.slick-dots) {
+    bottom: 5px;
+  }
 }
 
 .fallbackImage {

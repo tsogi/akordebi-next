@@ -1,10 +1,21 @@
 const shopProducts = [
     {
-      id: "yamaha-c40m",
-      name: "Yamaha C40M",
-      price: "395",
-      description: "შესანიშნავი საწყისი კლასიკური გიტარა დამწყებთათვის. ნაძვის ხის ზედაპირით და მაღალი ხარისხის სიმებით.",
-      thumbnail: "/images/shop/c40.jpg",
+      id: "yamaha-c40bl",
+      name: "Yamaha C40 Black",
+      price: "371",
+      description: "შესანიშნავი არჩევანი დამწყები გიტარისტებისთვის",
+      thumbnail: "/images/shop/c40_bl_1.png",
+      images: [
+        "/images/shop/c40_bl_1.png",
+        "/images/shop/c40_bl_2.png",
+        "/images/shop/c40_bl_3.png",
+        "/images/shop/c40_bl_4.png",
+        "/images/shop/c40_bl_5.png",
+        "/images/shop/c40_bl_6.png",
+        "/images/shop/c40_bl_7.jpg",
+        "/images/shop/c40_bl_8.jpg",
+        "/images/shop/c40_bl_9.jpg",
+      ],
       category: "კლასიკური გიტარა",
       inStock: true
     },
@@ -13,7 +24,9 @@ const shopProducts = [
       name: "Cordoba C5",
       price: "990",
       description: "მაღალი ხარისხის კლასიკური გიტარა კედრის ხის ზედაპირით და მუქი პალისანდრის გრიფით.",
-      thumbnail: "/images/shop/c40.jpg",
+      thumbnail: "/images/shop/c40_bl_1.jpg",
+      images: [
+      ],
       category: "კლასიკური გიტარა",
       inStock: true
     },
@@ -23,6 +36,8 @@ const shopProducts = [
       price: "650",
       description: "მაგარი ხმის აკუსტიკური გიტარა ნაძვის ხის ზედაპირით და მაჰაგონის გვერდებით, მდიდარი ჟღერადობით.",
       thumbnail: "/images/shop/fender-cd60s.jpg",
+      images: [
+      ],
       category: "აკუსტიკური გიტარა",
       inStock: true
     },
@@ -32,6 +47,8 @@ const shopProducts = [
       price: "730",
       description: "ყველაზე გაყიდვადი აკუსტიკური გიტარა ძლიერი ბასებით და ბალანსირებული ჟღერადობით.",
       thumbnail: "/images/shop/yamaha-fg800.jpg",
+      images: [
+      ],
       category: "აკუსტიკური გიტარა",
       inStock: true
     },
@@ -41,6 +58,8 @@ const shopProducts = [
       price: "15",
       description: "პროფესიონალური მედიატორების ნაკრები, სხვადასხვა სისქით, იდეალური სხვადასხვა სტილის დაკვრისთვის.",
       thumbnail: "/images/shop/dunlop-picks.jpg",
+      images: [
+      ],
       category: "აქსესუარები",
       subCategory: "მედიატორი",
       inStock: true
@@ -51,6 +70,8 @@ const shopProducts = [
       price: "70₾",
       description: "კომპაქტური და ზუსტი ციფრული ტიუნერი თქვენი გიტარის იდეალური აწყობისთვის.",
       thumbnail: "/images/shop/korg-ca50.jpg",
+      images: [
+      ],
       category: "აქსესუარები",
       subCategory: "ტიუნერი",
       inStock: true
@@ -61,6 +82,8 @@ const shopProducts = [
       price: "45₾",
       description: "მაღალი ხარისხის, ადვილად გამოსაყენებელი კაპო სწრაფი ტონალური ცვლილებებისთვის.",
       thumbnail: "/images/shop/kyser-capo.jpg",
+      images: [
+      ],
       category: "აქსესუარები",
       subCategory: "კაპო",
       inStock: true
@@ -71,6 +94,8 @@ const shopProducts = [
       price: "55₾",
       description: "კომფორტული და გამძლე ტყავის სამხრე ქამარი თქვენი გიტარისთვის.",
       thumbnail: "/images/shop/levys-strap.jpg",
+      images: [
+      ],
       category: "აქსესუარები",
       subCategory: "სამხრე ქამარი",
       inStock: true
@@ -81,6 +106,8 @@ const shopProducts = [
       price: "120₾",
       description: "დაბალნილი, გამძლე ჩანთა თქვენი კლასიკური გიტარის უსაფრთხო ტრანსპორტირებისთვის.",
       thumbnail: "/images/shop/gator-case.jpg",
+      images: [
+      ],
       category: "აქსესუარები",
       subCategory: "ჩანთა",
       inStock: true
@@ -91,6 +118,8 @@ const shopProducts = [
       price: "25₾",
       description: "მაღალი ხარისხის კლასიკური გიტარის სიმების კომპლექტი ნათელი და დაბალანსებული ჟღერადობით.",
       thumbnail: "/images/shop/daddario-ej45.jpg",
+      images: [
+      ],
       category: "აქსესუარები",
       subCategory: "კლასიკური სიმები",
       inStock: true
@@ -101,6 +130,8 @@ const shopProducts = [
       price: "40₾",
       description: "ხანგრძლივი ჟღერადობის აკუსტიკური გიტარის სიმები Nanoweb დამცავი დაფარვით.",
       thumbnail: "/images/shop/elixir-strings.jpg",
+      images: [
+      ],
       category: "აქსესუარები",
       subCategory: "აკუსტიკური სიმები",
       inStock: true
@@ -111,6 +142,8 @@ const shopProducts = [
       price: "65₾",
       description: "მყარი და სტაბილური სადგამი თქვენი გიტარისთვის, ადვილი დაკეცვის მექანიზმით.",
       thumbnail: "/images/shop/hercules-stand.jpg",
+      images: [
+      ],
       category: "აქსესუარები",
       subCategory: "სადგამი",
       inStock: true

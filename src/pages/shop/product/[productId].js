@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -8,11 +8,21 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { useShoppingCart } from '@/context/ShoppingCartContext';
+import Slider from 'react-slick';
+import Lightbox from 'yet-another-react-lightbox';
+import 'yet-another-react-lightbox/styles.css';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import Zoom from 'yet-another-react-lightbox/plugins/zoom';
+import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
+import 'yet-another-react-lightbox/plugins/thumbnails.css';
 
 export default function ProductDetail() {
   const router = useRouter();
   const { productId } = router.query;
   const { addToCart } = useShoppingCart();
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
   
   // Find the product in our data
   const product = Object.values(shopProducts).find(p => p.id === productId);
@@ -38,6 +48,28 @@ export default function ProductDetail() {
   const handleAddToCart = () => {
     addToCart(product);
   };
+
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: true,
+    beforeChange: (oldIndex, newIndex) => setCurrentSlide(newIndex),
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          arrows: false,
+        }
+      }
+    ]
+  };
+
+  const slides = product.images && product.images.length > 0 
+    ? product.images 
+    : [product.thumbnail];
   
   return (
     <>
@@ -61,15 +93,46 @@ export default function ProductDetail() {
           
           <div className={styles.productDetail}>
             <div className={styles.productImageContainer}>
-              {product.thumbnail ? (
-                <Image 
-                  src={product.thumbnail} 
-                  alt={product.name}
-                  width={500}
-                  height={500}
-                  className={styles.productImage}
-                  priority
-                />
+              {slides.length > 0 ? (
+                <>
+                  <div className={styles.slider}>
+                    <Slider {...sliderSettings}>
+                      {slides.map((image, index) => (
+                        <div key={index} className={styles.slideContainer}>
+                          <Image 
+                            src={image} 
+                            alt={`${product.name} - სურათი ${index + 1}`}
+                            width={500}
+                            height={500}
+                            className={styles.productImage}
+                            priority={index === 0}
+                            onClick={() => setLightboxOpen(true)}
+                          />
+                        </div>
+                      ))}
+                    </Slider>
+                  </div>
+                  <div className={styles.lightbox}>
+                    <Lightbox
+                      open={lightboxOpen}
+                      close={() => setLightboxOpen(false)}
+                      slides={slides.map(image => ({ src: image }))}
+                      index={currentSlide}
+                      plugins={[Zoom, Thumbnails]}
+                      zoom={{
+                        maxZoomPixelRatio: 3,
+                        zoomInMultiplier: 2,
+                        doubleTapDelay: 300,
+                        doubleClickDelay: 300,
+                        doubleClickMaxStops: 2,
+                        keyboardMoveDistance: 50,
+                        wheelZoomDistanceFactor: 100,
+                        pinchZoomDistanceFactor: 100,
+                        scrollToZoom: true,
+                      }}
+                    />
+                  </div>
+                </>
               ) : (
                 <div className={styles.fallbackImage}>
                   <div className={styles.fallbackImageContent}>
