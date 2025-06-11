@@ -33,7 +33,7 @@ export default function ChordsList({ initialSongs }){
         router.query.notation ? router.query.notation : "chords"
     );
     const[sortBy, setSortBy] = useState(
-        router.query.sort ? router.query.sort : "default"
+        router.query.sort ? router.query.sort : "likes"
     );
     const[currentPage, setCurrentPage] = useState(
         router.query.page ? Number(router.query.page) : 1
@@ -214,7 +214,7 @@ export default function ChordsList({ initialSongs }){
         setFilterConfirmed(false);
         setFilterLessoned(false);
         setFilterFavorites(false);
-        setSortBy("default");
+        setSortBy("likes");
 
         // Todo find safer way to make sure setAllSongs is executed after setFilterConfirmed and setFilterLessoned
         setTimeout(() => {
@@ -237,7 +237,7 @@ export default function ChordsList({ initialSongs }){
                 <div className={styles.sortContainer}>
                     <CustomSelect 
                         options={[
-                            { label: lang._filterQuality, value: "default" }, 
+                            // { label: lang._filterQuality, value: "default" }, 
                             { label: lang._filterPopularity, value: "likes" }, 
                             { label: lang._filterDifficulty, value: "difficulty" },
                             { label: lang._filterViews, value: "views" }
@@ -255,11 +255,11 @@ export default function ChordsList({ initialSongs }){
                             />
                         </div>
                     </Tooltip>
-                    <Tooltip placement="top" title={lang._videoIconTitle}>
+                    {/* <Tooltip placement="top" title={lang._videoIconTitle}>
                         <div onClick={handleLessonedClick} className={`${styles.filter} ${filterLessoned ? styles.filterSelected : ""}`}>
                             <OndemandVideoIcon style={{ color: "#9ebeff", fontSize: "22px" }} />
                         </div>
-                    </Tooltip>
+                    </Tooltip> */}
                 </div>
             </div>
         </div>
