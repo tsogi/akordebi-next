@@ -22,7 +22,7 @@ const interfaceGeo = {
     _metaDescription: "გიტარის აკორდები | ფანდურის აკორდები | ნოტები | ტაბები | გაკვეთილები | gitaris akordebi | fanduris akordebi",
     _searchText: "ჩაწერეთ სიმღერა ან ავტორი",
     _searchLabel: "აკორდების ძებნა",
-    _filterPopularity: "პოპულარობით",
+    _filterPopularity: "მოწონებებით",
     _filterQuality: "ხარისხით",
     _filterDifficulty: "სიმარტივით",
     _filterViews: "ნახვებით",
