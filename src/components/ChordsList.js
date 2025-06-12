@@ -30,7 +30,7 @@ export default function ChordsList({ initialSongs }){
         router.query.lessoned ? router.query.lessoned : false
     );
     const[notationFormat, setNotationFormat] = useState(
-        router.query.notation ? router.query.notation : "chords"
+        router.query.notation ? router.query.notation : "guitar_chord"
     );
     const[sortBy, setSortBy] = useState(
         router.query.sort ? router.query.sort : "likes"

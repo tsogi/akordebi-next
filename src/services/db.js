@@ -150,6 +150,38 @@ class Db{
         return null;
     }
 
+    async getSongByUrlAndNotation(url, notation_format, userID = null){
+        const [rows,fields] = await this.pool.execute(`
+            SELECT 
+                songs.id, 
+                songs.videoLesson, 
+                songs.url,
+                songs.uploader, 
+                songs.searchWords, 
+                songs.name, 
+                songs.body, 
+                songs.uploaderUserId,
+                songs.notation_format,
+                GROUP_CONCAT(DISTINCT authors.name ORDER BY authors.name) AS authors,
+                MAX(IF(favorite_songs.user_id IS NOT NULL AND favorite_songs.song_id = songs.id, TRUE, FALSE)) AS isFavorite
+            FROM songs
+            LEFT JOIN authors_songs ON songs.id = authors_songs.song_id
+            LEFT JOIN authors ON authors_songs.author_id = authors.id
+            LEFT JOIN favorite_songs ON songs.id = favorite_songs.song_id AND favorite_songs.user_id = '${userID}'
+            WHERE songs.url = ? AND songs.notation_format = ?
+            GROUP BY songs.id;
+        `, [url, notation_format]);
+
+        if(rows.length){
+            let song = rows[0];
+            song.authors = song.authors ? song.authors.split(",") : [];
+
+            return song;
+        }
+
+        return null;
+    }
+
     async getAllSongsSorted(userID = null){
         let initialSongs = await this.getAllSongs(userID);
 

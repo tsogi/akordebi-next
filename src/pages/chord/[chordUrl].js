@@ -453,19 +453,18 @@ export async function getServerSideProps(ctx) {
     const supabase = createPagesServerClient(ctx);
     const {data} = await supabase.auth.getSession();
     const userID = data?.session?.user?.id ?? null;
-    let { chordUrl } = ctx.params;
+    let { chordUrl, notationFormat } = ctx.params;
 
-    let song = await db.getSongByUrl(chordUrl, userID);
+    let song = null;
 
-    if (!song) {
-        let name = chordUrl.split("_")[0];
-        name = name.replaceAll("-", " ");
-
-        song = await db.getSongByName(name);
+    // First attempt: Try to find song by name and notation format
+    if (notationFormat) {
+        song = await db.getSongByUrlAndNotation(chordUrl, notationFormat, userID);
     }
 
+    // Second attempt: Try to find song by URL
     if (!song) {
-        song = await db.getSong(chordUrl);
+        song = await db.getSongByUrl(chordUrl, userID);
     }
 
     if (song) {
