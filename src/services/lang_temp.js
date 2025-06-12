@@ -106,7 +106,7 @@ const interfaceGeo = {
         deleteSuccess: "სიმღერა წარმატებით წაიშალა"
     },
     upload: {
-        select_type: "აირჩიეთ ტიპი:",
+        select_type: "აირჩიეთ კატეგორია:",
         chords: "აკორდები",
         fanduri: "ფანდური",
         tabs: "ტაბები",

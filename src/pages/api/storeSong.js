@@ -21,10 +21,11 @@ export default async function handler(req, res) {
             data.url = url;
             data.userId = user.id;
 
-            let dbSong = await db.getSongByUrl(data.url);
+            // let dbSong = await db.getSongByUrl(data.url);
+            let dbSong = await db.getSongByUrlAndNotation(data.url, data.notation_format);
             
             if(dbSong) {
-                response2.error = "სიმღერა ამ სახელით/ავტორებით უკვე დარეგისტრირებულია, გთხოვთ ჩაწერეთ სხვა სახელი/ავტორები";
+                response2.error = `სიმღერა ამავე სახელით/ავტორებით კატეგორიაში ${data.notation_format} უკვე არსებობს, გთხოვთ ჩაწერეთ სხვა სახელი/ავტორები ან კატეგორია`;
                 res.json(response2);
                 return;
             } 

@@ -15,7 +15,7 @@ const css = {
     textInput: "h-[50px] pl-5 text-white w-full bg-[rgba(255,255,255,.05)] shadow-[inset 12px 12px 30px rgba(53,123,230,.2)]"
 }
 
-export default function SongCreator({ _songName = "", _authors = [], _songText = [], _videoLesson = "", _songId = null, _uploader = "", _notationFormat = "chords" }){
+export default function SongCreator({ _songName = "", _authors = [], _songText = [], _videoLesson = "", _songId = null, _uploader = "", _notationFormat = notations[0].tabs[0].code }){
     const [songName, setSongName] = React.useState(_songName);
     const [authors, setAuthors] = React.useState(_authors);
     const [songText, setSongText] = React.useState(_songText);
