@@ -113,7 +113,7 @@ export default function SongPage({ song, relatedSongs }){
             <meta property="og:title" content={`${displaySongName} - ${song.notation.page_title}`} />
             <meta property="og:description" content={song.searchWords} />
             <meta property="og:type" content="article" />
-            <meta property="og:url" content={`${process.env.NEXT_PUBLIC_DOMAIN}/chord/${song.url}`} />
+            <meta property="og:url" content={`${process.env.NEXT_PUBLIC_DOMAIN}/resource/${song.notation_format}/${song.url}`} />
             
             {/* Twitter Card meta tags */}
             <meta name="twitter:card" content="summary" />
@@ -121,7 +121,7 @@ export default function SongPage({ song, relatedSongs }){
             <meta name="twitter:description" content={song.searchWords} />
             
             {/* Canonical URL to prevent duplicate content issues */}
-            <link rel="canonical" href={`${process.env.NEXT_PUBLIC_DOMAIN}/chord/${song.url}`} />
+            <link rel="canonical" href={`${process.env.NEXT_PUBLIC_DOMAIN}/resource/${song.notation_format}/${song.url}`} />
             
             {/* Additional meta tags for better SEO */}
             <meta name="keywords" content={`${displaySongName}, ${displayAuthors?.join(', ')}, ${song.notation.page_title}, chords, music, აკორდები, ტაბები, გაკვეთილებები`} />

@@ -139,7 +139,7 @@ export default function SongCard({ song, onDelete }){
                     </Tooltip>
                 )}
                 
-                <Link href={`/chord/${song.url}`} className={styles.songLink}>
+                <Link href={`/resource/${song.notation_format}/${song.url}`} className={styles.songLink}>
                     <div className={styles.songContent}>
                         <div className={styles.songDetails}>
                             <h2 className={`${styles.songName} capital`}>{displaySongName}</h2>

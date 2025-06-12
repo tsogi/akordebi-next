@@ -18,10 +18,6 @@ export default function Header(){
     const { lang, toggleLanguage, language } = useLanguage();
 
     function isActive(page){
-        if(page == "home" && ["/", "/chord/[chordUrl]"].includes(router.pathname)){ 
-            return true;
-        }
-
         if(page == "guitar-finder" && router.pathname == "/guitar-finder"){
             return true;
         }
@@ -35,6 +31,10 @@ export default function Header(){
         }
 
         if(page == "teachers" && router.pathname == "/teachers"){
+            return true;
+        }
+
+        if(page == "home" && ["/", "/chord/[chordUrl]"].includes(router.pathname)){ 
             return true;
         }
     }

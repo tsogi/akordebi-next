@@ -29,7 +29,7 @@ const generateSitemapXml = (records) => {
   records.forEach((record) => {
     urlset
       .ele('url')
-      .ele('loc', `https://${domain}/chord/${record.url}`)
+      .ele('loc', `https://${domain}/resource/${record.notation_format}/${record.url}`)
       .up()
       .ele('changefreq', 'monthly')
       .up()

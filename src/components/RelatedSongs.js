@@ -27,7 +27,7 @@ export default function RelatedSongs({ songs }) {
             : song?.authors;
 
           return (
-            <Link href={`/chord/${song.url}`} key={song.id} className={styles.songCard}>
+            <Link href={`/resource/${song.notation_format}/${song.url}`} key={song.id} className={styles.songCard}>
               <div className={styles.songCardInner}>
                 <h4 className={styles.songName}>{displaySongName}</h4>
                 {displayAuthors && displayAuthors.length > 0 && (
