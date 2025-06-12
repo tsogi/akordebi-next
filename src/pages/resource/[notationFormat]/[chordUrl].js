@@ -1,4 +1,4 @@
-import SongPage from '@/pages/chord/[chordUrl]';
+import SongPage, { getServerSideProps as originalGetServerSideProps } from '@/pages/chord/[chordUrl]';
 import { getNotation } from '@/utils/notations';
 
 export default function ChordPageWithSegment(props) {
@@ -25,5 +25,5 @@ export async function getServerSideProps(ctx) {
         }
     };
 
-    return SongPage.getServerSideProps(modifiedCtx);
+    return originalGetServerSideProps(modifiedCtx);
 } 
