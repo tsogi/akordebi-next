@@ -171,6 +171,13 @@ const interfaceGeo = {
     _search: "ძებნა",
     _footer_refunds: "დაბრუნება",
     
+    // Search modal translations
+    searchModal: {
+        noResults: "ვერაფერი მოიძებნა",
+        searchResults: "ძებნის შედეგები",
+        openInNewTab: "ახალ ფანჯარაში გახსნა"
+    },
+    
     // Price page translations
     price: {
         month: "თვე",
@@ -371,6 +378,13 @@ Bass Down Down Up Down Up or Bass ↓ ↓ ↑ ↓ ↑ or Bass 3 2 1 2 3`
     },
     _search: "Search",
     _footer_refunds: "Refunds",
+    
+    // Search modal translations
+    searchModal: {
+        noResults: "No results found",
+        searchResults: "Search Results",
+        openInNewTab: "Open in new tab"
+    },
     
     // Price page translations
     price: {

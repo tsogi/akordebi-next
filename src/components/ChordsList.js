@@ -209,20 +209,6 @@ export default function ChordsList({ initialSongs }){
         setFilterLessoned(true);
     }
 
-    function handleSearchClick(songs){
-        setCurrentPage(1);
-        setFilterConfirmed(false);
-        setFilterLessoned(false);
-        setFilterFavorites(false);
-        setSortBy("likes");
-
-        // Todo find safer way to make sure setAllSongs is executed after setFilterConfirmed and setFilterLessoned
-        setTimeout(() => {
-            initialSongs = songs;
-            applyFilters();
-        }, 10);
-    }
-
     function handleNotationFormatChange(format) {
         setCurrentPage(1);
         setNotationFormat(format);
@@ -230,8 +216,8 @@ export default function ChordsList({ initialSongs }){
 
     return <div className={"page_container"}>
         <div className="flex flex-col md:flex-row justify-between items-center w-full gap-6 mb-8">
-            <div className={`${styles.searchComponent} w-full md:w-1/2`}>
-                <SearchSongs onSearch={handleSearchClick} />
+            <div className="w-full md:w-1/2">
+                <SearchSongs />
             </div>
             <div className={`${styles.filterSongs} w-full md:w-1/2 flex justify-end`}>
                 <div className={styles.sortContainer}>

@@ -282,7 +282,7 @@ class Db{
           }
 
           let filteredSongs = searchSongs(searchText);
-          let res = filteredSongs?.length ? filteredSongs.map(item => item.item) : [];
+          let res = filteredSongs?.length ? filteredSongs.slice(0, 5).map(item => item.item) : [];
           
         return res;
     }
