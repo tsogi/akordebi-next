@@ -77,7 +77,6 @@ const SearchSong = () => {
       const url = `/resource/${notation.code}/${song.url}`;
       window.open(url, '_blank');
     }
-    setShowResults(false);
   };
 
   return (
