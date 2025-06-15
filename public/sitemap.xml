@@ -216,6 +216,11 @@
     <priority>0.800</priority>
   </url>
   <url>
+    <loc>https://akordebi.ge/resource/fanduri_chord/ra_yofila_sichabuke-chikhladzeebi</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.800</priority>
+  </url>
+  <url>
     <loc>https://akordebi.ge/resource/guitar_chord/afkhazetis_miwaze</loc>
     <changefreq>monthly</changefreq>
     <priority>0.800</priority>
@@ -236,12 +241,12 @@
     <priority>0.800</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/resource/guitar_chord/asetia_qurdi_katsis_bedi-k._chavchanidze_bidzina_kvernadze</loc>
+    <loc>https://akordebi.ge/resource/guitar_chord/mtvare-mgzavrebi</loc>
     <changefreq>monthly</changefreq>
     <priority>0.800</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/resource/guitar_chord/mtvare-mgzavrebi</loc>
+    <loc>https://akordebi.ge/resource/guitar_chord/asetia_qurdi_katsis_bedi-k._chavchanidze_bidzina_kvernadze</loc>
     <changefreq>monthly</changefreq>
     <priority>0.800</priority>
   </url>
@@ -476,17 +481,17 @@
     <priority>0.800</priority>
   </url>
   <url>
+    <loc>https://akordebi.ge/resource/guitar_chord/dabadebis_dghe-ghamis_shous_bendi</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.800</priority>
+  </url>
+  <url>
     <loc>https://akordebi.ge/resource/guitar_chord/zogi_uberavs-nikolshou</loc>
     <changefreq>monthly</changefreq>
     <priority>0.800</priority>
   </url>
   <url>
     <loc>https://akordebi.ge/resource/guitar_chord/aludas_khsovnas</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.800</priority>
-  </url>
-  <url>
-    <loc>https://akordebi.ge/resource/guitar_chord/dabadebis_dghe-ghamis_shous_bendi</loc>
     <changefreq>monthly</changefreq>
     <priority>0.800</priority>
   </url>
@@ -561,17 +566,17 @@
     <priority>0.800</priority>
   </url>
   <url>
+    <loc>https://akordebi.ge/resource/guitar_chord/mayvala-nino_chkheidze</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.800</priority>
+  </url>
+  <url>
     <loc>https://akordebi.ge/resource/guitar_chord/pankesas_simghera-verisubnis_melodiebi</loc>
     <changefreq>monthly</changefreq>
     <priority>0.800</priority>
   </url>
   <url>
     <loc>https://akordebi.ge/resource/guitar_chord/isev-Killages</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.800</priority>
-  </url>
-  <url>
-    <loc>https://akordebi.ge/resource/guitar_chord/mayvala-nino_chkheidze</loc>
     <changefreq>monthly</changefreq>
     <priority>0.800</priority>
   </url>
@@ -636,6 +641,11 @@
     <priority>0.800</priority>
   </url>
   <url>
+    <loc>https://akordebi.ge/resource/guitar_chord/deda-jemal_sefiashvili_jansugh_charkviani</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.800</priority>
+  </url>
+  <url>
     <loc>https://akordebi.ge/resource/guitar_chord/minda_frtebi_gavshalo</loc>
     <changefreq>monthly</changefreq>
     <priority>0.800</priority>
@@ -662,11 +672,6 @@
   </url>
   <url>
     <loc>https://akordebi.ge/resource/guitar_chord/chiti-gvriti-konstantine_lortqifanidze_revaz_laghidze</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.800</priority>
-  </url>
-  <url>
-    <loc>https://akordebi.ge/resource/guitar_chord/deda-jemal_sefiashvili_jansugh_charkviani</loc>
     <changefreq>monthly</changefreq>
     <priority>0.800</priority>
   </url>
@@ -761,6 +766,11 @@
     <priority>0.800</priority>
   </url>
   <url>
+    <loc>https://akordebi.ge/resource/guitar_chord/qartvelebis_ertad_yofna_damilotse_ghmerto-gogi_dolidze</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.800</priority>
+  </url>
+  <url>
     <loc>https://akordebi.ge/resource/guitar_chord/gviani_serenada</loc>
     <changefreq>monthly</changefreq>
     <priority>0.800</priority>
@@ -847,11 +857,6 @@
   </url>
   <url>
     <loc>https://akordebi.ge/resource/guitar_chord/gvirila-inola_gurgulia</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.800</priority>
-  </url>
-  <url>
-    <loc>https://akordebi.ge/resource/guitar_chord/qartvelebis_ertad_yofna_damilotse_ghmerto-gogi_dolidze</loc>
     <changefreq>monthly</changefreq>
     <priority>0.800</priority>
   </url>
@@ -1161,6 +1166,11 @@
     <priority>0.800</priority>
   </url>
   <url>
+    <loc>https://akordebi.ge/resource/guitar_chord/shen_ra_itsi_dzvirfaso</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.800</priority>
+  </url>
+  <url>
     <loc>https://akordebi.ge/resource/guitar_chord/bulbulis_stvena-otar_ramishvili</loc>
     <changefreq>monthly</changefreq>
     <priority>0.800</priority>
@@ -1207,6 +1217,11 @@
   </url>
   <url>
     <loc>https://akordebi.ge/resource/guitar_chord/visi_sitsotskhlets_viyav-temur_wiklauri</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.800</priority>
+  </url>
+  <url>
+    <loc>https://akordebi.ge/resource/guitar_chord/mitkhar_rad_khar_mowyenili-otar_ramishvili</loc>
     <changefreq>monthly</changefreq>
     <priority>0.800</priority>
   </url>
@@ -1376,11 +1391,6 @@
     <priority>0.800</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/resource/guitar_chord/shen_ra_itsi_dzvirfaso</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.800</priority>
-  </url>
-  <url>
     <loc>https://akordebi.ge/resource/guitar_tab/tsisferi_mtebi-gia_yancheli</loc>
     <changefreq>monthly</changefreq>
     <priority>0.800</priority>
@@ -1401,7 +1411,7 @@
     <priority>0.800</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/resource/guitar_chord/yayacho</loc>
+    <loc>https://akordebi.ge/resource/fanduri_chord/khandakhan_wvimad_davedinebi-giorgi_ramazashvili</loc>
     <changefreq>monthly</changefreq>
     <priority>0.800</priority>
   </url>
@@ -1427,11 +1437,6 @@
   </url>
   <url>
     <loc>https://akordebi.ge/resource/guitar_chord/siyvaruli_gana_khshirad</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.800</priority>
-  </url>
-  <url>
-    <loc>https://akordebi.ge/resource/guitar_chord/mitkhar_rad_khar_mowyenili-otar_ramishvili</loc>
     <changefreq>monthly</changefreq>
     <priority>0.800</priority>
   </url>
@@ -1487,6 +1492,11 @@
   </url>
   <url>
     <loc>https://akordebi.ge/resource/guitar_chord/duduko_chemo_tkbilo_tilisma</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.800</priority>
+  </url>
+  <url>
+    <loc>https://akordebi.ge/resource/guitar_chord/mrude_tu_gaqvs_kheli-giorgi_tsabadze</loc>
     <changefreq>monthly</changefreq>
     <priority>0.800</priority>
   </url>
@@ -1781,6 +1791,11 @@
     <priority>0.800</priority>
   </url>
   <url>
+    <loc>https://akordebi.ge/resource/guitar_chord/yayacho</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.800</priority>
+  </url>
+  <url>
     <loc>https://akordebi.ge/resource/guitar_chord/saqanela-inola_gurgulia</loc>
     <changefreq>monthly</changefreq>
     <priority>0.800</priority>
@@ -1877,11 +1892,6 @@
   </url>
   <url>
     <loc>https://akordebi.ge/resource/guitar_chord/mindorta_mamshvenebelo-tamar_chokhonelidze</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.800</priority>
-  </url>
-  <url>
-    <loc>https://akordebi.ge/resource/guitar_chord/mrude_tu_gaqvs_kheli-giorgi_tsabadze</loc>
     <changefreq>monthly</changefreq>
     <priority>0.800</priority>
   </url>
@@ -2346,17 +2356,22 @@
     <priority>0.800</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/resource/fanduri_chord/khandakhan_wvimad_davedinebi-giorgi_ramazashvili</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.800</priority>
-  </url>
-  <url>
     <loc>https://akordebi.ge/resource/guitar_tab/isev_midikhar_(solo)-archil_kereselidze</loc>
     <changefreq>monthly</changefreq>
     <priority>0.800</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/resource/fanduri_chord/apareka_(fanduri)-aluda_qetelauri</loc>
+    <loc>https://akordebi.ge/resource/fanduri_chord/gafrindi_am_gulshi_chamowva_burusi-aluda_qetelauri</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.800</priority>
+  </url>
+  <url>
+    <loc>https://akordebi.ge/resource/fanduri_chord/apareka-aluda_qetelauri</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.800</priority>
+  </url>
+  <url>
+    <loc>https://akordebi.ge/resource/fanduri_chord/arkhotis_tsasavit_lurji_gaqvs_tvalebi-elguja_udzilauri</loc>
     <changefreq>monthly</changefreq>
     <priority>0.800</priority>
   </url>
@@ -3446,11 +3461,6 @@
     <priority>0.800</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/resource/fanduri_chord/gafrindi_am_gulshi_chamowva_burusi-aluda_qetelauri</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.800</priority>
-  </url>
-  <url>
     <loc>https://akordebi.ge/resource/guitar_chord/zestafono_gshordebi</loc>
     <changefreq>monthly</changefreq>
     <priority>0.800</priority>
@@ -3481,12 +3491,7 @@
     <priority>0.800</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/resource/fanduri_chord/arkhotis_tsasavit_lurji_gaqvs_tvalebi-elguja_udzilauri</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.800</priority>
-  </url>
-  <url>
-    <loc>https://akordebi.ge/resource/fanduri_chord/gudanis_jvari_(fanduri)-aluda_qetelauri</loc>
+    <loc>https://akordebi.ge/resource/fanduri_chord/gudanis_jvari-aluda_qetelauri</loc>
     <changefreq>monthly</changefreq>
     <priority>0.800</priority>
   </url>
@@ -3511,7 +3516,7 @@
     <priority>0.800</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/resource/fanduri_chord/300_aragveli_(fanduri)</loc>
+    <loc>https://akordebi.ge/resource/fanduri_chord/300_aragveli</loc>
     <changefreq>monthly</changefreq>
     <priority>0.800</priority>
   </url>
@@ -3521,7 +3526,7 @@
     <priority>0.800</priority>
   </url>
   <url>
-    <loc>https://akordebi.ge/resource/fanduri_chord/samshoblo_(fanduri)</loc>
+    <loc>https://akordebi.ge/resource/fanduri_chord/samshoblo</loc>
     <changefreq>monthly</changefreq>
     <priority>0.800</priority>
   </url>
@@ -3547,6 +3552,16 @@
   </url>
   <url>
     <loc>https://akordebi.ge/resource/fanduri_chord/bakhtrionidan_gitsqerdi</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.800</priority>
+  </url>
+  <url>
+    <loc>https://akordebi.ge/resource/guitar_chord/rogor_davenduro_beds-mr_mumch</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.800</priority>
+  </url>
+  <url>
+    <loc>https://akordebi.ge/resource/guitar_lesson/gitaris_shercheva_da_tipebi-</loc>
     <changefreq>monthly</changefreq>
     <priority>0.800</priority>
   </url>

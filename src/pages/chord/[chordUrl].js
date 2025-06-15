@@ -49,6 +49,13 @@ export default function SongPage({ song, relatedSongs }){
         };
     }, []);
 
+    // Add cleanup for scroll interval when component unmounts
+    useEffect(() => {
+        return () => {
+            clearInterval(intervalId);
+        };
+    }, []);
+
     function handleScreenClick(event) {
         let el = event.target;
         if(!el.classList.contains('chordBtn')) {
