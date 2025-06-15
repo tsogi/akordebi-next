@@ -37,6 +37,14 @@ export default function SongPage({ song, relatedSongs }){
         ? song.authors.map(author => transliterateWithCapitalizedWords(author))
         : song?.authors;
 
+    // Load font size from localStorage after component mounts
+    useEffect(() => {
+        const savedFontSize = localStorage.getItem('songFontSize');
+        if (savedFontSize) {
+            setFontSize(parseInt(savedFontSize, 10));
+        }
+    }, []);
+
     useEffect(() => {
         scroll();
     }, [scrollSpeed])
@@ -76,6 +84,7 @@ export default function SongPage({ song, relatedSongs }){
         let newFontSize = fontSize + 1;
         if(newFontSize < 50) {
             setFontSize(newFontSize);
+            localStorage.setItem('songFontSize', newFontSize.toString());
         }
     }
 
@@ -83,6 +92,7 @@ export default function SongPage({ song, relatedSongs }){
         let newFontSize = fontSize - 1;
         if(newFontSize > 5) {
             setFontSize(newFontSize);
+            localStorage.setItem('songFontSize', newFontSize.toString());
         }
     }
 
