@@ -189,23 +189,28 @@ export default function SongPage({ song, relatedSongs }){
                     </div>
                 </div>
                 
-                <button 
-                    className={`${styles.toggleButton} ${showChords ? styles.active : ''}`}
-                    onClick={handleShowChordsClick}
-                    aria-label={showChords ? lang.chord.hide : lang.chord.appearance}
-                >
-                    {showChords ? (
-                        <>
-                            <EyeSlashIcon className={styles.toggleIcon} />
-                            <span>{lang.chord.hide}</span>
-                        </>
-                    ) : (
-                        <>
-                            <EyeIcon className={styles.toggleIcon} />
-                            <span>{lang.chord.appearance}</span>
-                        </>
-                    )}
-                </button>
+                {
+                    song.notation?.hideChords ?
+                    null
+                    :
+                    <button 
+                        className={`${styles.toggleButton} ${showChords ? styles.active : ''}`}
+                        onClick={handleShowChordsClick}
+                        aria-label={showChords ? lang.chord.hide : lang.chord.appearance}
+                    >
+                        {showChords ? (
+                            <>
+                                <EyeSlashIcon className={styles.toggleIcon} />
+                                <span>{lang.chord.hide}</span>
+                            </>
+                        ) : (
+                            <>
+                                <EyeIcon className={styles.toggleIcon} />
+                                <span>{lang.chord.appearance}</span>
+                            </>
+                        )}
+                    </button>
+                }
                 
                 <div className={styles.favoriteWrapper}>
                     <Favorite song={song} showLabel={true} />
@@ -223,7 +228,7 @@ export default function SongPage({ song, relatedSongs }){
                 }
             </div>
             <main className={`${styles.songBody} mxedruli`} style={{fontSize}}>
-                {!isPremium && user?.id !== song.uploaderUserId && (
+                {!song.notation?.isFree && !isPremium && user?.id !== song.uploaderUserId && (
                     <div className={styles.blurredContent}>
                         <SubscriptionPrompt />
                     </div>
@@ -265,14 +270,19 @@ export default function SongPage({ song, relatedSongs }){
                     </div>
                     <SongVotes songId={song.id} />
                 </div>
-                <div className={styles.songDifficultiesWrapper}>
-                    <div className={styles.evaluate_label}>
-                        {lang._evaluate_difficulty}
+                {
+                    song.notation?.hideDifficulty ?
+                    null
+                    :
+                    <div className={styles.songDifficultiesWrapper}>
+                        <div className={styles.evaluate_label}>
+                            {lang._evaluate_difficulty}
+                        </div>
+                        <div className={styles.difficultiesWrapper}>
+                            <SongDifficulties songId={song.id} />
+                        </div>
                     </div>
-                    <div className={styles.difficultiesWrapper}>
-                        <SongDifficulties songId={song.id} />
-                    </div>
-                </div>
+                }
             </div>
             {
                 song?.videoLesson ?

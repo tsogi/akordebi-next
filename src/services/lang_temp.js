@@ -91,9 +91,9 @@ const interfaceGeo = {
         chord: "აკორდების",
         hide: "აკორდები",
         appearance: "აკორდები",
-        uploaded: "აკორდები ატვირთა",
-        rate: " შეაფასეთ აკორდების სისწორე",
-        relatedSongs: "მსგავსი აკორდები",
+        uploaded: "რესურსები ატვირთა",
+        rate: " შეაფასეთ რესურსის სისწორე",
+        relatedSongs: "მსგავსი რესურსები",
     },
     songCard: {
         videoTooltip: "ვიდეო გაკვეთილი",
