@@ -1,14 +1,33 @@
 import { useLanguage } from '@/context/LanguageContext';
 import { notations } from '@/utils/notations';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function NotationSwitcher({ 
     notationFormat, 
     onNotationFormatChange
 }) {
     const { lang } = useLanguage();
-    const [selectedGroup, setSelectedGroup] = useState("გიტარა");
     
+    // Find the group that contains the current notationFormat
+    const findGroupForNotation = (notation) => {
+        for (const group of notations) {
+            if (group.tabs.some(tab => tab.code === notation)) {
+                return group.name;
+            }
+        }
+        return "გიტარა"; // fallback to default
+    };
+    
+    const [selectedGroup, setSelectedGroup] = useState(() => findGroupForNotation(notationFormat));
+    
+    // Update selectedGroup when notationFormat changes
+    useEffect(() => {
+        const correctGroup = findGroupForNotation(notationFormat);
+        if (correctGroup !== selectedGroup) {
+            setSelectedGroup(correctGroup);
+        }
+    }, [notationFormat, selectedGroup]);
+
     const currentGroup = notations.find(n => n.name === selectedGroup);
     const currentTab = currentGroup?.tabs.find(t => t.code === notationFormat) || currentGroup?.tabs[0];
 
