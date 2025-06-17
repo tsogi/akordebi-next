@@ -25,6 +25,8 @@ export default function SongPage({ song, relatedSongs }){
     const [fontSize, setFontSize] = useState(16);
     const [scrollSpeed, setScrollSpeed] = useState(0);
     const [showChords, setShowChords ] = useState(false);
+    const [tonality, setTonality] = useState(0);
+    const [useCapo, setUseCapo] = useState(false);
     const { isPremium, user } = useUser();
     const { lang, language } = useLanguage();
 
@@ -110,6 +112,57 @@ export default function SongPage({ song, relatedSongs }){
         }
     }
 
+    async function handleMinusTonalityClick(){
+        let newTonality = tonality - 1;
+        if(newTonality >= -6) {
+            setTonality(newTonality);
+        }
+    }
+
+    async function handlePlusTonalityClick(){
+        let newTonality = tonality + 1;
+        if(newTonality <= 6) {
+            setTonality(newTonality);
+        }
+    }
+
+    async function handleCapoChange(event){
+        setUseCapo(event.target.checked);
+    }
+
+    // Chord transposition function
+    function transposeChord(chord, semitones) {
+        if (!chord || semitones === 0) return chord;
+        
+        const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+        const flats = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
+        
+        // Extract root note and chord suffix
+        let rootNote = '';
+        let chordSuffix = '';
+        
+        if (chord.length >= 2 && (chord[1] === '#' || chord[1] === 'b')) {
+            rootNote = chord.slice(0, 2);
+            chordSuffix = chord.slice(2);
+        } else {
+            rootNote = chord.slice(0, 1);
+            chordSuffix = chord.slice(1);
+        }
+        
+        // Find current note index
+        let noteIndex = notes.indexOf(rootNote);
+        if (noteIndex === -1) {
+            noteIndex = flats.indexOf(rootNote);
+        }
+        if (noteIndex === -1) return chord; // Return original if not found
+        
+        // Transpose
+        let newIndex = (noteIndex + semitones + 12) % 12;
+        let newNote = notes[newIndex];
+        
+        return newNote + chordSuffix;
+    }
+
     async function handleShowChordsClick(){
         if(showChords) {
             setShowChords(false);
@@ -188,6 +241,38 @@ export default function SongPage({ song, relatedSongs }){
                         </button>
                     </div>
                 </div>
+
+                <div className={styles.controlGroup}>
+                    <label className={styles.controlLabel}>ტონალობა</label>
+                    <div className={styles.controlActions}>
+                        <button 
+                            className={styles.controlButton} 
+                            onClick={handleMinusTonalityClick}
+                            aria-label="Decrease tonality"
+                        >
+                            <MinusIcon className={styles.controlIcon} />
+                        </button>
+                        <div className={styles.controlValue}>{tonality > 0 ? `+${tonality}` : tonality}</div>
+                        <button 
+                            className={styles.controlButton} 
+                            onClick={handlePlusTonalityClick}
+                            aria-label="Increase tonality"
+                        >
+                            <PlusIcon className={styles.controlIcon} />
+                        </button>
+                    </div>
+                    <div className={styles.capoWrapper}>
+                        <label className={styles.capoLabel}>
+                            <input 
+                                type="checkbox" 
+                                checked={useCapo} 
+                                onChange={handleCapoChange}
+                                className={styles.capoCheckbox}
+                            />
+                            Capo
+                        </label>
+                    </div>
+                </div>
                 
                 {
                     song.notation?.hideChords ?
@@ -250,15 +335,15 @@ export default function SongPage({ song, relatedSongs }){
                         }
 
                         if(line.type == "coupletChords") {
-                            return coupletChordsLine(line.list, index, showChords, song.notation.chordsDir);
+                            return coupletChordsLine(line.list, index, showChords, song.notation.chordsDir, tonality, useCapo, transposeChord);
                         }
 
                         if(line.type == "text") {
-                            return coupletLine(line, index, song.notation.chordsDir);
+                            return coupletLine(line, index, song.notation.chordsDir, tonality, useCapo, transposeChord);
                         }
                         
                         if(line.type == "chorus") {
-                            return chorusLine(line, index, song.notation.chordsDir);
+                            return chorusLine(line, index, song.notation.chordsDir, tonality, useCapo, transposeChord);
                         }
 
                         if(line.type == "break") {
@@ -338,12 +423,13 @@ export default function SongPage({ song, relatedSongs }){
     </>
 }
 
-function coupletChordsLine(chords, index, showChords, chordsDir){
+function coupletChordsLine(chords, index, showChords, chordsDir, tonality, useCapo, transposeChord){
     return <div key={index} className={`${styles.lineWrapper} ${styles.coupletChords}`}>
         <div className={styles.coupletChordsList} style={{ display: showChords ? "flex" : "none" }}>
             {
                 chords.map(chord => {
-                    return <img className={styles.coupletChordImg} onError = {(e) => { e.target.style.display = 'none' }} src={ findChordImage(chord, chordsDir) } />
+                    const imageChord = useCapo ? transposeChord(chord, -tonality) : chord;
+                    return <img className={styles.coupletChordImg} onError = {(e) => { e.target.style.display = 'none' }} src={ findChordImage(imageChord, chordsDir) } />
                 })
             }
         </div>
@@ -382,26 +468,30 @@ function renderCharacter(character){
     return character;
 }
 
-function renderLine(line, index, chordsDir){
+function renderLine(line, index, chordsDir, tonality, useCapo, transposeChord){
     return <div key={index} className={`lineWrapper ${line.type}`}>
     {
         line.value.split("").map((character, index) => {
+            const originalChord = line.chords[index];
+            const displayChord = originalChord ? (useCapo ? originalChord : transposeChord(originalChord, tonality)) : null;
+            const imageChord = originalChord ? (useCapo ? transposeChord(originalChord, -tonality) : originalChord) : null;
+            
             return <div key={index} className={styles.textBit}>
                 <div className={styles.character}>{renderCharacter(character)}</div>
                 {
-                    line.chords[index] ?
+                    originalChord ?
                     <>
-                        <div className={`${styles.chordLabel} chordBtn`} onClick={(event) => { handleChordClick(event, line.chords[index])}}>{line.chords[index]}</div>
+                        <div className={`${styles.chordLabel} chordBtn`} onClick={(event) => { handleChordClick(event, imageChord, chordsDir)}}>{displayChord}</div>
                         <div className={`${styles.chordImage} chordImage`}>
                             <div className={styles.closeChordBtn} onClick={handleChordClose}><HighlightOffIcon /></div>
-                            {/* <div className={styles.imageLabel">{line.chords[index]}</div> */}
+                            {/* <div className={styles.imageLabel">{imageChord}</div> */}
                             <img
                                 onError={({ currentTarget }) => {
                                     currentTarget.onerror = null; // prevents looping
                                     currentTarget.src="";
                                 }}
 
-                            src={ findChordImage(line.chords[index], chordsDir) } />
+                            src={ findChordImage(imageChord, chordsDir) } />
                         </div>
                     </>
                     :
@@ -433,7 +523,7 @@ function handleChordClose(){
     });
 }
 
-async function handleChordClick(event, chord){
+async function handleChordClick(event, chord, chordsDir){
     if(event.target.nextSibling.style.display == "flex") {
         document.querySelectorAll(".chordImage").forEach((item) => {
             item.style.display = "none";
@@ -459,16 +549,16 @@ async function handleChordClick(event, chord){
     }
 }
 
-function coupletLine(line, index, chordsDir){
-    return renderLine(line, index, chordsDir)
+function coupletLine(line, index, chordsDir, tonality, useCapo, transposeChord){
+    return renderLine(line, index, chordsDir, tonality, useCapo, transposeChord)
 }
 
 function breakLine(index){
     return <div key={index} className={`lineWrapper break`}></div>
 }
 
-function chorusLine(line, index, chordsDir){
-    return renderLine(line, index, chordsDir)
+function chorusLine(line, index, chordsDir, tonality, useCapo, transposeChord){
+    return renderLine(line, index, chordsDir, tonality, useCapo, transposeChord)
 }
 
 function imageLine(value, index){
