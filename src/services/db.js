@@ -63,7 +63,7 @@ class Db{
     // Todo Most of the code in getSong(), getSongByUrl(), getSongByName() are duplicated. Fix DRY
     async getSong(songId){
         const [rows,fields] = await this.pool.execute(`
-            select songs.id, songs.videoLesson, songs.url, songs.uploader, songs.searchWords, songs.name, songs.body, GROUP_CONCAT(authors.name) as authors from songs 
+            select songs.id, songs.videoLesson, songs.url, songs.uploader, songs.searchWords, songs.name, songs.body, songs.capo_location, GROUP_CONCAT(authors.name) as authors from songs 
             left join authors_songs on songs.id = authors_songs.song_id
             left join authors on authors_songs.author_id = authors.id
             where songs.id = ?
@@ -86,6 +86,7 @@ class Db{
                 songs.id, 
                 songs.videoLesson, 
                 songs.url,
+                songs.capo_location,
                 songs.uploader, 
                 songs.searchWords, 
                 songs.name, 
@@ -114,7 +115,7 @@ class Db{
 
     async getSongById(songId){
         const [rows,fields] = await this.pool.execute(`
-            select songs.id, songs.videoLesson, songs.uploaderUserId, songs.uploader, songs.searchWords, songs.name, songs.body, GROUP_CONCAT(authors.name) as authors from songs 
+            select songs.id, songs.videoLesson, songs.uploaderUserId, songs.uploader, songs.searchWords, songs.name, songs.body, songs.capo_location, GROUP_CONCAT(authors.name) as authors from songs 
             left join authors_songs on songs.id = authors_songs.song_id
             left join authors on authors_songs.author_id = authors.id
             where songs.id = ?
@@ -133,7 +134,7 @@ class Db{
 
     async getSongByName(songName){
         const [rows,fields] = await this.pool.execute(`
-            select songs.id, songs.videoLesson, songs.uploader, songs.searchWords, songs.name, songs.body, GROUP_CONCAT(authors.name) as authors from songs 
+            select songs.id, songs.videoLesson, songs.uploader, songs.searchWords, songs.name, songs.body, songs.capo_location, GROUP_CONCAT(authors.name) as authors from songs 
             left join authors_songs on songs.id = authors_songs.song_id
             left join authors on authors_songs.author_id = authors.id
             where songs.name = ?
@@ -156,6 +157,7 @@ class Db{
                 songs.id, 
                 songs.videoLesson, 
                 songs.url,
+                songs.capo_location,
                 songs.uploader, 
                 songs.searchWords, 
                 songs.name, 
@@ -217,6 +219,7 @@ class Db{
                 songs.searchWords, 
                 songs.videoLesson, 
                 songs.id, 
+                songs.capo_location,
                 songs.view_count,
                 songs.notation_format,
                 songs.uploaderUserId,

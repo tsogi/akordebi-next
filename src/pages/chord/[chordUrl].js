@@ -234,6 +234,16 @@ export default function SongPage({ song, relatedSongs }){
                     </div>
                 )}
                 {
+                    song?.capo_location ?
+                    <div className="ml-[10px] mb-[15px] italic">
+                        <span>{lang.chord.capoLocation}: </span>
+                        <span id="capo-location">{song.capo_location} </span>
+                        <span>{lang.chord.fret}</span>
+                    </div>
+                    :
+                    null
+                }
+                {
                     song?.body ? song.body.map((line, index) => {
                         if(line.type == "rightHand") {
                             return rightHandLine(line.value, index);

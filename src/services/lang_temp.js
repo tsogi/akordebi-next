@@ -89,6 +89,8 @@ const interfaceGeo = {
         font: "ფონტი",
         autoScroll: "ავტო-სქროლი",
         chord: "აკორდების",
+        capoLocation: "კაპო პოზიცია",
+        fret: "ლადი",
         hide: "აკორდები",
         appearance: "აკორდები",
         uploaded: "რესურსი ატვირთა",
@@ -313,6 +315,8 @@ const interfaceEng = {
         uploaded: "Uploaded by",
         rate: "Rate chord accuracy",
         relatedSongs: "Related Chords",
+        capoLocation: "Capo Location",
+        fret: "Fret",
     },
     songCard: {
         videoTooltip: "Video lesson",
