@@ -26,7 +26,6 @@ export default function SongPage({ song, relatedSongs }){
     const [scrollSpeed, setScrollSpeed] = useState(0);
     const [showChords, setShowChords ] = useState(false);
     const [tonality, setTonality] = useState(0);
-    const [useCapo, setUseCapo] = useState(false);
     const { isPremium, user } = useUser();
     const { lang, language } = useLanguage();
 
@@ -124,10 +123,6 @@ export default function SongPage({ song, relatedSongs }){
         if(newTonality <= 6) {
             setTonality(newTonality);
         }
-    }
-
-    async function handleCapoChange(event){
-        setUseCapo(event.target.checked);
     }
 
     // Chord transposition function
@@ -261,17 +256,6 @@ export default function SongPage({ song, relatedSongs }){
                             <PlusIcon className={styles.controlIcon} />
                         </button>
                     </div>
-                    <div className={styles.capoWrapper}>
-                        <label className={styles.capoLabel}>
-                            <input 
-                                type="checkbox" 
-                                checked={useCapo} 
-                                onChange={handleCapoChange}
-                                className={styles.capoCheckbox}
-                            />
-                            Capo
-                        </label>
-                    </div>
                 </div>
                 
                 {
@@ -335,15 +319,15 @@ export default function SongPage({ song, relatedSongs }){
                         }
 
                         if(line.type == "coupletChords") {
-                            return coupletChordsLine(line.list, index, showChords, song.notation.chordsDir, tonality, useCapo, transposeChord);
+                            return coupletChordsLine(line.list, index, showChords, song.notation.chordsDir, tonality, transposeChord);
                         }
 
                         if(line.type == "text") {
-                            return coupletLine(line, index, song.notation.chordsDir, tonality, useCapo, transposeChord);
+                            return coupletLine(line, index, song.notation.chordsDir, tonality, transposeChord);
                         }
                         
                         if(line.type == "chorus") {
-                            return chorusLine(line, index, song.notation.chordsDir, tonality, useCapo, transposeChord);
+                            return chorusLine(line, index, song.notation.chordsDir, tonality, transposeChord);
                         }
 
                         if(line.type == "break") {
@@ -423,13 +407,25 @@ export default function SongPage({ song, relatedSongs }){
     </>
 }
 
-function coupletChordsLine(chords, index, showChords, chordsDir, tonality, useCapo, transposeChord){
+function coupletChordsLine(chords, index, showChords, chordsDir, tonality, transposeChord){
+    // Simply transpose the existing chord list for this section
+    const transposedChords = tonality !== 0 
+        ? chords.map(chord => transposeChord(chord, tonality))
+        : chords;
+    
+    // Remove duplicates that might occur after transposition
+    const uniqueTransposedChords = [...new Set(transposedChords)];
+    
     return <div key={index} className={`${styles.lineWrapper} ${styles.coupletChords}`}>
         <div className={styles.coupletChordsList} style={{ display: showChords ? "flex" : "none" }}>
             {
-                chords.map(chord => {
-                    const imageChord = useCapo ? transposeChord(chord, -tonality) : chord;
-                    return <img className={styles.coupletChordImg} onError = {(e) => { e.target.style.display = 'none' }} src={ findChordImage(imageChord, chordsDir) } />
+                uniqueTransposedChords.map((chord, chordIndex) => {
+                    return <img 
+                        key={chordIndex}
+                        className={styles.coupletChordImg} 
+                        onError = {(e) => { e.target.style.display = 'none' }} 
+                        src={ findChordImage(chord, chordsDir) } 
+                    />
                 })
             }
         </div>
@@ -468,13 +464,19 @@ function renderCharacter(character){
     return character;
 }
 
-function renderLine(line, index, chordsDir, tonality, useCapo, transposeChord){
+function renderLine(line, index, chordsDir, tonality, transposeChord){
     return <div key={index} className={`lineWrapper ${line.type}`}>
     {
         line.value.split("").map((character, index) => {
             const originalChord = line.chords[index];
-            const displayChord = originalChord ? (useCapo ? originalChord : transposeChord(originalChord, tonality)) : null;
-            const imageChord = originalChord ? (useCapo ? transposeChord(originalChord, -tonality) : originalChord) : null;
+            let displayChord = originalChord;
+            let imageChord = originalChord;
+            
+            if (originalChord && tonality !== 0) {
+                // Transpose both chord name and image to show correct fingerings
+                displayChord = transposeChord(originalChord, tonality);
+                imageChord = transposeChord(originalChord, tonality);
+            }
             
             return <div key={index} className={styles.textBit}>
                 <div className={styles.character}>{renderCharacter(character)}</div>
@@ -549,16 +551,16 @@ async function handleChordClick(event, chord, chordsDir){
     }
 }
 
-function coupletLine(line, index, chordsDir, tonality, useCapo, transposeChord){
-    return renderLine(line, index, chordsDir, tonality, useCapo, transposeChord)
+function coupletLine(line, index, chordsDir, tonality, transposeChord){
+    return renderLine(line, index, chordsDir, tonality, transposeChord)
 }
 
 function breakLine(index){
     return <div key={index} className={`lineWrapper break`}></div>
 }
 
-function chorusLine(line, index, chordsDir, tonality, useCapo, transposeChord){
-    return renderLine(line, index, chordsDir, tonality, useCapo, transposeChord)
+function chorusLine(line, index, chordsDir, tonality, transposeChord){
+    return renderLine(line, index, chordsDir, tonality, transposeChord)
 }
 
 function imageLine(value, index){
