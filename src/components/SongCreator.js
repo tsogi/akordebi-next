@@ -152,9 +152,9 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
             }
         }
 
-        if(!containsChord && !containsImage) {
-            return "მონიშნეთ აკორდები ან დაამატეთ ტაბის სურათი. აკორდების მოსანიშნად ასოს თავზე დააჭირეთ პლიუს ნიშანს";
-        }
+        // if(!containsChord && !containsImage) {
+        //     return "მონიშნეთ აკორდები ან დაამატეთ ტაბის სურათი. აკორდების მოსანიშნად ასოს თავზე დააჭირეთ პლიუს ნიშანს";
+        // }
 
         // Check if all unique chord files exist
         let missingChords = new Set();
