@@ -9,23 +9,14 @@ import { useUser } from '@/utils/useUser';
 export default function UploadInfo() {
   const { user, setAuthOpenedFrom } = useUser();
 
-  const handleUploadClick = () => {
+  const handleUploadClick = (notationType) => {
     if (!user) {
       setAuthOpenedFrom('upload-info');
       return;
     }
-    // User is logged in, navigate to upload page
-    window.location.href = '/createSong';
+    // User is logged in, navigate to upload page with notation type
+    window.location.href = `/createSong?notationType=${notationType}`;
   };
-
-  const UploadButton = ({ className = "" }) => (
-    <button
-      onClick={handleUploadClick}
-      className={`w-full py-4 px-8 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 capital ${className}`}
-    >
-      რესურსის ატვირთვა
-    </button>
-  );
 
   const guitarChordsData = {
     title: "გიტარის აკორდები",
@@ -69,7 +60,7 @@ export default function UploadInfo() {
     ]
   };
 
-  const ResourceCard = ({ resourceData, isHighlighted = false }) => (
+  const ResourceCard = ({ resourceData, notationType }) => (
     <div className="relative rounded-2xl overflow-hidden p-6 md:p-8 w-full flex flex-col shadow-lg border transition-all duration-300 hover:shadow-xl bg-gradient-to-br from-gray-800/90 via-gray-700/90 to-gray-800/90 border-gray-500/50">
       {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-emerald-400"></div>
@@ -100,8 +91,18 @@ export default function UploadInfo() {
         </ul>
       </div>
       
+      {/* Upload Button for this resource type */}
+      <div className="mt-auto mb-4">
+        <button
+          onClick={() => handleUploadClick(notationType)}
+          className="w-full py-3 px-6 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 capital"
+        >
+          ატვირთვა
+        </button>
+      </div>
+      
       {resourceData.example_link && (
-        <div className="mt-auto pt-4 border-t border-gray-600">
+        <div className="pt-4 border-t border-gray-600">
           <p className="text-sm text-gray-300 mb-2">
             სრულფასოვანი სიმღერის მაგალითად შეგიძლიათ გამოიყენოთ მოცემული რესურსა:
           </p>
@@ -137,19 +138,14 @@ export default function UploadInfo() {
             </h1>
             <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-3xl mx-auto">
               ატვირთეთ ხარისხიანი რესურსები და მიიღეთ ანაზღაურება</p>
-            
-            {/* Top Upload Button */}
-            <div className="max-w-sm mx-auto">
-              <UploadButton />
-            </div>
           </div>
 
           {/* Resource Types Section */}
           <div className="mb-16">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-              <ResourceCard resourceData={guitarChordsData} />
-              <ResourceCard resourceData={fanduriChordsData} />
-              <ResourceCard resourceData={songTextsData} />
+              <ResourceCard resourceData={guitarChordsData} notationType="guitar_chord" />
+              <ResourceCard resourceData={fanduriChordsData} notationType="fanduri_chord" />
+              <ResourceCard resourceData={songTextsData} notationType="song_text" />
             </div>
           </div>
 
@@ -189,16 +185,6 @@ export default function UploadInfo() {
                 </p>
               </div>
             </div>
-          </div>
-
-          {/* Bottom Upload Button */}
-          <div className="text-center">
-            <div className="max-w-sm mx-auto">
-              <UploadButton />
-            </div>
-            <p className="text-sm text-gray-300 mt-4">
-              {!user ? 'ატვირთვისთვის საჭიროა ავტორიზაცია' : 'მზად ხართ ატვირთვის დასაწყებად?'}
-            </p>
           </div>
         </main>
       </div>
