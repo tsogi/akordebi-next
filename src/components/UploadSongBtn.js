@@ -17,7 +17,7 @@ export default function UploadSongBtn(){
     return (
         <div 
             onClick={handleUploadClick}
-            className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 rounded-lg shadow-md hover:shadow-lg cursor-pointer transition-all duration-200 p-6 text-center"
+            className="h-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 rounded-lg shadow-md hover:shadow-lg cursor-pointer transition-all duration-200 flex flex-col justify-center items-center text-center p-6 border border-green-500/20"
         >
             <div className="flex items-center justify-center mb-3">
                 <svg className="w-8 h-8 text-white mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -26,7 +26,7 @@ export default function UploadSongBtn(){
                 <span className="text-white font-semibold text-lg">ატვირთვა</span>
             </div>
             
-            <h3 className="text-white font-bold text-base mb-1">
+            <h3 className="text-white font-bold text-base mb-1 leading-tight">
                 ატვირთე სიმღერები ან აკორდები
             </h3>
             <p className="text-white/90 text-sm">
