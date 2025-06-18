@@ -70,23 +70,9 @@ export default function UploadInfo() {
   };
 
   const ResourceCard = ({ resourceData, isHighlighted = false }) => (
-    <div className={`relative rounded-2xl overflow-hidden p-6 md:p-8 w-full flex flex-col shadow-lg border transition-all duration-300 hover:shadow-xl ${
-      isHighlighted 
-        ? 'bg-gradient-to-br from-blue-900/90 via-blue-800/90 to-indigo-900/90 border-blue-400/50' 
-        : 'bg-gradient-to-br from-gray-800/90 via-gray-700/90 to-gray-800/90 border-gray-500/50'
-    }`}>
+    <div className="relative rounded-2xl overflow-hidden p-6 md:p-8 w-full flex flex-col shadow-lg border transition-all duration-300 hover:shadow-xl bg-gradient-to-br from-gray-800/90 via-gray-700/90 to-gray-800/90 border-gray-500/50">
       {/* Decorative elements */}
-      <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${
-        isHighlighted ? 'from-blue-400 to-indigo-400' : 'from-green-400 to-emerald-400'
-      }`}></div>
-      
-      {isHighlighted && (
-        <div className="absolute top-6 right-6">
-          <span className="inline-block px-3 py-1 text-xs font-medium rounded-full bg-blue-500/20 text-blue-300 border border-blue-400/30 capital">
-            რეკომენდებული
-          </span>
-        </div>
-      )}
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-emerald-400"></div>
       
       <div className="mb-6 relative">
         <h3 className="text-2xl font-bold text-white mb-2 capital">{resourceData.title}</h3>
@@ -147,11 +133,10 @@ export default function UploadInfo() {
           {/* Hero Section */}
           <div className="text-center mb-12">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 capital">
-              გამოიმუშავეთ თანხა რესურსების ატვირთვით
+              გამოიმუშავეთ თანხა
             </h1>
             <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-3xl mx-auto">
-              ატვირთეთ ხარისხიანი რესურსები და მიიღეთ ანაზღაურება ყოველი დამოწმებული ატვირთვისთვის
-            </p>
+              ატვირთეთ ხარისხიანი რესურსები და მიიღეთ ანაზღაურება</p>
             
             {/* Top Upload Button */}
             <div className="max-w-sm mx-auto">
@@ -161,12 +146,8 @@ export default function UploadInfo() {
 
           {/* Resource Types Section */}
           <div className="mb-16">
-            <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-12 capital">
-              ხელმისაწვდომი რესურსის ტიპები
-            </h2>
-            
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-              <ResourceCard resourceData={guitarChordsData} isHighlighted={true} />
+              <ResourceCard resourceData={guitarChordsData} />
               <ResourceCard resourceData={fanduriChordsData} />
               <ResourceCard resourceData={songTextsData} />
             </div>
