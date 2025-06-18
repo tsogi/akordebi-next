@@ -39,6 +39,10 @@ export default function Footer(){
               {/* <span className={styles.linksDivider}></span> */}
               {lang.prices}
             </a>
+            <a className={styles.quickLink} href="/upload-info">
+              <span className={styles.linksDivider}></span>
+              {lang._footer_earn_money}
+            </a>
             {process.env.NEXT_PUBLIC_DOMAIN === "akordebi.ge" && (
               <a className={styles.quickLink} href="/teachers">
                 <span className={styles.linksDivider}></span>
