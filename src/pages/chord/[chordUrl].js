@@ -420,12 +420,14 @@ function coupletChordsLine(chords, index, showChords, chordsDir, tonality, trans
         <div className={styles.coupletChordsList} style={{ display: showChords ? "flex" : "none" }}>
             {
                 uniqueTransposedChords.map((chord, chordIndex) => {
-                    return <img 
-                        key={chordIndex}
-                        className={styles.coupletChordImg} 
-                        onError = {(e) => { e.target.style.display = 'none' }} 
-                        src={ findChordImage(chord, chordsDir) } 
-                    />
+                    return <div key={chordIndex} className={styles.chordWrapper}>
+                        <div className="text-center">{chord}</div>
+                        <img 
+                            className={styles.coupletChordImg} 
+                            onError = {(e) => { e.target.style.display = 'none' }} 
+                            src={ findChordImage(chord, chordsDir) } 
+                        />
+                    </div>
                 })
             }
         </div>
@@ -509,6 +511,7 @@ function renderLine(line, index, chordsDir, tonality, transposeChord){
 }
 
 function findChordImage(code, chordsDir){
+    console.log("The code", code);
     code = code.replace("/", "-");
     code = code.replace(":", "-");
     code = code.replace("#", "_");
