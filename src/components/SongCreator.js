@@ -32,10 +32,16 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
     React.useEffect(() => {
         const queryParams = new URLSearchParams(window.location.search);
         const passValue = queryParams.get('pass');
+        const notationTypeValue = queryParams.get('notationType');
+        
         setPass(passValue);
         
-        // Check if _notationFormat is passed from props
-        if (_notationFormat) {
+        // Check if notationType is provided in URL
+        if (notationTypeValue) {
+            setNotationFormat(notationTypeValue);
+        }
+        // Check if _notationFormat is passed from props (fallback)
+        else if (_notationFormat) {
             setNotationFormat(_notationFormat);
         }
     }, [_notationFormat]);
