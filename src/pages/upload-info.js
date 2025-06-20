@@ -144,7 +144,7 @@ export default function UploadInfo() {
               გამოიმუშავეთ თანხა
             </h1>
             <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-3xl mx-auto">
-              ატვირთეთ რესურსები და მიიღეთ ანაზღაურება</p>
+              ატვირთეთ <b>ქართული</b> რესურსები და მიიღეთ ანაზღაურება</p>
           </div>
 
           {/* Resource Types Section */}

@@ -30,7 +30,7 @@ export default function UploadSongBtn(){
                 ატვირთე სიმღერები ან აკორდები
             </h3>
             <p className="text-white/90 text-sm">
-                და გამოიმუშავე თანხე
+                და გამოიმუშავე თანხა
             </p>
         </div>
     );
