@@ -23,6 +23,7 @@ import { transliterateWithCapital, transliterateWithCapitalizedWords, convertGeo
 import { getNotation, notations } from '@/utils/notations';
 import { formatCount } from '@/utils/formatCount';
 import DeleteSongButton from '@/components/DeleteSongButton';
+import EditSongButton from '@/components/EditSongButton';
 let intervalId;
 
 export default function SongPage({ song, relatedSongs }){
@@ -376,7 +377,11 @@ export default function SongPage({ song, relatedSongs }){
                         <span className='ml-[10px]'>{formatCount(song.view_count) || "0"}</span>
                     </div>
                 </div>
-                    <div className="mt-2">
+                    <div className="mt-2 flex items-center justify-center">
+                        <EditSongButton 
+                            song={song} 
+                            className="text-sm mr-2"
+                        />
                         <DeleteSongButton 
                             song={song} 
                             onDelete={() => {
