@@ -12,6 +12,7 @@ import CustomSelect from "./CustomSelect";
 import UploadSongBtn from "./UploadSongBtn";
 import { useLanguage } from '@/context/LanguageContext';
 import NotationSwitcher from "./NotationSwitcher";
+import { getNotation } from '@/utils/notations';
 const resultsPerPage = 20;
 
 export default function ChordsList({ initialSongs }){
@@ -272,6 +273,7 @@ export default function ChordsList({ initialSongs }){
             onNextClick = {handleNextClick}
             onPreviousClick = {handlePreviousClick}
             goToPage = {handlePageClick}
+            notation = {getNotation(notationFormat)}
         />
         {/* {
             process.env.NEXT_PUBLIC_DOMAIN == "akordebi.ge" ?

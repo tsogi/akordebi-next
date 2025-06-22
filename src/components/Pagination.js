@@ -8,7 +8,8 @@ export default function Pagination({
   resultsPerPage = 20,
   onNextClick = () => {}, 
   onPreviousClick = () => {}, 
-  goToPage = () => {}
+  goToPage = () => {},
+  notation = null
 }) {
   const { lang } = useLanguage();
   const totalPages = Math.ceil(totalResults / resultsPerPage);
@@ -46,7 +47,7 @@ export default function Pagination({
       <div className="sm:flex sm:flex-1 sm:items-center sm:justify-between">
         <div className='mb-[15px]'>
           {
-            paginationMeta(currentPage, totalResults)
+            paginationMeta(currentPage, totalResults, notation)
           }
         </div>
         <div>
@@ -91,8 +92,11 @@ export default function Pagination({
   )
 }
 
-function paginationMeta(currentPage, totalResults){
+function paginationMeta(currentPage, totalResults, notation){
   const { lang } = useLanguage();
+
+  // Use notation.page_title if available, otherwise fall back to lang._song
+  const displayText = notation?.page_title || lang._song;
 
   if(process.env.NEXT_PUBLIC_LANG == "geo") {
     return <p className="text-sm text-white">
@@ -103,7 +107,7 @@ function paginationMeta(currentPage, totalResults){
         -{lang._till}{' '}
         {lang._totally}
         <span className="font-medium"> {totalResults} </span> 
-        {lang._song}
+        {displayText}
     </p>
   }
 
@@ -116,6 +120,6 @@ function paginationMeta(currentPage, totalResults){
       <span className="font-medium"> {currentPage * 20}</span>
       . {lang._totally}
       <span className="font-medium"> {totalResults} </span> 
-      {lang._song}
+      {displayText}
   </p>
 }
