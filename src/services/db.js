@@ -91,6 +91,7 @@ class Db{
                 songs.searchWords, 
                 songs.name, 
                 songs.body, 
+                songs.view_count,
                 songs.uploaderUserId,
                 songs.notation_format,
                 GROUP_CONCAT(DISTINCT authors.name ORDER BY authors.name) AS authors,
@@ -162,6 +163,7 @@ class Db{
                 songs.searchWords, 
                 songs.name, 
                 songs.body, 
+                songs.view_count,
                 songs.uploaderUserId,
                 songs.notation_format,
                 GROUP_CONCAT(DISTINCT authors.name ORDER BY authors.name) AS authors,
@@ -281,11 +283,11 @@ class Db{
           function searchSongs(searchTerm) {
             const fuse = new Fuse(songs, options);
             const results = fuse.search(searchTerm);
-            return results.length > 0 ? results : null;
+            return results.length > 0 ? results : [];
           }
 
           let filteredSongs = searchSongs(searchText);
-          let res = filteredSongs?.length ? filteredSongs.slice(0, 5).map(item => item.item) : [];
+          let res = filteredSongs?.length ? filteredSongs.map(item => item.item) : [];
           
         return res;
     }

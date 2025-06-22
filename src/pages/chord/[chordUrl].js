@@ -1,4 +1,5 @@
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useEffect, useState } from "react";
 import Head from 'next/head';
 // import FbComments from "@/components/FbComments";
@@ -19,6 +20,7 @@ import { useUser } from '@/utils/useUser';
 import { useLanguage } from '@/context/LanguageContext';
 import { transliterateWithCapital, transliterateWithCapitalizedWords, convertGeorgianToLatin } from '@/utils/transliteration';
 import { getNotation, notations } from '@/utils/notations';
+import { formatCount } from '@/utils/formatCount';
 let intervalId;
 
 export default function SongPage({ song, relatedSongs }){
@@ -362,6 +364,15 @@ export default function SongPage({ song, relatedSongs }){
                         </div>
                     </div>
                 }
+                <div className={styles.songVotesWrapper}>
+                    <div className={styles.evaluate_label}>
+                        {lang.chord.views || "ნახვები"}
+                    </div>
+                    <div className={`${styles.viewsWrapper} flex items-center`}>
+                        <VisibilityIcon />
+                        <span className='ml-[10px]'>{formatCount(song.view_count) || "0"}</span>
+                    </div>
+                </div>
             </div>
             {
                 song?.videoLesson ?
