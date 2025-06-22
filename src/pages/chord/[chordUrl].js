@@ -2,6 +2,7 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useEffect, useState } from "react";
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 // import FbComments from "@/components/FbComments";
 import Header from "@/components/Header";
 import EmbedVideo from "@/components/EmbedVideo";
@@ -21,6 +22,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { transliterateWithCapital, transliterateWithCapitalizedWords, convertGeorgianToLatin } from '@/utils/transliteration';
 import { getNotation, notations } from '@/utils/notations';
 import { formatCount } from '@/utils/formatCount';
+import DeleteSongButton from '@/components/DeleteSongButton';
 let intervalId;
 
 export default function SongPage({ song, relatedSongs }){
@@ -30,6 +32,7 @@ export default function SongPage({ song, relatedSongs }){
     const [tonality, setTonality] = useState(0);
     const { isPremium, user } = useUser();
     const { lang, language } = useLanguage();
+    const router = useRouter();
 
     // Get song name and author(s) in either Georgian or Latin based on language
     const displaySongName = language === "eng" 
@@ -373,6 +376,16 @@ export default function SongPage({ song, relatedSongs }){
                         <span className='ml-[10px]'>{formatCount(song.view_count) || "0"}</span>
                     </div>
                 </div>
+                    <div className="mt-2">
+                        <DeleteSongButton 
+                            song={song} 
+                            onDelete={() => {
+                                // Redirect to home page after successful deletion
+                                router.push('/');
+                            }}
+                            className="text-sm"
+                        />
+                    </div>
             </div>
             {
                 song?.videoLesson ?

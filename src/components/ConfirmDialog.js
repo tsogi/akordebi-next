@@ -1,7 +1,15 @@
 import { XMarkIcon } from '@heroicons/react/20/solid';
+import { createPortal } from 'react-dom';
+import { useEffect, useState } from 'react';
 
 const ConfirmDialog = ({ open, setOpen, message, onConfirm, type = "error" }) => {
-    if (!open) return null;
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!open || !mounted) return null;
 
     const handleConfirm = () => {
         onConfirm();
@@ -12,9 +20,23 @@ const ConfirmDialog = ({ open, setOpen, message, onConfirm, type = "error" }) =>
         setOpen(false);
     };
 
-    return (
-        <div className='fixed top-0 left-0 right-0 w-screen flex items-center justify-center z-50'>
-            <div className={`rounded-md ${type === "error" ? "bg-red-50" : "bg-blue-50"} p-4 m-2 max-w-md w-full shadow-lg`}>
+    const dialogContent = (
+        <div 
+            className='fixed top-0 left-0 w-full flex justify-center z-[9999]' 
+            style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 9999 }}
+        >
+            {/* Backdrop */}
+            <div 
+                className='fixed inset-0 bg-black bg-opacity-50' 
+                onClick={handleCancel}
+                style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 9998 }}
+            ></div>
+            
+            {/* Dialog positioned at top */}
+            <div 
+                className={`relative rounded-md ${type === "error" ? "bg-red-50" : "bg-blue-50"} p-4 m-4 max-w-md w-full shadow-lg`}
+                style={{ marginTop: '20px', position: 'relative', zIndex: 10000 }}
+            >
                 <div className="flex flex-col">
                     <div className="flex items-center justify-between mb-4">
                         <h3 className={`text-lg font-medium ${type === "error" ? "text-red-800" : "text-blue-800"}`}>
@@ -49,6 +71,8 @@ const ConfirmDialog = ({ open, setOpen, message, onConfirm, type = "error" }) =>
             </div>
         </div>
     );
+
+    return createPortal(dialogContent, document.body);
 };
 
 export default ConfirmDialog; 

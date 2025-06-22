@@ -12,9 +12,7 @@ import Favorite from "./Favorite";
 import { useLanguage } from '@/context/LanguageContext';
 import { transliterateWithCapital, transliterateWithCapitalizedWords } from '@/utils/transliteration';
 import { formatCount } from '@/utils/formatCount';
-import Alert from './Alert';
-import ConfirmDialog from './ConfirmDialog';
-import { TrashIcon } from '@heroicons/react/20/solid';
+import DeleteSongButton from './DeleteSongButton';
 
 export default function SongCard({ song, onDelete }){
     const { language, lang } = useLanguage();
@@ -26,8 +24,6 @@ export default function SongCard({ song, onDelete }){
         difficulty: false, 
         likes: false
     });
-    const [showDeleteConfirm, setShowDeleteConfirm] = React.useState(false);
-    const [showDeleteSuccess, setShowDeleteSuccess] = React.useState(false);
 
     // Function to handle tooltip open
     const handleTooltipOpen = (tooltipName) => {
@@ -37,44 +33,6 @@ export default function SongCard({ song, onDelete }){
         setTimeout(() => {
             setOpenTooltip(prevState => ({...prevState, [tooltipName]: false}));
         }, 1000);
-    };
-
-    const handleDeleteClick = async () => {
-        if (!user) {
-            setAuthOpenedFrom('deleteSongBtn');
-            return;
-        }
-
-        if (!process.env.NEXT_PUBLIC_CAN_DELETE_SONG.includes(user.email)) {
-            return;
-        }
-
-        setShowDeleteConfirm(true);
-    };
-
-    const handleDeleteConfirm = async () => {
-        try {
-            const response = await fetch('/api/songs/delete', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ songId: song.id }),
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to delete song');
-            }
-
-            setShowDeleteSuccess(true);
-            
-            // Call the onDelete callback to remove the song from the UI
-            if (onDelete) {
-                onDelete(song.id);
-            }
-        } catch (error) {
-            console.error('Error deleting song:', error);
-        }
     };
 
     React.useEffect(() => {
@@ -161,14 +119,11 @@ export default function SongCard({ song, onDelete }){
                                 </svg>
                             </Link>
                         )}
-                        {user && process.env.NEXT_PUBLIC_CAN_DELETE_SONG.includes(user.email) && (
-                            <button 
-                                onClick={handleDeleteClick}
-                                className={`${styles.editButton} hover:text-red-500`}
-                            >
-                                <TrashIcon className="w-5 h-5" />
-                            </button>
-                        )}
+                        <DeleteSongButton 
+                            song={song} 
+                            onDelete={onDelete} 
+                            className={styles.editButton}
+                        />
                         <Favorite song={song} />
                     </div>
                     
@@ -233,22 +188,6 @@ export default function SongCard({ song, onDelete }){
                     </div>
                 </div>
             </div>
-
-            <ConfirmDialog 
-                open={showDeleteConfirm} 
-                setOpen={setShowDeleteConfirm} 
-                message={lang.songCard.deleteConfirm}
-                onConfirm={handleDeleteConfirm}
-                type="error"
-            />
-
-            <Alert 
-                open={showDeleteSuccess} 
-                setOpen={setShowDeleteSuccess} 
-                message={lang.songCard.deleteSuccess} 
-                duration={3}
-                type="success"
-            />
         </article>
     );
 }
