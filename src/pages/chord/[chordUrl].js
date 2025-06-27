@@ -303,11 +303,11 @@ export default function SongPage({ song, relatedSongs }){
                 }
             </div>
             <main className={`${styles.songBody} mxedruli`} style={{fontSize}}>
-                {!song.notation?.isFree && !isPremium && user?.id !== song.uploaderUserId && (
+                {/* {!song.notation?.isFree && !isPremium && user?.id !== song.uploaderUserId && (
                     <div className={styles.blurredContent}>
                         <SubscriptionPrompt />
                     </div>
-                )}
+                )} */}
                 {
                     song?.capo_location ?
                     <div className="ml-[10px] mb-[15px] italic">

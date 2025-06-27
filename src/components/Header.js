@@ -26,9 +26,9 @@ export default function Header(){
             return true;
         }
 
-        if(page == "prices" && router.pathname == "/prices"){
-            return true;
-        }
+        // if(page == "prices" && router.pathname == "/prices"){
+        //     return true;
+        // }
 
         if(page == "teachers" && router.pathname == "/teachers"){
             return true;
@@ -69,13 +69,13 @@ export default function Header(){
                 >
                     {lang.main_page}
                 </Link>
-                <Link 
+                {/* <Link 
                     href="/prices" 
                     onClick={() => setIsMenuOpen(false)}
                     className="nav-link"
                 >
                     {lang.prices || "ფასები"}
-                </Link>
+                </Link> */}
                 <Link 
                     href="/teachers" 
                     onClick={() => setIsMenuOpen(false)}

@@ -35,10 +35,9 @@ export default function Footer(){
       <div className="w-[100%] flex items-center px-[10px] flex-wrap">
         <div className={styles.linksAndCopyright}>
           <div className={`${styles.quickLinks} text-[#98b9fa] text-[0.8rem] flex flex-wrap items-center mb-[10px]`}>
-            <a className={styles.quickLink} href="/prices">
-              {/* <span className={styles.linksDivider}></span> */}
+            {/* <a className={styles.quickLink} href="/prices">
               {lang.prices}
-            </a>
+            </a> */}
             <a className={styles.quickLink} href="/upload-info">
               <span className={styles.linksDivider}></span>
               {lang._footer_earn_money}
@@ -81,7 +80,7 @@ export default function Footer(){
             </a>
           </div>
           <div className={`${styles.feedback}`}>
-            <div className="mt-12 text-center text-gray-600 text-[0.8rem]">
+            <div className="mt-12 text-center text-[#a09898] text-[0.8rem]">
               <p>{lang.price.questions} <a href="mailto:tsogiaidze1@gmail.com" className="text-blue-600 hover:underline">{lang.price.contact_us}</a></p>
             </div>
             {/* <WriteUs /> */}

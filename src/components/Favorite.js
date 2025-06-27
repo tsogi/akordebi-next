@@ -21,7 +21,7 @@ export default function Favorite({ song, size = 'medium', showLabel = false }) {
     e.preventDefault();
     e.stopPropagation();
 
-    if (!user || !isPremium) {
+    if (!user) {
       localStorage.setItem("addSongToFavorites", song.id);
       setShowSubscriptionPrompt(true);
       return;
@@ -78,7 +78,7 @@ export default function Favorite({ song, size = 'medium', showLabel = false }) {
         onClick={(e) => e.stopPropagation()}
       >
         <SubscriptionPrompt 
-          unauthenticatedText="ფავორიტებში დასამატებლად გაიარეთ მარტივი ავტორიზაცია 1 კლიკით და გამოიწერეთ akordebi.ge"
+          unauthenticatedText="ფავორიტებში დასამატებლად გაიარეთ მარტივი ავტორიზაცია 1 კლიკით"
           authenticatedText="დააჭირეთ გადახდას და მიყევით ბანკის ინსტრუქციას"
           source="favorite"
           inModal={true}

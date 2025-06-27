@@ -27,7 +27,7 @@ export default function UploadSongBtn(){
             </div>
             
             <h3 className="text-white font-bold text-base mb-1 leading-tight">
-                ატვირთე სიმღერები ან აკორდები
+                ატვირთე სიმღერის ტექსტები ან აკორდები
             </h3>
             <p className="text-white/90 text-sm">
                 და გამოიმუშავე თანხა

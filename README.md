@@ -9,7 +9,7 @@ ssh -i /Users/nika/Projects/akordebi.ge/akordebi_ec2.pem -t ubuntu@18.153.218.23
 
 select * from users where payment_date is not null;
 
-UPDATE users SET payment_date = "2025-06-05 21:56:13", payment_confirmed = 1, paid_until = "2026-06-05 21:56:13" WHERE email = "eka.vonschoenfeldt@gmail.com";
+UPDATE users SET payment_date = "2020-06-05 21:56:13", payment_confirmed = 1, paid_until = "2023-06-05 21:56:13" WHERE email = "tsogiaidze1@gmail.com";
 
 UPDATE users 
 SET paid_until = DATE_ADD(payment_date, INTERVAL 1 MONTH)
