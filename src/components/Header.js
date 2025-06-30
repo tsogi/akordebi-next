@@ -30,6 +30,10 @@ export default function Header(){
         //     return true;
         // }
 
+        if(page == "upload" && router.pathname == "/upload-info"){
+            return true;
+        }
+
         if(page == "teachers" && router.pathname == "/teachers"){
             return true;
         }
@@ -69,6 +73,13 @@ export default function Header(){
                 >
                     {lang.main_page}
                 </Link>
+                <Link 
+                    href="/upload-info" 
+                    className={`nav-link ${isActive("upload") ? "active" : ""}`}
+                    onClick={() => setIsMenuOpen(false)}
+                >
+                    {lang.upload_nav}
+                </Link>
                 {/* <Link 
                     href="/prices" 
                     onClick={() => setIsMenuOpen(false)}
@@ -78,8 +89,8 @@ export default function Header(){
                 </Link> */}
                 <Link 
                     href="/teachers" 
+                    className={`nav-link ${isActive("teachers") ? "active" : ""}`}
                     onClick={() => setIsMenuOpen(false)}
-                    className="nav-link"
                 >
                     {lang.teachers}
                 </Link>
