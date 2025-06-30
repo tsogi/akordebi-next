@@ -43,6 +43,37 @@
     position: relative;
 }
 
+.breadcrumb {
+    margin: 20px 0 10px 10px;
+    font-size: 0.9rem;
+    color: #ccc;
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumbLink {
+    color: #f2ac2b;
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.breadcrumbLink:hover {
+    color: #ffc04d;
+    text-decoration: underline;
+}
+
+.breadcrumbSeparator {
+    margin: 0 8px;
+    color: #666;
+}
+
+.breadcrumbCurrent {
+    color: #ccc;
+    font-weight: normal;
+}
+
 .songName {
     margin-bottom: 5px;
     margin-left: 10px;
@@ -442,6 +473,16 @@
 }
 
 @media (max-width: 768px) {
+    .breadcrumb {
+        margin: 15px 0 10px 10px;
+        font-size: 0.8rem;
+        flex-wrap: wrap;
+    }
+    
+    .breadcrumbSeparator {
+        margin: 0 6px;
+    }
+    
     .controlsContainer {
         flex-direction: row;
         flex-wrap: wrap;

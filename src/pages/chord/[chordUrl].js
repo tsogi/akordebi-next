@@ -3,6 +3,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useEffect, useState } from "react";
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 // import FbComments from "@/components/FbComments";
 import Header from "@/components/Header";
 import EmbedVideo from "@/components/EmbedVideo";
@@ -291,7 +292,15 @@ export default function SongPage({ song, relatedSongs }){
                     <Favorite song={song} showLabel={true} />
                 </div>
             </div>
-            <h2 className={`${styles.songName} capital`}>{displaySongName}</h2>
+            
+            {/* Breadcrumb Navigation */}
+            <div className={styles.breadcrumb}>
+                <Link href={`/?notation=${song.notation.code}`} className={styles.breadcrumbLink}>
+                    {song.notation.page_title_plural || song.notation.page_title}
+                </Link>
+                <span className={styles.breadcrumbSeparator}> / </span>
+                <span className={styles.breadcrumbCurrent}>{displaySongName}</span>
+            </div>
             <div className={styles.songAuthors}>
                 {
                     displayAuthors ?

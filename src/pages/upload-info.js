@@ -54,7 +54,7 @@ export default function UploadInfo() {
 
   const songTextsData = {
     title: "სიმღერების ტექსტები",
-    price: "0.5 ლარი",
+    price: "1 ლარი",
     requirements_title: "ატვირთვის წესები და პირობები",
     requirements: [
       "ტექსტი შეყვანილია სრულად, შემოკლებების გარეშე",
