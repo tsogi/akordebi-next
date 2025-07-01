@@ -54,7 +54,7 @@ const interfaceGeo = {
     _enter_text: "ჩაწერეთ ტექსტი",
     _comment_sent: "თქვენი კომენტარი წარმატებით გაიგზავნა",
     _comment_not_sent: "მესიჯი ვერ გაიგზავნა. გთხოვთ სცადოთ მოგვიანებით",
-    _evaluate_difficulty: "შეაფასეთ დაკვრის სირთულე:",
+    _evaluate_difficulty: "შეაფასეთ სირთულე:",
     rightHand: "მარჯვენა ხელი:",
     difficulty: {
         select: "არჩევა",

@@ -244,31 +244,34 @@ export default function SongPage({ song, relatedSongs }){
                     </div>
                 </div>
 
-                <div className={styles.controlGroup}>
-                    <label className={styles.controlLabel}>ტონალობა</label>
-                    <div className={styles.controlActions}>
-                        <button 
-                            className={styles.controlButton} 
-                            onClick={handleMinusTonalityClick}
-                            aria-label="Decrease tonality"
-                        >
-                            <MinusIcon className={styles.controlIcon} />
-                        </button>
-                        <div className={styles.controlValue}>{tonality > 0 ? `+${tonality}` : tonality}</div>
-                        <button 
-                            className={styles.controlButton} 
-                            onClick={handlePlusTonalityClick}
-                            aria-label="Increase tonality"
-                        >
-                            <PlusIcon className={styles.controlIcon} />
-                        </button>
+                {
+                    song.notation?.showTonality ?
+                    <div className={styles.controlGroup}>
+                        <label className={styles.controlLabel}>ტონალობა</label>
+                        <div className={styles.controlActions}>
+                            <button 
+                                className={styles.controlButton} 
+                                onClick={handleMinusTonalityClick}
+                                aria-label="Decrease tonality"
+                            >
+                                <MinusIcon className={styles.controlIcon} />
+                            </button>
+                            <div className={styles.controlValue}>{tonality > 0 ? `+${tonality}` : tonality}</div>
+                            <button 
+                                className={styles.controlButton} 
+                                onClick={handlePlusTonalityClick}
+                                aria-label="Increase tonality"
+                            >
+                                <PlusIcon className={styles.controlIcon} />
+                            </button>
+                        </div>
                     </div>
-                </div>
+                    :
+                    null
+                }
                 
                 {
-                    song.notation?.hideChords ?
-                    null
-                    :
+                    song.notation?.showChords ?
                     <button 
                         className={`${styles.toggleButton} ${showChords ? styles.active : ''}`}
                         onClick={handleShowChordsClick}
@@ -286,6 +289,8 @@ export default function SongPage({ song, relatedSongs }){
                             </>
                         )}
                     </button>
+                    :
+                    null
                 }
                 
                 <div className={styles.favoriteWrapper}>
