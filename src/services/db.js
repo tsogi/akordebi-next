@@ -722,6 +722,40 @@ class Db{
         
         return result.affectedRows > 0;
     }
+
+    async getContributors() {
+        // First, get the contributors with their song counts
+        const [contributorRows] = await this.pool.execute(`
+            SELECT 
+                u.id as user_id,
+                u.email,
+                COUNT(s.id) as songs_count
+            FROM users u
+            INNER JOIN songs s ON BINARY u.id = BINARY s.uploaderUserId
+            WHERE u.email IS NOT NULL AND u.email != ''
+            GROUP BY u.id, u.email
+            ORDER BY songs_count DESC, u.email ASC
+        `);
+
+        // For each contributor, get their songs
+        for(let contributor of contributorRows) {
+            const [songRows] = await this.pool.execute(`
+                SELECT 
+                    s.id,
+                    s.name,
+                    s.url,
+                    s.notation_format
+                FROM songs s
+                WHERE BINARY s.uploaderUserId = BINARY ?
+                ORDER BY s.id DESC
+            `, [contributor.user_id]);
+            
+            contributor.songs = songRows;
+            delete contributor.user_id;
+        }
+
+        return contributorRows;
+    }
 }
 
 module.exports = new Db();

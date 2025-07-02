@@ -175,6 +175,18 @@ const interfaceGeo = {
     _search: "ძებნა",
     _footer_refunds: "დაბრუნება",
     
+    // Contributors page translations
+    contributors: {
+        title: "კონტრიბუტორები",
+        meta_description: "საიტზე რესურსების შემქმნელები და მოწვდილები",
+        page_description: "ეს არის ის ადამიანები, რომლებმაც თავიანთი შრომით შეავსეს ჩვენი საიტი სხვადასხვა რესურსებით",
+        email: "ელ. ფოსტა",
+        songs_count: "რესურსების რაოდენობა",
+        uploaded_songs: "ატვირთული რესურსები",
+        no_contributors: "კონტრიბუტორები არ მოიძებნა",
+        loading: "იტვირთება..."
+    },
+    
     // Search modal translations
     searchModal: {
         noResults: "ვერაფერი მოიძებნა",
@@ -386,6 +398,18 @@ Bass Down Down Up Down Up or Bass ↓ ↓ ↑ ↓ ↑ or Bass 3 2 1 2 3`
     },
     _search: "Search",
     _footer_refunds: "Refunds",
+    
+    // Contributors page translations
+    contributors: {
+        title: "Contributors",
+        meta_description: "Website resource creators and contributors",
+        page_description: "These are the people who have filled our website with various resources through their work",
+        email: "Email",
+        songs_count: "Number of resources",
+        uploaded_songs: "Uploaded resources",
+        no_contributors: "No contributors found",
+        loading: "Loading..."
+    },
     
     // Search modal translations
     searchModal: {

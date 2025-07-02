@@ -554,7 +554,6 @@ function renderLine(line, index, chordsDir, tonality, transposeChord){
 }
 
 function findChordImage(code, chordsDir){
-    console.log("The code", code);
     code = code.replace("/", "-");
     code = code.replace(":", "-");
     code = code.replace("#", "_");
