@@ -180,9 +180,10 @@ const interfaceGeo = {
         title: "კონტრიბუტორები",
         meta_description: "საიტზე რესურსების შემქმნელები და მოწვდილები",
         page_description: "ეს არის ის ადამიანები, რომლებმაც თავიანთი შრომით შეავსეს ჩვენი საიტი სხვადასხვა რესურსებით",
-        email: "ელ. ფოსტა",
+        user_id: "მომხმარებლის ID",
         songs_count: "რესურსების რაოდენობა",
         uploaded_songs: "ატვირთული რესურსები",
+        uploaded_at: "ატვირთვის თარიღი",
         no_contributors: "კონტრიბუტორები არ მოიძებნა",
         loading: "იტვირთება..."
     },
@@ -404,9 +405,10 @@ Bass Down Down Up Down Up or Bass ↓ ↓ ↑ ↓ ↑ or Bass 3 2 1 2 3`
         title: "Contributors",
         meta_description: "Website resource creators and contributors",
         page_description: "These are the people who have filled our website with various resources through their work",
-        email: "Email",
+        user_id: "User ID",
         songs_count: "Number of resources",
         uploaded_songs: "Uploaded resources",
+        uploaded_at: "Upload date",
         no_contributors: "No contributors found",
         loading: "Loading..."
     },

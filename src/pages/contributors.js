@@ -34,19 +34,29 @@ export default function Contributors() {
         }
     };
 
-    const toggleContributor = (email) => {
+    const formatDate = (dateString) => {
+        if (!dateString) return '';
+        const date = new Date(dateString);
+        return date.toLocaleDateString('ka-GE', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+        });
+    };
+
+    const toggleContributor = (userId) => {
         setExpandedContributors(prev => {
             const newSet = new Set(prev);
-            if (newSet.has(email)) {
-                newSet.delete(email);
+            if (newSet.has(userId)) {
+                newSet.delete(userId);
             } else {
-                newSet.add(email);
+                newSet.add(userId);
             }
             return newSet;
         });
     };
 
-    const isExpanded = (email) => expandedContributors.has(email);
+    const isExpanded = (userId) => expandedContributors.has(userId);
 
     if (loading) {
         return (
@@ -108,25 +118,25 @@ export default function Contributors() {
                         <div className="space-y-8">
                             {contributors.map((contributor, index) => (
                                 <div 
-                                    key={contributor.email}
+                                    key={contributor.user_id}
                                     className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 rounded-xl border border-slate-700/50 shadow-xl backdrop-blur-sm overflow-hidden"
                                 >
                                     {/* Contributor Header - Clickable */}
                                     <div 
                                         className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 px-6 py-4 border-b border-slate-700/50 cursor-pointer hover:from-blue-600/30 hover:to-purple-600/30 transition-all duration-200"
-                                        onClick={() => toggleContributor(contributor.email)}
+                                        onClick={() => toggleContributor(contributor.user_id)}
                                     >
                                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                                             <div className="flex items-center gap-3 flex-1">
                                                 <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
-                                                    {contributor.email.charAt(0).toUpperCase()}
+                                                    {contributor.user_id ? contributor.user_id.charAt(0).toUpperCase() : 'U'}
                                                 </div>
                                                 <div className="flex-1">
-                                                    <h2 className="text-xl font-semibold text-white break-all">
-                                                        {contributor.email}
+                                                    <h2 className="text-xl font-semibold text-white break-all font-mono">
+                                                        {contributor.user_id || 'Unknown User'}
                                                     </h2>
                                                     <p className="text-gray-400 text-sm">
-                                                        {lang.contributors.email}
+                                                        {lang.contributors.user_id}
                                                     </p>
                                                 </div>
                                             </div>
@@ -144,7 +154,7 @@ export default function Contributors() {
                                                 {/* Expand/Collapse Icon */}
                                                 <div className="flex-shrink-0">
                                                     <svg 
-                                                        className={`w-6 h-6 text-gray-400 transition-transform duration-200 ${isExpanded(contributor.email) ? 'rotate-180' : ''}`}
+                                                        className={`w-6 h-6 text-gray-400 transition-transform duration-200 ${isExpanded(contributor.user_id) ? 'rotate-180' : ''}`}
                                                         fill="none" 
                                                         stroke="currentColor" 
                                                         viewBox="0 0 24 24"
@@ -157,7 +167,7 @@ export default function Contributors() {
                                     </div>
 
                                     {/* Songs List - Collapsible */}
-                                    {isExpanded(contributor.email) && (
+                                    {isExpanded(contributor.user_id) && (
                                         <div className="p-6 animate-fadeIn">
                                             <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
                                                 <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -180,6 +190,9 @@ export default function Contributors() {
                                                                                                                             <h4 className="font-medium text-white group-hover:text-blue-400 transition-colors duration-200 truncate">
                                                                 {song.name}
                                                             </h4>
+                                                            <p className="text-xs text-gray-400 mt-1">
+                                                                {lang.contributors.uploaded_at}: {formatDate(song.created_at)}
+                                                            </p>
                                                             </div>
                                                             <div className="flex-shrink-0">
                                                                 <svg className="w-4 h-4 text-gray-400 group-hover:text-blue-400 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">

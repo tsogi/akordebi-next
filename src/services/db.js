@@ -729,12 +729,13 @@ class Db{
             SELECT 
                 u.id as user_id,
                 u.email,
-                COUNT(s.id) as songs_count
+                COUNT(s.id) as songs_count,
+                MAX(s.created_at) as latest_upload
             FROM users u
             INNER JOIN songs s ON BINARY u.id = BINARY s.uploaderUserId
-            WHERE u.email IS NOT NULL AND u.email != ''
+            WHERE u.id IS NOT NULL AND u.id != ''
             GROUP BY u.id, u.email
-            ORDER BY songs_count DESC, u.email ASC
+            ORDER BY latest_upload DESC, u.id ASC
         `);
 
         // For each contributor, get their songs
@@ -744,14 +745,14 @@ class Db{
                     s.id,
                     s.name,
                     s.url,
-                    s.notation_format
+                    s.notation_format,
+                    s.created_at
                 FROM songs s
                 WHERE BINARY s.uploaderUserId = BINARY ?
-                ORDER BY s.id DESC
+                ORDER BY s.created_at DESC
             `, [contributor.user_id]);
             
             contributor.songs = songRows;
-            delete contributor.user_id;
         }
 
         return contributorRows;
