@@ -727,7 +727,8 @@ class Db{
         // First, get the contributors with their song counts
         const [contributorRows] = await this.pool.execute(`
             SELECT 
-                u.id as user_id,
+                u.id as full_user_id,
+                SUBSTRING_INDEX(u.id, '-', 1) as user_id,
                 u.email,
                 COUNT(s.id) as songs_count,
                 MAX(s.created_at) as latest_upload
@@ -750,9 +751,11 @@ class Db{
                 FROM songs s
                 WHERE BINARY s.uploaderUserId = BINARY ?
                 ORDER BY s.created_at DESC
-            `, [contributor.user_id]);
+            `, [contributor.full_user_id]);
             
             contributor.songs = songRows;
+            // Remove the full_user_id from the response for security
+            delete contributor.full_user_id;
         }
 
         return contributorRows;
