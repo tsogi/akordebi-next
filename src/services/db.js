@@ -729,13 +729,16 @@ class Db{
             SELECT 
                 u.id as full_user_id,
                 SUBSTRING_INDEX(u.id, '-', 1) as user_id,
-                u.email,
+                CASE 
+                    WHEN LENGTH(MAX(u.email)) <= 2 THEN MAX(u.email)
+                    ELSE CONCAT(LEFT(MAX(u.email), 1), '***', SUBSTRING(MAX(u.email), LOCATE('@', MAX(u.email)) - 1, 1))
+                END as masked_email,
                 COUNT(s.id) as songs_count,
                 MAX(s.created_at) as latest_upload
             FROM users u
             INNER JOIN songs s ON BINARY u.id = BINARY s.uploaderUserId
             WHERE u.id IS NOT NULL AND u.id != ''
-            GROUP BY u.id, u.email
+            GROUP BY u.id
             ORDER BY latest_upload DESC, u.id ASC
         `);
 

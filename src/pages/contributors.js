@@ -134,6 +134,11 @@ export default function Contributors() {
                                                 <div className="flex-1">
                                                     <h2 className="text-xl font-semibold text-white break-all font-mono">
                                                         {contributor.user_id || 'Unknown User'}
+                                                        {contributor.masked_email && (
+                                                            <span className="text-gray-400 text-base font-normal ml-2">
+                                                                ({contributor.masked_email})
+                                                            </span>
+                                                        )}
                                                     </h2>
                                                     <p className="text-gray-400 text-sm">
                                                         {lang.contributors.user_id}
