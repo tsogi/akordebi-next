@@ -26,6 +26,7 @@ import { formatCount } from '@/utils/formatCount';
 import DeleteSongButton from '@/components/DeleteSongButton';
 import EditSongButton from '@/components/EditSongButton';
 import DonationButton from '@/components/DonationButton';
+import TonalityControl, { transposeChord } from '@/components/TonalityControl';
 let intervalId;
 
 export default function SongPage({ song, relatedSongs }){
@@ -119,52 +120,9 @@ export default function SongPage({ song, relatedSongs }){
         }
     }
 
-    async function handleMinusTonalityClick(){
-        let newTonality = tonality - 1;
-        if(newTonality >= -6) {
-            setTonality(newTonality);
-        }
-    }
-
-    async function handlePlusTonalityClick(){
-        let newTonality = tonality + 1;
-        if(newTonality <= 6) {
-            setTonality(newTonality);
-        }
-    }
-
-    // Chord transposition function
-    function transposeChord(chord, semitones) {
-        if (!chord || semitones === 0) return chord;
-        
-        const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
-        const flats = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
-        
-        // Extract root note and chord suffix
-        let rootNote = '';
-        let chordSuffix = '';
-        
-        if (chord.length >= 2 && (chord[1] === '#' || chord[1] === 'b')) {
-            rootNote = chord.slice(0, 2);
-            chordSuffix = chord.slice(2);
-        } else {
-            rootNote = chord.slice(0, 1);
-            chordSuffix = chord.slice(1);
-        }
-        
-        // Find current note index
-        let noteIndex = notes.indexOf(rootNote);
-        if (noteIndex === -1) {
-            noteIndex = flats.indexOf(rootNote);
-        }
-        if (noteIndex === -1) return chord; // Return original if not found
-        
-        // Transpose
-        let newIndex = (noteIndex + semitones + 12) % 12;
-        let newNote = notes[newIndex];
-        
-        return newNote + chordSuffix;
-    }
+    const handleTonalityChange = (newTonality) => {
+        setTonality(newTonality);
+    };
 
     async function handleShowChordsClick(){
         if(showChords) {
@@ -247,26 +205,10 @@ export default function SongPage({ song, relatedSongs }){
 
                 {
                     song.notation?.showTonality ?
-                    <div className={styles.controlGroup}>
-                        <label className={styles.controlLabel}>ტონალობა</label>
-                        <div className={styles.controlActions}>
-                            <button 
-                                className={styles.controlButton} 
-                                onClick={handleMinusTonalityClick}
-                                aria-label="Decrease tonality"
-                            >
-                                <MinusIcon className={styles.controlIcon} />
-                            </button>
-                            <div className={styles.controlValue}>{tonality > 0 ? `+${tonality}` : tonality}</div>
-                            <button 
-                                className={styles.controlButton} 
-                                onClick={handlePlusTonalityClick}
-                                aria-label="Increase tonality"
-                            >
-                                <PlusIcon className={styles.controlIcon} />
-                            </button>
-                        </div>
-                    </div>
+                    <TonalityControl 
+                        onTonalityChange={handleTonalityChange}
+                        initialTonality={tonality}
+                    />
                     :
                     null
                 }
