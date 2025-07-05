@@ -39,7 +39,7 @@ export default async function handler(req, res) {
     }
 
     // Step 2: Create payment order
-    const externalOrderId = `donation_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`; // Unique order ID for donations
+    const externalOrderId = `donation_${donationAmount}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`; // Unique order ID for donations
     const callbackUrl = `https://${process.env.NEXT_PUBLIC_DOMAIN}/api/payment/bog-callback`;
     const successUrl = `https://${process.env.NEXT_PUBLIC_DOMAIN}/donation/thank-you`;
     const failUrl = `https://${process.env.NEXT_PUBLIC_DOMAIN}/payment/fail`;

@@ -242,7 +242,7 @@ const interfaceGeo = {
         amount_50: "50 ლარი",
         custom_amount: "სხვა თანხა",
         custom_amount_placeholder: "ჩაწერეთ თანხა (1-500 ლარი)",
-        donate_button: "შემოწირვა",
+        donate_button: "გადახდაზე გადასვლა",
         processing: "მუშავდება...",
         error_min_amount: "მინიმალური თანხა 1 ლარია",
         error_max_amount: "მაქსიმალური თანხა 500 ლარია",

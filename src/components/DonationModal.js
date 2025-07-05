@@ -176,10 +176,15 @@ const DonationModal = ({ isOpen, onClose }) => {
           >
             {isProcessing ? lang.donation.processing : lang.donation.donate_button}
           </button>
+          
+          {/* Payment Method Label */}
+          <p className="text-xs text-gray-400 text-center mt-2">
+            ნებისმიერი ქართული ბანკის ბარათით
+          </p>
         </div>
       </div>
     </div>
   );
 };
 
-export default DonationModal; 
+export default DonationModal;
