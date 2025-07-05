@@ -25,6 +25,7 @@ import { getNotation, notations } from '@/utils/notations';
 import { formatCount } from '@/utils/formatCount';
 import DeleteSongButton from '@/components/DeleteSongButton';
 import EditSongButton from '@/components/EditSongButton';
+import DonationButton from '@/components/DonationButton';
 let intervalId;
 
 export default function SongPage({ song, relatedSongs }){
@@ -316,6 +317,12 @@ export default function SongPage({ song, relatedSongs }){
                     null
                 }
             </div>
+            
+            {/* Donation Section */}
+            <div className="flex justify-left pl-[10px] my-6">
+                <DonationButton className="shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200" />
+            </div>
+            
             <main className={`${styles.songBody} mxedruli`} style={{fontSize}}>
                 {/* {!song.notation?.isFree && !isPremium && user?.id !== song.uploaderUserId && (
                     <div className={styles.blurredContent}>

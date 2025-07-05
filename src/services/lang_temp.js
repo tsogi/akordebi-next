@@ -231,6 +231,23 @@ const interfaceGeo = {
         guitar: "გიტარა",
         fanduri: "ფანდური",
         no_chords: "აკორდები ვერ მოიძებნა"
+    },
+    donation: {
+        title: "შემოწირულობა",
+        button: "მხარდაჭერა",
+        support_text: "მიუთითეთ თანხა როტიც გსურთ ჩვენი საიტის მხარდაჭერა",
+        amount_5: "5 ლარი",
+        amount_10: "10 ლარი",
+        amount_20: "20 ლარი",
+        amount_50: "50 ლარი",
+        custom_amount: "სხვა თანხა",
+        custom_amount_placeholder: "ჩაწერეთ თანხა (1-500 ლარი)",
+        donate_button: "შემოწირვა",
+        processing: "მუშავდება...",
+        error_min_amount: "მინიმალური თანხა 1 ლარია",
+        error_max_amount: "მაქსიმალური თანხა 500 ლარია",
+        error_invalid_amount: "გთხოვთ მიუთითოთ სწორი თანხა",
+        thank_you: "მადლობთ მხარდაჭერისთვის!"
     }
 }
 
@@ -456,6 +473,23 @@ Bass Down Down Up Down Up or Bass ↓ ↓ ↑ ↓ ↑ or Bass 3 2 1 2 3`
         guitar: "Guitar",
         fanduri: "Fanduri",
         no_chords: "No chords found"
+    },
+    donation: {
+        title: "Donation",
+        button: "Support",
+        support_text: "Choose the amount you would like to support our site with",
+        amount_5: "5 GEL",
+        amount_10: "10 GEL", 
+        amount_20: "20 GEL",
+        amount_50: "50 GEL",
+        custom_amount: "Custom amount",
+        custom_amount_placeholder: "Enter amount (1-500 GEL)",
+        donate_button: "Donate",
+        processing: "Processing...",
+        error_min_amount: "Minimum amount is 1 GEL",
+        error_max_amount: "Maximum amount is 500 GEL",
+        error_invalid_amount: "Please enter a valid amount",
+        thank_you: "Thank you for your support!"
     }
 }
 
