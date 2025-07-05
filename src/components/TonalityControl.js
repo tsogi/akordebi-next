@@ -1,14 +1,10 @@
-import { useState } from 'react';
 import { MinusIcon, PlusIcon } from '@heroicons/react/24/outline';
 import styles from '../pages/chord/SongPage.module.css';
 
-export default function TonalityControl({ onTonalityChange, initialTonality = 0 }) {
-    const [tonality, setTonality] = useState(initialTonality);
-
+export default function TonalityControl({ onTonalityChange, tonality = 0 }) {
     const handleMinusTonalityClick = () => {
         const newTonality = tonality - 1;
         if (newTonality >= -6) {
-            setTonality(newTonality);
             onTonalityChange(newTonality);
         }
     };
@@ -16,7 +12,6 @@ export default function TonalityControl({ onTonalityChange, initialTonality = 0 
     const handlePlusTonalityClick = () => {
         const newTonality = tonality + 1;
         if (newTonality <= 6) {
-            setTonality(newTonality);
             onTonalityChange(newTonality);
         }
     };

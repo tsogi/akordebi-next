@@ -763,6 +763,23 @@ class Db{
 
         return contributorRows;
     }
+
+    async getUserTonality(userId, songId) {
+        const [rows] = await this.pool.execute(`
+            SELECT tonality FROM user_song_tonality
+            WHERE user_id = ? AND song_id = ?
+        `, [userId, songId]);
+
+        return rows.length > 0 ? rows[0].tonality : null;
+    }
+
+    async setUserTonality(userId, songId, tonality) {
+        await this.pool.execute(`
+            INSERT INTO user_song_tonality (user_id, song_id, tonality)
+            VALUES (?, ?, ?)
+            ON DUPLICATE KEY UPDATE tonality = ?, updated_at = CURRENT_TIMESTAMP
+        `, [userId, songId, tonality, tonality]);
+    }
 }
 
 module.exports = new Db();

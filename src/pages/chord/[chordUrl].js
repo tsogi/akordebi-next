@@ -55,6 +55,25 @@ export default function SongPage({ song, relatedSongs }){
         }
     }, []);
 
+    // Load user's saved tonality when component mounts
+    useEffect(() => {
+        const loadUserTonality = async () => {
+            if (user?.id && song?.id) {
+                try {
+                    const response = await fetch(`/api/tonality/${song.id}`);
+                    if (response.ok) {
+                        const data = await response.json();
+                        setTonality(data.tonality);
+                    }
+                } catch (error) {
+                    console.error('Error loading user tonality:', error);
+                }
+            }
+        };
+
+        loadUserTonality();
+    }, [user?.id, song?.id]);
+
     useEffect(() => {
         scroll();
     }, [scrollSpeed])
@@ -120,8 +139,23 @@ export default function SongPage({ song, relatedSongs }){
         }
     }
 
-    const handleTonalityChange = (newTonality) => {
+    const handleTonalityChange = async (newTonality) => {
         setTonality(newTonality);
+        
+        // Save tonality to database if user is authenticated
+        if (user?.id && song?.id) {
+            try {
+                await fetch(`/api/tonality/${song.id}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ tonality: newTonality }),
+                });
+            } catch (error) {
+                console.error('Error saving tonality:', error);
+            }
+        }
     };
 
     async function handleShowChordsClick(){
@@ -207,7 +241,7 @@ export default function SongPage({ song, relatedSongs }){
                     song.notation?.showTonality ?
                     <TonalityControl 
                         onTonalityChange={handleTonalityChange}
-                        initialTonality={tonality}
+                        tonality={tonality}
                     />
                     :
                     null
