@@ -45,7 +45,6 @@
 
 .breadcrumb {
     margin: 20px 0 10px 10px;
-    font-size: 0.9rem;
     color: #ccc;
     display: flex;
     align-items: center;
@@ -103,9 +102,8 @@
 }
 
 .songAuthors {
-    font-size: 0.8rem;
     display: flex;
-    margin-top: 25px;
+    margin-top: 10px;
     margin-left: 10px;
 }
 
@@ -331,7 +329,6 @@
 }
 
 .lineWrapper.rightHand {
-    margin-bottom: 35px;
     display: flex;
     font-style: italic;
     margin-left: 10px;
