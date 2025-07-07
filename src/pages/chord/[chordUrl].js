@@ -17,7 +17,7 @@ import styles from "./SongPage.module.css";
 import SongDifficulties from '@/components/SongDifficulties';
 import Favorite from '@/components/Favorite';
 import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
-import { MinusIcon, PlusIcon, EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
+import { MinusIcon, PlusIcon, EyeIcon, EyeSlashIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
 import { useUser } from '@/utils/useUser';
 import { useLanguage } from '@/context/LanguageContext';
 import { transliterateWithCapital, transliterateWithCapitalizedWords, convertGeorgianToLatin } from '@/utils/transliteration';
@@ -27,6 +27,7 @@ import DeleteSongButton from '@/components/DeleteSongButton';
 import EditSongButton from '@/components/EditSongButton';
 import DonationButton from '@/components/DonationButton';
 import TonalityControl, { transposeChord } from '@/components/TonalityControl';
+import { downloadSong } from '@/services/downloadService';
 let intervalId;
 
 export default function SongPage({ song, relatedSongs }){
@@ -167,6 +168,19 @@ export default function SongPage({ song, relatedSongs }){
         setShowChords(true);
     }
 
+    const handleDownload = async () => {
+        const success = await downloadSong({
+            songBodySelector: `.${styles.songBody}`,
+            songName: displaySongName,
+            notationCode: song.notation?.code
+        });
+        
+        if (!success) {
+            console.error('Download failed');
+            // Could show user notification here if needed
+        }
+    };
+
     return <>
         <Head>
             <title>{`${displaySongName} - ${song.notation.page_title}`}</title>
@@ -273,6 +287,16 @@ export default function SongPage({ song, relatedSongs }){
                 <div className={styles.favoriteWrapper}>
                     <Favorite song={song} showLabel={true} />
                 </div>
+                
+                <button 
+                    className={`${styles.toggleButton}`}
+                    onClick={handleDownload}
+                    aria-label={lang.chord?.download || "Download"}
+                    title={lang.chord?.download || "Download song"}
+                >
+                    <ArrowDownTrayIcon className={styles.toggleIcon} />
+                    <span>{lang.chord?.download || "Download"}</span>
+                </button>
             </div>
             
             {/* Breadcrumb Navigation */}
