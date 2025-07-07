@@ -98,6 +98,7 @@ const interfaceGeo = {
         uploaded: "რესურსი ატვირთა",
         rate: " შეაფასეთ რესურსის სისწორე",
         relatedSongs: "მსგავსი რესურსები",
+        download: "ჩამოტვირთვა",
     },
     songCard: {
         videoTooltip: "ვიდეო გაკვეთილი",
@@ -351,6 +352,7 @@ const interfaceEng = {
         relatedSongs: "Related Chords",
         capoLocation: "Capo Location",
         fret: "Fret",
+        download: "Download",
     },
     songCard: {
         videoTooltip: "Video lesson",

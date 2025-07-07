@@ -26,7 +26,7 @@ import { formatCount } from '@/utils/formatCount';
 import DeleteSongButton from '@/components/DeleteSongButton';
 import EditSongButton from '@/components/EditSongButton';
 import DonationButton from '@/components/DonationButton';
-import TonalityControl, { transposeChord } from '@/components/TonalityControl';
+import { transposeChord } from '@/components/TonalityControl';
 import { downloadSong } from '@/services/downloadService';
 let intervalId;
 
@@ -208,94 +208,142 @@ export default function SongPage({ song, relatedSongs }){
         </Head>
         <Header />    
         <div className={`${styles.songPage} page_container noselect`}>
-            <div className={styles.controlsContainer}>
-                <div className={styles.controlGroup}>
-                    <label className={styles.controlLabel}>{lang.chord.font}</label>
-                    <div className={styles.controlActions}>
-                        <button 
-                            className={styles.controlButton} 
-                            onClick={handleMinusFontClick}
-                            aria-label="Decrease font size"
-                        >
-                            <MinusIcon className={styles.controlIcon} />
-                        </button>
-                        <div className={styles.controlValue}>{fontSize}</div>
-                        <button 
-                            className={styles.controlButton} 
-                            onClick={handlePlusFontClick}
-                            aria-label="Increase font size"
-                        >
-                            <PlusIcon className={styles.controlIcon} />
-                        </button>
+            {/* Modern controls layout with Tailwind CSS */}
+            <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-4 mb-6 space-y-4 border border-slate-700/50">
+                {/* Font and Auto-scroll on same line */}
+                <div className="grid grid-cols-2 gap-4">
+                    {/* Font Control */}
+                    <div className="space-y-2">
+                        <label className="text-sm font-medium text-slate-300 block">{lang.chord.font}</label>
+                        <div className="flex items-center justify-center bg-slate-700/50 rounded-lg p-1 gap-1">
+                            <button 
+                                className="flex items-center justify-center w-8 h-8 rounded-md bg-slate-600/50 hover:bg-slate-500/50 text-slate-300 hover:text-white transition-colors duration-200 border border-slate-600/50"
+                                onClick={handleMinusFontClick}
+                                aria-label="Decrease font size"
+                            >
+                                <MinusIcon className="w-4 h-4" />
+                            </button>
+                            <div className="flex-1 text-center text-sm font-medium text-slate-200 min-w-[32px]">
+                                {fontSize}
+                            </div>
+                            <button 
+                                className="flex items-center justify-center w-8 h-8 rounded-md bg-slate-600/50 hover:bg-slate-500/50 text-slate-300 hover:text-white transition-colors duration-200 border border-slate-600/50"
+                                onClick={handlePlusFontClick}
+                                aria-label="Increase font size"
+                            >
+                                <PlusIcon className="w-4 h-4" />
+                            </button>
+                        </div>
                     </div>
-                </div>
-                
-                <div className={styles.controlGroup}>
-                    <label className={styles.controlLabel}>{lang.chord.autoScroll}</label>
-                    <div className={styles.controlActions}>
-                        <button 
-                            className={styles.controlButton} 
-                            onClick={handleMinusScrollClick}
-                            aria-label="Decrease scroll speed"
-                        >
-                            <MinusIcon className={styles.controlIcon} />
-                        </button>
-                        <div className={styles.controlValue}>{scrollSpeed}</div>
-                        <button 
-                            className={styles.controlButton} 
-                            onClick={handlePlusScrollClick}
-                            aria-label="Increase scroll speed"
-                        >
-                            <PlusIcon className={styles.controlIcon} />
-                        </button>
+
+                    {/* Auto-scroll Control */}
+                    <div className="space-y-2">
+                        <label className="text-sm font-medium text-slate-300 block">{lang.chord.autoScroll}</label>
+                        <div className="flex items-center justify-center bg-slate-700/50 rounded-lg p-1 gap-1">
+                            <button 
+                                className="flex items-center justify-center w-8 h-8 rounded-md bg-slate-600/50 hover:bg-slate-500/50 text-slate-300 hover:text-white transition-colors duration-200 border border-slate-600/50"
+                                onClick={handleMinusScrollClick}
+                                aria-label="Decrease scroll speed"
+                            >
+                                <MinusIcon className="w-4 h-4" />
+                            </button>
+                            <div className="flex-1 text-center text-sm font-medium text-slate-200 min-w-[32px]">
+                                {scrollSpeed}
+                            </div>
+                            <button 
+                                className="flex items-center justify-center w-8 h-8 rounded-md bg-slate-600/50 hover:bg-slate-500/50 text-slate-300 hover:text-white transition-colors duration-200 border border-slate-600/50"
+                                onClick={handlePlusScrollClick}
+                                aria-label="Increase scroll speed"
+                            >
+                                <PlusIcon className="w-4 h-4" />
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                {
-                    song.notation?.showTonality ?
-                    <TonalityControl 
-                        onTonalityChange={handleTonalityChange}
-                        tonality={tonality}
-                    />
-                    :
-                    null
-                }
-                
-                {
-                    song.notation?.showChords ?
-                    <button 
-                        className={`${styles.toggleButton} ${showChords ? styles.active : ''}`}
-                        onClick={handleShowChordsClick}
-                        aria-label={showChords ? lang.chord.hide : lang.chord.appearance}
-                    >
-                        {showChords ? (
-                            <>
-                                <EyeSlashIcon className={styles.toggleIcon} />
-                                <span>{lang.chord.hide}</span>
-                            </>
-                        ) : (
-                            <>
-                                <EyeIcon className={styles.toggleIcon} />
-                                <span>{lang.chord.appearance}</span>
-                            </>
-                        )}
-                    </button>
-                    :
-                    null
-                }
-                
-                <div className={styles.favoriteWrapper}>
-                    <Favorite song={song} showLabel={true} />
+                {/* Tonality Control - Full Width */}
+                {song.notation?.showTonality && (
+                    <div className="space-y-2">
+                        <label className="text-sm font-medium text-slate-300 block">ტონალობა</label>
+                        <div className="flex items-center justify-center bg-slate-700/50 rounded-lg p-1 gap-1">
+                            <button 
+                                className="flex items-center justify-center w-8 h-8 rounded-md bg-slate-600/50 hover:bg-slate-500/50 text-slate-300 hover:text-white transition-colors duration-200 border border-slate-600/50"
+                                onClick={() => {
+                                    const newTonality = tonality - 1;
+                                    if (newTonality >= -6) {
+                                        handleTonalityChange(newTonality);
+                                    }
+                                }}
+                                aria-label="Decrease tonality"
+                            >
+                                <MinusIcon className="w-4 h-4" />
+                            </button>
+                            <div className="flex-1 text-center text-sm font-medium text-slate-200 min-w-[60px]">
+                                {tonality > 0 ? `+${tonality}` : tonality}
+                            </div>
+                            <button 
+                                className="flex items-center justify-center w-8 h-8 rounded-md bg-slate-600/50 hover:bg-slate-500/50 text-slate-300 hover:text-white transition-colors duration-200 border border-slate-600/50"
+                                onClick={() => {
+                                    const newTonality = tonality + 1;
+                                    if (newTonality <= 6) {
+                                        handleTonalityChange(newTonality);
+                                    }
+                                }}
+                                aria-label="Increase tonality"
+                            >
+                                <PlusIcon className="w-4 h-4" />
+                            </button>
+                        </div>
+                    </div>
+                )}
+
+                {/* Divider */}
+                <div className="border-t border-slate-600/50"></div>
+
+                {/* Chords and Favorites on same line */}
+                <div className="grid grid-cols-2 gap-4">
+                    {/* Show/Hide Chords Button */}
+                    {song.notation?.showChords ? (
+                        <button 
+                            className={`flex items-center justify-center gap-2 px-4 py-3 rounded-lg transition-all duration-200 border text-sm font-medium ${
+                                showChords 
+                                    ? 'bg-blue-500/20 text-blue-400 border-blue-500/50 hover:bg-blue-500/30' 
+                                    : 'bg-slate-700/50 text-slate-300 border-slate-600/50 hover:bg-slate-600/50 hover:text-white'
+                            }`}
+                            onClick={handleShowChordsClick}
+                            aria-label={showChords ? lang.chord.hide : lang.chord.appearance}
+                        >
+                            {showChords ? (
+                                <>
+                                    <EyeSlashIcon className="w-4 h-4" />
+                                    <span>{lang.chord.hide}</span>
+                                </>
+                            ) : (
+                                <>
+                                    <EyeIcon className="w-4 h-4" />
+                                    <span>{lang.chord.appearance}</span>
+                                </>
+                            )}
+                        </button>
+                    ) : (
+                        <div></div> 
+                    )}
+                    
+                    {/* Favorite Button - Always show */}
+                    <div className="flex">
+                        <Favorite song={song} showLabel={true} />
+                    </div>
                 </div>
-                
+
+                {/* Download Button - Full Width */}
                 <button 
-                    className={`${styles.toggleButton}`}
+                    className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-green-500/20 text-green-400 border border-green-500/50 rounded-lg hover:bg-green-500/30 hover:text-green-300 transition-all duration-200 font-medium text-sm"
                     onClick={handleDownload}
-                    aria-label={lang.chord?.download || "Download"}
-                    title={lang.chord?.download || "Download song"}
+                    aria-label={lang.chord.download}
+                    title={lang.chord.download}
                 >
-                    <ArrowDownTrayIcon className={styles.toggleIcon} />
-                    <span>{lang.chord?.download || "Download"}</span>
+                    <ArrowDownTrayIcon className="w-4 h-4" />
+                    <span>{lang.chord.download}</span>
                 </button>
             </div>
             

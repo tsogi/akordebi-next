@@ -93,23 +93,23 @@ export default function Favorite({ song, size = 'medium', showLabel = false }) {
       <>
         <button 
           onClick={handleFavoriteClick} 
-          className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 ${
+          className={`w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg transition-all duration-200 border text-sm font-medium ${
             isFavorite 
-              ? 'bg-red-500/20 text-red-500 hover:bg-red-500/30' 
-              : 'bg-gray-800/50 text-gray-400 hover:bg-gray-700/50'
+              ? 'bg-red-500/20 text-red-400 border-red-500/50 hover:bg-red-500/30' 
+              : 'bg-slate-700/50 text-slate-300 border-slate-600/50 hover:bg-slate-600/50 hover:text-white'
           } ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
           aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
           disabled={isLoading}
         >
           {isFavorite ? (
             <>
-              <HeartIcon className={`${sizeClasses[size]} text-red-500`} />
-              <span>{lang.favorites.remove || "ფავორიტებიდან ამოშლა"}</span>
+              <HeartIcon className="w-4 h-4" />
+              <span>{lang.favorites.remove || "ამოშლა"}</span>
             </>
           ) : (
             <>
-              <HeartOutline className={`${sizeClasses[size]} text-gray-400`} />
-              <span>{lang.favorites.add || "ფავორიტებში დამატება"}</span>
+              <HeartOutline className="w-4 h-4" />
+              <span>{lang.favorites.add || "შენახვა"}</span>
             </>
           )}
         </button>
