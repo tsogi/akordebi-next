@@ -307,7 +307,7 @@ export default function SongPage({ song, relatedSongs }){
             
             <main className={`${styles.songBody} mxedruli`} style={{fontSize}}>
                 {/* Breadcrumb Navigation */}
-                <div className="mb-[40px]">
+                <div className="mb-[40px] capital">
                     <div className={styles.breadcrumb}>
                         <Link href={`/?notation=${song.notation.code}`} className={styles.breadcrumbLink}>
                             {song.notation.page_title_plural || song.notation.page_title}
