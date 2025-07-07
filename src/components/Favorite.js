@@ -93,11 +93,7 @@ export default function Favorite({ song, size = 'medium', showLabel = false }) {
       <>
         <button 
           onClick={handleFavoriteClick} 
-          className={`w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg transition-all duration-200 border text-sm font-medium ${
-            isFavorite 
-              ? 'bg-red-500/20 text-red-400 border-red-500/50 hover:bg-red-500/30' 
-              : 'bg-slate-700/50 text-slate-300 border-slate-600/50 hover:bg-slate-600/50 hover:text-white'
-          } ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className={`w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 border border-slate-600/50 text-slate-300 hover:bg-slate-600/50 hover:text-white text-sm font-medium ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
           aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
           disabled={isLoading}
         >
