@@ -17,7 +17,8 @@ import styles from "./SongPage.module.css";
 import SongDifficulties from '@/components/SongDifficulties';
 import Favorite from '@/components/Favorite';
 import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
-import { MinusIcon, PlusIcon, EyeIcon, EyeSlashIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
+import { MinusIcon, PlusIcon, EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
+import { ArrowDownTrayIcon } from '@heroicons/react/24/solid';
 import { useUser } from '@/utils/useUser';
 import { useLanguage } from '@/context/LanguageContext';
 import { transliterateWithCapital, transliterateWithCapitalizedWords, convertGeorgianToLatin } from '@/utils/transliteration';
@@ -300,47 +301,46 @@ export default function SongPage({ song, relatedSongs }){
                 {/* Divider */}
                 <div className="border-t border-slate-600/50"></div>
 
-                {/* Chords and Favorites on same line */}
+                {/* Favorite and Download on same line */}
                 <div className="grid grid-cols-2 gap-4">
-                    {/* Show/Hide Chords Button */}
-                    {song.notation?.showChords ? (
-                        <button 
-                            className="flex items-center justify-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 border border-slate-600/50 text-slate-300 hover:bg-slate-600/50 hover:text-white text-sm font-medium"
-                            onClick={handleShowChordsClick}
-                            aria-label={showChords ? lang.chord.hide : lang.chord.appearance}
-                        >
-                            {showChords ? (
-                                <>
-                                    <EyeSlashIcon className="w-4 h-4" />
-                                    <span>{lang.chord.hide}</span>
-                                </>
-                            ) : (
-                                <>
-                                    <EyeIcon className="w-4 h-4" />
-                                    <span>{lang.chord.appearance}</span>
-                                </>
-                            )}
-                        </button>
-                    ) : (
-                        <div></div> 
-                    )}
-                    
-                    {/* Favorite Button - Always show */}
+                    {/* Favorite Button */}
                     <div className="flex">
                         <Favorite song={song} showLabel={true} />
                     </div>
+                    
+                    {/* Download Button */}
+                    <button 
+                        className="flex items-center justify-center gap-2 px-2 py-2 border border-slate-600/50 rounded-lg hover:bg-slate-600/50 hover:text-white font-medium text-sm"
+                        // className="flex items-center gap-2"
+                        onClick={handleDownload}
+                        aria-label={lang.chord.download}
+                        title={lang.chord.download}
+                    >
+                        <ArrowDownTrayIcon className="w-4 h-4" />
+                        <span>{lang.chord.download}</span>
+                    </button>
                 </div>
 
-                {/* Download Button - Full Width */}
-                <button 
-                    className="w-full flex items-center justify-center gap-2 px-4 py-2 border border-slate-600/50 rounded-lg text-slate-300 hover:bg-slate-600/50 hover:text-white transition-all duration-200 font-medium text-sm"
-                    onClick={handleDownload}
-                    aria-label={lang.chord.download}
-                    title={lang.chord.download}
-                >
-                    <ArrowDownTrayIcon className="w-4 h-4" />
-                    <span>{lang.chord.download}</span>
-                </button>
+                {/* Show/Hide Chords Button - Full Width */}
+                {song.notation?.showChords && (
+                    <button 
+                        className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 border border-slate-600/50 text-slate-300 hover:bg-slate-600/50 hover:text-white text-sm font-medium"
+                        onClick={handleShowChordsClick}
+                        aria-label={showChords ? lang.chord.hide : lang.chord.appearance}
+                    >
+                        {showChords ? (
+                            <>
+                                <EyeSlashIcon className="w-4 h-4" />
+                                <span>{lang.chord.hide}</span>
+                            </>
+                        ) : (
+                            <>
+                                <EyeIcon className="w-4 h-4" />
+                                <span>{lang.chord.appearance}</span>
+                            </>
+                        )}
+                    </button>
+                )}
             </div>
             
             
