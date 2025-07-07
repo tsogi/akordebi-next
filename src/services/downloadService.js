@@ -1,5 +1,7 @@
-import html2canvas from 'html2canvas';
+import * as htmlToImage from 'html-to-image';
 import { saveAs } from 'file-saver';
+
+
 
 /**
  * Prepares the song content for capture by modifying styles for better visibility
@@ -66,7 +68,8 @@ export const restoreOriginalStyles = (changes) => {
 };
 
 /**
- * Downloads song content as PNG image
+ * Downloads song content as PNG image using html-to-image (better CORS support)
+ * 
  * @param {Object} options - Download options
  * @param {string} options.songBodySelector - CSS selector for the song body element
  * @param {string} options.songName - Name of the song for filename
@@ -74,6 +77,8 @@ export const restoreOriginalStyles = (changes) => {
  * @returns {Promise<boolean>} Success status
  */
 export const downloadSongAsPNG = async ({ songBodySelector, songName, notationCode }) => {
+    let styleChanges = [];
+    
     try {
         const songBodyElement = document.querySelector(songBodySelector);
         if (!songBodyElement) {
@@ -81,35 +86,78 @@ export const downloadSongAsPNG = async ({ songBodySelector, songName, notationCo
             return false;
         }
 
+        console.log('Preparing song for download...');
+        
         // Prepare the content for capture
-        const styleChanges = prepareSongForCapture(songBodyElement);
+        styleChanges = prepareSongForCapture(songBodyElement);
 
-        // Create canvas with high quality settings
-        const canvas = await html2canvas(songBodyElement, {
+        // Wait a moment for styles to apply
+        await new Promise(resolve => setTimeout(resolve, 100));
+
+        console.log('Starting PNG capture with html-to-image...');
+
+        // Calculate full dimensions to avoid cutting off content
+        const rect = songBodyElement.getBoundingClientRect();
+        const scrollHeight = Math.max(
+            songBodyElement.scrollHeight,
+            songBodyElement.offsetHeight,
+            songBodyElement.clientHeight
+        );
+        const scrollWidth = Math.max(
+            songBodyElement.scrollWidth,
+            songBodyElement.offsetWidth,
+            songBodyElement.clientWidth
+        );
+
+        console.log(`Capturing dimensions: ${scrollWidth}x${scrollHeight}`);
+
+        // Use html-to-image which has much better CORS support
+        const dataUrl = await htmlToImage.toPng(songBodyElement, {
+            quality: 1.0,
+            pixelRatio: 2, // High resolution
             backgroundColor: '#ffffff',
-            scale: 2, // Higher resolution
-            useCORS: true,
-            allowTaint: true,
-            scrollX: 0,
-            scrollY: 0,
-            width: songBodyElement.scrollWidth,
-            height: songBodyElement.scrollHeight,
+            width: scrollWidth,
+            height: scrollHeight + 50, // Add 50px padding to prevent cutoff
+            style: {
+                // Ensure consistent styling
+                fontFamily: 'inherit',
+                color: 'black',
+                // Ensure we capture the full content
+                overflow: 'visible',
+                maxHeight: 'none',
+                height: 'auto'
+            },
+            // html-to-image handles CORS automatically - no complex configuration needed!
+            skipAutoScale: false,
+            cacheBust: true, // Helps with external image loading
+            // Wait for images to load
+            skipFonts: false
         });
 
-        // Restore original styles
+        // Restore original styles immediately after capture
         restoreOriginalStyles(styleChanges);
+        styleChanges = []; // Clear to avoid double restoration
 
-        // Convert to blob and download
-        return new Promise((resolve) => {
-            canvas.toBlob((blob) => {
-                const fileName = `${songName || 'song'}_${notationCode || 'chords'}.png`;
-                saveAs(blob, fileName);
-                resolve(true);
-            }, 'image/png');
-        });
+        console.log('Converting to blob and downloading...');
+
+        // Convert data URL to blob and download
+        const response = await fetch(dataUrl);
+        const blob = await response.blob();
+        
+        const fileName = `${songName || 'song'}_${notationCode || 'chords'}.png`;
+        saveAs(blob, fileName);
+        
+        console.log('✅ Download completed successfully with html-to-image!');
+        return true;
 
     } catch (error) {
         console.error('Error downloading song as PNG:', error);
+        
+        // Restore styles if anything went wrong
+        if (styleChanges.length > 0) {
+            restoreOriginalStyles(styleChanges);
+        }
+        
         return false;
     }
 };
@@ -166,18 +214,6 @@ export const downloadSong = async ({ songBodySelector, songName, notationCode })
 
     } catch (error) {
         console.error('Download failed completely:', error);
-        
-        // Final attempt to restore styles if something went wrong
-        try {
-            const songBodyElement = document.querySelector(songBodySelector);
-            if (songBodyElement) {
-                const styleChanges = prepareSongForCapture(songBodyElement);
-                restoreOriginalStyles(styleChanges);
-            }
-        } catch (restoreError) {
-            console.error('Error restoring styles after failed download:', restoreError);
-        }
-        
         return false;
     }
 }; 

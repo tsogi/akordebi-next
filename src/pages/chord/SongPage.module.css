@@ -39,6 +39,7 @@
 
 .songBody {
     margin-top: 50px;
+    padding-bottom: 50px;
     font-size: 1rem;
     position: relative;
 }
