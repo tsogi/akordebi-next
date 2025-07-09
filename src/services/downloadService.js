@@ -11,6 +11,26 @@ import { saveAs } from 'file-saver';
 export const prepareSongForCapture = (songBodyElement) => {
     const changes = [];
 
+    // Add logo at the top
+    const logoDiv = document.createElement('div');
+    logoDiv.className = 'download-watermark-top';
+    logoDiv.innerHTML = '<span class="logoText" style="font-size: 24px; font-weight: bold; color: black; margin-bottom: 20px; display: block;">akordebi.ge</span>';
+    songBodyElement.insertBefore(logoDiv, songBodyElement.firstChild);
+    changes.push({
+        type: 'addedElement',
+        element: logoDiv
+    });
+
+    // Add footer text
+    const footerDiv = document.createElement('div');
+    footerDiv.className = 'download-watermark-bottom';
+    footerDiv.innerHTML = '<span style="font-size: 14px; color: black; margin-top: 20px; display: block;">გადმოწერილია akordebi.ge-დან</span>';
+    songBodyElement.appendChild(footerDiv);
+    changes.push({
+        type: 'addedElement',
+        element: footerDiv
+    });
+
     // Hide all report wrappers
     const reportWrappers = songBodyElement.querySelectorAll('.reportWrapper');
     reportWrappers.forEach((wrapper, index) => {
@@ -59,7 +79,10 @@ export const prepareSongForCapture = (songBodyElement) => {
  */
 export const restoreOriginalStyles = (changes) => {
     changes.forEach(change => {
-        if (change.originalValue) {
+        if (change.type === 'addedElement') {
+            // Remove added watermark elements
+            change.element.remove();
+        } else if (change.originalValue) {
             change.element.style[change.property] = change.originalValue;
         } else {
             change.element.style.removeProperty(change.property);
