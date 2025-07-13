@@ -473,7 +473,6 @@
 @media (max-width: 768px) {
     .breadcrumb {
         margin: 15px 0 10px 10px;
-        font-size: 0.8rem;
         flex-wrap: wrap;
     }
     

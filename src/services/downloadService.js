@@ -14,7 +14,7 @@ export const prepareSongForCapture = (songBodyElement) => {
     // Add logo at the top
     const logoDiv = document.createElement('div');
     logoDiv.className = 'download-watermark-top';
-    logoDiv.innerHTML = '<span class="logoText" style="font-size: 24px; font-weight: bold; color: black; margin-bottom: 20px; display: block;">akordebi.ge</span>';
+    logoDiv.innerHTML = `<span class="logoText" style="font-size: 24px; margin-left: 10px; font-weight: bold; color: black; margin-bottom: 20px; display: block; font-family: 'Charm', cursive;">akordebi.ge</span>`;
     songBodyElement.insertBefore(logoDiv, songBodyElement.firstChild);
     changes.push({
         type: 'addedElement',
@@ -24,7 +24,7 @@ export const prepareSongForCapture = (songBodyElement) => {
     // Add footer text
     const footerDiv = document.createElement('div');
     footerDiv.className = 'download-watermark-bottom';
-    footerDiv.innerHTML = '<span style="font-size: 14px; color: black; margin-top: 20px; display: block;">გადმოწერილია akordebi.ge-დან</span>';
+    footerDiv.innerHTML = '<span style="font-size: 14px; color: black; margin-left: 10px; margin-top: 20px; display: block;">© გადმოწერილია akordebi.ge-დან</span>';
     songBodyElement.appendChild(footerDiv);
     changes.push({
         type: 'addedElement',
