@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useUser } from '@/utils/useUser';
 import { supabase } from '@/utils/supabase-client';
-import SubscriptionModal from './SubscriptionModal';
 import { useLanguage } from '@/context/LanguageContext';
 import dataClient from '@/services/data';
 
@@ -35,7 +34,6 @@ const SubscriptionPrompt = ({
   inModal = false
 }) => {
   const { user, setAuthOpenedFrom } = useUser();
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [showCustomAuth, setShowCustomAuth] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [paymentError, setPaymentError] = useState(null);
@@ -50,7 +48,6 @@ const SubscriptionPrompt = ({
     await dataClient.logEvent('subscribe_click', `From ${source}`);
     
     // Check if user email is the special test email
-    if (user) {
       try {
         setIsLoading(true);
         setPaymentError(null);
@@ -87,10 +84,6 @@ const SubscriptionPrompt = ({
       } finally {
         // setIsLoading(false);
       }
-    } else {
-      // For all other users, just show the modal
-      setIsModalOpen(true);
-    }
   };
   
   // Use client-side only rendering for the auth component to prevent hydration issues
@@ -141,8 +134,8 @@ const SubscriptionPrompt = ({
                   
                   {/* Price Tag */}
                   <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-4 rounded-xl mb-6 transform hover:scale-[1.02] transition-transform duration-300">
-                    <div className="text-2xl font-bold text-blue-600">3 ლარი / თვეში</div>
-                    <div className="text-blue-500/80 text-sm mt-1">ნებისმიერი ბანკის ბარათით</div>
+                    <div className="text-2xl font-bold text-blue-600">{process.env.NEXT_PUBLIC_MONTHLY_COST} ლარი / თვეში</div>
+                    {/* <div className="text-blue-500/80 text-sm mt-1">ნებისმიერი ბანკის ბარათით</div> */}
                   </div>
                   
                   {/* Benefits */}
@@ -169,7 +162,7 @@ const SubscriptionPrompt = ({
                       } 
                       transition-all duration-200 shadow-lg hover:shadow-xl`}
                   >
-                    {isLoading ? 'გთხოვთ მოიცადოთ...' : 'გადახდა'}
+                    {isLoading ? 'გთხოვთ მოიცადოთ...' : 'ბარათით გადახდა'}
                   </button>
                   
                   {paymentError && (
@@ -185,11 +178,6 @@ const SubscriptionPrompt = ({
           </div>
         </div>
       </div>
-      
-      <SubscriptionModal 
-        open={isModalOpen} 
-        setOpen={setIsModalOpen} 
-      />
       
       <style jsx global>{`
         @keyframes fadeIn {

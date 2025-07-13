@@ -21,7 +21,7 @@ export default function Favorite({ song, size = 'medium', showLabel = false }) {
     e.preventDefault();
     e.stopPropagation();
 
-    if (!user) {
+    if (!user || !isPremium) {
       localStorage.setItem("addSongToFavorites", song.id);
       setShowSubscriptionPrompt(true);
       return;
@@ -79,7 +79,7 @@ export default function Favorite({ song, size = 'medium', showLabel = false }) {
       >
         <SubscriptionPrompt
           unauthenticatedText="ფავორიტებში დასამატებლად გაიარეთ მარტივი ავტორიზაცია 1 კლიკით"
-          authenticatedText="დააჭირეთ გადახდას და მიყევით ბანკის ინსტრუქციას"
+          authenticatedText={`უფასო ვერსიაში ფავორიტებში შეგიძლიათ დაამატოთ მხოლოდ ${process.env.NEXT_PUBLIC_MONTHLY_FAVORITES} სიმღერა. შეუზღუდავი ფავორიტებისთვის გაიაქტიურეთ პრემიუმ პაკეტი.`}
           source="favorite"
           inModal={true}
         />
