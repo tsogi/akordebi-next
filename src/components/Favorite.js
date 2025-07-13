@@ -37,7 +37,7 @@ export default function Favorite({ song, size = 'medium', showLabel = false }) {
           },
           body: JSON.stringify({ songId: song.id }),
         });
-        
+
         if (response.ok) {
           setIsFavorite(false);
         }
@@ -49,7 +49,7 @@ export default function Favorite({ song, size = 'medium', showLabel = false }) {
           },
           body: JSON.stringify({ songId: song.id }),
         });
-        
+
         if (response.ok) {
           setIsFavorite(true);
         }
@@ -69,15 +69,15 @@ export default function Favorite({ song, size = 'medium', showLabel = false }) {
 
   // Modal portal
   const modal = showSubscriptionPrompt ? createPortal(
-    <div 
+    <div
       className="fixed inset-0 bg-black/50 z-[100] flex items-center justify-center"
       onClick={() => setShowSubscriptionPrompt(false)}
     >
-      <div 
-        className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md mx-4" 
+      <div
+        className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md mx-4"
         onClick={(e) => e.stopPropagation()}
       >
-        <SubscriptionPrompt 
+        <SubscriptionPrompt
           unauthenticatedText="ფავორიტებში დასამატებლად გაიარეთ მარტივი ავტორიზაცია 1 კლიკით"
           authenticatedText="დააჭირეთ გადახდას და მიყევით ბანკის ინსტრუქციას"
           source="favorite"
@@ -88,49 +88,43 @@ export default function Favorite({ song, size = 'medium', showLabel = false }) {
     typeof window !== 'undefined' ? document.body : null
   ) : null;
 
-  if (showLabel) {
-    return (
-      <>
-        <button 
-          onClick={handleFavoriteClick} 
-          className={`w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 border border-slate-600/50 text-slate-300 hover:bg-slate-600/50 hover:text-white text-sm font-medium ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
-          aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
-          disabled={isLoading}
-        >
-          {isFavorite ? (
-            <>
-              <HeartIcon className="w-4 h-4" />
-              <span>{lang.favorites.remove || "ამოშლა"}</span>
-            </>
-          ) : (
-            <>
-              <HeartOutline className="w-4 h-4" />
-              <span>{lang.favorites.add || "შენახვა"}</span>
-            </>
-          )}
-        </button>
-        {modal}
-      </>
-    );
-  }
+  const buttonClass = showLabel
+    ? `w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 border border-slate-600/50 text-slate-300 hover:bg-slate-600/50 hover:text-white text-sm font-medium ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`
+    : `flex items-center justify-center rounded-full transition-all duration-200 ${
+        isFavorite
+          ? 'bg-red-500/20 text-red-500 hover:bg-red-500/30'
+          : 'bg-gray-800/50 text-gray-400 hover:bg-gray-700/50'
+      } ${sizeClasses[size]} ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`;
+
+  const iconClass = showLabel
+    ? "w-4 h-4"
+    : isFavorite
+      ? `${sizeClasses[size]} text-red-500`
+      : `${sizeClasses[size]} text-gray-400`;
+
+  // Simplified label rendering
+  const label = showLabel
+    ? (
+        <span>
+          {isFavorite
+            ? (lang.favorites.remove || "ამოშლა")
+            : (lang.favorites.add || "შენახვა")}
+        </span>
+      )
+    : null;
 
   return (
     <>
-      <button 
-        onClick={handleFavoriteClick} 
-        className={`flex items-center justify-center rounded-full transition-all duration-200 ${
-          isFavorite 
-            ? 'bg-red-500/20 text-red-500 hover:bg-red-500/30' 
-            : 'bg-gray-800/50 text-gray-400 hover:bg-gray-700/50'
-        } ${sizeClasses[size]} ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+      <button
+        onClick={handleFavoriteClick}
+        className={buttonClass}
         aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
         disabled={isLoading}
       >
-        {isFavorite ? (
-          <HeartIcon className={`${sizeClasses[size]} text-red-500`} />
-        ) : (
-          <HeartOutline className={`${sizeClasses[size]} text-gray-400`} />
-        )}
+        {isFavorite
+          ? <HeartIcon className={iconClass} />
+          : <HeartOutline className={iconClass} />}
+        {label}
       </button>
       {modal}
     </>

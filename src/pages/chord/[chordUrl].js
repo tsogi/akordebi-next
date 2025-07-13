@@ -345,9 +345,9 @@ export default function SongPage({ song, relatedSongs }){
             
             
             {/* Donation Section */}
-            <div className="flex justify-left pl-[10px] my-6">
+            {/* <div className="flex justify-left pl-[10px] my-6">
                 <DonationButton className="shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200" />
-            </div>
+            </div> */}
             
             <main className={`${styles.songBody} mxedruli`} style={{fontSize}}>
                 {/* Breadcrumb Navigation */}
