@@ -2,7 +2,6 @@ import * as htmlToImage from 'html-to-image';
 import { saveAs } from 'file-saver';
 
 
-
 /**
  * Prepares the song content for capture by modifying styles for better visibility
  * @param {HTMLElement} songBodyElement - The main song content element
@@ -219,14 +218,32 @@ export const downloadSongAsText = async ({ songBodySelector, songName, notationC
  * @param {string} options.songBodySelector - CSS selector for the song body element
  * @param {string} options.songName - Name of the song for filename
  * @param {string} options.notationCode - Notation format code
+ * @param {string} options.userId - User ID for tracking (optional)
+ * @param {number} options.songId - Song ID for tracking (optional)
  * @returns {Promise<boolean>} Success status
  */
-export const handleDownload = async ({ songBodySelector, songName, notationCode }) => {
+export const handleDownload = async ({ songBodySelector, songName, notationCode, userId, songId }) => {
     const success = await downloadSong({
         songBodySelector,
         songName,
         notationCode
     });
+    
+    // Record the download if successful and we have user/song info
+    if (success && userId && songId) {
+        try {
+            await fetch('/api/downloads/record', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ songId }),
+            });
+        } catch (error) {
+            console.error('Error recording download:', error);
+            // Don't fail the download if recording fails
+        }
+    }
     
     if (!success) {
         console.error('Download failed');

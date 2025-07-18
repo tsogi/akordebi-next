@@ -41,7 +41,10 @@ class Db{
                  WHERE user_id COLLATE utf8mb4_general_ci = users.id COLLATE utf8mb4_general_ci) as totalFavorites,
                 (SELECT COUNT(*) 
                  FROM user_song_tonality 
-                 WHERE user_id COLLATE utf8mb4_general_ci = users.id COLLATE utf8mb4_general_ci) as totalTonalities
+                 WHERE user_id COLLATE utf8mb4_general_ci = users.id COLLATE utf8mb4_general_ci) as totalTonalities,
+                (SELECT COUNT(*) 
+                 FROM downloads 
+                 WHERE user_id COLLATE utf8mb4_general_ci = users.id COLLATE utf8mb4_general_ci) as totalDownloads
             FROM users 
             WHERE id = ?
         `, [id]);
@@ -795,6 +798,25 @@ class Db{
             DELETE FROM user_song_tonality 
             WHERE user_id = ? AND song_id = ?
         `, [userId, songId]);
+    }
+
+    async recordDownload(userId, songId) {
+        await this.pool.execute(`
+            INSERT INTO downloads (user_id, song_id)
+            VALUES (?, ?)
+        `, [userId, songId]);
+    }
+
+    async getUserDownloads(userId) {
+        const [rows] = await this.pool.execute(`
+            SELECT d.*, s.name as song_name, s.url as song_url
+            FROM downloads d
+            LEFT JOIN songs s ON d.song_id = s.id
+            WHERE d.user_id = ?
+            ORDER BY d.created_at DESC
+        `, [userId]);
+
+        return rows;
     }
 }
 

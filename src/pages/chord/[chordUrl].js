@@ -139,7 +139,9 @@ export default function SongPage({ song, relatedSongs }){
         await handleDownload({
             songBodySelector: `.${styles.songBody}`,
             songName: displaySongName,
-            notationCode: song.notation?.code
+            notationCode: song.notation?.code,
+            userId: user?.id,
+            songId: song?.id
         });
     };
 
