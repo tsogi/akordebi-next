@@ -28,7 +28,7 @@ import DeleteSongButton from '@/components/DeleteSongButton';
 import EditSongButton from '@/components/EditSongButton';
 import { transposeChord } from '@/components/TonalityControl';
 import TonalityControl from '@/components/TonalityControl';
-import { downloadSong } from '@/services/downloadService';
+import { handleDownload } from '@/services/downloadService';
 let intervalId;
 
 export default function SongPage({ song, relatedSongs }){
@@ -135,17 +135,12 @@ export default function SongPage({ song, relatedSongs }){
         setShowChords(true);
     }
 
-    const handleDownload = async () => {
-        const success = await downloadSong({
+    const onDownloadClick = async () => {
+        await handleDownload({
             songBodySelector: `.${styles.songBody}`,
             songName: displaySongName,
             notationCode: song.notation?.code
         });
-        
-        if (!success) {
-            console.error('Download failed');
-            // Could show user notification here if needed
-        }
     };
 
     return <>
@@ -247,7 +242,7 @@ export default function SongPage({ song, relatedSongs }){
                     <button 
                         className="flex items-center justify-center gap-2 px-2 py-2 border border-slate-600/50 rounded-lg hover:bg-slate-600/50 hover:text-white font-medium text-sm"
                         // className="flex items-center gap-2"
-                        onClick={handleDownload}
+                        onClick={onDownloadClick}
                         aria-label={lang.chord.download}
                         title={lang.chord.download}
                     >

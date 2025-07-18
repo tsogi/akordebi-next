@@ -167,7 +167,7 @@ export const downloadSongAsPNG = async ({ songBodySelector, songName, notationCo
         const response = await fetch(dataUrl);
         const blob = await response.blob();
         
-        const fileName = `${songName || 'song'}_${notationCode || 'chords'}.png`;
+        const fileName = `${songName || 'song'}_${notationCode || 'chords'}_akordebi.ge.png`;
         saveAs(blob, fileName);
         
         console.log('✅ Download completed successfully with html-to-image!');
@@ -211,6 +211,29 @@ export const downloadSongAsText = async ({ songBodySelector, songName, notationC
         console.error('Error downloading song as text:', error);
         return false;
     }
+};
+
+/**
+ * Handle download with error handling and logging
+ * @param {Object} options - Download options
+ * @param {string} options.songBodySelector - CSS selector for the song body element
+ * @param {string} options.songName - Name of the song for filename
+ * @param {string} options.notationCode - Notation format code
+ * @returns {Promise<boolean>} Success status
+ */
+export const handleDownload = async ({ songBodySelector, songName, notationCode }) => {
+    const success = await downloadSong({
+        songBodySelector,
+        songName,
+        notationCode
+    });
+    
+    if (!success) {
+        console.error('Download failed');
+        // Could show user notification here if needed
+    }
+    
+    return success;
 };
 
 /**
