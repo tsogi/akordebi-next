@@ -8,7 +8,7 @@ import SubscriptionPrompt from '@/components/SubscriptionPrompt';
 
 export default function Favorite({ song, size = 'medium', showLabel = false }) {
   const [isFavorite, setIsFavorite] = useState(song.isFavorite ?? false);
-  const { user, isPremium } = useUser();
+  const { user, isPremium, refreshUser } = useUser();
   const [isLoading, setIsLoading] = useState(false);
   const [showSubscriptionPrompt, setShowSubscriptionPrompt] = useState(false);
   const { lang } = useLanguage();
@@ -17,15 +17,17 @@ export default function Favorite({ song, size = 'medium', showLabel = false }) {
     setIsFavorite(song.isFavorite ?? false);
   }, [song.isFavorite]);
 
-  function shouldShowPrompt() {
-    if(!user) {
+  async function shouldShowPrompt() {
+    // Refresh user data to get latest favorites count
+    const latestUser = await refreshUser();
+    
+    if(!latestUser) {
       return true;
     }
 
     if(!isPremium) {
       const favoritesLimit = parseInt(process.env.NEXT_PUBLIC_FAVORITES);
-      // todo: user.totalFavorites is retrieved on initial load, so user can add unlimited songs if he doesn't refresh the page
-      if(user?.totalFavorites >= favoritesLimit) {
+      if(latestUser?.totalFavorites >= favoritesLimit) {
         return true;
       }
     }
@@ -52,7 +54,7 @@ export default function Favorite({ song, size = 'medium', showLabel = false }) {
           setIsFavorite(false);
         }
       } else {
-        if (shouldShowPrompt()) {
+        if (await shouldShowPrompt()) {
           localStorage.setItem("addSongToFavorites", song.id);
           setShowSubscriptionPrompt(true);
           return;

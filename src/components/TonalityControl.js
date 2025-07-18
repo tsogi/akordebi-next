@@ -8,7 +8,7 @@ import SubscriptionPrompt from '@/components/SubscriptionPrompt';
 export default function TonalityControl({ songId, onTonalityChange }) {
     const [tonality, setTonality] = useState(0);
     const [showSubscriptionPrompt, setShowSubscriptionPrompt] = useState(false);
-    const { user, isPremium } = useUser();
+    const { user, isPremium, refreshUser } = useUser();
     const { lang } = useLanguage();
 
     // Load user's saved tonality when component mounts
@@ -34,16 +34,18 @@ export default function TonalityControl({ songId, onTonalityChange }) {
         loadUserTonality();
     }, [user?.id, songId, onTonalityChange]);
 
-    function shouldShowPrompt(newTonality) {
-        if (!user) {
+    async function shouldShowPrompt(newTonality) {
+        // Refresh user data to get latest tonality count
+        const latestUser = await refreshUser();
+        
+        if (!latestUser) {
             return true;
         }
 
         if (!isPremium && newTonality !== 0) {
             const tonalityLimit = parseInt(process.env.NEXT_PUBLIC_TONALITY);
             // Only show prompt if user is trying to set a new tonality and has reached limit
-            // Todo: totalTonalities is loaded on initial load, so user can set unlimited tonality if he doesn't refresh the page
-            if (tonality === 0 && user?.totalTonalities >= tonalityLimit) {
+            if (tonality === 0 && latestUser?.totalTonalities >= tonalityLimit) {
                 return true;
             }
         }
@@ -53,7 +55,7 @@ export default function TonalityControl({ songId, onTonalityChange }) {
 
     const handleTonalityChange = async (newTonality) => {
         // Check if we should show subscription prompt
-        if (shouldShowPrompt(newTonality)) {
+        if (await shouldShowPrompt(newTonality)) {
             setShowSubscriptionPrompt(true);
             return;
         }
