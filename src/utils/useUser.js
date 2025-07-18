@@ -14,26 +14,38 @@ export const MyUserContextProvider = ({ children }) => {
   const [authOpenedFrom, setAuthOpenedFrom] = useState(null);
   const [isPremium, setIsPremium] = useState(false);
 
+  const refreshUser = async () => {
+    if (!supabaseUser) return null;
+
+    try {
+      const response = await fetch(`/api/auth/getUser`, {
+        method: "GET", 
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      const { user: foundUserDetails } = await response.json();
+
+      if (foundUserDetails) {
+        // Merge supabase user with database user details
+        const mergedUser = { ...supabaseUser, ...foundUserDetails };
+        setUser(mergedUser);
+        // Set premium status based on paid_until date
+        const isPaidUntilValid = foundUserDetails.paid_until && new Date(foundUserDetails.paid_until) > new Date();
+        setIsPremium(isPaidUntilValid);
+        return mergedUser;
+      }
+    } catch (error) {
+      console.error('Error refreshing user data:', error);
+    }
+
+    return null;
+  };
+
   useEffect(() => {
     const initializeUserDetails = async () => {
       if (supabaseUser && !isLoadingData && !user) {
         setIsloadingData(true);
-
-        const response = await fetch(`/api/auth/getUser`,
-          { method: "GET", headers: { 'Content-Type': 'application/json', }}
-        );
-
-        const {user: foundUserDetails} = await response.json();
-
-        if (foundUserDetails) {
-          // Merge supabase user with database user details
-          const mergedUser = { ...supabaseUser, ...foundUserDetails };
-          setUser(mergedUser);
-          // Set premium status based on paid_until date
-          const isPaidUntilValid = foundUserDetails.paid_until && new Date(foundUserDetails.paid_until) > new Date();
-          setIsPremium(isPaidUntilValid);
-        }
-
+        await refreshUser();
         setIsloadingData(false);
       } else if (!supabaseUser && !isLoadingUser && !isLoadingData) {
         setUser(null);
@@ -57,6 +69,7 @@ export const MyUserContextProvider = ({ children }) => {
     authOpenedFrom,
     setAuthOpenedFrom,
     isPremium,
+    refreshUser,
   };
 
   return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>;

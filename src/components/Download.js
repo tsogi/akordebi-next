@@ -15,17 +15,20 @@ export default function Download({
 }) {
     const [isLoading, setIsLoading] = useState(false);
     const [showSubscriptionPrompt, setShowSubscriptionPrompt] = useState(false);
-    const { user, isPremium } = useUser();
+    const { user, isPremium, refreshUser } = useUser();
     const { lang } = useLanguage();
 
-    function shouldShowPrompt() {
-        if (!user) {
+    async function shouldShowPrompt() {
+        // Refresh user data to get latest download count
+        const latestUser = await refreshUser();
+        
+        if (!latestUser) {
             return true;
         }
 
         if (!isPremium) {
             const downloadsLimit = parseInt(process.env.NEXT_PUBLIC_DOWNLOADS);
-            if (user?.totalDownloads >= downloadsLimit) {
+            if (latestUser?.totalDownloads >= downloadsLimit) {
                 return true;
             }
         }
@@ -34,7 +37,7 @@ export default function Download({
     }
 
     const handleDownloadClick = async () => {
-        if (shouldShowPrompt()) {
+        if (await shouldShowPrompt()) {
             setShowSubscriptionPrompt(true);
             return;
         }
