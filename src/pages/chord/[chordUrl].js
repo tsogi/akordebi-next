@@ -16,9 +16,9 @@ import db from "@/services/db";
 import styles from "./SongPage.module.css";
 import SongDifficulties from '@/components/SongDifficulties';
 import Favorite from '@/components/Favorite';
+import Download from '@/components/Download';
 import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
 import { MinusIcon, PlusIcon, EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
-import { ArrowDownTrayIcon } from '@heroicons/react/24/solid';
 import { useUser } from '@/utils/useUser';
 import { useLanguage } from '@/context/LanguageContext';
 import { transliterateWithCapital, transliterateWithCapitalizedWords, convertGeorgianToLatin } from '@/utils/transliteration';
@@ -28,7 +28,6 @@ import DeleteSongButton from '@/components/DeleteSongButton';
 import EditSongButton from '@/components/EditSongButton';
 import { transposeChord } from '@/components/TonalityControl';
 import TonalityControl from '@/components/TonalityControl';
-import { handleDownload } from '@/services/downloadService';
 let intervalId;
 
 export default function SongPage({ song, relatedSongs }){
@@ -135,16 +134,6 @@ export default function SongPage({ song, relatedSongs }){
         setShowChords(true);
     }
 
-    const onDownloadClick = async () => {
-        await handleDownload({
-            songBodySelector: `.${styles.songBody}`,
-            songName: displaySongName,
-            notationCode: song.notation?.code,
-            userId: user?.id,
-            songId: song?.id
-        });
-    };
-
     return <>
         <Head>
             <title>{`${displaySongName} - ${song.notation.page_title}`}</title>
@@ -241,16 +230,11 @@ export default function SongPage({ song, relatedSongs }){
                     </div>
                     
                     {/* Download Button */}
-                    <button 
-                        className="flex items-center justify-center gap-2 px-2 py-2 border border-slate-600/50 rounded-lg hover:bg-slate-600/50 hover:text-white font-medium text-sm"
-                        // className="flex items-center gap-2"
-                        onClick={onDownloadClick}
-                        aria-label={lang.chord.download}
-                        title={lang.chord.download}
-                    >
-                        <ArrowDownTrayIcon className="w-4 h-4" />
-                        <span>{lang.chord.download}</span>
-                    </button>
+                    <Download 
+                        song={song} 
+                        songBodySelector={`.${styles.songBody}`}
+                        showLabel={true}
+                    />
                 </div>
 
                 {/* Show/Hide Chords Button - Full Width */}
