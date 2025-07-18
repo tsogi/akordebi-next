@@ -27,8 +27,13 @@ export default async function handler(req, res) {
             if (tonality < -6 || tonality > 6) {
                 return res.status(400).json({ error: 'Tonality must be between -6 and 6' });
             }
-            
-            await db.setUserTonality(userId, songId, tonality);
+
+            if (tonality === 0) {
+                // Remove the record from db if tonality is 0
+                await db.deleteUserTonality(userId, songId);
+            } else {
+                await db.setUserTonality(userId, songId, tonality);
+            }
             res.status(200).json({ success: true });
         } catch (error) {
             console.error('Error setting tonality:', error);

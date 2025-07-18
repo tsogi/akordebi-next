@@ -26,8 +26,8 @@ import { getNotation, notations } from '@/utils/notations';
 import { formatCount } from '@/utils/formatCount';
 import DeleteSongButton from '@/components/DeleteSongButton';
 import EditSongButton from '@/components/EditSongButton';
-import DonationButton from '@/components/DonationButton';
 import { transposeChord } from '@/components/TonalityControl';
+import TonalityControl from '@/components/TonalityControl';
 import { downloadSong } from '@/services/downloadService';
 let intervalId;
 
@@ -56,25 +56,6 @@ export default function SongPage({ song, relatedSongs }){
             setFontSize(parseInt(savedFontSize, 10));
         }
     }, []);
-
-    // Load user's saved tonality when component mounts
-    useEffect(() => {
-        const loadUserTonality = async () => {
-            if (user?.id && song?.id) {
-                try {
-                    const response = await fetch(`/api/tonality/${song.id}`);
-                    if (response.ok) {
-                        const data = await response.json();
-                        setTonality(data.tonality);
-                    }
-                } catch (error) {
-                    console.error('Error loading user tonality:', error);
-                }
-            }
-        };
-
-        loadUserTonality();
-    }, [user?.id, song?.id]);
 
     useEffect(() => {
         scroll();
@@ -141,23 +122,8 @@ export default function SongPage({ song, relatedSongs }){
         }
     }
 
-    const handleTonalityChange = async (newTonality) => {
+    const handleTonalityChange = (newTonality) => {
         setTonality(newTonality);
-        
-        // Save tonality to database if user is authenticated
-        if (user?.id && song?.id) {
-            try {
-                await fetch(`/api/tonality/${song.id}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ tonality: newTonality }),
-                });
-            } catch (error) {
-                console.error('Error saving tonality:', error);
-            }
-        }
     };
 
     async function handleShowChordsClick(){
@@ -264,38 +230,7 @@ export default function SongPage({ song, relatedSongs }){
 
                 {/* Tonality Control - Full Width */}
                 {song.notation?.showTonality && (
-                    <div className="space-y-2">
-                        <label className="text-sm font-medium text-slate-300 block">ტონალობა</label>
-                        <div className="flex items-center justify-center bg-slate-700/50 rounded-lg p-1 gap-1">
-                            <button 
-                                className="flex items-center justify-center w-8 h-8 rounded-md bg-slate-600/50 hover:bg-slate-500/50 text-slate-300 hover:text-white transition-colors duration-200 border border-slate-600/50"
-                                onClick={() => {
-                                    const newTonality = tonality - 1;
-                                    if (newTonality >= -6) {
-                                        handleTonalityChange(newTonality);
-                                    }
-                                }}
-                                aria-label="Decrease tonality"
-                            >
-                                <MinusIcon className="w-4 h-4" />
-                            </button>
-                            <div className="flex-1 text-center text-sm font-medium text-slate-200 min-w-[60px]">
-                                {tonality > 0 ? `+${tonality}` : tonality}
-                            </div>
-                            <button 
-                                className="flex items-center justify-center w-8 h-8 rounded-md bg-slate-600/50 hover:bg-slate-500/50 text-slate-300 hover:text-white transition-colors duration-200 border border-slate-600/50"
-                                onClick={() => {
-                                    const newTonality = tonality + 1;
-                                    if (newTonality <= 6) {
-                                        handleTonalityChange(newTonality);
-                                    }
-                                }}
-                                aria-label="Increase tonality"
-                            >
-                                <PlusIcon className="w-4 h-4" />
-                            </button>
-                        </div>
-                    </div>
+                    <TonalityControl songId={song.id} onTonalityChange={handleTonalityChange} />
                 )}
 
                 {/* Divider */}

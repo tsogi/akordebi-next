@@ -786,6 +786,13 @@ class Db{
             ON DUPLICATE KEY UPDATE tonality = ?, updated_at = CURRENT_TIMESTAMP
         `, [userId, songId, tonality, tonality]);
     }
+
+    async deleteUserTonality(userId, songId) {
+        await this.pool.execute(`
+            DELETE FROM user_song_tonality 
+            WHERE user_id = ? AND song_id = ?
+        `, [userId, songId]);
+    }
 }
 
 module.exports = new Db();
