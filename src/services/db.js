@@ -38,7 +38,10 @@ class Db{
                 users.*,
                 (SELECT COUNT(*) 
                  FROM favorite_songs 
-                 WHERE user_id = users.id) as totalFavorites
+                 WHERE user_id COLLATE utf8mb4_general_ci = users.id COLLATE utf8mb4_general_ci) as totalFavorites,
+                (SELECT COUNT(*) 
+                 FROM user_song_tonality 
+                 WHERE user_id COLLATE utf8mb4_general_ci = users.id COLLATE utf8mb4_general_ci) as totalTonalities
             FROM users 
             WHERE id = ?
         `, [id]);
