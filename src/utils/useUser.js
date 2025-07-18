@@ -7,16 +7,16 @@ export const UserContext = createContext();
 // Provider component
 export const MyUserContextProvider = ({ children }) => {
   const { session, isLoading: isLoadingUser, supabaseClient: supabase } = useSessionContext();
-  const user = useSupaUser();
+  const supabaseUser = useSupaUser();
   const accessToken = session?.access_token ?? null;
   const [isLoadingData, setIsloadingData] = useState(false);
-  const [userDetails, setUserDetails] = useState(null);
+  const [user, setUser] = useState(null);
   const [authOpenedFrom, setAuthOpenedFrom] = useState(null);
   const [isPremium, setIsPremium] = useState(false);
 
   useEffect(() => {
     const initializeUserDetails = async () => {
-      if (user && !isLoadingData && !userDetails) {
+      if (supabaseUser && !isLoadingData && !user) {
         setIsloadingData(true);
 
         const response = await fetch(`/api/auth/getUser`,
@@ -26,15 +26,17 @@ export const MyUserContextProvider = ({ children }) => {
         const {user: foundUserDetails} = await response.json();
 
         if (foundUserDetails) {
-          setUserDetails(foundUserDetails);
+          // Merge supabase user with database user details
+          const mergedUser = { ...supabaseUser, ...foundUserDetails };
+          setUser(mergedUser);
           // Set premium status based on paid_until date
           const isPaidUntilValid = foundUserDetails.paid_until && new Date(foundUserDetails.paid_until) > new Date();
           setIsPremium(isPaidUntilValid);
         }
 
         setIsloadingData(false);
-      } else if (!user && !isLoadingUser && !isLoadingData) {
-        setUserDetails(null);
+      } else if (!supabaseUser && !isLoadingUser && !isLoadingData) {
+        setUser(null);
         setIsPremium(false);
       }
     };
@@ -42,16 +44,15 @@ export const MyUserContextProvider = ({ children }) => {
     initializeUserDetails();
 
     // close auth slide over if user is logged in
-    if(user && !!authOpenedFrom) {
+    if(supabaseUser && !!authOpenedFrom) {
       setAuthOpenedFrom(null);
     }
 
-  }, [user, isLoadingUser, userDetails]);
+  }, [supabaseUser, isLoadingUser, user]);
 
   const contextValue = {
     accessToken,
     user,
-    userDetails,
     isLoading: isLoadingUser || isLoadingData,
     authOpenedFrom,
     setAuthOpenedFrom,

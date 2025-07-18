@@ -17,15 +17,25 @@ export default function Favorite({ song, size = 'medium', showLabel = false }) {
     setIsFavorite(song.isFavorite ?? false);
   }, [song.isFavorite]);
 
+  function shouldShowPrompt() {
+    if(!user) {
+      return true;
+    }
+
+    if(!isPremium) {
+      const favoritesLimit = parseInt(process.env.NEXT_PUBLIC_FAVORITES);
+      // todo: user.totalFavorites is retrieved on initial load, so user can add unlimited songs if he doesn't refresh the page
+      if(user?.totalFavorites >= favoritesLimit) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   async function handleFavoriteClick(e) {
     e.preventDefault();
     e.stopPropagation();
-
-    if (!user || !isPremium) {
-      localStorage.setItem("addSongToFavorites", song.id);
-      setShowSubscriptionPrompt(true);
-      return;
-    }
 
     setIsLoading(true);
     try {
@@ -42,6 +52,12 @@ export default function Favorite({ song, size = 'medium', showLabel = false }) {
           setIsFavorite(false);
         }
       } else {
+        if (shouldShowPrompt()) {
+          localStorage.setItem("addSongToFavorites", song.id);
+          setShowSubscriptionPrompt(true);
+          return;
+        }
+
         const response = await fetch('/api/favorites/add', {
           method: 'POST',
           headers: {
@@ -52,6 +68,9 @@ export default function Favorite({ song, size = 'medium', showLabel = false }) {
 
         if (response.ok) {
           setIsFavorite(true);
+        } else if (response.status === 403) {
+          // Favorites limit reached
+          setShowSubscriptionPrompt(true);
         }
       }
     } catch (error) {
@@ -79,7 +98,7 @@ export default function Favorite({ song, size = 'medium', showLabel = false }) {
       >
         <SubscriptionPrompt
           unauthenticatedText="ფავორიტებში დასამატებლად გაიარეთ მარტივი ავტორიზაცია 1 კლიკით"
-          authenticatedText={`უფასო ვერსიაში ფავორიტებში შეგიძლიათ დაამატოთ მხოლოდ ${process.env.NEXT_PUBLIC_MONTHLY_FAVORITES} სიმღერა. შეუზღუდავი ფავორიტებისთვის გაიაქტიურეთ პრემიუმ პაკეტი.`}
+          authenticatedText={`უფასო ვერსიაში ფავორიტებში შეგიძლიათ დაამატოთ მაქსიმუმ ${process.env.NEXT_PUBLIC_FAVORITES} სიმღერა. შეუზღუდავი ფავორიტებისთვის გაიაქტიურეთ პრემიუმ პაკეტი. ამით ასევე წვლილს შეიტანთ საიტის განვითარებაში`}
           source="favorite"
           inModal={true}
         />

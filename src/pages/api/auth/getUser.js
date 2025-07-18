@@ -14,14 +14,12 @@ export default async function handler(req, res) {
     }
 
     const userExists = await db.getUserByID(user.id);
-
     let userDetails = null;
 
     if (userExists) {
       userDetails = userExists;
     } else {
-      const insertedUser = await db.setUserData(user);
-      userDetails = insertedUser;
+      userDetails = await db.setUserData(user);
     }
     return res.status(200).json({ user: userDetails });
   } else {

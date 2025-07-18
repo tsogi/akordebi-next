@@ -11,7 +11,7 @@ import { useUser } from '@/utils/useUser';
 export default function Prices() {
   const { lang } = useLanguage();
   const [showSubscriptionPrompt, setShowSubscriptionPrompt] = useState(false);
-  const { isPremium, userDetails } = useUser();
+  const { isPremium, user } = useUser();
 
   const handleSubscribe = () => {
     setShowSubscriptionPrompt(true);
@@ -22,8 +22,8 @@ export default function Prices() {
 
   // Format date as DD.MM.YYYY
   let premiumUntil = '';
-  if (userDetails?.paid_until) {
-    const date = new Date(userDetails.paid_until);
+  if (user?.paid_until) {
+    const date = new Date(user.paid_until);
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const year = date.getFullYear();

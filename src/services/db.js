@@ -34,7 +34,13 @@ class Db{
 
     async getUserByID(id){
         const [rows,fields] = await this.pool.execute(`
-            select * from users where id = ?
+            SELECT 
+                users.*,
+                (SELECT COUNT(*) 
+                 FROM favorite_songs 
+                 WHERE user_id = users.id) as totalFavorites
+            FROM users 
+            WHERE id = ?
         `, [id]);
 
         if(rows.length){
