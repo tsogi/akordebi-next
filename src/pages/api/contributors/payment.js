@@ -13,9 +13,11 @@ export default async function handler(req, res) {
     return res.status(401).json({ error: 'Not authenticated' });
   }
 
-  // You might want to add admin role checking here
-  // For now, assuming any authenticated user can update payment status
-  // In production, you should restrict this to admin users only
+  // Check if user is authorized to update payment status
+  const authorizedEmails = process.env.NEXT_PUBLIC_CAN_DELETE_SONG?.split(',') || [];
+  if (!authorizedEmails.includes(user.email)) {
+    return res.status(403).json({ error: 'Not authorized to update payment status' });
+  }
 
   const { userId, songId, paid } = req.body;
   
