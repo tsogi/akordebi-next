@@ -3,6 +3,7 @@ import { useUser } from '@/utils/useUser';
 import { supabase } from '@/utils/supabase-client';
 import { useLanguage } from '@/context/LanguageContext';
 import dataClient from '@/services/data';
+import BankTransferModal from '@/components/BankTransferModal';
 
 // Custom button component that will replace the Google sign-in button
 const GoogleSignInButton = ({ onClick }) => {
@@ -37,6 +38,7 @@ const SubscriptionPrompt = ({
   const [showCustomAuth, setShowCustomAuth] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [paymentError, setPaymentError] = useState(null);
+  const [showBankTransferModal, setShowBankTransferModal] = useState(false);
   const { lang } = useLanguage();
 
   const handleLoginClick = () => {
@@ -84,6 +86,11 @@ const SubscriptionPrompt = ({
       } finally {
         // setIsLoading(false);
       }
+  };
+
+  const handleBankTransferClick = async () => {
+    await dataClient.logEvent('bank_transfer_click', `From ${source}`);
+    setShowBankTransferModal(true);
   };
   
   // Use client-side only rendering for the auth component to prevent hydration issues
@@ -152,18 +159,32 @@ const SubscriptionPrompt = ({
                     </ul>
                   </div>
                   
-                  <button 
-                    onClick={handleSubscribeClick}
-                    disabled={isLoading}
-                    className={`w-full py-3 px-6 rounded-xl font-semibold text-white 
-                      ${isLoading 
-                        ? 'bg-gray-400 cursor-not-allowed' 
-                        : 'bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 transform hover:scale-[1.02] active:scale-[0.98]'
-                      } 
-                      transition-all duration-200 shadow-lg hover:shadow-xl`}
-                  >
-                    {isLoading ? 'გთხოვთ მოიცადოთ...' : 'ბარათით გადახდა'}
-                  </button>
+                  <div className="space-y-3">
+                    <button 
+                      onClick={handleSubscribeClick}
+                      disabled={isLoading}
+                      className={`w-full py-3 px-6 rounded-xl font-semibold text-white 
+                        ${isLoading 
+                          ? 'bg-gray-400 cursor-not-allowed' 
+                          : 'bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 transform hover:scale-[1.02] active:scale-[0.98]'
+                        } 
+                        transition-all duration-200 shadow-lg hover:shadow-xl`}
+                    >
+                      {isLoading ? 'გთხოვთ მოიცადოთ...' : 'ბარათით გადახდა'}
+                    </button>
+                    
+                    <div className="flex items-center justify-center">
+                      <span className="text-gray-500 text-sm">ან</span>
+                    </div>
+                    
+                    <button 
+                      onClick={handleBankTransferClick}
+                      disabled={isLoading}
+                      className="w-full py-3 px-6 rounded-xl font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 border border-blue-200 hover:border-blue-300 transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
+                    >
+                      გადმორიცხვა
+                    </button>
+                  </div>
                   
                   {paymentError && (
                     <div className="mt-4 p-3 bg-red-50 rounded-lg">
@@ -178,6 +199,13 @@ const SubscriptionPrompt = ({
           </div>
         </div>
       </div>
+      
+      {/* Bank Transfer Modal */}
+      <BankTransferModal 
+        isOpen={showBankTransferModal}
+        onClose={() => setShowBankTransferModal(false)}
+        userEmail={user?.email}
+      />
       
       <style jsx global>{`
         @keyframes fadeIn {
