@@ -18,7 +18,7 @@ export default function Prices() {
   };
 
   const customUnauthenticatedText = 'პრემიუმ პაკეტის გასააქტიურებლად გაიარეთ მარტივი Gmail ავტორიზაცია 1 კლიკით და შემდეგ ხელახლა დააჭირეთ გააქტიურებას';
-  const customAuthenticatedText = 'დააჭირეთ გადახდას და მიყევით ბანკის ინსტრუქციას';
+  const customAuthenticatedText = 'გადაიხადეთ ნებისმიერი ბანკის ბარათით ან გადმორიცხეთ თანხა';
 
   // Format date as DD.MM.YYYY
   let premiumUntil = '';

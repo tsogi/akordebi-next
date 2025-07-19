@@ -162,9 +162,9 @@ export default function SongPage({ song, relatedSongs }){
         <Header />    
         <div className={`${styles.songPage} page_container noselect`}>
             {/* Modern controls layout with Tailwind CSS */}
-            <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-4 mb-6 space-y-4 border border-slate-700/50">
-                {/* Font and Auto-scroll on same line */}
-                <div className="grid grid-cols-2 gap-4">
+            <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-4 mb-6 space-y-4 border border-slate-700/50 max-w-2xl mx-auto lg:max-w-4xl">
+                {/* First row: Font, Auto-scroll, and Tonality (if enabled) */}
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                     {/* Font Control */}
                     <div className="space-y-2">
                         <label className="text-sm font-medium text-slate-300 block">{lang.chord.font}</label>
@@ -212,18 +212,20 @@ export default function SongPage({ song, relatedSongs }){
                             </button>
                         </div>
                     </div>
-                </div>
 
-                {/* Tonality Control - Full Width */}
-                {song.notation?.showTonality && (
-                    <TonalityControl songId={song.id} onTonalityChange={handleTonalityChange} />
-                )}
+                    {/* Tonality Control - Third column on desktop, full width on mobile */}
+                    {song.notation?.showTonality && (
+                        <div className="col-span-2 md:col-span-1">
+                            <TonalityControl songId={song.id} onTonalityChange={handleTonalityChange} />
+                        </div>
+                    )}
+                </div>
 
                 {/* Divider */}
                 <div className="border-t border-slate-600/50"></div>
 
-                {/* Favorite and Download on same line */}
-                <div className="grid grid-cols-2 gap-4">
+                {/* Second row: Favorite, Download, and Show/Hide Chords (if enabled) */}
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                     {/* Favorite Button */}
                     <div className="flex">
                         <Favorite song={song} showLabel={true} />
@@ -235,28 +237,30 @@ export default function SongPage({ song, relatedSongs }){
                         songBodySelector={`.${styles.songBody}`}
                         showLabel={true}
                     />
-                </div>
 
-                {/* Show/Hide Chords Button - Full Width */}
-                {song.notation?.showChords && (
-                    <button 
-                        className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 border border-slate-600/50 text-slate-300 hover:bg-slate-600/50 hover:text-white text-sm font-medium"
-                        onClick={handleShowChordsClick}
-                        aria-label={showChords ? lang.chord.hide : lang.chord.appearance}
-                    >
-                        {showChords ? (
-                            <>
-                                <EyeSlashIcon className="w-4 h-4" />
-                                <span>{lang.chord.hide}</span>
-                            </>
-                        ) : (
-                            <>
-                                <EyeIcon className="w-4 h-4" />
-                                <span>{lang.chord.appearance}</span>
-                            </>
-                        )}
-                    </button>
-                )}
+                    {/* Show/Hide Chords Button - Third column on desktop, full width on mobile */}
+                    {song.notation?.showChords && (
+                        <div className="col-span-2 md:col-span-1">
+                            <button 
+                                className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 border border-slate-600/50 text-slate-300 hover:bg-slate-600/50 hover:text-white text-sm font-medium"
+                                onClick={handleShowChordsClick}
+                                aria-label={showChords ? lang.chord.hide : lang.chord.appearance}
+                            >
+                                {showChords ? (
+                                    <>
+                                        <EyeSlashIcon className="w-4 h-4" />
+                                        <span>{lang.chord.hide}</span>
+                                    </>
+                                ) : (
+                                    <>
+                                        <EyeIcon className="w-4 h-4" />
+                                        <span>{lang.chord.appearance}</span>
+                                    </>
+                                )}
+                            </button>
+                        </div>
+                    )}
+                </div>
             </div>
             
             

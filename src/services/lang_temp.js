@@ -214,9 +214,9 @@ const interfaceGeo = {
         contact_us: "მოგვწერეთ",
         free_features: {
             "all_resources": "ყველა რესურსი სრულად",
-            "limited_downloads": `მაქს. ${process.env.NEXT_PUBLIC_MONTHLY_DOWNLOADS} გადმოწერა`,
-            "limited_tonality": `მაქს. ${process.env.NEXT_PUBLIC_MONTHLY_TONALITY} ტონალობა`,
-            "limited_favorites": `მაქს. ${process.env.NEXT_PUBLIC_MONTHLY_FAVORITES} ფავორიტი`,
+            "limited_downloads": `მაქს. ${process.env.NEXT_PUBLIC_DOWNLOADS} გადმოწერა`,
+            "limited_tonality": `მაქს. ${process.env.NEXT_PUBLIC_TONALITY} ტონალობა`,
+            "limited_favorites": `მაქს. ${process.env.NEXT_PUBLIC_FAVORITES} ფავორიტი`,
             "integrated_ads": "ინტეგრირებული რეკლამა",
         },
         premium_features: {
