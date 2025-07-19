@@ -818,6 +818,75 @@ class Db{
 
         return rows;
     }
+
+    async getContributorPaymentStatus(userId, songId) {
+        const [rows] = await this.pool.execute(`
+            SELECT paid, updated_at
+            FROM contributor_payments
+            WHERE user_id = ? AND song_id = ?
+        `, [userId, songId]);
+
+        return rows.length > 0 ? rows[0] : null;
+    }
+
+    async setContributorPaymentStatus(userId, songId, paid) {
+        await this.pool.execute(`
+            INSERT INTO contributor_payments (user_id, song_id, paid)
+            VALUES (?, ?, ?)
+            ON DUPLICATE KEY UPDATE 
+                paid = ?, 
+                updated_at = CURRENT_TIMESTAMP
+        `, [userId, songId, paid, paid]);
+    }
+
+    async getContributorsWithPayments() {
+        // First, get the contributors with their song counts
+        const [contributorRows] = await this.pool.execute(`
+            SELECT 
+                u.id as full_user_id,
+                SUBSTRING_INDEX(u.id, '-', 1) as user_id,
+                CASE 
+                    WHEN LENGTH(MAX(u.email)) <= 2 THEN MAX(u.email)
+                    ELSE CONCAT(LEFT(MAX(u.email), 1), '***', SUBSTRING(MAX(u.email), LOCATE('@', MAX(u.email)) - 1, 1))
+                END as masked_email,
+                COUNT(s.id) as songs_count,
+                MAX(s.created_at) as latest_upload
+            FROM users u
+            INNER JOIN songs s ON BINARY u.id = BINARY s.uploaderUserId
+            WHERE u.id IS NOT NULL AND u.id != ''
+            GROUP BY u.id
+            ORDER BY latest_upload DESC, u.id ASC
+        `);
+
+        // For each contributor, get their songs with payment status
+        for(let contributor of contributorRows) {
+            const [songRows] = await this.pool.execute(`
+                SELECT 
+                    s.id,
+                    s.name,
+                    s.url,
+                    s.notation_format,
+                    s.created_at,
+                    COALESCE(cp.paid, FALSE) as paid,
+                    cp.updated_at as payment_updated_at
+                FROM songs s
+                LEFT JOIN contributor_payments cp ON s.id = cp.song_id AND (cp.user_id = ? OR cp.user_id = ?)
+                WHERE BINARY s.uploaderUserId = BINARY ?
+                ORDER BY s.created_at DESC
+            `, [contributor.user_id, contributor.full_user_id, contributor.full_user_id]);
+            
+            console.log(`Debug: Contributor ${contributor.user_id} (full: ${contributor.full_user_id}) has ${songRows.length} songs`);
+            if (songRows.length > 0) {
+                console.log('First song payment status:', { id: songRows[0].id, name: songRows[0].name, paid: songRows[0].paid });
+            }
+            
+            contributor.songs = songRows;
+            // Remove the full_user_id from the response for security
+            delete contributor.full_user_id;
+        }
+
+        return contributorRows;
+    }
 }
 
 module.exports = new Db();

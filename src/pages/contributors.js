@@ -10,6 +10,7 @@ export default function Contributors() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [expandedContributors, setExpandedContributors] = useState(new Set());
+    const [updatingPayments, setUpdatingPayments] = useState(new Set());
 
     useEffect(() => {
         fetchContributors();
@@ -31,6 +32,50 @@ export default function Contributors() {
             console.error('Error fetching contributors:', err);
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handlePaymentStatusChange = async (userId, songId, paid) => {
+        const paymentKey = `${userId}-${songId}`;
+        setUpdatingPayments(prev => new Set(prev).add(paymentKey));
+
+        try {
+            const response = await fetch('/api/contributors/payment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ userId, songId, paid }),
+            });
+
+            if (response.ok) {
+                // Update local state
+                setContributors(prev => prev.map(contributor => {
+                    if (contributor.user_id === userId) {
+                        return {
+                            ...contributor,
+                            songs: contributor.songs.map(song => {
+                                if (song.id === songId) {
+                                    return { ...song, paid };
+                                }
+                                return song;
+                            })
+                        };
+                    }
+                    return contributor;
+                }));
+            } else {
+                console.error('Failed to update payment status');
+                // You might want to show an error message to the user
+            }
+        } catch (error) {
+            console.error('Error updating payment status:', error);
+        } finally {
+            setUpdatingPayments(prev => {
+                const newSet = new Set(prev);
+                newSet.delete(paymentKey);
+                return newSet;
+            });
         }
     };
 
@@ -57,6 +102,7 @@ export default function Contributors() {
     };
 
     const isExpanded = (userId) => expandedContributors.has(userId);
+    const isUpdatingPayment = (userId, songId) => updatingPayments.has(`${userId}-${songId}`);
 
     if (loading) {
         return (
@@ -181,31 +227,67 @@ export default function Contributors() {
                                                 {lang.contributors.uploaded_songs}
                                             </h3>
                                             
-                                            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                                            <div className="grid gap-3 sm:grid-cols-1 lg:grid-cols-2">
                                                 {contributor.songs && contributor.songs.map((song) => (
-                                                    <a
+                                                    <div
                                                         key={song.id}
-                                                        href={`/resource/${song.notation_format}/${song.url}`}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="group p-4 bg-gradient-to-br from-slate-700/50 to-slate-800/50 rounded-lg border border-slate-600/30 hover:border-blue-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 hover:scale-[1.02]"
+                                                        className="group p-4 bg-gradient-to-br from-slate-700/50 to-slate-800/50 rounded-lg border border-slate-600/30 transition-all duration-300"
                                                     >
-                                                        <div className="flex items-start justify-between gap-3">
+                                                        <div className="flex items-start justify-between gap-3 mb-3">
                                                             <div className="flex-1 min-w-0">
-                                                                                                                            <h4 className="font-medium text-white group-hover:text-blue-400 transition-colors duration-200 truncate">
-                                                                {song.name}
-                                                            </h4>
-                                                            <p className="text-xs text-gray-400 mt-1">
-                                                                {lang.contributors.uploaded_at}: {formatDate(song.created_at)}
-                                                            </p>
+                                                                <a
+                                                                    href={`/resource/${song.notation_format}/${song.url}`}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    className="block hover:text-blue-400 transition-colors duration-200"
+                                                                >
+                                                                    <h4 className="font-medium text-white hover:text-blue-400 transition-colors duration-200 truncate">
+                                                                        {song.name}
+                                                                    </h4>
+                                                                </a>
+                                                                <p className="text-xs text-gray-400 mt-1">
+                                                                    {lang.contributors.uploaded_at}: {formatDate(song.created_at)}
+                                                                </p>
                                                             </div>
                                                             <div className="flex-shrink-0">
-                                                                <svg className="w-4 h-4 text-gray-400 group-hover:text-blue-400 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                                                </svg>
+                                                                <a
+                                                                    href={`/resource/${song.notation_format}/${song.url}`}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                >
+                                                                    <svg className="w-4 h-4 text-gray-400 hover:text-blue-400 transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                                                    </svg>
+                                                                </a>
                                                             </div>
                                                         </div>
-                                                    </a>
+                                                        
+                                                        {/* Payment Status */}
+                                                        <div className="flex items-center gap-3 pt-3 border-t border-slate-600/30">
+                                                            <label className="flex items-center gap-2 cursor-pointer">
+                                                                <input
+                                                                    type="checkbox"
+                                                                    checked={song.paid}
+                                                                    onChange={(e) => handlePaymentStatusChange(contributor.user_id, song.id, e.target.checked)}
+                                                                    disabled={isUpdatingPayment(contributor.user_id, song.id)}
+                                                                    className="w-4 h-4 text-green-600 bg-slate-700 border-slate-500 rounded focus:ring-green-500 focus:ring-2"
+                                                                />
+                                                                <span className={`text-sm font-medium ${song.paid ? 'text-green-400' : 'text-gray-400'}`}>
+                                                                    {song.paid ? 'Paid' : 'Unpaid'}
+                                                                </span>
+                                                            </label>
+                                                            
+                                                            {isUpdatingPayment(contributor.user_id, song.id) && (
+                                                                <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                                                            )}
+                                                            
+                                                            {song.payment_updated_at && (
+                                                                <span className="text-xs text-gray-500">
+                                                                    Updated: {formatDate(song.payment_updated_at)}
+                                                                </span>
+                                                            )}
+                                                        </div>
+                                                    </div>
                                                 ))}
                                             </div>
                                         </div>
