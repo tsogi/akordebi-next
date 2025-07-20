@@ -36,7 +36,7 @@ const generateSitemapXml = (records) => {
       .ele('priority', priority)
       .up();
 
-    priority = (priority - 0.0001).toFixed(3);
+    priority = (priority - 0.0001).toFixed(4);
   });
 
   return urlset.end({ pretty: true });

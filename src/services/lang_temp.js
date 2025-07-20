@@ -251,6 +251,20 @@ const interfaceGeo = {
         error_max_amount: "მაქსიმალური თანხა 500 ლარია",
         error_invalid_amount: "გთხოვთ მიუთითოთ სწორი თანხა",
         thank_you: "მადლობთ მხარდაჭერისთვის!"
+    },
+    admin: {
+        premium_management: "პრემიუმ გამოწერების მართვა",
+        user_email: "მომხმარებლის ელ-ფოსტა",
+        paid_until: "გამოწერის ვადა",
+        update_subscription: "გამოწერის განახლება",
+        user_email_placeholder: "ჩაწერეთ მომხმარებლის ელ-ფოსტა",
+        paid_until_placeholder: "აირჩიეთ თარიღი",
+        success_message: "მომხმარებლის გამოწერა წარმატებით განახლდა",
+        error_required_fields: "ყველა ველი სავალდებულოა",
+        error_user_not_found: "მომხმარებელი ამ ელ-ფოსტით ვერ მოიძებნა",
+        error_not_authorized: "თქვენ არ გაქვთ უფლება ამ ოპერაციის შესრულების",
+        updating: "მუშავდება...",
+        select_date: "აირჩიეთ თარიღი"
     }
 }
 
@@ -494,6 +508,20 @@ Bass Down Down Up Down Up or Bass ↓ ↓ ↑ ↓ ↑ or Bass 3 2 1 2 3`
         error_max_amount: "Maximum amount is 500 GEL",
         error_invalid_amount: "Please enter a valid amount",
         thank_you: "Thank you for your support!"
+    },
+    admin: {
+        premium_management: "Premium Subscription Management",
+        user_email: "User Email",
+        paid_until: "Subscription Valid Until",
+        update_subscription: "Update Subscription",
+        user_email_placeholder: "Enter user email",
+        paid_until_placeholder: "Select date",
+        success_message: "User subscription updated successfully",
+        error_required_fields: "All fields are required",
+        error_user_not_found: "User not found with this email",
+        error_not_authorized: "You are not authorized to perform this operation",
+        updating: "Updating...",
+        select_date: "Select date"
     }
 }
 
