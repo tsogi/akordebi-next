@@ -152,19 +152,19 @@ export default function Header(){
                     <div className={styles.headerActions}>
                         {languageSwitcher()}
                         <button 
-                            className={styles.menuButton}
+                            className="flex items-center justify-center w-11 h-11 bg-slate-800/50 hover:bg-slate-700/50 border border-slate-700/50 hover:border-slate-600/50 rounded-xl transition-all duration-200"
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
                             aria-label="Toggle menu"
                         >
                             {isMenuOpen ? (
-                                <XMarkIcon className="w-6 h-6" />
+                                <XMarkIcon className="w-6 h-6 text-slate-300" />
                             ) : (
-                                <Bars3Icon className="w-6 h-6" />
+                                <Bars3Icon className="w-6 h-6 text-slate-300" />
                             )}
                         </button>
                         <div className="flex items-center">
                             {user ? (
-                                <Link href="/profile" className="flex items-center space-x-2 px-3 py-2 bg-slate-800/50 hover:bg-slate-700/50 border border-slate-700/50 hover:border-slate-600/50 rounded-xl transition-all duration-200">
+                                <Link href="/profile" className="flex items-center space-x-2 px-3 py-2 h-11 bg-slate-800/50 hover:bg-slate-700/50 border border-slate-700/50 hover:border-slate-600/50 rounded-xl transition-all duration-200">
                                     <div className="w-8 h-8 bg-blue-500/20 rounded-full flex items-center justify-center">
                                         <span className="text-blue-400 text-sm font-medium">
                                             {user.email.charAt(0).toUpperCase()}
@@ -182,7 +182,7 @@ export default function Header(){
                             ) : (
                                 <button 
                                     onClick={() => setAuthOpenedFrom('header')}
-                                    className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition-all duration-200 font-medium"
+                                    className="flex items-center space-x-2 px-4 py-2 h-11 bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition-all duration-200 font-medium"
                                 >
                                     <ArrowRightOnRectangleIcon className="w-4 h-4" />
                                     <span className="text-[0.8rem]">{lang._login}</span>

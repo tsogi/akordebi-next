@@ -138,9 +138,9 @@ export default function UserProfile() {
                                     <h1 className="text-2xl sm:text-3xl font-bold text-white">
                                         {lang.user_profile.title}
                                     </h1>
-                                    <p className="text-slate-400 text-sm sm:text-base mt-1">
+                                    {/* <p className="text-slate-400 text-sm sm:text-base mt-1">
                                         {lang.user_profile.signed_in_as} {user.email}
-                                    </p>
+                                    </p> */}
                                 </div>
                             </div>
                             <div className="flex items-center space-x-2">
@@ -238,7 +238,7 @@ export default function UserProfile() {
                                                         <span>{lang.user_profile.subscription_active}</span>
                                                     </div>
                                                     <p className="text-slate-300 text-sm">
-                                                        {lang.user_profile.valid_until}: {formatDate(user.paid_until)}
+                                                        {lang.user_profile.valid_until}: {formatDate(user.paid_until)}-მდე
                                                     </p>
                                                 </div>
                                             ) : subscriptionStatus.isExpired ? (
