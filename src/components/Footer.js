@@ -48,6 +48,18 @@ export default function Footer(){
               <span className={styles.linksDivider}></span>
               {lang._footer_earn_money}
             </a>
+            <a className={styles.quickLink} href="/?page=1&sort=likes&lessoned=false&favorites=false&confirmed=false&notation=guitar_chord">
+              <span className={styles.linksDivider}></span>
+              გიტარის აკორდები
+            </a>
+            <a className={styles.quickLink} href="/?page=1&sort=likes&lessoned=false&favorites=false&confirmed=false&notation=fanduri_chord">
+              <span className={styles.linksDivider}></span>
+              ფანდურის აკორდები
+            </a>
+            <a className={styles.quickLink} href="/?page=1&sort=likes&lessoned=false&favorites=false&confirmed=false&notation=song_text">
+              <span className={styles.linksDivider}></span>
+              სიმღერის ტექსტები
+            </a>
             {process.env.NEXT_PUBLIC_DOMAIN === "akordebi.ge" && (
               <a className={styles.quickLink} href="/teachers">
                 <span className={styles.linksDivider}></span>
@@ -75,10 +87,6 @@ export default function Footer(){
             <a className={styles.quickLink} href="/legal/privacy">
               <span className={styles.linksDivider}></span>
               {lang._footer_policy}
-            </a>
-            <a className={styles.quickLink} href="/">
-              <span className={styles.linksDivider}></span>
-              {lang._footer_all_songs}
             </a>
             <a className={styles.quickLink} href="/createSong">
               <span className={styles.linksDivider}></span>
