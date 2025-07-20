@@ -264,7 +264,24 @@ const interfaceGeo = {
         error_user_not_found: "მომხმარებელი ამ ელ-ფოსტით ვერ მოიძებნა",
         error_not_authorized: "თქვენ არ გაქვთ უფლება ამ ოპერაციის შესრულების",
         updating: "მუშავდება...",
-        select_date: "აირჩიეთ თარიღი"
+        select_date: "აირჩიეთ თარიღი",
+        reports_management: "რეპორტების მართვა",
+        reports: "რეპორტები",
+        song_url: "სიმღერის URL",
+        line_number: "სტრიქონის ნომერი",
+        line_text: "სტრიქონის ტექსტი",
+        report_text: "რეპორტის ტექსტი",
+        status: "სტატუსი",
+        created_at: "შექმნის თარიღი",
+        updated_at: "განახლების თარიღი",
+        save_status: "სტატუსის შენახვა",
+        no_reports: "რეპორტები ვერ მოიძებნა",
+        loading_reports: "რეპორტები იტვირთება...",
+        status_updated: "სტატუსი წარმატებით განახლდა",
+        pending: "მუშავდება",
+        resolved: "გადაწყვეტილი",
+        rejected: "უარყოფილი",
+        in_progress: "პროცესშია"
     }
 }
 
@@ -521,7 +538,24 @@ Bass Down Down Up Down Up or Bass ↓ ↓ ↑ ↓ ↑ or Bass 3 2 1 2 3`
         error_user_not_found: "User not found with this email",
         error_not_authorized: "You are not authorized to perform this operation",
         updating: "Updating...",
-        select_date: "Select date"
+        select_date: "Select date",
+        reports_management: "Reports Management",
+        reports: "Reports",
+        song_url: "Song URL",
+        line_number: "Line Number",
+        line_text: "Line Text",
+        report_text: "Report Text",
+        status: "Status",
+        created_at: "Created At",
+        updated_at: "Updated At",
+        save_status: "Save Status",
+        no_reports: "No reports found",
+        loading_reports: "Loading reports...",
+        status_updated: "Status updated successfully",
+        pending: "Pending",
+        resolved: "Resolved",
+        rejected: "Rejected",
+        in_progress: "In Progress"
     }
 }
 

@@ -9,7 +9,8 @@ import {
     UserGroupIcon, 
     CreditCardIcon, 
     ShieldCheckIcon,
-    ChevronRightIcon 
+    ChevronRightIcon,
+    ExclamationTriangleIcon 
 } from '@heroicons/react/24/outline';
 
 export default function AdminDashboard() {
@@ -157,6 +158,30 @@ export default function AdminDashboard() {
                                                 </h3>
                                                 <p className="text-slate-400 text-sm mt-1">
                                                     Manually manage premium subscriptions for users
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <ChevronRightIcon className="w-5 h-5 text-slate-400 group-hover:text-white transition-colors" />
+                                    </div>
+                                </div>
+                            </Link>
+
+                            {/* Reports Link */}
+                            <Link href="/admin/reports" className="group">
+                                <div className="bg-slate-800/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-700/50 hover:border-slate-600/50 transition-all duration-200 hover:bg-slate-800/90">
+                                    <div className="flex items-center justify-between">
+                                        <div className="flex items-center space-x-4">
+                                            <div className="flex-shrink-0">
+                                                <div className="w-12 h-12 bg-amber-500/20 rounded-xl flex items-center justify-center">
+                                                    <ExclamationTriangleIcon className="w-6 h-6 text-amber-400" />
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h3 className="text-lg font-semibold text-white group-hover:text-amber-300 transition-colors">
+                                                    რეპორტები
+                                                </h3>
+                                                <p className="text-slate-400 text-sm mt-1">
+                                                    Manage user-submitted reports and issues
                                                 </p>
                                             </div>
                                         </div>
