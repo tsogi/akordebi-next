@@ -93,16 +93,10 @@ export default function Footer(){
               {lang._footer_add_song}
             </a>
             {isAuthorized && (
-              <>
-                <a className={styles.quickLink} href="/contributors">
-                  <span className={styles.linksDivider}></span>
-                  კონტრიბუციები
-                </a>
-                <a className={styles.quickLink} href="/admin/premium-subscriptions">
-                  <span className={styles.linksDivider}></span>
-                  გამოწერები
-                </a>
-              </>
+              <a className={styles.quickLink} href="/admin">
+                <span className={styles.linksDivider}></span>
+                  ადმინ
+              </a>
             )}
           </div>
           <div className={`${styles.feedback}`}>
