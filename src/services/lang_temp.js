@@ -282,6 +282,24 @@ const interfaceGeo = {
         resolved: "გადაწყვეტილი",
         rejected: "უარყოფილი",
         in_progress: "პროცესშია"
+    },
+    user_profile: {
+        title: "მომხმარებლის პროფილი",
+        signed_in_as: "შესული ხარ როგორც",
+        account_info: "ანგარიშის ინფორმაცია",
+        subscription_status: "გამოწერის სტატუსი",
+        current_plan: "მიმდინარე პაკეტი",
+        free_plan: "უფასო პაკეტი",
+        premium_plan: "პრემიუმ პაკეტი",
+        valid_until: "ვალიდურია",
+        expired_on: "ვადა გავიდა",
+        upgrade_to_premium: "პრემიუმზე გადასვლა",
+        manage_subscription: "გამოწერის მართვა",
+        sign_out: "გასვლა",
+        member_since: "წევრი",
+        gmail_account: "Gmail ანგარიში",
+        subscription_expired: "გამოწერის ვადა გასულია",
+        subscription_active: "გამოწერა აქტიურია"
     }
 }
 
@@ -556,6 +574,24 @@ Bass Down Down Up Down Up or Bass ↓ ↓ ↑ ↓ ↑ or Bass 3 2 1 2 3`
         resolved: "Resolved",
         rejected: "Rejected",
         in_progress: "In Progress"
+    },
+    user_profile: {
+        title: "User Profile",
+        signed_in_as: "Signed in as",
+        account_info: "Account Information",
+        subscription_status: "Subscription Status",
+        current_plan: "Current Plan",
+        free_plan: "Free Plan",
+        premium_plan: "Premium Plan",
+        valid_until: "Valid until",
+        expired_on: "Expired on",
+        upgrade_to_premium: "Upgrade to Premium",
+        manage_subscription: "Manage Subscription",
+        sign_out: "Sign Out",
+        member_since: "Member since",
+        gmail_account: "Gmail Account",
+        subscription_expired: "Subscription expired",
+        subscription_active: "Subscription active"
     }
 }
 

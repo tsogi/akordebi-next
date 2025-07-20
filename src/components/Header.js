@@ -2,7 +2,6 @@
 
 import styles from "./Header.module.css";
 import { useUser } from "@/utils/useUser";
-import { supabase } from "@/utils/supabase-client";
 import { useRouter } from "next/router";
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import uiDb from '@/services/data';
@@ -163,29 +162,30 @@ export default function Header(){
                                 <Bars3Icon className="w-6 h-6" />
                             )}
                         </button>
-                        <div className={styles.authButton}>
+                        <div className="flex items-center">
                             {user ? (
-                                <div className={styles.userInfo}>
-                                    <span className={styles.username}>{user.email.split('@')[0]}</span>
-                                    <button
-                                        onClick={async () => {
-                                            const { error } = await supabase.auth.signOut();
-                                            if(error) console.error(error);
-                                            router.reload();
-                                        }}
-                                        className={styles.logoutButton}
-                                        aria-label="Sign out"
-                                    >
-                                        <XMarkIcon className="w-5 h-5" />
-                                    </button>
-                                </div>
+                                <Link href="/profile" className="flex items-center space-x-2 px-3 py-2 bg-slate-800/50 hover:bg-slate-700/50 border border-slate-700/50 hover:border-slate-600/50 rounded-xl transition-all duration-200">
+                                    <div className="w-8 h-8 bg-blue-500/20 rounded-full flex items-center justify-center">
+                                        <span className="text-blue-400 text-sm font-medium">
+                                            {user.email.charAt(0).toUpperCase()}
+                                        </span>
+                                    </div>
+                                    <div className="hidden sm:block">
+                                        <p className="text-white text-sm font-medium">
+                                            {user.email.split('@')[0]}
+                                        </p>
+                                        <p className="text-slate-400 text-xs">
+                                            {user.paid_until && new Date(user.paid_until) > new Date() ? 'Premium' : 'Free'}
+                                        </p>
+                                    </div>
+                                </Link>
                             ) : (
                                 <button 
                                     onClick={() => setAuthOpenedFrom('header')}
-                                    className={styles.loginButton}
+                                    className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition-all duration-200 font-medium"
                                 >
-                                    <ArrowRightOnRectangleIcon className="w-5 h-5" />
-                                    <span>{lang._login}</span>
+                                    <ArrowRightOnRectangleIcon className="w-4 h-4" />
+                                    <span className="text-[0.8rem]">{lang._login}</span>
                                 </button>
                             )}
                         </div>
