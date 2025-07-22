@@ -875,7 +875,6 @@ class Db{
                 ORDER BY s.created_at DESC
             `, [contributor.user_id, contributor.full_user_id, contributor.full_user_id]);
             
-            console.log(`Debug: Contributor ${contributor.user_id} (full: ${contributor.full_user_id}) has ${songRows.length} songs`);
             if (songRows.length > 0) {
                 console.log('First song payment status:', { id: songRows[0].id, name: songRows[0].name, paid: songRows[0].paid });
             }
