@@ -173,7 +173,7 @@ const SubscriptionPrompt = ({
                       {isLoading ? 'გთხოვთ მოიცადოთ...' : 'ბარათით გადახდა'}
                     </button>
                     
-                    <div className="flex items-center justify-center">
+                    {/* <div className="flex items-center justify-center">
                       <span className="text-gray-500 text-sm">ან</span>
                     </div>
                     
@@ -183,7 +183,7 @@ const SubscriptionPrompt = ({
                       className="w-full py-3 px-6 rounded-xl font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 border border-blue-200 hover:border-blue-300 transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
                     >
                       გადმორიცხვა
-                    </button>
+                    </button> */}
                   </div>
                   
                   {paymentError && (
