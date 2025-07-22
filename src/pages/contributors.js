@@ -228,11 +228,11 @@ export default function Contributors() {
                                                 {lang.contributors.uploaded_songs}
                                             </h3>
                                             
-                                            <div className="grid gap-3 sm:grid-cols-1 lg:grid-cols-2">
+                                            <div className="flex flex-col gap-3">
                                                 {contributor.songs && contributor.songs.map((song) => (
                                                     <div
                                                         key={song.id}
-                                                        className="group p-4 bg-gradient-to-br from-slate-700/50 to-slate-800/50 rounded-lg border border-slate-600/30 transition-all duration-300"
+                                                        className="w-full group p-4 bg-gradient-to-br from-slate-700/50 to-slate-800/50 rounded-lg border border-slate-600/30 transition-all duration-300"
                                                     >
                                                         <div className="flex items-start justify-between gap-3 mb-3">
                                                                                                                                                                                                                                          <div className="flex-1 min-w-0">
@@ -264,8 +264,8 @@ export default function Contributors() {
                                                         </div>
                                                         
                                                         {/* Payment Status */}
-                                                        <div className="flex items-center justify-between pt-3 border-t border-slate-600/30">
-                                                            <div className="flex items-center gap-3">
+                                                        <div className="pt-3 border-t border-slate-600/30 space-y-2">
+                                                            <div className="flex items-center justify-between">
                                                                 <label className="flex items-center gap-2 cursor-pointer">
                                                                     <input
                                                                         type="checkbox"
@@ -277,21 +277,12 @@ export default function Contributors() {
                                                                     <span className={`text-sm font-medium ${song.paid ? 'text-green-400' : 'text-gray-400'}`}>
                                                                         {song.paid ? 'Paid' : 'Unpaid'}
                                                                     </span>
+                                                                    {isUpdatingPayment(contributor.user_id, song.id) && (
+                                                                        <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin ml-1"></div>
+                                                                    )}
                                                                 </label>
                                                                 
-                                                                {isUpdatingPayment(contributor.user_id, song.id) && (
-                                                                    <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-                                                                )}
-                                                                
-                                                                {song.payment_updated_at && (
-                                                                    <span className="text-xs text-gray-500">
-                                                                        Updated: {formatDate(song.payment_updated_at)}
-                                                                    </span>
-                                                                )}
-                                                            </div>
-                                                            
-                                                            <div className="flex-shrink-0">
-                                                                <span className={`inline-flex items-center px-2 py-1 rounded text-xs font-medium ${
+                                                                <span className={`inline-flex items-center px-2 py-1 rounded text-xs font-medium flex-shrink-0 ${
                                                                     song.notation_format === 'guitar_chord' ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' :
                                                                     song.notation_format === 'fanduri_chord' ? 'bg-green-500/20 text-green-400 border border-green-500/30' :
                                                                     song.notation_format === 'song_text' ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30' :
@@ -300,6 +291,12 @@ export default function Contributors() {
                                                                     {getNotation(song.notation_format)?.page_title || song.notation_format}
                                                                 </span>
                                                             </div>
+                                                            
+                                                            {song.payment_updated_at && (
+                                                                <div className="text-xs text-gray-500">
+                                                                    Updated: {formatDate(song.payment_updated_at)}
+                                                                </div>
+                                                            )}
                                                         </div>
                                                     </div>
                                                 ))}
