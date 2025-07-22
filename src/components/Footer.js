@@ -3,19 +3,13 @@ import { useEffect } from "react";
 import WriteUs from "./WriteUs";
 import { useLanguage } from '@/context/LanguageContext';
 import { useShoppingCart } from '@/context/ShoppingCartContext';
-import { useUser } from '@/utils/useUser';
 import Link from "next/link";
 import { useRouter } from 'next/router';
 
 export default function Footer(){
   const { lang } = useLanguage();
   const { getTotalItems, getTotalPrice, isMounted } = useShoppingCart();
-  const { user } = useUser();
   const router = useRouter();
-
-  // Check if user is authorized for admin functions
-  const isAuthorized = user && process.env.NEXT_PUBLIC_CAN_DELETE_SONG && 
-    process.env.NEXT_PUBLIC_CAN_DELETE_SONG.includes(user.email);
 
   useEffect(() => {
     if(process.env.NEXT_PUBLIC_DOMAIN == "akordebi.ge"){
@@ -92,12 +86,6 @@ export default function Footer(){
               <span className={styles.linksDivider}></span>
               {lang._footer_add_song}
             </a>
-            {isAuthorized && (
-              <a className={styles.quickLink} href="/admin">
-                <span className={styles.linksDivider}></span>
-                  ადმინ
-              </a>
-            )}
           </div>
           <div className={`${styles.feedback}`}>
             <div className="mt-12 text-center text-[#a09898] text-[0.8rem]">

@@ -16,6 +16,10 @@ export default function Header(){
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { lang, toggleLanguage, language } = useLanguage();
 
+    // Check if user is authorized for admin functions
+    const isAuthorized = user && process.env.NEXT_PUBLIC_CAN_DELETE_SONG && 
+        process.env.NEXT_PUBLIC_CAN_DELETE_SONG.includes(user.email);
+
     function isActive(page){
         if(page == "guitar-finder" && router.pathname == "/guitar-finder"){
             return true;
@@ -34,6 +38,10 @@ export default function Header(){
         }
 
         if(page == "teachers" && router.pathname == "/teachers"){
+            return true;
+        }
+
+        if(page == "admin" && router.pathname.startsWith("/admin")){
             return true;
         }
 
@@ -93,6 +101,15 @@ export default function Header(){
                 >
                     {lang.teachers}
                 </Link>
+                {isAuthorized && (
+                    <Link 
+                        href="/admin" 
+                        className={`nav-link ${isActive("admin") ? "active" : ""}`}
+                        onClick={() => setIsMenuOpen(false)}
+                    >
+                        ადმინ
+                    </Link>
+                )}
                 {/* <Link 
                     href="/shop" 
                     onClick={() => setIsMenuOpen(false)}
