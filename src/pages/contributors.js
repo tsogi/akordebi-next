@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useLanguage } from '@/context/LanguageContext';
+import { getNotation } from '@/utils/notations';
 
 export default function Contributors() {
     const { lang } = useLanguage();
@@ -234,21 +235,21 @@ export default function Contributors() {
                                                         className="group p-4 bg-gradient-to-br from-slate-700/50 to-slate-800/50 rounded-lg border border-slate-600/30 transition-all duration-300"
                                                     >
                                                         <div className="flex items-start justify-between gap-3 mb-3">
-                                                            <div className="flex-1 min-w-0">
-                                                                <a
-                                                                    href={`/resource/${song.notation_format}/${song.url}`}
-                                                                    target="_blank"
-                                                                    rel="noopener noreferrer"
-                                                                    className="block hover:text-blue-400 transition-colors duration-200"
-                                                                >
-                                                                    <h4 className="font-medium text-white hover:text-blue-400 transition-colors duration-200 truncate">
-                                                                        {song.name}
-                                                                    </h4>
-                                                                </a>
-                                                                <p className="text-xs text-gray-400 mt-1">
-                                                                    {lang.contributors.uploaded_at}: {formatDate(song.created_at)}
-                                                                </p>
-                                                            </div>
+                                                                                                                                                                                                                                         <div className="flex-1 min-w-0">
+                                                            <a
+                                                                href={`/resource/${song.notation_format}/${song.url}`}
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                className="block hover:text-blue-400 transition-colors duration-200"
+                                                            >
+                                                                <h4 className="font-medium text-white hover:text-blue-400 transition-colors duration-200 truncate">
+                                                                    {song.name}
+                                                                </h4>
+                                                            </a>
+                                                            <p className="text-xs text-gray-400 mt-1">
+                                                                {lang.contributors.uploaded_at}: {formatDate(song.created_at)}
+                                                            </p>
+                                                        </div>
                                                             <div className="flex-shrink-0">
                                                                 <a
                                                                     href={`/resource/${song.notation_format}/${song.url}`}
@@ -263,29 +264,42 @@ export default function Contributors() {
                                                         </div>
                                                         
                                                         {/* Payment Status */}
-                                                        <div className="flex items-center gap-3 pt-3 border-t border-slate-600/30">
-                                                            <label className="flex items-center gap-2 cursor-pointer">
-                                                                <input
-                                                                    type="checkbox"
-                                                                    checked={song.paid}
-                                                                    onChange={(e) => handlePaymentStatusChange(contributor.user_id, song.id, e.target.checked)}
-                                                                    disabled={isUpdatingPayment(contributor.user_id, song.id)}
-                                                                    className="w-4 h-4 text-green-600 bg-slate-700 border-slate-500 rounded focus:ring-green-500 focus:ring-2"
-                                                                />
-                                                                <span className={`text-sm font-medium ${song.paid ? 'text-green-400' : 'text-gray-400'}`}>
-                                                                    {song.paid ? 'Paid' : 'Unpaid'}
-                                                                </span>
-                                                            </label>
+                                                        <div className="flex items-center justify-between pt-3 border-t border-slate-600/30">
+                                                            <div className="flex items-center gap-3">
+                                                                <label className="flex items-center gap-2 cursor-pointer">
+                                                                    <input
+                                                                        type="checkbox"
+                                                                        checked={song.paid}
+                                                                        onChange={(e) => handlePaymentStatusChange(contributor.user_id, song.id, e.target.checked)}
+                                                                        disabled={isUpdatingPayment(contributor.user_id, song.id)}
+                                                                        className="w-4 h-4 text-green-600 bg-slate-700 border-slate-500 rounded focus:ring-green-500 focus:ring-2"
+                                                                    />
+                                                                    <span className={`text-sm font-medium ${song.paid ? 'text-green-400' : 'text-gray-400'}`}>
+                                                                        {song.paid ? 'Paid' : 'Unpaid'}
+                                                                    </span>
+                                                                </label>
+                                                                
+                                                                {isUpdatingPayment(contributor.user_id, song.id) && (
+                                                                    <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                                                                )}
+                                                                
+                                                                {song.payment_updated_at && (
+                                                                    <span className="text-xs text-gray-500">
+                                                                        Updated: {formatDate(song.payment_updated_at)}
+                                                                    </span>
+                                                                )}
+                                                            </div>
                                                             
-                                                            {isUpdatingPayment(contributor.user_id, song.id) && (
-                                                                <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-                                                            )}
-                                                            
-                                                            {song.payment_updated_at && (
-                                                                <span className="text-xs text-gray-500">
-                                                                    Updated: {formatDate(song.payment_updated_at)}
+                                                            <div className="flex-shrink-0">
+                                                                <span className={`inline-flex items-center px-2 py-1 rounded text-xs font-medium ${
+                                                                    song.notation_format === 'guitar_chord' ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' :
+                                                                    song.notation_format === 'fanduri_chord' ? 'bg-green-500/20 text-green-400 border border-green-500/30' :
+                                                                    song.notation_format === 'song_text' ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30' :
+                                                                    'bg-gray-500/20 text-gray-400 border border-gray-500/30'
+                                                                }`}>
+                                                                    {getNotation(song.notation_format)?.page_title || song.notation_format}
                                                                 </span>
-                                                            )}
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 ))}
