@@ -54,6 +54,7 @@ export default function SongPage({ song, relatedSongs }){
         if (savedFontSize) {
             setFontSize(parseInt(savedFontSize, 10));
         }
+        console.log("The song is ", song)
     }, []);
 
     useEffect(() => {
@@ -158,6 +159,24 @@ export default function SongPage({ song, relatedSongs }){
             {/* Additional meta tags for better SEO */}
             <meta name="keywords" content={`${displaySongName}, ${displayAuthors?.join(', ')}, ${song.notation.page_title}, chords, music, აკორდები, ტაბები, გაკვეთილებები`} />
             <meta name="author" content={song.uploader || 'Akordebi.ge'} />
+            
+            {/* JSON-LD structured data for better SEO */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "MusicComposition",
+                        "name": displaySongName,
+                        "composer": displayAuthors,
+                        "description": song.searchWords,
+                        "text": song.text,
+                        "url": `${process.env.NEXT_PUBLIC_DOMAIN}/resource/${song.notation_format}/${song.url}`,
+                        "genre": song.notation.page_title,
+                        "inLanguage": language === "eng" ? "en" : "ka"
+                    })
+                }}
+            />
         </Head>
         <Header />    
         <div className={`${styles.songPage} page_container noselect`}>
@@ -268,6 +287,27 @@ export default function SongPage({ song, relatedSongs }){
             {/* <div className="flex justify-left pl-[10px] my-6">
                 <DonationButton className="shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200" />
             </div> */}
+            
+            {/* Hidden full text for SEO - not visible to users but crawlable by search engines */}
+            {song.text && (
+                <div 
+                    className="sr-only" 
+                    aria-hidden="true"
+                    style={{ 
+                        position: 'absolute', 
+                        left: '-10000px', 
+                        width: '1px', 
+                        height: '1px', 
+                        overflow: 'hidden' 
+                    }}
+                >
+                    <h2>
+                        {language === "eng" ? "Song Lyrics" : "სიმღერის ტექსტი"}: {displaySongName}
+                        {displayAuthors && ` - ${displayAuthors.join(', ')}`}
+                    </h2>
+                    <p>{song.text}</p>
+                </div>
+            )}
             
             <main className={`${styles.songBody} mxedruli`} style={{fontSize}}>
                 {/* Breadcrumb Navigation */}

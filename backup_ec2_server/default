@@ -2,7 +2,30 @@
 server {
     listen 80;
     server_name akordebi.ge www.akordebi.ge;
-    return 301 https://$host$request_uri;
+    
+    # ACME challenge location for certificate renewal
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+    
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+
+# HTTP Configuration for admin.tsogi.ge
+server {
+    listen 80;
+    server_name admin.tsogi.ge www.admin.tsogi.ge;
+    
+    # ACME challenge location for certificate renewal
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+    
+    location / {
+        return 301 https://$host$request_uri;
+    }
 }
 
 server {
@@ -14,8 +37,30 @@ server {
     include /etc/letsencrypt/options-ssl-nginx.conf;
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 
+    client_max_body_size 10M;
+
     location / {
         proxy_pass http://localhost:3002;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+
+server {
+    listen 443 ssl;
+    server_name admin.tsogi.ge www.admin.tsogi.ge;
+
+    ssl_certificate /etc/letsencrypt/live/admin.tsogi.ge/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/admin.tsogi.ge/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+    client_max_body_size 10M;
+
+    location / {
+        proxy_pass http://localhost:3003;  # Assuming admin runs on different port
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
