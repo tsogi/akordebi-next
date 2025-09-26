@@ -12,6 +12,7 @@ export default function Contributors() {
     const [error, setError] = useState(null);
     const [expandedContributors, setExpandedContributors] = useState(new Set());
     const [updatingPayments, setUpdatingPayments] = useState(new Set());
+    const [bulkUpdatingUsers, setBulkUpdatingUsers] = useState(new Set());
 
     useEffect(() => {
         fetchContributors();
@@ -80,6 +81,48 @@ export default function Contributors() {
         }
     };
 
+    const handleMarkAllAsPaid = async (userId) => {
+        setBulkUpdatingUsers(prev => new Set(prev).add(userId));
+
+        try {
+            const response = await fetch('/api/contributors/bulk-payment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ userId }),
+            });
+
+            if (response.ok) {
+                // Update local state - mark all unpaid songs as paid
+                setContributors(prev => prev.map(contributor => {
+                    if (contributor.user_id === userId) {
+                        return {
+                            ...contributor,
+                            songs: contributor.songs.map(song => ({
+                                ...song,
+                                paid: true,
+                                payment_updated_at: new Date().toISOString()
+                            }))
+                        };
+                    }
+                    return contributor;
+                }));
+            } else {
+                console.error('Failed to update bulk payment status');
+                // You might want to show an error message to the user
+            }
+        } catch (error) {
+            console.error('Error updating bulk payment status:', error);
+        } finally {
+            setBulkUpdatingUsers(prev => {
+                const newSet = new Set(prev);
+                newSet.delete(userId);
+                return newSet;
+            });
+        }
+    };
+
     const formatDate = (dateString) => {
         if (!dateString) return '';
         const date = new Date(dateString);
@@ -104,6 +147,8 @@ export default function Contributors() {
 
     const isExpanded = (userId) => expandedContributors.has(userId);
     const isUpdatingPayment = (userId, songId) => updatingPayments.has(`${userId}-${songId}`);
+    const isBulkUpdating = (userId) => bulkUpdatingUsers.has(userId);
+    const hasUnpaidSongs = (contributor) => contributor.songs && contributor.songs.some(song => !song.paid);
 
     if (loading) {
         return (
@@ -193,6 +238,28 @@ export default function Contributors() {
                                                 </div>
                                             </div>
                                             <div className="flex items-center gap-4">
+                                                {/* Mark All as Paid Button */}
+                                                {hasUnpaidSongs(contributor) && (
+                                                    <button
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            handleMarkAllAsPaid(contributor.user_id);
+                                                        }}
+                                                        disabled={isBulkUpdating(contributor.user_id)}
+                                                        className="flex items-center gap-2 px-3 py-2 bg-green-600/20 hover:bg-green-600/30 border border-green-500/30 rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                                                    >
+                                                        {isBulkUpdating(contributor.user_id) ? (
+                                                            <div className="w-4 h-4 border-2 border-green-500 border-t-transparent rounded-full animate-spin"></div>
+                                                        ) : (
+                                                            <svg className="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                                                            </svg>
+                                                        )}
+                                                        <span className="text-green-400 text-sm font-medium whitespace-nowrap">
+                                                            {isBulkUpdating(contributor.user_id) ? 'Updating...' : 'Mark All Paid'}
+                                                        </span>
+                                                    </button>
+                                                )}
                                                 <div className="text-right">
                                                     <div className="bg-blue-600/20 px-4 py-2 rounded-lg border border-blue-500/30">
                                                         <span className="text-2xl font-bold text-blue-400">

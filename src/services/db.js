@@ -841,6 +841,33 @@ class Db{
         `, [userId, songId, paid, paid]);
     }
 
+    async setAllContributorSongsAsPaid(userId) {
+        // Get all unpaid songs for this user
+        const [songRows] = await this.pool.execute(`
+            SELECT s.id 
+            FROM songs s
+            WHERE s.uploaderUserId LIKE CONCAT(?, '-%')
+            AND s.id NOT IN (
+                SELECT cp.song_id 
+                FROM contributor_payments cp 
+                WHERE cp.user_id = ? AND cp.paid = 1
+            )
+        `, [userId, userId]);
+
+        // Mark all unpaid songs as paid
+        for (const song of songRows) {
+            await this.pool.execute(`
+                INSERT INTO contributor_payments (user_id, song_id, paid)
+                VALUES (?, ?, 1)
+                ON DUPLICATE KEY UPDATE 
+                    paid = 1, 
+                    updated_at = CURRENT_TIMESTAMP
+            `, [userId, song.id]);
+        }
+
+        return songRows.length;
+    }
+
     async getContributorsWithPayments() {
         // First, get the contributors with their song counts
         const [contributorRows] = await this.pool.execute(`
