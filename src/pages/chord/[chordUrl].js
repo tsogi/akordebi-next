@@ -302,7 +302,7 @@ export default function SongPage({ song, relatedSongs }){
                     }}
                 >
                     <h2>
-                        {language === "eng" ? "Song Lyrics" : "სიმღერის ტექსტი"}: {displaySongName}
+                        {displaySongName}
                         {displayAuthors && ` - ${displayAuthors.join(', ')}`}
                     </h2>
                     <p>{song.text}</p>
