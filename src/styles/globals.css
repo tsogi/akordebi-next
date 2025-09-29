@@ -294,7 +294,7 @@ code {
 
 .lineWrapper {
     display: flex;
-    padding: 10px 0 11px 11px;
+    padding: 0px 0 11px 11px;
     flex-wrap: wrap;
 }
 
