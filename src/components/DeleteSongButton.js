@@ -5,7 +5,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import ConfirmDialog from './ConfirmDialog';
 import Alert from './Alert';
 
-const DeleteSongButton = ({ song, onDelete, className = "", style = {} }) => {
+const DeleteSongButton = ({ song, onDelete, className = "", style = {}, children }) => {
     const { user, setAuthOpenedFrom } = useUser();
     const { lang } = useLanguage();
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
@@ -63,7 +63,7 @@ const DeleteSongButton = ({ song, onDelete, className = "", style = {} }) => {
                 style={style}
                 title={lang.songCard?.deleteTooltip || "Delete song"}
             >
-                <TrashIcon className="w-4 h-4" />
+                {children || <TrashIcon className="w-4 h-4" />}
             </button>
 
             <ConfirmDialog 

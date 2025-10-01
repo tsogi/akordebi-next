@@ -99,6 +99,10 @@ const interfaceGeo = {
             delete: "ავტორის წაშლა",
         }
     },
+    songActions: {
+        edit: "რედაქტირება",
+        delete: "წაშლა"
+    },
     placeholder: {
         songText: `ჩაწერეთ ტექსტი. მაგალითად: 
 
@@ -219,6 +223,10 @@ const interfaceEng = {
             authorName: "Author name",
             delete: "Delete the author"
         }
+    },
+    songActions: {
+        edit: "Edit",
+        delete: "Delete"
     },
     placeholder: {
         songText: `Enter text. Example: 
