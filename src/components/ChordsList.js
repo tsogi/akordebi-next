@@ -216,10 +216,14 @@ export default function ChordsList({ initialSongs }){
     }
 
     return <div className={"page_container"}>
-        <div className="flex flex-col md:flex-row justify-between items-center w-full gap-6 mb-8">
+        <div className="flex flex-col md:flex-row justify-between items-center w-full gap-6 mb-2">
             <div className="w-full md:w-1/2">
                 <SearchSongs />
             </div>
+            <NotationSwitcher 
+                notationFormat={notationFormat}
+                onNotationFormatChange={handleNotationFormatChange}
+            />
             <div className={`${styles.filterSongs} w-full md:w-1/2 flex justify-end`}>
                 <div className={styles.sortContainer}>
                     <CustomSelect 
@@ -250,11 +254,6 @@ export default function ChordsList({ initialSongs }){
                 </div>
             </div>
         </div>
-        
-        <NotationSwitcher 
-            notationFormat={notationFormat}
-            onNotationFormatChange={handleNotationFormatChange}
-        />
         
         <main className={"songsList"}>
             {
