@@ -8,7 +8,7 @@ export default function NotationSwitcher({
     const { lang } = useLanguage();
 
     return (
-        <div className="mb-4 w-full px-2 md:px-0 md:max-w-[900px] md:mx-auto">
+        <div className="mb-4 w-full px-2">
             <div className="rounded-xl shadow-lg bg-gradient-to-br from-gray-800/95 to-gray-900/95 backdrop-blur-sm p-3 border border-gray-700/50">
                 <div className="space-y-3">
                     {notations.map((group) => (
