@@ -87,13 +87,13 @@ export default function Header(){
                 >
                     {lang.upload_nav}
                 </Link>
-                <Link 
+                {/* <Link 
                     href="/prices" 
                     className={`nav-link ${isActive("prices") ? "active" : ""}`}
                     onClick={() => setIsMenuOpen(false)}
                 >
                     {lang.prices || "ფასები"}
-                </Link>
+                </Link> */}
                 <Link 
                     href="/teachers" 
                     className={`nav-link ${isActive("teachers") ? "active" : ""}`}

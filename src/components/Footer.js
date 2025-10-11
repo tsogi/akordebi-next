@@ -74,10 +74,10 @@ export default function Footer(){
               <span className={styles.linksDivider}></span>
               {lang._footer_terms}
             </a>
-            <a className={styles.quickLink} href="/legal/refunds">
+            {/* <a className={styles.quickLink} href="/legal/refunds">
               <span className={styles.linksDivider}></span>
               {lang._footer_refunds}
-            </a>
+            </a> */}
             <a className={styles.quickLink} href="/legal/privacy">
               <span className={styles.linksDivider}></span>
               {lang._footer_policy}
