@@ -21,8 +21,7 @@ export const notations = [
         icon: "/icons/songs_icon.png",
         tabs: [
             { code: "song_text", category: "songs", name: "ტექსტები", page_title: "სიმღერის ტექსტი", page_title_plural: "სიმღერის ტექსტები", chordsDir: "/chords/guitar", isFree: true, hideDifficulty: true},
-            // { code: "song_singer", category: "songs", name: "შემსრულებლები", page_title: "მომღერალი", chordsDir: "/chords/guitar"},
-            // { code: "song_bands", category: "songs", name: "ჯგუფები", page_title: "ჯგუფი", chordsDir: "/chords/guitar"},
+            { code: "karaoke", category: "songs", name: "კარაოკე", page_title: "კარაოკე", page_title_plural: "კარაოკე", chordsDir: "/chords/guitar", isFree: true, hideDifficulty: false},
         ] 
     }
 ]
