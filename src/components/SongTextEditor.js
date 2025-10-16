@@ -551,11 +551,11 @@ return (
             <div className={styles.poemActionBtn}>
                 <Button
                     variant="contained"
-                    color="secondary"
+                    // color="secondary"
                     startIcon={<AddIcon />}
                     onClick={() => { addLine("mp3") }}
                 >
-                    ფაილის დამატება
+                    mp3 ფაილის დამატება
                 </Button>
             </div>
         </div>
