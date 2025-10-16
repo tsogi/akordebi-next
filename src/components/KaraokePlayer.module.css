@@ -1,0 +1,97 @@
+.karaokePlayer {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.audioPlayer {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.audioControls {
+    width: 100%;
+    max-width: 600px;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    outline: none;
+}
+
+.audioControls::-webkit-media-controls-panel {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.karaokeText {
+    font-size: 1.2em;
+    line-height: 1.8;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+    min-height: 200px;
+}
+
+.karaokeLine {
+    margin-bottom: 15px;
+    display: block;
+}
+
+.karaokeSegment {
+    display: inline;
+    padding: 2px 4px;
+    margin: 0 2px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    color: #cccccc;
+    background: transparent;
+}
+
+.karaokeSegment.highlighted {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+}
+
+.debugInfo {
+    margin-top: 20px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    color: #888;
+    text-align: center;
+    font-family: monospace;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .karaokePlayer {
+        padding: 15px;
+    }
+    
+    .karaokeText {
+        font-size: 1.1em;
+        padding: 15px;
+    }
+    
+    .audioControls {
+        height: 45px;
+    }
+}
+
+@media (max-width: 480px) {
+    .karaokeText {
+        font-size: 1em;
+        padding: 10px;
+    }
+    
+    .karaokePlayer {
+        padding: 10px;
+    }
+}

@@ -28,6 +28,7 @@ import DeleteSongButton from '@/components/DeleteSongButton';
 import EditSongButton from '@/components/EditSongButton';
 import { transposeChord } from '@/components/TonalityControl';
 import TonalityControl from '@/components/TonalityControl';
+import KaraokePlayer from '@/components/KaraokePlayer';
 let intervalId;
 
 export default function SongPage({ song, relatedSongs }){
@@ -372,33 +373,43 @@ export default function SongPage({ song, relatedSongs }){
                     null
                 }
                 {
-                    song?.body ? song.body.map((line, index) => {
-                        if(line.type == "rightHand") {
-                            return rightHandLine(line.value, index);
-                        }
+                    // Handle karaoke notation type specially
+                    song?.notation_format === "karaoke" ? (
+                        <KaraokePlayer songBody={song.body} />
+                    ) : (
+                        // Handle other notation types
+                        song?.body ? song.body.map((line, index) => {
+                            if(line.type == "rightHand") {
+                                return rightHandLine(line.value, index);
+                            }
 
-                        if(line.type == "coupletChords") {
-                            return coupletChordsLine(line.list, index, showChords, song.notation.chordsDir, tonality, transposeChord);
-                        }
+                            if(line.type == "coupletChords") {
+                                return coupletChordsLine(line.list, index, showChords, song.notation.chordsDir, tonality, transposeChord);
+                            }
 
-                        if(line.type == "text") {
-                            return coupletLine(line, index, song.notation.chordsDir, tonality, transposeChord);
-                        }
-                        
-                        if(line.type == "chorus") {
-                            return chorusLine(line, index, song.notation.chordsDir, tonality, transposeChord);
-                        }
+                            if(line.type == "text") {
+                                return coupletLine(line, index, song.notation.chordsDir, tonality, transposeChord);
+                            }
+                            
+                            if(line.type == "chorus") {
+                                return chorusLine(line, index, song.notation.chordsDir, tonality, transposeChord);
+                            }
 
-                        if(line.type == "break") {
-                            return breakLine(index);
-                        }
-                        
-                        if(line.type == "image") {
-                            return imageLine(line.value, index);
-                        }
-                    })
-                    :
-                    null
+                            if(line.type == "break") {
+                                return breakLine(index);
+                            }
+                            
+                            if(line.type == "image") {
+                                return imageLine(line.value, index);
+                            }
+                            
+                            if(line.type == "mp3") {
+                                return mp3Line(line.value, index);
+                            }
+                        })
+                        :
+                        null
+                    )
                 } 
             </main>
             <div className={styles.postSongArea}>
@@ -648,6 +659,24 @@ function imageLine(value, index){
     </div>
 }
 
+function mp3Line(value, index){
+    return <div key={index} className={`${styles.lineWrapper} ${styles.audio}`}>
+        <div style={{ color: 'white', marginBottom: '10px' }}>
+            აუდიო ფაილი:
+        </div>
+        <audio 
+            controls 
+            style={{ width: '100%', maxWidth: '600px' }}
+            src={value}
+        >
+            თქვენი ბრაუზერი არ აღიარებს audio ელემენტს.
+        </audio>
+        <div className='reportWrapper'>
+            <ReportLine lineNumber={index} lineText="Audio file" />
+        </div>
+    </div>
+}
+
 export async function getServerSideProps(ctx) {
     const supabase = createPagesServerClient(ctx);
     const {data} = await supabase.auth.getSession();
@@ -701,6 +730,11 @@ function attachNotation(song){
 }
 
 function addCoupletChords(song){
+    // Skip chord processing for karaoke notation
+    if (song.notation_format === "karaoke") {
+        return song;
+    }
+    
     let newLines = [];
     let lines = song.body;
 
