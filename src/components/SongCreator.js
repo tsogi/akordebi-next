@@ -124,6 +124,43 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
         setSnackOpen(open);
     }
 
+    // Function to parse karaoke text and extract timing information
+    function parseKaraokeText(text) {
+        const karaokeData = [];
+        const lines = text.split('\n');
+        
+        for (let line of lines) {
+            if (line.trim() === '') continue;
+            
+            // Find words with timing information: word[0:00:10-0:00:20]
+            const wordMatches = line.match(/(\S+)\[(\d+:\d+:\d+-\d+:\d+:\d+)\]/g);
+            
+            if (wordMatches) {
+                for (let match of wordMatches) {
+                    const [, word, timing] = match.match(/(\S+)\[(\d+:\d+:\d+-\d+:\d+:\d+)\]/);
+                    const [startTime, endTime] = timing.split('-');
+                    
+                    karaokeData.push({
+                        word: word,
+                        startTime: startTime,
+                        endTime: endTime
+                    });
+                }
+            }
+            
+            // Add regular text without timing
+            const textWithoutTiming = line.replace(/(\S+)\[(\d+:\d+:\d+-\d+:\d+:\d+)\]/g, '$1');
+            if (textWithoutTiming.trim()) {
+                karaokeData.push({
+                    text: textWithoutTiming.trim(),
+                    type: 'text'
+                });
+            }
+        }
+        
+        return karaokeData;
+    }
+
     async function validationError(data){
         if(!data.name) {
             return "სიმღერის სახელის ჩაწერა აუცილებელია";
@@ -134,6 +171,8 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
 
         let containsChord = false;
         let containsImage = false;
+        let containsMp3 = false;
+        let containsKaraoke = false;
         let uniqueChords = new Set();
         
         // Get the notation directory from notations.js
@@ -154,7 +193,27 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
             }
             if(line.type === "image" && line.value) {
                 containsImage = true;
-                break;
+            }
+            if(line.type === "mp3" && line.value) {
+                containsMp3 = true;
+            }
+            if(line.type === "karaoke" && line.value) {
+                containsKaraoke = true;
+                // Validate karaoke format
+                const karaokeData = parseKaraokeText(line.value);
+                if (karaokeData.length === 0) {
+                    return "კარაოკე ტექსტის ფორმატი არასწორია. გამოიყენეთ ფორმატი: სიტყვა[0:00:10-0:00:20]";
+                }
+            }
+        }
+
+        // Special validation for karaoke notation type
+        if (data.notation_format === "karaoke") {
+            if (!containsMp3) {
+                return "კარაოკე ტიპისთვის MP3 ფაილის ატვირთვა აუცილებელია";
+            }
+            if (!containsKaraoke) {
+                return "კარაოკე ტიპისთვის კარაოკე ტექსტის დამატება აუცილებელია";
             }
         }
 
@@ -237,7 +296,7 @@ export default function SongCreator({ _songName = "", _authors = [], _songText =
                 </div>
             </div>
             <div className={styles.textEditor}>
-                <SongTextEditor _lines={songText} onSongTextChange={setSongText} />
+                <SongTextEditor _lines={songText} onSongTextChange={setSongText} notationFormat={notationFormat} />
             </div>
             <div className={ `${styles.saveSongBtn} capital` }>
                 <Button disabled={saving ? true : false} style={{ background: "green", color: "white", fontSize: "1.3rem" }} size="large" onClick={handleSaveSongClick} variant="outlined" color='success'>{saveButtonText}</Button>

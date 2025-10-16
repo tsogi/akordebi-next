@@ -19,7 +19,7 @@ const css = {
     textInput: "h-[50px] pl-5 text-white w-full bg-[rgba(255,255,255,.05)] shadow-[inset 12px 12px 30px rgba(53,123,230,.2)]"
 }
 
-const PoemEditor = ({onSongTextChange, _lines = []}) => {
+const PoemEditor = ({onSongTextChange, _lines = [], notationFormat = ""}) => {
   const [lines, setLines] = useState(_lines);
   const { lang } = useLanguage();
 
@@ -34,6 +34,7 @@ const PoemEditor = ({onSongTextChange, _lines = []}) => {
   const [selectedChord, setselectedChord] = useState('');
   const [lineType, setLineType] = useState('');
   const [imageUploadOpen, setImageUploadOpen] = useState(false);
+  const [mp3UploadOpen, setMp3UploadOpen] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   
   const fileInputRef = useRef(null);
@@ -53,7 +54,13 @@ const PoemEditor = ({onSongTextChange, _lines = []}) => {
     if(type == "text") {
         newLine.chords = [];
         newLine.value = "";
-        setLineType("text");
+        // Set line type based on notation format for karaoke
+        if (notationFormat === "karaoke") {
+            setLineType("karaoke");
+            newLine.type = "karaoke";
+        } else {
+            setLineType("text");
+        }
         setEditId(newLine.id);
     }
 
@@ -73,6 +80,13 @@ const PoemEditor = ({onSongTextChange, _lines = []}) => {
         setImageUploadOpen(true);
         setSelectedLineIndex(lines.length);  // Set index to the position where new line will be added
     }
+
+    if(type == "mp3") {
+        newLine.value = "";
+        setMp3UploadOpen(true);
+        setSelectedLineIndex(lines.length);  // Set index to the position where new line will be added
+    }
+
 
     setLines([...lines, newLine]);
   };
@@ -212,6 +226,10 @@ const handleImageUploadClose = () => {
   setImageUploadOpen(false);
 };
 
+const handleMp3UploadClose = () => {
+  setMp3UploadOpen(false);
+};
+
 const handleNumberChange = event => {
   setselectedChord(event.target.value);
 };
@@ -286,6 +304,61 @@ const handleImageUpload = async (event) => {
   }
 };
 
+const handleMp3Upload = async (event) => {
+  const file = event.target.files[0];
+  if (file) {
+    // Validate file type
+    if (!file.name.toLowerCase().endsWith('.mp3')) {
+      alert('მხოლოდ MP3 ფაილები დაშვებულია');
+      return;
+    }
+    
+    setIsUploading(true);
+    try {
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        const base64Audio = e.target.result;
+        
+        // Generate a unique filename
+        const fileName = `karaoke_${Date.now()}.mp3`;
+        
+        // Upload the MP3 via API
+        const response = await fetch('/api/uploadMp3', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            audio: base64Audio,
+            fileName: fileName
+          }),
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+          console.error('Upload error details:', data);
+          throw new Error(data.details || data.error || 'Failed to upload MP3');
+        }
+        
+        // Update the value of the appropriate line with the S3 URL
+        const newLines = [...lines];
+        newLines[selectedLineIndex].value = data.url;
+        
+        setLines(newLines);
+        setIsUploading(false);
+        setMp3UploadOpen(false);
+      };
+      
+      reader.readAsDataURL(file);
+    } catch (error) {
+      console.error("Error uploading MP3:", error);
+      setIsUploading(false);
+      alert(`MP3 ატვირთვა ვერ მოხერხდა: ${error.message}. გთხოვთ სცადოთ ხელახლა.`);
+    }
+  }
+};
+
 return (
   <div>
     <ReactSortable list={lines} setList={setLines}>
@@ -298,7 +371,7 @@ return (
                     value={line.value}
                     onChange={e => handleUpdate(line.id, e.target.value)}
                     rows={ getTextAreaRows(lineType) }
-                    placeholder={ getTextAreaPlaceholder(lineType) }
+                    placeholder={ getTextAreaPlaceholder(lineType, notationFormat) }
                 ></textarea>
                 <Button className={styles.saveBtn} style={{ borderColor: "white", color: "white", marginLeft: "20px" }} color='primary' variant='outlined' onClick={handleSaveClick}>{lang.upload.editor_save}</Button>
             </div>
@@ -321,7 +394,7 @@ return (
                       </Tooltip>
                     </span>
                 {
-                    ["text", "chorus", "rightHand"].includes(line.type) ?
+                    ["text", "chorus", "rightHand", "karaoke"].includes(line.type) ?
                     <span className={styles.actionBtn}>
                       <Tooltip placement="top" title={lang.upload.editor_change_title}>
                         <EditIcon onClick={() => handleEdit(line.id)} />
@@ -351,7 +424,7 @@ return (
                     null
                 }
                 {
-                    ["break", "rightHand", "image"].includes(line.type) ?
+                    ["break", "rightHand", "image", "mp3"].includes(line.type) ?
                     <div className={styles.actionPlace}></div>
                     :
                     null
@@ -394,6 +467,16 @@ return (
                 null
             }
             {
+                line.type == "karaoke" ?
+                <div className={styles.karaoke}>
+                  <div style={{ color: '#ccc', whiteSpace: 'pre-wrap' }}>
+                    {line.value}
+                  </div>
+                </div>
+                :
+                null
+            }
+            {
                 line.type == "break" ?
                 <div className={styles.breakDiv}>
                 </div>
@@ -408,6 +491,23 @@ return (
                     alt="Uploaded tab or music note" 
                     style={{ maxWidth: '100%', marginTop: '10px' }} 
                   />
+                </div>
+                :
+                null
+            }
+            {
+                line.type == "mp3" && line.value ?
+                <div className={styles.audioContainer}>
+                  <div style={{ color: 'white', marginBottom: '10px' }}>
+                    კარაოკე ფაილი:
+                  </div>
+                  <audio 
+                    controls 
+                    style={{ width: '100%', marginTop: '10px' }}
+                    src={line.value}
+                  >
+                    თქვენი ბრაუზერი არ აღიარებს audio ელემენტს.
+                  </audio>
                 </div>
                 :
                 null
@@ -445,7 +545,17 @@ return (
                     startIcon={<AddIcon />}
                     onClick={() => { addLine("image") }}
                 >
-                    {lang.upload.add_image_button || "Add Image"}
+                    {lang.upload.add_image_button || "ფოტოს დამატება"}
+                </Button>
+            </div>
+            <div className={styles.poemActionBtn}>
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    startIcon={<AddIcon />}
+                    onClick={() => { addLine("mp3") }}
+                >
+                    ფაილის დამატება
                 </Button>
             </div>
         </div>
@@ -466,12 +576,12 @@ return (
     </Modal>
     <Modal open={imageUploadOpen} onClose={handleImageUploadClose}>
       <div style={{ position: 'absolute', width: 400, backgroundColor: "#004aad", borderRadius: "4px", padding: "35px", top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
-        <Typography variant="h8">{lang.upload.upload_image || "Upload Image"}</Typography>
+        <Typography variant="h8">{lang.upload.upload_image || "ფოტოს ატვირთვა"}</Typography>
         {isUploading ? (
           <div style={{ display: 'flex', justifyContent: 'center', margin: '20px 0' }}>
             <CircularProgress style={{ color: 'white' }} />
             <Typography style={{ marginLeft: '10px', color: 'white' }}>
-              {lang.upload.uploading || "Uploading..."}
+              {lang.upload.uploading || "იტვირთება..."}
             </Typography>
           </div>
         ) : (
@@ -487,7 +597,36 @@ return (
               }}
             />
             <Button variant="contained" color="primary" onClick={handleImageUploadClose}>
-              {lang.upload.cancel || "Cancel"}
+              {lang.upload.cancel || "გაუქმება"}
+            </Button>
+          </>
+        )}
+      </div>
+    </Modal>
+    <Modal open={mp3UploadOpen} onClose={handleMp3UploadClose}>
+      <div style={{ position: 'absolute', width: 400, backgroundColor: "#004aad", borderRadius: "4px", padding: "35px", top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+        <Typography variant="h8">MP3 ფაილის ატვირთვა</Typography>
+        {isUploading ? (
+          <div style={{ display: 'flex', justifyContent: 'center', margin: '20px 0' }}>
+            <CircularProgress style={{ color: 'white' }} />
+            <Typography style={{ marginLeft: '10px', color: 'white' }}>
+              იტვირთება...
+            </Typography>
+          </div>
+        ) : (
+          <>
+            <input
+              type="file"
+              accept=".mp3,audio/mpeg"
+              onChange={handleMp3Upload}
+              style={{
+                display: 'block',
+                margin: '20px 0',
+                color: 'white'
+              }}
+            />
+            <Button variant="contained" color="primary" onClick={handleMp3UploadClose}>
+              გაუქმება
             </Button>
           </>
         )}
@@ -497,7 +636,7 @@ return (
 );
 };
 
-function getTextAreaPlaceholder(type) {
+function getTextAreaPlaceholder(type, notationFormat) {
   const { lang } = useLanguage();
 
   if(type == "rightHand") {
@@ -506,6 +645,10 @@ function getTextAreaPlaceholder(type) {
 
   if(type == "text") {
     return lang.placeholder.songText;
+  }
+
+  if(type == "karaoke" || notationFormat === "karaoke") {
+    return "მაგალითი:\nიმაგინე[0:00:10-0:00:20] ყველა[0:00:20-0:00:30] ხალხი[0:00:30-0:00:40]\nცხოვრობს მშვიდობაში\n\nფორმატი: სიტყვა[საათი:წუთი:წამი-საათი:წუთი:წამი]";
   }
 
   return "";
@@ -518,6 +661,10 @@ function getTextAreaRows(type) {
 
   if(type == "text") {
     return 25;
+  }
+
+  if(type == "karaoke") {
+    return 15;
   }
 
   return 6;
