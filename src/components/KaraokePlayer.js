@@ -131,12 +131,6 @@ const KaraokePlayer = ({ songBody }) => {
                 {karaokeLines.map((line, index) => renderKaraokeLine(line, index))}
             </div>
             
-            {/* Debug Info (can be removed in production) */}
-            {process.env.NODE_ENV === 'development' && (
-                <div className={styles.debugInfo}>
-                    <small>Current Time: {currentTime.toFixed(2)}s</small>
-                </div>
-            )}
         </div>
     );
 };
