@@ -20,8 +20,8 @@ export const notations = [
         name: "სიმღერები", 
         icon: "/icons/songs_icon.png",
         tabs: [
-            { code: "song_text", category: "songs", name: "ტექსტები", page_title: "სიმღერის ტექსტი", page_title_plural: "სიმღერის ტექსტები", chordsDir: "/chords/guitar", isFree: true, hideDifficulty: true},
             { code: "karaoke", category: "songs", name: "კარაოკე", page_title: "კარაოკე", page_title_plural: "კარაოკე", chordsDir: "/chords/guitar", isFree: true, hideDifficulty: false},
+            { code: "song_text", category: "songs", name: "ტექსტები", page_title: "სიმღერის ტექსტი", page_title_plural: "სიმღერის ტექსტები", chordsDir: "/chords/guitar", isFree: true, hideDifficulty: true},
         ] 
     }
 ]
