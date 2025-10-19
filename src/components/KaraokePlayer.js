@@ -86,6 +86,18 @@ const KaraokePlayer = ({ songBody }) => {
         return currentTime >= startTime && currentTime <= endTime;
     };
     
+    // Handle clicking on a text segment to jump to that timestamp
+    const handleSegmentClick = (startTime) => {
+        const audio = audioRef.current;
+        if (audio && startTime !== null) {
+            audio.currentTime = startTime;
+            // Also play if paused
+            if (audio.paused) {
+                audio.play().catch(console.log);
+            }
+        }
+    };
+    
     // Render karaoke text with highlighting
     const renderKaraokeLine = (line, lineIndex) => {
         const segments = parseKaraokeText(line.value);
@@ -99,13 +111,22 @@ const KaraokePlayer = ({ songBody }) => {
                             isHighlighted(segment.startTime, segment.endTime) 
                                 ? styles.highlighted 
                                 : ''
-                        }`}
+                        } ${segment.startTime !== null ? styles.clickable : ''}`}
+                        onClick={() => handleSegmentClick(segment.startTime)}
+                        title={segment.startTime !== null ? `Jump to ${formatTimeDisplay(segment.startTime)}` : ''}
                     >
                         {segment.text}
                     </span>
                 ))}
             </div>
         );
+    };
+    
+    // Helper function to format time for display in tooltip
+    const formatTimeDisplay = (seconds) => {
+        const minutes = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${minutes}:${secs.toString().padStart(2, '0')}`;
     };
     
     if (!mp3Line) {
