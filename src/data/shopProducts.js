@@ -2,7 +2,7 @@ const shopProducts = [
     {
       id: "yamaha-c40bl",
       name: "Yamaha C40 Black",
-      price: "371",
+      price: "370",
       description: "საუკეთესო არჩევანი მათთვის ვინც ახლა იწყებს დაკვრის სწავლას",
       thumbnail: "/images/shop/c40/1.png",
       images: [
@@ -24,7 +24,7 @@ const shopProducts = [
     {
       id: "yamaha-cg102",
       name: "Yamaha CG102",
-      price: "639",
+      price: "605",
       description: "საუკეთესო არჩევანი მათთვის ვინც 5 წელზე ნაკლებია უკრავს გიტარაზე",
       thumbnail: "/images/shop/cg102/1.png",
       images: [
@@ -45,12 +45,47 @@ const shopProducts = [
       inStock: true
     },
     {
-      id: "acoustic-1",
-      name: "Fender CD-60S",
-      price: "650",
-      description: "მაგარი ხმის აკუსტიკური გიტარები ნაძვის ხის ზედაპირით და მაჰაგონის გვერდებით, მდიდარი ჟღერადობით.",
-      thumbnail: "/images/shop/fender-cd60s.jpg",
+      id: "yamaha-cg142c",
+      name: "Yamaha CG142C",
+      price: "911",
+      description: "უმაღლესი დონის სასწავლო გიტარა",
+      thumbnail: "/images/shop/cg142c/8.png",
       images: [
+        "/images/shop/cg142c/8.png",
+        "/images/shop/cg142c/1.png",
+        "/images/shop/cg142c/2.png",
+        "/images/shop/cg142c/3.png",
+        "/images/shop/cg142c/4.png",
+        "/images/shop/cg142c/5.png",
+        "/images/shop/cg142c/6.png",
+        "/images/shop/cg142c/7.png",
+        "/images/shop/cg142c/9.png",
+        "/images/shop/cg142c/10.png",
+      ],
+      characteristics: [
+        { "name": "ზომა", "value": "4/4 სრული ზომა" },
+        { "name": "ზედაპირი", "value": "ნაძვი, პრიალა დამუშავებით" },
+        { "name": "გრიფი", "value": "ვარდის ხე, მატოვი" },
+      ],
+      category: "კლასიკური გიტარები",
+      inStock: true
+    },
+    {
+      id: "yamaha-f310tbs",
+      name: "Yamaha F310TBS",
+      price: "355",
+      description: "საუკეთესო არჩევანი მათთვის ვინც ახლა იწყებს დაკვრის სწავლას",
+      thumbnail: "/images/shop/f310tbs/1.png",
+      images: [
+        "/images/shop/f310tbs/1.png",
+        "/images/shop/f310tbs/2.png",
+        "/images/shop/f310tbs/3.png",
+        "/images/shop/f310tbs/4.png",
+        "/images/shop/f310tbs/5.png",
+        "/images/shop/f310tbs/6.png",
+        "/images/shop/f310tbs/7.png",
+        "/images/shop/f310tbs/8.png",
+        "/images/shop/f310tbs/9.png",
       ],
       characteristics: [
       ],
@@ -58,12 +93,15 @@ const shopProducts = [
       inStock: true
     },
     {
-      id: "acoustic-2",
-      name: "Yamaha FG800",
-      price: "730",
-      description: "ყველაზე გაყიდვადი აკუსტიკური გიტარები ძლიერი ბასებით და ბალანსირებული ჟღერადობით.",
-      thumbnail: "/images/shop/yamaha-fg800.jpg",
+      id: "yamaha-fs400",
+      name: "Yamaha FS400",
+      price: "685",
+      description: "საუკეთესო არჩევანი 2-5 წლამდე გამოცდილების შემსრულებლებისთვის",
+      thumbnail: "/images/shop/fs400/1.png",
       images: [
+        "/images/shop/fs400/1.png",
+        "/images/shop/fs400/2.png",
+        "/images/shop/fs400/3.png",
       ],
       characteristics: [
       ],
@@ -84,104 +122,6 @@ const shopProducts = [
       subCategory: "მედიატორი",
       inStock: true
     },
-    {
-      id: "acc-2",
-      name: "KORG CA-50 ციფრული ტიუნერი",
-      price: "70₾",
-      description: "კომპაქტური და ზუსტი ციფრული ტიუნერი თქვენი გიტარის იდეალური აწყობისთვის.",
-      thumbnail: "/images/shop/korg-ca50.jpg",
-      images: [
-      ],
-      characteristics: [
-      ],
-      category: "აქსესუარები",
-      subCategory: "ტიუნერი",
-      inStock: true
-    },
-    {
-      id: "acc-3",
-      name: "Kyser Quick-Change კაპო",
-      price: "45₾",
-      description: "მაღალი ხარისხის, ადვილად გამოსაყენებელი კაპო სწრაფი ტონალური ცვლილებებისთვის.",
-      thumbnail: "/images/shop/kyser-capo.jpg",
-      images: [
-      ],
-      characteristics: [
-      ],
-      category: "აქსესუარები",
-      subCategory: "კაპო",
-      inStock: true
-    },
-    {
-      id: "acc-4",
-      name: "Levy's სამხრე ქამარი",
-      price: "55₾",
-      description: "კომფორტული და გამძლე ტყავის სამხრე ქამარი თქვენი გიტარისთვის.",
-      thumbnail: "/images/shop/levys-strap.jpg",
-      images: [
-      ],
-      characteristics: [
-      ],
-      category: "აქსესუარები",
-      subCategory: "სამხრე ქამარი",
-      inStock: true
-    },
-    {
-      id: "acc-5",
-      name: "Gator კლასიკური გიტარის ჩანთა",
-      price: "120₾",
-      description: "დაბალნილი, გამძლე ჩანთა თქვენი კლასიკური გიტარის უსაფრთხო ტრანსპორტირებისთვის.",
-      thumbnail: "/images/shop/gator-case.jpg",
-      images: [
-      ],
-      characteristics: [
-      ],
-      category: "აქსესუარები",
-      subCategory: "ჩანთა",
-      inStock: true
-    },
-    {
-      id: "acc-6",
-      name: "D'Addario EJ45 კლასიკური გიტარის სიმები",
-      price: "25₾",
-      description: "მაღალი ხარისხის კლასიკური გიტარის სიმების კომპლექტი ნათელი და დაბალანსებული ჟღერადობით.",
-      thumbnail: "/images/shop/daddario-ej45.jpg",
-      images: [
-      ],
-      characteristics: [
-      ],
-      category: "აქსესუარები",
-      subCategory: "კლასიკური სიმები",
-      inStock: true
-    },
-    {
-      id: "acc-7",
-      name: "Elixir Nanoweb აკუსტიკური გიტარის სიმები",
-      price: "40₾",
-      description: "ხანგრძლივი ჟღერადობის აკუსტიკური გიტარის სიმები Nanoweb დამცავი დაფარვით.",
-      thumbnail: "/images/shop/elixir-strings.jpg",
-      images: [
-      ],
-      characteristics: [
-      ],
-      category: "აქსესუარები",
-      subCategory: "აკუსტიკური სიმები",
-      inStock: true
-    },
-    {
-      id: "acc-8",
-      name: "Hercules GS414B გიტარის სადგამი",
-      price: "65₾",
-      description: "მყარი და სტაბილური სადგამი თქვენი გიტარისთვის, ადვილი დაკეცვის მექანიზმით.",
-      thumbnail: "/images/shop/hercules-stand.jpg",
-      images: [
-      ],
-      characteristics: [
-      ],
-      category: "აქსესუარები",
-      subCategory: "სადგამი",
-      inStock: true
-    }
   ]
 
 export default shopProducts; 
