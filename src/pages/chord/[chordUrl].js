@@ -18,7 +18,7 @@ import SongDifficulties from '@/components/SongDifficulties';
 import Favorite from '@/components/Favorite';
 import Download from '@/components/Download';
 import { createPagesServerClient } from '@supabase/auth-helpers-nextjs'
-import { MinusIcon, PlusIcon, EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
+import { MinusIcon, PlusIcon, EyeIcon, EyeSlashIcon, ViewColumnsIcon, Bars3Icon } from '@heroicons/react/24/outline';
 import { useUser } from '@/utils/useUser';
 import { useLanguage } from '@/context/LanguageContext';
 import { transliterateWithCapital, transliterateWithCapitalizedWords, convertGeorgianToLatin } from '@/utils/transliteration';
@@ -35,6 +35,7 @@ export default function SongPage({ song, relatedSongs }){
     const [fontSize, setFontSize] = useState(16);
     const [scrollSpeed, setScrollSpeed] = useState(0);
     const [showChords, setShowChords ] = useState(false);
+    const [multiColumn, setMultiColumn] = useState(true);
     const [tonality, setTonality] = useState(0);
     const { isPremium, user } = useUser();
     const { lang, language } = useLanguage();
@@ -280,6 +281,31 @@ export default function SongPage({ song, relatedSongs }){
                             </button>
                         </div>
                     )}
+
+                    {/* Multi-column Toggle Button */}
+                    <div className="col-span-2 md:col-span-1">
+                        <button 
+                            className={`w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 border text-sm font-medium ${
+                                multiColumn 
+                                    ? 'border-blue-500/50 bg-blue-600/20 text-blue-300 hover:bg-blue-600/30' 
+                                    : 'border-slate-600/50 text-slate-300 hover:bg-slate-600/50 hover:text-white'
+                            }`}
+                            onClick={() => setMultiColumn(!multiColumn)}
+                            aria-label={lang.chord.multiColumn}
+                        >
+                            {multiColumn ? (
+                                <>
+                                    <ViewColumnsIcon className="w-4 h-4" />
+                                    <span>{lang.chord.multiColumn}</span>
+                                </>
+                            ) : (
+                                <>
+                                    <Bars3Icon className="w-4 h-4" />
+                                    <span>{lang.chord.multiColumn}</span>
+                                </>
+                            )}
+                        </button>
+                    </div>
                 </div>
             </div>
             
@@ -310,7 +336,7 @@ export default function SongPage({ song, relatedSongs }){
                 </div>
             )}
             
-            <main className={`${styles.songBody} mxedruli`} style={{fontSize}}>
+            <main className={`${styles.songBody} ${!multiColumn ? styles.singleColumn : ''} mxedruli`} style={{fontSize}}>
                 {/* Breadcrumb Navigation - spans all columns */}
                 <div className={`${styles.songHeader} capital`}>
                     <div className={styles.breadcrumb}>

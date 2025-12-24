@@ -71,6 +71,11 @@
     }
 }
 
+/* Force single column when multi-column is disabled */
+.songBody.singleColumn {
+    column-count: 1 !important;
+}
+
 .breadcrumb {
     margin: 20px 0 10px 10px;
     color: #ccc;
