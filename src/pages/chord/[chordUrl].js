@@ -36,6 +36,7 @@ export default function SongPage({ song, relatedSongs }){
     const [scrollSpeed, setScrollSpeed] = useState(0);
     const [showChords, setShowChords ] = useState(false);
     const [multiColumn, setMultiColumn] = useState(true);
+    const [showOrientationHint, setShowOrientationHint] = useState(false);
     const [tonality, setTonality] = useState(0);
     const { isPremium, user } = useUser();
     const { lang, language } = useLanguage();
@@ -137,6 +138,23 @@ export default function SongPage({ song, relatedSongs }){
         setShowChords(true);
     }
 
+    function handleMultiColumnToggle() {
+        const newValue = !multiColumn;
+        setMultiColumn(newValue);
+        
+        // Show orientation hint if enabling multi-column on mobile in portrait mode
+        if (newValue && typeof window !== 'undefined') {
+            const isPortrait = window.matchMedia('(orientation: portrait)').matches;
+            const isMobile = window.innerWidth < 1200;
+            
+            if (isPortrait && isMobile) {
+                setShowOrientationHint(true);
+                // Auto-hide after 4 seconds
+                setTimeout(() => setShowOrientationHint(false), 4000);
+            }
+        }
+    }
+
     return <>
         <Head>
             <title>{`${displaySongName} - ${song.notation.page_title}`}</title>
@@ -180,7 +198,26 @@ export default function SongPage({ song, relatedSongs }){
                 }}
             />
         </Head>
-        <Header />    
+        <Header />
+        
+        {/* Orientation hint toast */}
+        {showOrientationHint && (
+            <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50 bg-slate-800 border border-blue-500/50 text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3 animate-pulse max-w-[90vw]">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-blue-400 flex-shrink-0">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+                </svg>
+                <span className="text-sm">ორ სვეტიანი რეჟიმისთვის გადაატრიალეთ ეკრანი ჰორიზონტალურად</span>
+                <button 
+                    onClick={() => setShowOrientationHint(false)}
+                    className="ml-2 text-slate-400 hover:text-white flex-shrink-0"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        )}
+    
         <div className={`${styles.songPage} page_container noselect`}>
             {/* Modern controls layout with Tailwind CSS */}
             <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-4 mb-6 space-y-4 border border-slate-700/50 max-w-2xl mx-auto lg:max-w-4xl">
@@ -245,8 +282,10 @@ export default function SongPage({ song, relatedSongs }){
                 {/* Divider */}
                 <div className="border-t border-slate-600/50"></div>
 
-                {/* Second row: Favorite, Download, and Show/Hide Chords (if enabled) */}
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                {/* Second row: Favorite, Download, Show/Hide Chords, and Multi-column toggle */}
+                {/* Mobile: 2 columns (Fav+Download on row1, Chords+Columns on row2) */}
+                {/* Desktop: 4 columns (all on same row) */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {/* Favorite Button */}
                     <div className="flex">
                         <Favorite song={song} showLabel={true} />
@@ -259,53 +298,49 @@ export default function SongPage({ song, relatedSongs }){
                         showLabel={true}
                     />
 
-                    {/* Show/Hide Chords Button - Third column on desktop, full width on mobile */}
+                    {/* Show/Hide Chords Button */}
                     {song.notation?.showChords && (
-                        <div className="col-span-2 md:col-span-1">
-                            <button 
-                                className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 border border-slate-600/50 text-slate-300 hover:bg-slate-600/50 hover:text-white text-sm font-medium"
-                                onClick={handleShowChordsClick}
-                                aria-label={showChords ? lang.chord.hide : lang.chord.appearance}
-                            >
-                                {showChords ? (
-                                    <>
-                                        <EyeSlashIcon className="w-4 h-4" />
-                                        <span>{lang.chord.hide}</span>
-                                    </>
-                                ) : (
-                                    <>
-                                        <EyeIcon className="w-4 h-4" />
-                                        <span>{lang.chord.appearance}</span>
-                                    </>
-                                )}
-                            </button>
-                        </div>
-                    )}
-
-                    {/* Multi-column Toggle Button */}
-                    <div className="col-span-2 md:col-span-1">
                         <button 
-                            className={`w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 border text-sm font-medium ${
-                                multiColumn 
-                                    ? 'border-blue-500/50 bg-blue-600/20 text-blue-300 hover:bg-blue-600/30' 
-                                    : 'border-slate-600/50 text-slate-300 hover:bg-slate-600/50 hover:text-white'
-                            }`}
-                            onClick={() => setMultiColumn(!multiColumn)}
-                            aria-label={lang.chord.multiColumn}
+                            className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 border border-slate-600/50 text-slate-300 hover:bg-slate-600/50 hover:text-white text-sm font-medium"
+                            onClick={handleShowChordsClick}
+                            aria-label={showChords ? lang.chord.hide : lang.chord.appearance}
                         >
-                            {multiColumn ? (
+                            {showChords ? (
                                 <>
-                                    <ViewColumnsIcon className="w-4 h-4" />
-                                    <span>{lang.chord.multiColumn}</span>
+                                    <EyeSlashIcon className="w-4 h-4" />
+                                    <span>{lang.chord.hide}</span>
                                 </>
                             ) : (
                                 <>
-                                    <Bars3Icon className="w-4 h-4" />
-                                    <span>{lang.chord.multiColumn}</span>
+                                    <EyeIcon className="w-4 h-4" />
+                                    <span>{lang.chord.appearance}</span>
                                 </>
                             )}
                         </button>
-                    </div>
+                    )}
+
+                    {/* Multi-column Toggle Button */}
+                    <button 
+                        className={`w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 border text-sm font-medium ${
+                            multiColumn 
+                                ? 'border-blue-500/50 bg-blue-600/20 text-blue-300 hover:bg-blue-600/30' 
+                                : 'border-slate-600/50 text-slate-300 hover:bg-slate-600/50 hover:text-white'
+                        }`}
+                        onClick={handleMultiColumnToggle}
+                        aria-label={lang.chord.multiColumn}
+                    >
+                        {multiColumn ? (
+                            <>
+                                <ViewColumnsIcon className="w-4 h-4" />
+                                <span>{lang.chord.multiColumn}</span>
+                            </>
+                        ) : (
+                            <>
+                                <Bars3Icon className="w-4 h-4" />
+                                <span>{lang.chord.multiColumn}</span>
+                            </>
+                        )}
+                    </button>
                 </div>
             </div>
             
