@@ -99,7 +99,6 @@ const interfaceGeo = {
         rate: " შეაფასეთ რესურსის სისწორე",
         relatedSongs: "მსგავსი რესურსები",
         download: "ჩამოტვირთვა",
-        multiColumn: "2 სვეტი",
     },
     songCard: {
         videoTooltip: "ვიდეო გაკვეთილი",
@@ -405,7 +404,6 @@ const interfaceEng = {
         capoLocation: "Capo Location",
         fret: "Fret",
         download: "Download",
-        multiColumn: "2 Columns",
     },
     songCard: {
         videoTooltip: "Video lesson",

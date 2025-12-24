@@ -45,16 +45,7 @@
     position: relative;
 }
 
-/* Two-column layout for mobile landscape */
-@media (min-width: 568px) and (max-width: 1199px) and (orientation: landscape) {
-    .songBody {
-        column-count: 2;
-        column-gap: 40px;
-        column-rule: 1px solid rgba(255, 255, 255, 0.1);
-    }
-}
-
-/* Two-column layout for large screens */
+/* Two-column layout for large screens only */
 @media (min-width: 1200px) {
     .songBody {
         column-count: 2;
@@ -69,11 +60,6 @@
         column-count: 3;
         column-gap: 50px;
     }
-}
-
-/* Force single column when multi-column is disabled */
-.songBody.singleColumn {
-    column-count: 1 !important;
 }
 
 .breadcrumb {
