@@ -23,6 +23,7 @@
     "@supabase/supabase-js": "^2.39.0",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/typography": "^0.5.10",
+    "bcryptjs": "^3.0.3",
     "file-saver": "^2.0.5",
     "fuse.js": "^6.6.2",
     "html-to-image": "^1.11.13",
@@ -38,6 +39,7 @@
     "react-sortablejs": "^6.1.4",
     "slick-carousel": "^1.8.1",
     "sortablejs": "^1.15.1",
+    "uuid": "^13.0.0",
     "xmlbuilder": "^15.1.1",
     "yet-another-react-lightbox": "^3.23.2"
   },

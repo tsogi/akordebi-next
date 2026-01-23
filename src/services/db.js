@@ -55,6 +55,44 @@ class Db{
         return null;
     }
 
+    async getUserByEmail(email){
+        const [rows,fields] = await this.pool.execute(`
+            SELECT 
+                users.*,
+                (SELECT COUNT(*) 
+                 FROM favorite_songs 
+                 WHERE user_id COLLATE utf8mb4_general_ci = users.id COLLATE utf8mb4_general_ci) as totalFavorites,
+                (SELECT COUNT(*) 
+                 FROM user_song_tonality 
+                 WHERE user_id COLLATE utf8mb4_general_ci = users.id COLLATE utf8mb4_general_ci) as totalTonalities,
+                (SELECT COUNT(*) 
+                 FROM downloads 
+                 WHERE user_id COLLATE utf8mb4_general_ci = users.id COLLATE utf8mb4_general_ci) as totalDownloads
+            FROM users 
+            WHERE email = ?
+        `, [email]);
+
+        if(rows.length){
+            return rows[0];
+        }
+        return null;
+    }
+
+    async createUserWithPassword(user){
+        const { id, email, full_name, password_hash } = user;
+
+        let query = `
+            INSERT INTO users (id, email, full_name, password_hash)
+            VALUES (?, ?, ?, ?)
+        `;
+
+        await this.pool.execute(query, [id, email, full_name, password_hash]);
+
+        const userDetails = await this.getUserByID(id);
+
+        return userDetails;
+    }
+
     async addSongToFavorites(songId, userId){
         const [rows,fields] = await this.pool.execute(`
             insert into favorite_songs (song_id, user_id)
