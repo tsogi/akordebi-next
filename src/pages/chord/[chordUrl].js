@@ -182,7 +182,7 @@ export default function SongPage({ song, relatedSongs }){
         <Header />
         <div className={`${styles.songPage} page_container noselect`}>
             {/* Modern controls layout with Tailwind CSS */}
-            <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-4 mb-6 space-y-4 border border-slate-700/50 max-w-2xl mx-auto lg:max-w-4xl">
+            <div className="bg-slate-800/80 rounded-xl p-4 mb-6 space-y-4 border border-slate-700/50 max-w-2xl mx-auto lg:max-w-4xl">
                 {/* First row: Font, Auto-scroll, and Tonality (if enabled) */}
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                     {/* Font Control */}
