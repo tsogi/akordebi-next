@@ -191,6 +191,65 @@ export default function ProductDetail() {
               </div>
             </div>
           </div>
+
+          {/* FAQ Section */}
+          <section className="mt-12 mb-8">
+            <div className="flex items-center gap-3 mb-6">
+              <h2 className="text-xl font-bold text-white">ხშირად დასმული კითხვები</h2>
+              <div className="flex-grow h-px bg-gradient-to-r from-amber-500/50 to-transparent"></div>
+            </div>
+            
+            <div className="space-y-4">
+              <details className="bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden group">
+                <summary className="px-5 py-4 cursor-pointer text-white font-medium flex items-center justify-between hover:bg-slate-700/30 transition-colors">
+                  <span>როგორ ხდება მიტანა?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </summary>
+                <div className="px-5 pb-4 text-gray-400 text-sm leading-relaxed">
+                  თბილისში მიტანა უფასოა და ხდება იმავე დღეს საღამოს 21:00-23:00 საათზე (თუ შეკვეთა გაკეთდა 17:00-მდე). რეგიონებში გზავნა ხდება კურიერით, ღირებულება დამოკიდებულია ადგილმდებარეობაზე.
+                </div>
+              </details>
+              
+              <details className="bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden group">
+                <summary className="px-5 py-4 cursor-pointer text-white font-medium flex items-center justify-between hover:bg-slate-700/30 transition-colors">
+                  <span>შემიძლია ადგილზე გიტარის მოსინჯვა?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </summary>
+                <div className="px-5 pb-4 text-gray-400 text-sm leading-relaxed">
+                  რა თქმა უნდა! მიტანისას შეგიძლია გიტარის მოსინჯვა და თუ რაიმე არ მოგეწონება, არ ხარ ვალდებული შეიძინო. გადახდა ხდება მხოლოდ ადგილზე, გიტარის ნახვის შემდეგ.
+                </div>
+              </details>
+              
+              <details className="bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden group">
+                <summary className="px-5 py-4 cursor-pointer text-white font-medium flex items-center justify-between hover:bg-slate-700/30 transition-colors">
+                  <span>რომელი გიტარა შევარჩიო დამწყებისთვის?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </summary>
+                <div className="px-5 pb-4 text-gray-400 text-sm leading-relaxed">
+                  დამწყებებისთვის საუკეთესო არჩევანია <strong>Yamaha C40</strong> (კლასიკური) ან <strong>Yamaha F310</strong> (აკუსტიკური). ორივე იდეალურია სწავლისთვის და შესანიშნავი ფასი აქვს. მოგვწერე და დაგეხმარებით არჩევანში!
+                </div>
+              </details>
+              
+              <details className="bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden group">
+                <summary className="px-5 py-4 cursor-pointer text-white font-medium flex items-center justify-between hover:bg-slate-700/30 transition-colors">
+                  <span>როგორ გადავიხადო?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </summary>
+                <div className="px-5 pb-4 text-gray-400 text-sm leading-relaxed">
+                  გადახდა ხდება მხოლოდ ადგილზე, გიტარის მიღებისას. ვიღებთ ნაღდ ფულს და საბანკო გადარიცხვას.
+                </div>
+              </details>
+            </div>
+          </section>
+
         </div>
       </main>
       
