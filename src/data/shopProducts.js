@@ -1,8 +1,8 @@
 const shopProducts = [
     {
-      id: "yamaha-c40bl",
-      name: "Yamaha C40 Black",
-      price: "370",
+      id: "yamaha-c40",
+      name: "Yamaha C40",
+      price: "360",
       description: "საუკეთესო არჩევანი მათთვის ვინც ახლა იწყებს დაკვრის სწავლას",
       thumbnail: "/images/shop/c40/1.png",
       images: [
@@ -12,11 +12,14 @@ const shopProducts = [
         "/images/shop/c40/4.png",
         "/images/shop/c40/5.png",
         "/images/shop/c40/6.png",
+        "/images/shop/c40/7.png",
+        "/images/shop/c40/8.png",
       ],
       characteristics: [
         { "name": "ზომა", "value": "4/4 სრული ზომა" },
         { "name": "ზედაპირი", "value": "ნაძვი, პრიალა დამუშავებით" },
         { "name": "გრიფი", "value": "ვარდის ხე, მატოვი" },
+        { "name": "სიმები", "value": "მოყვება" },
       ],
       category: "კლასიკური გიტარები",
       inStock: true
@@ -40,6 +43,7 @@ const shopProducts = [
         { "name": "ზომა", "value": "4/4 სრული ზომა" },
         { "name": "ზედაპირი", "value": "ნაძვი, პრიალა დამუშავებით" },
         { "name": "გრიფი", "value": "ვარდის ხე, მატოვი" },
+        { "name": "სიმები", "value": "მოყვება" },
       ],
       category: "კლასიკური გიტარები",
       inStock: true
@@ -66,14 +70,15 @@ const shopProducts = [
         { "name": "ზომა", "value": "4/4 სრული ზომა" },
         { "name": "ზედაპირი", "value": "ნაძვი, პრიალა დამუშავებით" },
         { "name": "გრიფი", "value": "ვარდის ხე, მატოვი" },
+        { "name": "სიმები", "value": "მოყვება" },
       ],
       category: "კლასიკური გიტარები",
       inStock: true
     },
     {
       id: "yamaha-f310tbs",
-      name: "Yamaha F310TBS",
-      price: "355",
+      name: "Yamaha F310",
+      price: "460",
       description: "საუკეთესო არჩევანი მათთვის ვინც ახლა იწყებს დაკვრის სწავლას",
       thumbnail: "/images/shop/f310tbs/1.png",
       images: [
@@ -88,38 +93,30 @@ const shopProducts = [
         "/images/shop/f310tbs/9.png",
       ],
       characteristics: [
+        { "name": "სიმები", "value": "მოყვება" },
       ],
       category: "აკუსტიკური გიტარები",
       inStock: true
     },
     {
-      id: "yamaha-fs400",
-      name: "Yamaha FS400",
-      price: "685",
-      description: "საუკეთესო არჩევანი 2-5 წლამდე გამოცდილების შემსრულებლებისთვის",
-      thumbnail: "/images/shop/fs400/1.png",
+      id: "yamaha-f370b",
+      name: "Yamaha F370",
+      price: "643",
+      description: "უმაღლესი დონის სასწავლო გიტარა",
+      thumbnail: "/images/shop/f370b/1.png",
       images: [
-        "/images/shop/fs400/1.png",
-        "/images/shop/fs400/2.png",
-        "/images/shop/fs400/3.png",
+        "/images/shop/f370b/1.png",
+        "/images/shop/f370b/2.png",
+        "/images/shop/f370b/3.png",
+        "/images/shop/f370b/4.png",
+        "/images/shop/f370b/5.png",
+        "/images/shop/f370b/6.png",
+        "/images/shop/f370b/7.png",
       ],
       characteristics: [
+        { "name": "სიმები", "value": "მოყვება" },
       ],
       category: "აკუსტიკური გიტარები",
-      inStock: true
-    },
-    {
-      id: "acc-1",
-      name: "Dunlop მედიატორები (5 ცალი)",
-      price: "15",
-      description: "პროფესიონალური მედიატორების ნაკრები, სხვადასხვა სისქით, იდეალური სხვადასხვა სტილის დაკვრისთვის.",
-      thumbnail: "/images/shop/dunlop-picks.jpg",
-      images: [
-      ],
-      characteristics: [
-      ],
-      category: "აქსესუარები",
-      subCategory: "მედიატორი",
       inStock: true
     },
   ]
