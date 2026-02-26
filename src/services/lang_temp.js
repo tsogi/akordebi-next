@@ -300,6 +300,13 @@ const interfaceGeo = {
         gmail_account: "Gmail ანგარიში",
         subscription_expired: "გამოწერის ვადა გასულია",
         subscription_active: "გამოწერა აქტიურია"
+    },
+    shopTeaser: {
+        title: "akordebi.ge-ის გიტარის მაღაზია",
+        badge: "სიახლე",
+        trustLine: "უფასო მიტანა იმავე დღეს · ადგილზე გადახდა",
+        cta: "მაღაზიაში გადასვლა",
+        from: "დან"
     }
 }
 
@@ -592,6 +599,13 @@ Bass Down Down Up Down Up or Bass ↓ ↓ ↑ ↓ ↑ or Bass 3 2 1 2 3`
         gmail_account: "Gmail Account",
         subscription_expired: "Subscription expired",
         subscription_active: "Subscription active"
+    },
+    shopTeaser: {
+        title: "akordebi.ge Guitar Shop",
+        badge: "New",
+        trustLine: "Tested guitars · Free same-day delivery · Pay on arrival",
+        cta: "Visit Shop",
+        from: "from"
     }
 }
 
