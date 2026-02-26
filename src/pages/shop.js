@@ -165,7 +165,7 @@ export default function Shop() {
                   </div>
                   <div>
                     <h3 className="text-white font-semibold text-lg mb-2">საუკეთესო ფასი</h3>
-                    <p className="text-gray-400 text-sm leading-relaxed">
+                    <p className="text-gray-400 text-sm leading-relaxed mxedruli normal-case">
                       პირდაპირი კონტაქტი ოფიციალურ დისტრიბუტორთან გვაძლევს საშუალებას შემოგთავაზოთ საუკეთესო ფასი ბაზარზე, ხარისხზე კომპრომისის გარეშე.
                     </p>
                   </div>
@@ -181,7 +181,7 @@ export default function Shop() {
                   </div>
                   <div>
                     <h3 className="text-white font-semibold text-lg mb-2">მხოლოდ Yamaha</h3>
-                    <p className="text-gray-400 text-sm leading-relaxed">
+                    <p className="text-gray-400 text-sm leading-relaxed mxedruli normal-case">
                       ჩვენ ვყიდით მხოლოდ Yamaha-ს გიტარებს - მსოფლიოში ნომერ პირველ ბრენდს სასწავლო გიტარებში. არანაირი ჩინური ასლი ან უცნობი ბრენდი.
                     </p>
                   </div>
@@ -197,7 +197,7 @@ export default function Shop() {
                   </div>
                   <div>
                     <h3 className="text-white font-semibold text-lg mb-2">მოხერხებული მიტანა</h3>
-                    <p className="text-gray-400 text-sm leading-relaxed">
+                    <p className="text-gray-400 text-sm leading-relaxed mxedruli normal-case">
                       მიტანა საღამოს 21:00-23:00 საათზე - როცა სახლში ხარ. აღარ გჭირდება სამსახურიდან გამოსვლა ან შაბათის დახარჯვა მაღაზიებში სიარულში.
                     </p>
                   </div>
