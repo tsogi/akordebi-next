@@ -87,43 +87,43 @@ export default function Shop() {
           {/* Trust badges section */}
           <section className="grid grid-cols-2 md:grid-cols-4 gap-3 my-6">
             {/* Free same-day delivery */}
-            <div className="bg-gradient-to-br from-emerald-500/20 to-green-600/20 border border-emerald-500/30 text-white px-3 py-3 rounded-xl flex flex-col items-center text-center gap-2 hover:scale-105 transition-transform">
-              <div className="bg-emerald-500 p-2 rounded-full">
+            <div className="bg-gradient-to-br from-emerald-500/20 to-green-600/20 border border-emerald-500/30 text-white px-3 py-3 rounded-xl flex items-center text-left gap-3 hover:scale-105 transition-transform">
+              <div className="bg-emerald-500 p-2 rounded-full shrink-0">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
                 </svg>
               </div>
-              <span className="font-semibold text-xs leading-tight">უფასო მიტანა<br/>თბილისში</span>
+              <span className="font-semibold text-[11px] leading-tight">უფასო მიტანა თბილისში</span>
             </div>
             
             {/* Evening delivery */}
-            <div className="bg-gradient-to-br from-purple-500/20 to-violet-600/20 border border-purple-500/30 text-white px-3 py-3 rounded-xl flex flex-col items-center text-center gap-2 hover:scale-105 transition-transform">
-              <div className="bg-purple-500 p-2 rounded-full">
+            <div className="bg-gradient-to-br from-purple-500/20 to-violet-600/20 border border-purple-500/30 text-white px-3 py-3 rounded-xl flex items-center text-left gap-3 hover:scale-105 transition-transform">
+              <div className="bg-purple-500 p-2 rounded-full shrink-0">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                 </svg>
               </div>
-              <span className="font-semibold text-xs leading-tight">საღამოს მიტანა<br/>21:00-23:00</span>
+              <span className="font-semibold text-[11px] leading-tight">საღამოს მიტანა 21:00-23:00</span>
             </div>
             
             {/* Cash on delivery */}
-            <div className="bg-gradient-to-br from-amber-500/20 to-orange-600/20 border border-amber-500/30 text-white px-3 py-3 rounded-xl flex flex-col items-center text-center gap-2 hover:scale-105 transition-transform">
-              <div className="bg-amber-500 p-2 rounded-full">
+            <div className="bg-gradient-to-br from-amber-500/20 to-orange-600/20 border border-amber-500/30 text-white px-3 py-3 rounded-xl flex items-center text-left gap-3 hover:scale-105 transition-transform">
+              <div className="bg-amber-500 p-2 rounded-full shrink-0">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
               </div>
-              <span className="font-semibold text-xs leading-tight">ადგილზე<br/>გადახდა</span>
+              <span className="font-semibold text-[11px] leading-tight">ადგილზე გადახდა</span>
             </div>
             
             {/* Try on site */}
-            <div className="bg-gradient-to-br from-blue-500/20 to-cyan-600/20 border border-blue-500/30 text-white px-3 py-3 rounded-xl flex flex-col items-center text-center gap-2 hover:scale-105 transition-transform">
-              <div className="bg-blue-500 p-2 rounded-full">
+            <div className="bg-gradient-to-br from-blue-500/20 to-cyan-600/20 border border-blue-500/30 text-white px-3 py-3 rounded-xl flex items-center text-left gap-3 hover:scale-105 transition-transform">
+              <div className="bg-blue-500 p-2 rounded-full shrink-0">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <span className="font-semibold text-xs leading-tight">მოსინჯე<br/>ადგილზე</span>
+              <span className="font-semibold text-[11px] leading-tight">მოსინჯე ადგილზე</span>
             </div>
             
             
