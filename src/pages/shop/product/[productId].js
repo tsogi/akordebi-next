@@ -5,7 +5,6 @@ import Footer from '@/components/Footer';
 import styles from '@/styles/ProductDetail.module.css';
 import shopProducts from '@/data/shopProducts';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { useShoppingCart } from '@/context/ShoppingCartContext';
 import Slider from 'react-slick';
@@ -17,33 +16,23 @@ import Zoom from 'yet-another-react-lightbox/plugins/zoom';
 import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
 import 'yet-another-react-lightbox/plugins/thumbnails.css';
 
-export default function ProductDetail() {
-  const router = useRouter();
-  const { productId } = router.query;
+export function getStaticPaths() {
+  const paths = shopProducts.map(product => ({
+    params: { productId: product.id }
+  }));
+  return { paths, fallback: false };
+}
+
+export function getStaticProps({ params }) {
+  const product = shopProducts.find(p => p.id === params.productId);
+  if (!product) return { notFound: true };
+  return { props: { product } };
+}
+
+export default function ProductDetail({ product }) {
   const { addToCart } = useShoppingCart();
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
-  
-  // Find the product in our data
-  const product = Object.values(shopProducts).find(p => p.id === productId);
-  
-  // If the product is not found or page is still loading
-  if (!product) {
-    return (
-      <>
-        <Head>
-          <title>პროდუქტის დეტალები | აკორდები.გე</title>
-          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-          <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-        </Head>
-        <Header />
-        <div className={`page_container ${styles.loadingContainer}`}>
-          <div className={styles.loadingSpinner}></div>
-        </div>
-        <Footer />
-      </>
-    );
-  }
 
   const handleAddToCart = () => {
     addToCart(product);
@@ -72,13 +61,137 @@ export default function ProductDetail() {
     ]
   };
 
+  const baseUrl = 'https://akordebi.ge';
+  const productUrl = `${baseUrl}/shop/product/${product.id}`;
+  const productImage = `${baseUrl}${product.thumbnail}`;
+  const metaTitle = `${product.name} - ${product.category} | akordebi.ge მაღაზია`;
+  const metaDescription = `${product.name} - ${product.description} ფასი: ${product.price}₾. უფასო მიტანა თბილისში, ადგილზე გადახდა და მოსინჯვა.`;
+
   return (
     <>
       <Head>
-        <title>{product.name} | აკორდები.გე</title>
-        <meta name="description" content={product.description} />
+        <title>{metaTitle}</title>
+        <meta name="description" content={metaDescription} />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <meta name="keywords" content={`${product.name}, ${product.category}, გიტარა, გიტარის ყიდვა, yamaha, akordebi.ge, gitara, ${product.name.toLowerCase()}`} />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="canonical" href={productUrl} />
+
+        <meta property="og:type" content="product" />
+        <meta property="og:title" content={`${product.name} - ${product.price}₾ | akordebi.ge`} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:url" content={productUrl} />
+        <meta property="og:site_name" content="akordebi.ge" />
+        <meta property="og:image" content={productImage} />
+        <meta property="og:image:width" content="500" />
+        <meta property="og:image:height" content="500" />
+        <meta property="og:locale" content="ka_GE" />
+        <meta property="product:price:amount" content={product.price} />
+        <meta property="product:price:currency" content="GEL" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${product.name} - ${product.price}₾`} />
+        <meta name="twitter:description" content={product.description} />
+        <meta name="twitter:image" content={productImage} />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Product",
+              "name": product.name,
+              "description": product.description,
+              "image": product.images.map(img => `${baseUrl}${img}`),
+              "url": productUrl,
+              "category": product.category,
+              "brand": {
+                "@type": "Brand",
+                "name": "Yamaha"
+              },
+              "offers": {
+                "@type": "Offer",
+                "price": product.price,
+                "priceCurrency": "GEL",
+                "availability": product.inStock ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+                "seller": {
+                  "@type": "Organization",
+                  "name": "akordebi.ge"
+                },
+                "shippingDetails": {
+                  "@type": "OfferShippingDetails",
+                  "shippingRate": {
+                    "@type": "MonetaryAmount",
+                    "value": "0",
+                    "currency": "GEL"
+                  },
+                  "shippingDestination": {
+                    "@type": "DefinedRegion",
+                    "addressCountry": "GE",
+                    "addressRegion": "თბილისი"
+                  },
+                  "deliveryTime": {
+                    "@type": "ShippingDeliveryTime",
+                    "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 0, "unitCode": "DAY" },
+                    "transitTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" }
+                  }
+                }
+              },
+              ...(product.characteristics && product.characteristics.length > 0 && {
+                "additionalProperty": product.characteristics.map(c => ({
+                  "@type": "PropertyValue",
+                  "name": c.name,
+                  "value": c.value
+                }))
+              })
+            })
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "მთავარი", "item": baseUrl },
+                { "@type": "ListItem", "position": 2, "name": "გიტარის მაღაზია", "item": `${baseUrl}/shop` },
+                { "@type": "ListItem", "position": 3, "name": product.name, "item": productUrl }
+              ]
+            })
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "როგორ ხდება გიტარის მიტანა?",
+                  "acceptedAnswer": { "@type": "Answer", "text": "თბილისში მიტანა უფასოა და ხდება იმავე დღეს საღამოს 21:00-23:00 საათზე." }
+                },
+                {
+                  "@type": "Question",
+                  "name": "შემიძლია ადგილზე გიტარის მოსინჯვა?",
+                  "acceptedAnswer": { "@type": "Answer", "text": "რა თქმა უნდა! მიტანისას შეგიძლია გიტარის მოსინჯვა და თუ არ მოგეწონება, არ ხარ ვალდებული შეიძინო." }
+                },
+                {
+                  "@type": "Question",
+                  "name": "რომელი გიტარა შევარჩიო დამწყებისთვის?",
+                  "acceptedAnswer": { "@type": "Answer", "text": "დამწყებებისთვის საუკეთესო არჩევანია Yamaha C40 (კლასიკური) ან Yamaha F310 (აკუსტიკური)." }
+                },
+                {
+                  "@type": "Question",
+                  "name": "როგორ გადავიხადო?",
+                  "acceptedAnswer": { "@type": "Answer", "text": "გადახდა ხდება მხოლოდ ადგილზე, გიტარის მიღებისას. ვიღებთ ნაღდ ფულს და საბანკო გადარიცხვას." }
+                }
+              ]
+            })
+          }}
+        />
       </Head>
       <Header />
       

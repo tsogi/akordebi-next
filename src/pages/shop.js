@@ -41,10 +41,112 @@ export default function Shop() {
   return (
     <>
       <Head>
-        <title>გიტარის მაღაზია | აკორდები.გე</title>
-        <meta name="description" content="მაღალი ხარისხის გიტარები და აქსესუარები. შეიძინეთ კლასიკური და აკუსტიკური გიტარები საუკეთესო ფასად თბილისში." />
+        <title>გიტარის მაღაზია თბილისში | Yamaha გიტარები | akordebi.ge</title>
+        <meta name="description" content="იყიდე ორიგინალი Yamaha კლასიკური და აკუსტიკური გიტარები საუკეთესო ფასად თბილისში. უფასო მიტანა იმავე დღეს, ადგილზე გადახდა და მოსინჯვა. Yamaha C40, CG102, F310, F370 და აქსესუარები." />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <meta name="keywords" content="გიტარა, გიტარის მაღაზია, yamaha გიტარა, კლასიკური გიტარა, აკუსტიკური გიტარა, გიტარა თბილისში, იაფი გიტარა, Yamaha C40, Yamaha F310, გიტარის ყიდვა, gitara, gitaris maghazia" />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="canonical" href="https://akordebi.ge/shop" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="გიტარის მაღაზია | ორიგინალი Yamaha გიტარები თბილისში" />
+        <meta property="og:description" content="იყიდე ორიგინალი Yamaha გიტარები საუკეთესო ფასად. უფასო მიტანა იმავე დღეს, ადგილზე გადახდა და მოსინჯვა." />
+        <meta property="og:url" content="https://akordebi.ge/shop" />
+        <meta property="og:site_name" content="akordebi.ge" />
+        <meta property="og:image" content="https://akordebi.ge/images/shop/c40/1.png" />
+        <meta property="og:image:width" content="500" />
+        <meta property="og:image:height" content="500" />
+        <meta property="og:locale" content="ka_GE" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="გიტარის მაღაზია | ორიგინალი Yamaha გიტარები თბილისში" />
+        <meta name="twitter:description" content="იყიდე ორიგინალი Yamaha გიტარები საუკეთესო ფასად. უფასო მიტანა იმავე დღეს." />
+        <meta name="twitter:image" content="https://akordebi.ge/images/shop/c40/1.png" />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Store",
+              "name": "akordebi.ge გიტარის მაღაზია",
+              "description": "ორიგინალი Yamaha კლასიკური და აკუსტიკური გიტარები საუკეთესო ფასად თბილისში",
+              "url": "https://akordebi.ge/shop",
+              "image": "https://akordebi.ge/images/shop/c40/1.png",
+              "priceRange": "₾1 - ₾900",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "თბილისი",
+                "addressCountry": "GE"
+              },
+              "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "გიტარები და აქსესუარები",
+                "itemListElement": shopProducts.filter(p => p.inStock).map((product, index) => ({
+                  "@type": "ListItem",
+                  "position": index + 1,
+                  "item": {
+                    "@type": "Product",
+                    "name": product.name,
+                    "description": product.description,
+                    "image": `https://akordebi.ge${product.thumbnail}`,
+                    "url": `https://akordebi.ge/shop/product/${product.id}`,
+                    "offers": {
+                      "@type": "Offer",
+                      "price": product.price,
+                      "priceCurrency": "GEL",
+                      "availability": "https://schema.org/InStock",
+                      "seller": { "@type": "Organization", "name": "akordebi.ge" }
+                    }
+                  }
+                }))
+              }
+            })
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "როგორ ხდება გიტარის მიტანა?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "თბილისში მიტანა უფასოა და ხდება იმავე დღეს საღამოს 21:00-23:00 საათზე. რეგიონებში გაგზავნა ხდება კურიერით."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "შემიძლია ადგილზე გიტარის მოსინჯვა?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "რა თქმა უნდა! მიტანისას შეგიძლია გიტარის მოსინჯვა და თუ არ მოგეწონება, არ ხარ ვალდებული შეიძინო."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "რომელი გიტარა შევარჩიო დამწყებისთვის?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "დამწყებებისთვის საუკეთესო არჩევანია Yamaha C40 (კლასიკური) ან Yamaha F310 (აკუსტიკური). ორივე იდეალურია სწავლისთვის."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "როგორ გადავიხადო გიტარისთვის?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "გადახდა ხდება მხოლოდ ადგილზე, გიტარის მიღებისას. ვიღებთ ნაღდ ფულს და საბანკო გადარიცხვას."
+                  }
+                }
+              ]
+            })
+          }}
+        />
       </Head>
       <Header />
       

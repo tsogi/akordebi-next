@@ -1,4 +1,5 @@
 import db from '@/services/db';
+import shopProducts from '@/data/shopProducts';
 var builder = require('xmlbuilder');
 
 const domain = process.env.NEXT_PUBLIC_DOMAIN;
@@ -24,6 +25,26 @@ const generateSitemapXml = (records) => {
         .up()
         .ele('priority', 0.95)
         .up();
+
+    urlset
+        .ele('url')
+        .ele('loc', `https://${domain}/shop`)
+        .up()
+        .ele('changefreq', 'weekly')
+        .up()
+        .ele('priority', 0.90)
+        .up();
+
+    shopProducts.forEach((product) => {
+      urlset
+        .ele('url')
+        .ele('loc', `https://${domain}/shop/product/${product.id}`)
+        .up()
+        .ele('changefreq', 'weekly')
+        .up()
+        .ele('priority', 0.85)
+        .up();
+    });
 
   let priority = (0.800).toFixed(3);
   records.forEach((record) => {
