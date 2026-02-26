@@ -3,7 +3,7 @@ const shopProducts = [
       id: "yamaha-c40",
       name: "Yamaha C40",
       price: "360",
-      description: "საუკეთესო არჩევანი მათთვის ვინც ახლა იწყებს დაკვრის სწავლას",
+      description: "დამწყებისთვის ყველაზე პოპულარული კლასიკური გიტარა - რბილი ხმა, კომფორტული დაკვრა და გამძლე კონსტრუქცია ყოველდღიური სწავლისთვის",
       thumbnail: "/images/shop/c40/1.png",
       images: [
         "/images/shop/c40/1.png",
@@ -17,8 +17,6 @@ const shopProducts = [
       ],
       characteristics: [
         { "name": "ზომა", "value": "4/4 სრული ზომა" },
-        { "name": "ზედაპირი", "value": "ნაძვი, პრიალა დამუშავებით" },
-        { "name": "გრიფი", "value": "ვარდის ხე, მატოვი" },
         { "name": "სიმები", "value": "მოყვება" },
       ],
       category: "კლასიკური გიტარები",
@@ -28,7 +26,7 @@ const shopProducts = [
       id: "yamaha-cg102",
       name: "Yamaha CG102",
       price: "605",
-      description: "საუკეთესო არჩევანი მათთვის ვინც 5 წელზე ნაკლებია უკრავს გიტარაზე",
+      description: "იდეალური არჩევანი დამწყებისთვის და საშუალო დონის შემსრულებლისთვის - კომფორტული გრიფი, დაბალანსებული ჟღერადობა და Yamaha-ს სანდო ხარისხი ყოველდღიური ვარჯიშისთვის",
       thumbnail: "/images/shop/cg102/1.png",
       images: [
         "/images/shop/cg102/1.png",
@@ -41,8 +39,6 @@ const shopProducts = [
       ],
       characteristics: [
         { "name": "ზომა", "value": "4/4 სრული ზომა" },
-        { "name": "ზედაპირი", "value": "ნაძვი, პრიალა დამუშავებით" },
-        { "name": "გრიფი", "value": "ვარდის ხე, მატოვი" },
         { "name": "სიმები", "value": "მოყვება" },
       ],
       category: "კლასიკური გიტარები",
@@ -52,7 +48,7 @@ const shopProducts = [
       id: "yamaha-cg142c",
       name: "Yamaha CG142C",
       price: "911",
-      description: "უმაღლესი დონის სასწავლო გიტარა",
+      description: "საშუალო და შედარებით გამოცდილი გიტარისტისთვის - მდიდარი და თბილი ჟღერადობა, კომფორტული დაკვრა და Yamaha-ს მაღალი ხარისხი",
       thumbnail: "/images/shop/cg142c/8.png",
       images: [
         "/images/shop/cg142c/8.png",
@@ -68,8 +64,6 @@ const shopProducts = [
       ],
       characteristics: [
         { "name": "ზომა", "value": "4/4 სრული ზომა" },
-        { "name": "ზედაპირი", "value": "ნაძვი, პრიალა დამუშავებით" },
-        { "name": "გრიფი", "value": "ვარდის ხე, მატოვი" },
         { "name": "სიმები", "value": "მოყვება" },
       ],
       category: "კლასიკური გიტარები",
@@ -79,7 +73,7 @@ const shopProducts = [
       id: "yamaha-f310tbs",
       name: "Yamaha F310",
       price: "460",
-      description: "საუკეთესო არჩევანი მათთვის ვინც ახლა იწყებს დაკვრის სწავლას",
+      description: "დამწყებისთვის ყველაზე მოთხოვნადი აკუსტიკური გიტარა - მკაფიო ჟღერადობა, კომფორტული დაკვრა და Yamaha-ს სანდო ხარისხი",
       thumbnail: "/images/shop/f310tbs/1.png",
       images: [
         "/images/shop/f310tbs/1.png",
@@ -102,7 +96,7 @@ const shopProducts = [
       id: "yamaha-f370b",
       name: "Yamaha F370",
       price: "643",
-      description: "უმაღლესი დონის სასწავლო გიტარა",
+      description: "საშუალო და შედარებით გამოცდილი შემსრულებლისთვის - უფრო გამოკვეთილი ჟღერადობა, კომფორტული დაკვრა და Yamaha-ს სანდო ხარისხი",
       thumbnail: "/images/shop/f370b/1.png",
       images: [
         "/images/shop/f370b/1.png",

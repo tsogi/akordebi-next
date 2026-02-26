@@ -148,61 +148,61 @@ export default function Shop() {
             </section>
           ))}
 
-          {/* Why buy from Akordebi section */}
+          {/* FAQ Section */}
           <section className="mt-16 mb-12">
             <div className="flex items-center gap-3 mb-6">
-              <h2 className="text-xl font-bold text-white">რატომ აკორდები.გე?</h2>
+              <h2 className="text-xl font-bold text-white">ხშირად დასმული კითხვები</h2>
               <div className="flex-grow h-px bg-gradient-to-r from-amber-500/50 to-transparent"></div>
             </div>
-            
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-5">
-                <div className="flex items-start gap-4">
-                  <div className="bg-emerald-500/20 p-3 rounded-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-white font-semibold text-lg mb-2">საუკეთესო ფასი</h3>
-                    <p className="text-gray-400 text-sm leading-relaxed mxedruli normal-case">
-                      პირდაპირი კონტაქტი ოფიციალურ დისტრიბუტორთან გვაძლევს საშუალებას შემოგთავაზოთ საუკეთესო ფასი ბაზარზე, ხარისხზე კომპრომისის გარეშე.
-                    </p>
-                  </div>
+
+            <div className="space-y-4">
+              <details className="bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden group">
+                <summary className="px-5 py-4 cursor-pointer text-white font-medium flex items-center justify-between hover:bg-slate-700/30 transition-colors">
+                  <span className="mxedruli normal-case">როგორ ხდება მიტანა?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </summary>
+                <div className="px-5 pb-4 text-gray-400 text-sm leading-relaxed mxedruli normal-case">
+                  თბილისში მიტანა უფასოა და ხდება იმავე დღეს საღამოს 21:00-23:00 საათზე. რეგიონებში გზავნა ხდება კურიერით, ღირებულება დამოკიდებულია ადგილმდებარეობაზე.
                 </div>
-              </div>
-              
-              <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-5">
-                <div className="flex items-start gap-4">
-                  <div className="bg-blue-500/20 p-3 rounded-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-white font-semibold text-lg mb-2">მხოლოდ Yamaha</h3>
-                    <p className="text-gray-400 text-sm leading-relaxed mxedruli normal-case">
-                      ჩვენ ვყიდით მხოლოდ Yamaha-ს გიტარებს - მსოფლიოში ნომერ პირველ ბრენდს სასწავლო გიტარებში. არანაირი ჩინური ასლი ან უცნობი ბრენდი.
-                    </p>
-                  </div>
+              </details>
+
+              <details className="bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden group">
+                <summary className="px-5 py-4 cursor-pointer text-white font-medium flex items-center justify-between hover:bg-slate-700/30 transition-colors">
+                  <span className="mxedruli normal-case">შემიძლია ადგილზე გიტარის მოსინჯვა?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </summary>
+                <div className="px-5 pb-4 text-gray-400 text-sm leading-relaxed mxedruli normal-case">
+                  რა თქმა უნდა! მიტანისას შეგიძლია გიტარის მოსინჯვა და თუ რაიმე არ მოგეწონება, არ ხარ ვალდებული შეიძინო. გადახდა ხდება მხოლოდ ადგილზე, გიტარის ნახვის შემდეგ.
                 </div>
-              </div>
-              
-              <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-5">
-                <div className="flex items-start gap-4">
-                  <div className="bg-purple-500/20 p-3 rounded-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-white font-semibold text-lg mb-2">მოხერხებული მიტანა</h3>
-                    <p className="text-gray-400 text-sm leading-relaxed mxedruli normal-case">
-                      მიტანა საღამოს 21:00-23:00 საათზე - როცა სახლში ხარ. აღარ გჭირდება სამსახურიდან გამოსვლა ან შაბათის დახარჯვა მაღაზიებში სიარულში.
-                    </p>
-                  </div>
+              </details>
+
+              <details className="bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden group">
+                <summary className="px-5 py-4 cursor-pointer text-white font-medium flex items-center justify-between hover:bg-slate-700/30 transition-colors">
+                  <span className="mxedruli normal-case">რომელი გიტარა შევარჩიო დამწყებისთვის?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </summary>
+                <div className="px-5 pb-4 text-gray-400 text-sm leading-relaxed mxedruli normal-case">
+                  დამწყებებისთვის საუკეთესო არჩევანია <strong>Yamaha C40</strong> (კლასიკური) ან <strong>Yamaha F310</strong> (აკუსტიკური). ორივე იდეალურია სწავლისთვის და შესანიშნავი ფასი აქვს. მოგვწერე და დაგეხმარებით არჩევანში!
                 </div>
-              </div>
+              </details>
+
+              <details className="bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden group">
+                <summary className="px-5 py-4 cursor-pointer text-white font-medium flex items-center justify-between hover:bg-slate-700/30 transition-colors">
+                  <span className="mxedruli normal-case">როგორ გადავიხადო?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </summary>
+                <div className="px-5 pb-4 text-gray-400 text-sm leading-relaxed mxedruli normal-case">
+                  გადახდა ხდება მხოლოდ ადგილზე, გიტარის მიღებისას. ვიღებთ ნაღდ ფულს და საბანკო გადარიცხვას.
+                </div>
+              </details>
             </div>
           </section>
 
