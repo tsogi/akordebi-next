@@ -49,13 +49,18 @@ export default function ProductDetail() {
     addToCart(product);
   };
 
+  const slides = product.images && product.images.length > 0
+    ? product.images
+    : [product.thumbnail];
+  const hasMultipleSlides = slides.length > 1;
+
   const sliderSettings = {
-    dots: true,
-    infinite: true,
+    dots: hasMultipleSlides,
+    infinite: hasMultipleSlides,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: true,
+    arrows: hasMultipleSlides,
     beforeChange: (oldIndex, newIndex) => setCurrentSlide(newIndex),
     responsive: [
       {
@@ -67,10 +72,6 @@ export default function ProductDetail() {
     ]
   };
 
-  const slides = product.images && product.images.length > 0 
-    ? product.images 
-    : [product.thumbnail];
-  
   return (
     <>
       <Head>
