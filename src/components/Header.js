@@ -25,7 +25,7 @@ export default function Header(){
             return true;
         }
         
-        if(page == "shop" && router.pathname == "/shop"){
+        if(page == "shop" && router.pathname.startsWith("/shop")){
             return true;
         }
 
@@ -80,12 +80,12 @@ export default function Header(){
                 >
                     {lang.main_page}
                 </Link>
-                <Link 
-                    href="/upload-info" 
-                    className={`nav-link ${isActive("upload") ? "active" : ""}`}
+                <Link
+                    href="/shop"
+                    className={`nav-link ${isActive("shop") ? "active" : ""}`}
                     onClick={() => setIsMenuOpen(false)}
                 >
-                    {lang.upload_nav}
+                    გიტარის მაღაზია
                 </Link>
                 {/* <Link 
                     href="/prices" 
@@ -101,6 +101,13 @@ export default function Header(){
                 >
                     {lang.teachers}
                 </Link>
+                <Link 
+                    href="/upload-info" 
+                    className={`nav-link ${isActive("upload") ? "active" : ""}`}
+                    onClick={() => setIsMenuOpen(false)}
+                >
+                    {lang.upload_nav}
+                </Link>
                 {isAuthorized && (
                     <Link 
                         href="/admin" 
@@ -110,13 +117,6 @@ export default function Header(){
                         ადმინ
                     </Link>
                 )}
-                {/* <Link 
-                    href="/shop" 
-                    onClick={() => setIsMenuOpen(false)}
-                    className={`nav-link ${isActive("shop") ? "active" : ""}`}
-                >
-                    გიტარის მაღაზია
-                </Link> */}
                 {/* <Link 
                     href={""} 
                     onClick={(e) => {

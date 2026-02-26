@@ -38,6 +38,10 @@ export default function Footer(){
             {/* <a className={styles.quickLink} href="/prices">
               {lang.prices}
             </a> */}
+            <a className={styles.quickLink} href="/shop">
+              <span className={styles.linksDivider}></span>
+              გიტარის მაღაზია
+            </a>
             <a className={styles.quickLink} href="/upload-info">
               <span className={styles.linksDivider}></span>
               {lang._footer_earn_money}
