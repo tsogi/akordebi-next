@@ -7,31 +7,24 @@ import ProductCard from '@/components/ProductCard';
 import shopProducts from '@/data/shopProducts';
 
 export default function Shop() {
-  const [timeLeft, setTimeLeft] = useState('');
   const [canDeliverToday, setCanDeliverToday] = useState(true);
 
-  // Calculate time until 6 PM cutoff for same-day delivery
+  // Check if same-day delivery is still available
   useEffect(() => {
-    const calculateTimeLeft = () => {
+    const checkSameDayDelivery = () => {
       const now = new Date();
       const cutoff = new Date();
-      cutoff.setHours(17, 0, 0, 0); // 5 PM cutoff
+      cutoff.setHours(20, 0, 0, 0); // 8 PM cutoff
       
       if (now > cutoff) {
         setCanDeliverToday(false);
-        setTimeLeft('');
         return;
       }
-      
-      const diff = cutoff - now;
-      const hours = Math.floor(diff / (1000 * 60 * 60));
-      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      setTimeLeft(`${hours}:${minutes.toString().padStart(2, '0')}`);
       setCanDeliverToday(true);
     };
 
-    calculateTimeLeft();
-    const interval = setInterval(calculateTimeLeft, 60000);
+    checkSameDayDelivery();
+    const interval = setInterval(checkSameDayDelivery, 60000);
     return () => clearInterval(interval);
   }, []);
 
@@ -59,13 +52,13 @@ export default function Shop() {
         <div className={`page_container ${styles.shopContainer}`}>
           
           {/* Same-day delivery countdown banner */}
-          {canDeliverToday && timeLeft && (
+          {canDeliverToday && (
             <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-4 py-3 rounded-xl shadow-lg mb-6 flex items-center justify-center gap-3 animate-pulse">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               <span className="font-bold text-sm md:text-base">
-                შეუკვეთე <span className="bg-white/20 px-2 py-1 rounded font-mono">{timeLeft}</span> საათში და მიიღე დღესვე საღამოს!
+                შეუკვეთე 20:00 საათამდე და მოგიტანთ დღესვე
               </span>
             </div>
           )}
@@ -87,7 +80,7 @@ export default function Shop() {
               ოფიციალური <span className="text-amber-500">Yamaha</span> გიტარები
             </h1>
             <p className="text-gray-400 text-sm md:text-base max-w-xl mx-auto">
-              მსოფლიოში #1 ბრენდი დამწყებებისთვის — საუკეთესო ფასად, უფასო მიტანით თბილისში
+              მსოფლიოში #1 ბრენდი დამწყებებისთვის — საუკეთესო ფასად
             </p>
           </div>
           
@@ -223,7 +216,7 @@ export default function Shop() {
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2C6.477 2 2 6.145 2 11.243c0 2.936 1.444 5.544 3.7 7.257v3.5l3.258-1.787c.916.252 1.885.387 2.892.387h.15c5.523 0 10-4.145 10-9.243S17.523 2 12 2zm1.076 12.429l-2.54-2.712-4.96 2.712 5.456-5.79 2.602 2.712 4.897-2.712-5.455 5.79z"/>
               </svg>
-              მოგვწერე Messenger-ზე
+              მოგვწერე
             </a>
           </section>
 
