@@ -2,7 +2,7 @@ const shopProducts = [
     {
       id: "yamaha-c40",
       name: "Yamaha C40",
-      price: "360",
+      price: "350",
       description: "დამწყებისთვის ყველაზე პოპულარული კლასიკური გიტარა - რბილი ხმა, კომფორტული დაკვრა და გამძლე კონსტრუქცია ყოველდღიური სწავლისთვის",
       thumbnail: "/images/shop/c40/1.png",
       images: [
@@ -25,7 +25,7 @@ const shopProducts = [
     {
       id: "yamaha-cg102",
       name: "Yamaha CG102",
-      price: "605",
+      price: "595",
       description: "იდეალური არჩევანი დამწყებისთვის და საშუალო დონის შემსრულებლისთვის - კომფორტული გრიფი, დაბალანსებული ჟღერადობა და Yamaha-ს სანდო ხარისხი ყოველდღიური ვარჯიშისთვის",
       thumbnail: "/images/shop/cg102/1.png",
       images: [
@@ -47,7 +47,7 @@ const shopProducts = [
     {
       id: "yamaha-cg142c",
       name: "Yamaha CG142C",
-      price: "911",
+      price: "900",
       description: "საშუალო და შედარებით გამოცდილი გიტარისტისთვის - მდიდარი და თბილი ჟღერადობა, კომფორტული დაკვრა და Yamaha-ს მაღალი ხარისხი",
       thumbnail: "/images/shop/cg142c/8.png",
       images: [
@@ -72,7 +72,7 @@ const shopProducts = [
     {
       id: "yamaha-f310tbs",
       name: "Yamaha F310",
-      price: "460",
+      price: "450",
       description: "დამწყებისთვის ყველაზე მოთხოვნადი აკუსტიკური გიტარა - მკაფიო ჟღერადობა, კომფორტული დაკვრა და Yamaha-ს სანდო ხარისხი",
       thumbnail: "/images/shop/f310tbs/1.png",
       images: [
@@ -95,7 +95,7 @@ const shopProducts = [
     {
       id: "yamaha-f370b",
       name: "Yamaha F370",
-      price: "643",
+      price: "635",
       description: "საშუალო და შედარებით გამოცდილი შემსრულებლისთვის - უფრო გამოკვეთილი ჟღერადობა, კომფორტული დაკვრა და Yamaha-ს სანდო ხარისხი",
       thumbnail: "/images/shop/f370b/1.png",
       images: [
@@ -111,6 +111,67 @@ const shopProducts = [
         { "name": "სიმები", "value": "მოყვება" },
       ],
       category: "აკუსტიკური გიტარები",
+      inStock: true
+    },
+    {
+      id: "accessory-capo",
+      name: "კაპო",
+      price: "10",
+      description: "ერთი მოძრაობით ტონალობის შეცვლა და სუფთა ჟღერადობა ყველა ლადზე - აუცილებელი აქსესუარი ყოველდღიური ვარჯიშისა და სცენისთვის",
+      thumbnail: "/images/shop/accessories/capo.png",
+      images: [
+        "/images/shop/accessories/capo.png",
+      ],
+      characteristics: [
+        { "name": "თავსებადობა", "value": "კლასიკური და აკუსტიკური გიტარა" },
+      ],
+      category: "აქსესუარები",
+      inStock: true
+    },
+    {
+      id: "accessory-gigbag",
+      name: "გიტარის ჩასადები",
+      price: "25",
+      description: "გიტარის უსაფრთხო ტრანსპორტირება ყოველდღე - რბილი შიდა დაცვა, კომფორტული ტარება და მოსახერხებელი ჯიბე აქსესუარებისთვის",
+      thumbnail: "/images/shop/accessories/shalita_front.png",
+      images: [
+        "/images/shop/accessories/shalita_front.png",
+        "/images/shop/accessories/shalita_back.png",
+      ],
+      characteristics: [
+      ],
+      category: "აქსესუარები",
+      inStock: true
+    },
+    {
+      id: "accessory-stand",
+      name: "გიტარის დასადგამი",
+      price: "25",
+      description: "გიტარა ყოველთვის უსაფრთხოდ და სწორ პოზიციაში - მყარი კონსტრუქცია, სტაბილური დაჭერა და სწრაფი გაშლა სახლში თუ სტუდიაში",
+      thumbnail: "/images/shop/accessories/stand.png",
+      images: [
+        "/images/shop/accessories/stand.png",
+      ],
+      characteristics: [
+        { "name": "ტიპი", "value": "დასაკეცი იატაკის სტენდი" },
+        { "name": "გამოყენება", "value": "სახლი, სტუდია, რეპეტიცია" },
+      ],
+      category: "აქსესუარები",
+      inStock: true
+    },
+    {
+      id: "accessory-picks",
+      name: "მედიატორი",
+      price: "1",
+      description: "უკეთესი კონტროლისთვის",
+      thumbnail: "/images/shop/accessories/mediator.png",
+      images: [
+        "/images/shop/accessories/mediator.png",
+      ],
+      characteristics: [
+        { "name": "რაოდენობა", "value": "1 ცალი" },
+      ],
+      category: "აქსესუარები",
       inStock: true
     },
   ]
