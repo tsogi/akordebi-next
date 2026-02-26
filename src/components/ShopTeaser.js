@@ -6,14 +6,17 @@ import shopProducts from '@/data/shopProducts';
 import uiDb from '@/services/data';
 
 const guitars = shopProducts.filter(p => p.category !== 'აქსესუარები' && p.inStock);
+const accessories = shopProducts.filter(p => p.category === 'აქსესუარები' && p.inStock);
 
 export default function ShopTeaser({ placement = 'unknown' }) {
   const { lang } = useLanguage();
   const t = lang.shopTeaser || {};
   const impressionLogged = useRef(false);
 
-  const featured = useMemo(() => {
-    return guitars[Math.floor(Math.random() * guitars.length)];
+  const { guitar, accs } = useMemo(() => {
+    const g = guitars[Math.floor(Math.random() * guitars.length)];
+    const shuffled = [...accessories].sort(() => Math.random() - 0.5);
+    return { guitar: g, accs: shuffled.slice(0, 2) };
   }, []);
 
   useEffect(() => {
@@ -26,8 +29,8 @@ export default function ShopTeaser({ placement = 'unknown' }) {
     uiDb.logEvent('shop_teaser_click', placement);
   }
 
-  function handleProductClick() {
-    uiDb.logEvent('shop_teaser_product_click', `${placement}:${featured.id}`);
+  function handleProductClick(productId) {
+    uiDb.logEvent('shop_teaser_product_click', `${placement}:${productId}`);
   }
 
   return (
@@ -48,45 +51,72 @@ export default function ShopTeaser({ placement = 'unknown' }) {
           {t.trustLine || 'უფასო მიტანა იმავე დღეს · ადგილზე გადახდა'}
         </p>
 
-        {/* Featured product chip + CTA */}
-        <div className="flex items-center gap-3 flex-wrap">
-          {featured && (
+        {/* Featured guitar (left) + two accessories stacked (right) */}
+        <div className="grid grid-cols-2 gap-3 mb-4">
+          {guitar && (
             <Link
-              href={`/shop/product/${featured.id}`}
-              onClick={handleProductClick}
-              className="flex items-center gap-3 bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/40 rounded-xl px-3 py-2 transition-colors group"
+              href={`/shop/product/${guitar.id}`}
+              onClick={() => handleProductClick(guitar.id)}
+              className="bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/40 rounded-xl p-3 transition-colors group"
             >
-              <div className="w-10 h-10 rounded-lg overflow-hidden bg-slate-600/50 shrink-0">
+              <div className="w-full aspect-square rounded-lg overflow-hidden bg-slate-600/30 mb-2">
                 <Image
-                  src={featured.thumbnail}
-                  alt={featured.name}
-                  width={40}
-                  height={40}
-                  className="w-full h-full object-cover"
+                  src={guitar.thumbnail}
+                  alt={guitar.name}
+                  width={200}
+                  height={200}
+                  className="w-full h-full object-contain"
                 />
               </div>
-              <div className="min-w-0">
-                <p className="text-white text-xs font-medium truncate group-hover:text-amber-400 transition-colors">
-                  {featured.name}
-                </p>
-                <p className="text-amber-500 text-xs font-bold">
-                   {featured.price} ₾
-                </p>
-              </div>
+              <p className="text-white text-sm font-medium truncate group-hover:text-amber-400 transition-colors">
+                {guitar.name}
+              </p>
+              <p className="text-amber-500 text-sm font-bold">
+                {guitar.price} ₾
+              </p>
             </Link>
           )}
-
-          <Link
-            href="/shop"
-            onClick={handleCtaClick}
-            className="inline-flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs md:text-sm font-medium px-4 py-2.5 rounded-xl transition-colors ml-auto"
-          >
-            {t.cta || 'მაღაზიაში გადასვლა'}
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-            </svg>
-          </Link>
+          <div className="flex flex-col gap-3">
+            {accs.map((acc) => (
+              <Link
+                key={acc.id}
+                href={`/shop/product/${acc.id}`}
+                onClick={() => handleProductClick(acc.id)}
+                className="flex-1 bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/40 rounded-xl p-2.5 transition-colors group flex flex-col"
+              >
+                <div className="w-full flex-1 rounded-lg overflow-hidden bg-slate-600/30 flex items-center justify-center">
+                  <Image
+                    src={acc.thumbnail}
+                    alt={acc.name}
+                    width={100}
+                    height={100}
+                    className="w-3/4 h-3/4 object-contain"
+                  />
+                </div>
+                <div className="mt-1.5">
+                  <p className="text-white text-xs font-medium truncate group-hover:text-amber-400 transition-colors">
+                    {acc.name}
+                  </p>
+                  <p className="text-amber-500 text-xs font-bold">
+                    {acc.price} ₾
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
+
+        {/* CTA */}
+        <Link
+          href="/shop"
+          onClick={handleCtaClick}
+          className="flex items-center justify-center gap-1.5 w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-3 rounded-xl transition-colors"
+        >
+          {t.cta || 'მაღაზიაში გადასვლა'}
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+          </svg>
+        </Link>
       </div>
     </section>
   );
