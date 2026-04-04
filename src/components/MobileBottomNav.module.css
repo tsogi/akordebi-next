@@ -1,0 +1,75 @@
+.nav {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .nav {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        height: 64px;
+        background: rgba(30, 41, 59, 0.97);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-top: 1px solid rgba(51, 65, 85, 0.6);
+        align-items: stretch;
+        padding: 0;
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .button {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        color: #64748b;
+        text-decoration: none;
+        transition: color 0.15s ease;
+        padding: 8px 4px;
+        position: relative;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .button:active {
+        background: rgba(59, 130, 246, 0.08);
+    }
+
+    .button.active {
+        color: #3b82f6;
+    }
+
+    .iconWrap {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+    }
+
+    .activeIndicator {
+        position: absolute;
+        bottom: -4px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: #3b82f6;
+    }
+
+    .label {
+        font-size: 10px;
+        font-weight: 600;
+        line-height: 1;
+        font-family: 'Noto Sans Georgian', sans-serif;
+    }
+}
