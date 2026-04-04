@@ -48,7 +48,10 @@ export default function SearchPage() {
 
     useEffect(() => {
         setRecentSearches(loadRecent());
-        setTimeout(() => inputRef.current?.focus(), 150);
+        // Only auto-focus on desktop — on mobile it triggers iOS zoom
+        if (window.innerWidth > 768) {
+            setTimeout(() => inputRef.current?.focus(), 150);
+        }
     }, []);
 
     const handleSearch = useCallback(async (term) => {
@@ -93,7 +96,7 @@ export default function SearchPage() {
             <div className="page_container min-h-[80vh] flex flex-col pb-24">
 
                 {/* ── Search bar ── centered vertically when empty */}
-                <div className={`w-full max-w-xl mx-auto px-4 transition-all duration-300 ${hasSearched || recentSearches.length > 0 ? 'pt-6' : 'mt-[20vh]'}`}>
+                <div className={`w-full max-w-xl mx-auto px-4 ${hasSearched || recentSearches.length > 0 ? 'pt-6' : 'mt-[120px]'}`}>
                     <p className="text-slate-400 text-sm font-semibold text-center mb-4 font-[Noto_Sans_Georgian]">
                         {lang._searchText || 'მოძებნეთ სიმღერა'}
                     </p>
@@ -105,7 +108,8 @@ export default function SearchPage() {
                             <input
                                 ref={inputRef}
                                 type="text"
-                                className="flex-1 h-12 bg-transparent text-white placeholder-slate-500 focus:outline-none text-base font-[Noto_Sans_Georgian]"
+                                className="flex-1 h-12 bg-transparent text-white placeholder-slate-500 focus:outline-none font-[Noto_Sans_Georgian]"
+                                style={{ fontSize: '16px' }}
                                 placeholder="სიმღერა, ავტორი..."
                                 value={searchText}
                                 onChange={e => setSearchText(e.target.value)}
