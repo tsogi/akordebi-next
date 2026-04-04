@@ -5,6 +5,7 @@ import Head from 'next/head';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import { useUser } from '@/utils/useUser';
+import MessengerButton from '@/components/MessengerButton';
 
 export default function UploadInfo() {
   const { user, setAuthOpenedFrom } = useUser();
@@ -169,7 +170,8 @@ export default function UploadInfo() {
                   <span className="text-amber-300 font-bold capital">1</span>
                 </div>
                 <p className="text-gray-200 leading-relaxed">
-                  პირველი რესურსის ატვირთვის შემდეგ tsogiaidze1@gmail.com-ზე უნდა მოგვწეროთ თქვენი მეილი რომლითაც შეხვედით სისტემაში რესურსის ატვირთვის წინ. ადმინისტრაცია შეამოწმებს ატვირთვის სისწორეს და მოგცემთ დასტურს გააგრძელოთ ატვირთვა.
+                  პირველი რესურსის ატვირთვის შემდეგ უნდა მოგვწეროთ მესენჯერში თქვენი მეილი რომლითაც შეხვედით სისტემაში რესურსის ატვირთვის წინ. ადმინისტრაცია შეამოწმებს ატვირთვის სისწორეს და მოგცემთ დასტურს გააგრძელოთ ატვირთვა.
+                  <MessengerButton size="sm" inline className="ml-2" />
                 </p>
               </div>
               

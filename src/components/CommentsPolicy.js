@@ -1,4 +1,5 @@
 import Header from "./Header";
+import MessengerButton from "./MessengerButton";
 
 export default function CommentsPolicy(){
     return <>
@@ -16,7 +17,7 @@ export default function CommentsPolicy(){
             <p>You can access and manage your information through your Facebook account. Please refer to Facebook's Privacy Policy for more information on how to manage your information.</p>
             <h2>5. Changes to This Policy</h2>
             <p>We reserve the right to change this privacy policy at any time. If we make any changes, we will update this page to reflect the changes.</p>
-            <p>If you have any questions or concerns about this privacy policy, please contact us at tsogiaidze1@gmail.com</p>
+            <p className="flex items-center gap-2 flex-wrap">If you have any questions or concerns about this privacy policy, please contact us: <MessengerButton text="Write Us" size="sm" inline /></p>
         </div>
     </>
 }

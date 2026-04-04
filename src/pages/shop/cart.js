@@ -20,7 +20,11 @@ export default function ShoppingCart() {
   });
   const [showErrorDialog, setShowErrorDialog] = useState(false);
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
+  const [showSuspendedDialog, setShowSuspendedDialog] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  // Set to true to enable actual order acceptance, false to show "suspended" message
+  const SHOP_ACTIVE = false;
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -58,8 +62,12 @@ export default function ShoppingCart() {
         throw new Error('Failed to submit order');
       }
       
-      // Show success message
-      setShowSuccessDialog(true);
+      // Show appropriate message based on shop status
+      if (SHOP_ACTIVE) {
+        setShowSuccessDialog(true);
+      } else {
+        setShowSuspendedDialog(true);
+      }
     } catch (error) {
       console.error('Error submitting order:', error);
       setShowErrorDialog(true);
@@ -80,6 +88,10 @@ export default function ShoppingCart() {
     });
     // Redirect to home page
     router.push('/');
+  };
+
+  const handleSuspendedDialogClose = () => {
+    setShowSuspendedDialog(false);
   };
 
   // Show loading state during hydration
@@ -288,6 +300,14 @@ export default function ShoppingCart() {
         message="თქვენი შეკვეთა მიღებულია, დაგიკავშირდებით რამდენიმე წუთში"
         type="success"
         onConfirm={handleSuccessDialogClose}
+      />
+
+      <ConfirmDialog
+        open={showSuspendedDialog}
+        setOpen={setShowSuspendedDialog}
+        message="პროდუქტების გაყიდვა დროებით შეჩერებულია. ვმუშაობთ მალე აღდგენაზე. გმადლობთ ინტერესისთვის!"
+        type="error"
+        onConfirm={handleSuspendedDialogClose}
       />
       
       <Footer />

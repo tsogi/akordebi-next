@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import Header from '@/components/Header';
 import Head from 'next/head';
 import Footer from '@/components/Footer';
+import MessengerButton from '@/components/MessengerButton';
 
 export default function PaymentFail() {
   const router = useRouter();
@@ -28,7 +29,7 @@ export default function PaymentFail() {
         <h1 className="text-2xl font-bold text-gray-800 mb-4">გადახდა ვერ შესრულდა</h1>
         <div className="text-gray-600 mb-6 mxedruli text-left">
           <p>პირველ რიგში დარწმუნდით რომ ბარათის ნომერი, მოქმედების ვადა და CVV კოდი სწორად ჩაწერეთ.</p>
-          <p>გთხოვთ სცადოთ მოგვიანებით ან დაუკავშირდეთ ადმინისტრაციას tsogiaidze1@gmail.com.</p>
+          <p className="flex items-center gap-2 flex-wrap">გთხოვთ სცადოთ მოგვიანებით ან დაუკავშირდეთ ადმინისტრაციას: <MessengerButton size="sm" inline /></p>
         </div>
         <button 
           onClick={goToHomePage}

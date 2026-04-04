@@ -1,3 +1,5 @@
+import MessengerButton from "./MessengerButton";
+
 export default function RefundsEng(){
     return <div style={{ padding: '20px' }}>
     <strong>Refund Policy for {process.env.NEXT_PUBLIC_DOMAIN}</strong>
@@ -9,7 +11,7 @@ export default function RefundsEng(){
     
     <br></br>
     <strong>How to Request a Refund</strong>
-    <p>To request a refund, please send an email from the same email address that you used to subscribe to the service. The email should be sent to: tsogiaidze1@gmail.com</p>
+    <p>To request a refund, please contact us via Messenger from the same email address that you used to subscribe to the service: <MessengerButton text="Write Us" size="sm" inline /></p>
     
     <br></br>
     <strong>Refund Process</strong>
@@ -21,6 +23,6 @@ export default function RefundsEng(){
     
     <br></br>
     <strong>Additional Questions</strong>
-    <p>If you have any additional questions about the refund policy, please contact us at: tsogiaidze1@gmail.com</p>
+    <p className="flex items-center gap-2 flex-wrap">If you have any additional questions about the refund policy, please contact us: <MessengerButton text="Write Us" size="sm" inline /></p>
   </div> 
 } 

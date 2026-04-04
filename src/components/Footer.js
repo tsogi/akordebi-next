@@ -5,6 +5,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useShoppingCart } from '@/context/ShoppingCartContext';
 import Link from "next/link";
 import { useRouter } from 'next/router';
+import MessengerButton from "./MessengerButton";
 
 export default function Footer(){
   const { lang } = useLanguage();
@@ -93,7 +94,7 @@ export default function Footer(){
           </div>
           <div className={`${styles.feedback}`}>
             <div className="mt-12 text-center text-[#a09898] text-[0.8rem]">
-              <p>{lang.price.questions} <a href="mailto:tsogiaidze1@gmail.com" className="text-blue-600 hover:underline">{lang.price.contact_us}</a></p>
+              <p className="flex items-center justify-center gap-2">{lang.price.questions} <MessengerButton text={lang.price.contact_us} size="sm" inline /></p>
             </div>
             {/* <WriteUs /> */}
           </div>

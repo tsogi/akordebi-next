@@ -1,4 +1,6 @@
-export default function PrivacyGeo(){
+import MessengerButton from "./MessengerButton";
+
+export default function PrivacyEng(){
     return <div style={{ padding: '20px' }}>
       <h1>Privacy Policy for {process.env.NEXT_PUBLIC_DOMAIN}</h1>
       <p><strong>Last Updated:</strong> 30 Apr 2025</p>
@@ -46,7 +48,7 @@ export default function PrivacyGeo(){
         <strong>Contact Us</strong>
         <p>If you have any questions about this Privacy Policy, You can contact us:</p>
         <ul>
-          <li>By email: tsogiaidze1@gmail.com</li>
+          <li className="flex items-center gap-2">Via Messenger: <MessengerButton text="Write Us" size="sm" inline /></li>
         </ul>
       </section>
     </div>

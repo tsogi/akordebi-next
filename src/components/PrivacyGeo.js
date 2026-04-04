@@ -1,3 +1,5 @@
+import MessengerButton from "./MessengerButton";
+
 export default function PrivacyGeo(){
     return <div style={{ padding: '20px' }}>
     <h1 style={{ marginBottom: "5px" }}>კონფიდენციალურობის პოლიტიკა {process.env.NEXT_PUBLIC_DOMAIN}-სთვის</h1>
@@ -46,7 +48,7 @@ export default function PrivacyGeo(){
       <strong>დაგვიკავშირდით</strong>
       <p>თუ თქვენ გაქვთ რაიმე შეკითხვები ამ კონფიდენციალურობის პოლიტიკასთან დაკავშირებით, შეგიძლიათ დაგვიკავშირდეთ:</p>
       <ul>
-        <li>ელფოსტით: tsogiaidze1@gmail.com</li>
+        <li className="flex items-center gap-2">მესენჯერით: <MessengerButton size="sm" inline /></li>
       </ul>
     </section>
   </div>

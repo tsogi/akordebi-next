@@ -7,8 +7,8 @@ WORKDIR /usr/src/app
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install
+# Install production dependencies only (skip devDependencies like better-sqlite3)
+RUN npm install --omit=dev
 
 # Bundle app source inside the Docker image
 COPY . .

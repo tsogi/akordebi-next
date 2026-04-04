@@ -1,3 +1,5 @@
+import MessengerButton from "./MessengerButton";
+
 export default function RefundsGeo(){
     return <div style={{ padding: '20px' }}>
     <strong>დაბრუნების პოლიტიკა {process.env.NEXT_PUBLIC_DOMAIN}-სთვის</strong>
@@ -9,7 +11,7 @@ export default function RefundsGeo(){
     
     <br></br>
     <strong>როგორ მოვითხოვოთ თანხის დაბრუნება</strong>
-    <p className="mxedruli">თანხის დაბრუნების მოთხოვნისთვის, გთხოვთ გამოაგზავნოთ წერილი იმავე ელექტრონული ფოსტის მისამართიდან, რომელიც გამოიყენეთ სერვისის გამოწერისას. წერილი უნდა გაიგზავნოს შემდეგ მისამართზე: tsogiaidze1@gmail.com</p>
+    <p className="mxedruli">თანხის დაბრუნების მოთხოვნისთვის, გთხოვთ მოგვწეროთ მესენჯერზე იმავე ელექტრონული ფოსტის მისამართიდან, რომელიც გამოიყენეთ სერვისის გამოწერისას: <MessengerButton size="sm" inline /></p>
     
     <br></br>
     <strong>თანხის დაბრუნების პროცესი</strong>
@@ -21,6 +23,6 @@ export default function RefundsGeo(){
     
     <br></br>
     <strong>დამატებითი კითხვები</strong>
-    <p className="mxedruli">თუ გაქვთ დამატებითი კითხვები დაბრუნების პოლიტიკასთან დაკავშირებით, გთხოვთ დაგვიკავშირდეთ შემდეგ მისამართზე: tsogiaidze1@gmail.com</p>
+    <p className="mxedruli flex items-center gap-2 flex-wrap">თუ გაქვთ დამატებითი კითხვები დაბრუნების პოლიტიკასთან დაკავშირებით, გთხოვთ დაგვიკავშირდეთ: <MessengerButton size="sm" inline /></p>
   </div> 
 } 

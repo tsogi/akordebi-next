@@ -4,9 +4,32 @@ import Head from "next/head";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useLanguage } from '@/context/LanguageContext';
+import { useState, useEffect } from 'react';
+import ConfirmDialog from '@/components/ConfirmDialog';
+import { useRouter } from 'next/router';
 
 export default function CreateSong(){
     const { lang } = useLanguage();
+    const router = useRouter();
+    const [isMobile, setIsMobile] = useState(false);
+    const [showMobileWarning, setShowMobileWarning] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            const mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
+                || window.innerWidth < 768;
+            setIsMobile(mobile);
+            if (mobile) {
+                setShowMobileWarning(true);
+            }
+        };
+        checkMobile();
+    }, []);
+
+    const handleMobileWarningClose = () => {
+        setShowMobileWarning(false);
+        router.push('/');
+    };
 
     return <>
         <Head>
@@ -16,14 +39,33 @@ export default function CreateSong(){
             <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         </Head>
         <Header />
-        <div className={`${styles.createSongPage} mxedruli page_container`}>
-            <div className={styles.uploadLabel}>{lang.upload.publish}<a className="text-[#f2ac2b] underline" href="#videoInstruction">{lang.upload.video_Instructions}</a></div>
-            {/* <div className={styles.uploadLabel2}>{lang.upload.publish2}<a target="_blank" className="text-[#f2ac2b] underline" href="https://www.canva.com/design/DAF53EzSRJA/jrIBZWmCneGThXPXUInqNA/edit?utm_content=DAF53EzSRJA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton">{lang.upload.earn_terms}</a></div> */}
-            <SongCreator  />
-            <div id="videoInstruction" className={styles.videoInstruction}>
-                 <iframe width="100%" height="500px" src={getYoutubeSrc()} title={lang.upload.video_ifream_title} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        
+        {isMobile ? (
+            <div className={`${styles.createSongPage} mxedruli page_container`}>
+                <div className="text-center py-12">
+                    <h1 className="text-xl font-bold text-gray-100 mb-4">რესურსების ატვირთვა მობილურიდან შეუძლებელია</h1>
+                    <p className="text-gray-400">გთხოვთ გამოიყენოთ კომპიუტერი</p>
+                </div>
             </div>
-        </div>
+        ) : (
+            <div className={`${styles.createSongPage} mxedruli page_container`}>
+                <div className={styles.uploadLabel}>{lang.upload.publish}<a className="text-[#f2ac2b] underline" href="#videoInstruction">{lang.upload.video_Instructions}</a></div>
+                {/* <div className={styles.uploadLabel2}>{lang.upload.publish2}<a target="_blank" className="text-[#f2ac2b] underline" href="https://www.canva.com/design/DAF53EzSRJA/jrIBZWmCneGThXPXUInqNA/edit?utm_content=DAF53EzSRJA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton">{lang.upload.earn_terms}</a></div> */}
+                <SongCreator  />
+                <div id="videoInstruction" className={styles.videoInstruction}>
+                     <iframe width="100%" height="500px" src={getYoutubeSrc()} title={lang.upload.video_ifream_title} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+        )}
+        
+        <ConfirmDialog
+            open={showMobileWarning}
+            setOpen={setShowMobileWarning}
+            message="რესურსების ატვირთვა შესაძლებელია მხოლოდ კომპიუტერიდან. გთხოვთ შეხვიდეთ საიტზე კომპიუტერის გამოყენებით."
+            type="error"
+            onConfirm={handleMobileWarningClose}
+        />
+        
         <Footer />
     </>
 }

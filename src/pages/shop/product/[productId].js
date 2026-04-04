@@ -15,6 +15,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import Zoom from 'yet-another-react-lightbox/plugins/zoom';
 import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
 import 'yet-another-react-lightbox/plugins/thumbnails.css';
+import MessengerButton from '@/components/MessengerButton';
 
 export function getStaticPaths() {
   const paths = shopProducts.map(product => ({
@@ -370,12 +371,7 @@ export default function ProductDetail({ product }) {
             <p className="text-gray-400 mb-6 max-w-2xl mx-auto">
               მოგვწერე ნებისმიერ დროს და სიამოვნებით გიპასუხებთ!
             </p>
-            <a href="https://m.me/61587416465705" target="_blank" rel="noopener noreferrer" className="inline-flex bg-[#0084FF] hover:bg-[#0073E6] text-white font-bold py-3 px-8 rounded-xl transition-colors items-center gap-2 text-lg">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C6.477 2 2 6.145 2 11.243c0 2.936 1.444 5.544 3.7 7.257v3.5l3.258-1.787c.916.252 1.885.387 2.892.387h.15c5.523 0 10-4.145 10-9.243S17.523 2 12 2zm1.076 12.429l-2.54-2.712-4.96 2.712 5.456-5.79 2.602 2.712 4.897-2.712-5.455 5.79z"/>
-              </svg>
-              მოგვწერე
-            </a>
+            <MessengerButton size="lg" inline className="font-bold" />
           </section>
 
         </div>
