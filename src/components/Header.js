@@ -11,7 +11,7 @@ import { ArrowRightOnRectangleIcon } from '@heroicons/react/20/solid';
 import { useLanguage } from '@/context/LanguageContext';
 
 export default function Header(){
-    const { user, setAuthOpenedFrom } = useUser();
+    const { user, setAuthOpenedFrom, isPremium } = useUser();
     const router = useRouter();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { lang, toggleLanguage, language } = useLanguage();
@@ -94,8 +94,18 @@ export default function Header(){
                 >
                     {lang.prices || "ფასები"}
                 </Link> */}
-                <Link 
-                    href="/teachers" 
+                {!isPremium && (
+                    <Link
+                        href="/remove-ads"
+                        className={`nav-link ${router.pathname === '/remove-ads' ? 'active' : ''}`}
+                        onClick={() => setIsMenuOpen(false)}
+                        style={{ color: '#60a5fa' }}
+                    >
+                        რეკლამის გათიშვა
+                    </Link>
+                )}
+                <Link
+                    href="/teachers"
                     className={`nav-link ${isActive("teachers") ? "active" : ""}`}
                     onClick={() => setIsMenuOpen(false)}
                 >

@@ -45,7 +45,7 @@ export default function PaymentSuccess() {
         </div>
         <h1 className="text-2xl font-bold text-gray-800 mb-4">გადახდა წარმატებით დასრულდა!</h1>
         <p className="text-gray-600 mb-6 mxedruli">
-          გმადლობთ გამოწერისთვის. ახლა უკვე შეგიძლიათ ისარგებლოთ ყველა ჩვენი სერვისით სრულად.
+          გმადლობთ გამოწერისთვის. ახლა უკვე შეგიძლიათ ისარგებლოთ ყველა ჩვენი სერვისით სრულად ყოველგვარი რეკლამის გარეშე.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
           {returnUrl && (
