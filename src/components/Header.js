@@ -80,14 +80,14 @@ export default function Header(){
                 >
                     {lang.main_page}
                 </Link>
-                <Link
+                {/* <Link
                     href="/shop"
                     className={`nav-link ${isActive("shop") ? "active" : ""}`}
                     onClick={() => setIsMenuOpen(false)}
                 >
                     გიტარის მაღაზია
-                </Link>
-                {/* <Link 
+                </Link> */}
+                {/* <Link
                     href="/prices" 
                     className={`nav-link ${isActive("prices") ? "active" : ""}`}
                     onClick={() => setIsMenuOpen(false)}

@@ -2,14 +2,14 @@ import styles from "./Footer.module.css";
 import { useEffect } from "react";
 import WriteUs from "./WriteUs";
 import { useLanguage } from '@/context/LanguageContext';
-import { useShoppingCart } from '@/context/ShoppingCartContext';
+// import { useShoppingCart } from '@/context/ShoppingCartContext';
 import Link from "next/link";
 import { useRouter } from 'next/router';
 import MessengerButton from "./MessengerButton";
 
 export default function Footer(){
   const { lang } = useLanguage();
-  const { getTotalItems, getTotalPrice, isMounted } = useShoppingCart();
+  // const { getTotalItems, getTotalPrice, isMounted } = useShoppingCart();
   const router = useRouter();
 
   useEffect(() => {
@@ -27,9 +27,9 @@ export default function Footer(){
     }
   }, []);
 
-  const totalItems = getTotalItems();
-  const totalPrice = getTotalPrice();
-  const isCartPage = router.pathname === '/shop/cart';
+  // const totalItems = getTotalItems();
+  // const totalPrice = getTotalPrice();
+  // const isCartPage = router.pathname === '/shop/cart';
 
   return <footer className={styles.footerWrapper}>
     <div className={`${styles.topGeWrapper} page_container flex flex-col items-center`}>
@@ -39,10 +39,10 @@ export default function Footer(){
             {/* <a className={styles.quickLink} href="/prices">
               {lang.prices}
             </a> */}
-            <a className={styles.quickLink} href="/shop">
+            {/* <a className={styles.quickLink} href="/shop">
               <span className={styles.linksDivider}></span>
               გიტარის მაღაზია
-            </a>
+            </a> */}
             <a className={styles.quickLink} href="/upload-info">
               <span className={styles.linksDivider}></span>
               {lang._footer_earn_money}
@@ -102,7 +102,8 @@ export default function Footer(){
           </div>
         </div>
       </div>
-      {isMounted && totalItems > 0 && !isCartPage && (
+      {/* Cart badge hidden while shop is not active */}
+      {/* {isMounted && totalItems > 0 && !isCartPage && (
         <Link href="/shop/cart"
           className="fixed left-0 right-0 bottom-4 mx-auto w-[95vw] max-w-md z-50 px-0 flex justify-center"
           style={{ pointerEvents: 'auto' }}
@@ -118,7 +119,7 @@ export default function Footer(){
             <span className="font-bold text-lg">{totalPrice}₾</span>
           </div>
         </Link>
-      )}
+      )} */}
       {topGeJsx()}
       {/* <div className="donationWrapper capital mt-[20px]">
         <a href="/donation" class="justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 flex items-center gap-2 rounded-md px-4 py-2 bg-red-500 text-white hover:bg-red-600">

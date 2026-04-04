@@ -29,7 +29,7 @@ import EditSongButton from '@/components/EditSongButton';
 import { transposeChord } from '@/components/TonalityControl';
 import TonalityControl from '@/components/TonalityControl';
 import KaraokePlayer from '@/components/KaraokePlayer';
-import ShopTeaser from '@/components/ShopTeaser';
+// import ShopTeaser from '@/components/ShopTeaser';
 let intervalId;
 
 export default function SongPage({ song, relatedSongs }){
@@ -413,9 +413,10 @@ export default function SongPage({ song, relatedSongs }){
                     )
                 } 
             </main>
-            {process.env.NEXT_PUBLIC_DOMAIN === "akordebi.ge" && (
+            {/* Shop teaser hidden while shop is not active */}
+            {/* {process.env.NEXT_PUBLIC_DOMAIN === "akordebi.ge" && (
                 <ShopTeaser placement="chord_detail" />
-            )}
+            )} */}
             <div className={styles.postSongArea}>
                 <div className={styles.songVotesWrapper}>
                     <div>
