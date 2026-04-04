@@ -51,30 +51,12 @@ export default function MobileBottomNav() {
     const router = useRouter();
 
     const isHome = router.pathname === '/';
+    const isSearch = router.pathname === '/search';
     const isProfile = router.pathname === '/profile';
 
     function handleBack(e) {
         e.preventDefault();
         router.back();
-    }
-
-    function handleSearch(e) {
-        e.preventDefault();
-        if (router.pathname !== '/') {
-            router.push('/').then(() => {
-                setTimeout(() => focusSearch(), 300);
-            });
-        } else {
-            focusSearch();
-        }
-    }
-
-    function focusSearch() {
-        const input = document.querySelector('input[type="text"], input[type="search"]');
-        if (input) {
-            input.focus();
-            input.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
     }
 
     return (
@@ -94,12 +76,13 @@ export default function MobileBottomNav() {
                 <span className={styles.label}>მთავარი</span>
             </Link>
 
-            <button className={styles.button} onClick={handleSearch} aria-label="ძებნა">
+            <Link href="/search" className={`${styles.button} ${isSearch ? styles.active : ''}`} aria-label="ძებნა">
                 <span className={styles.iconWrap}>
-                    <SearchIcon />
+                    <SearchIcon filled={isSearch} />
+                    {isSearch && <span className={styles.activeIndicator} />}
                 </span>
                 <span className={styles.label}>ძებნა</span>
-            </button>
+            </Link>
 
             <Link href="/profile" className={`${styles.button} ${isProfile ? styles.active : ''}`} aria-label="პროფილი">
                 <span className={styles.iconWrap}>
