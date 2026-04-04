@@ -6,11 +6,9 @@ import { useLanguage } from '@/context/LanguageContext';
 import Link from "next/link";
 import { useRouter } from 'next/router';
 import MessengerButton from "./MessengerButton";
-import { useUser } from '@/utils/useUser';
 
 export default function Footer(){
   const { lang } = useLanguage();
-  const { isPremium } = useUser();
   // const { getTotalItems, getTotalPrice, isMounted } = useShoppingCart();
   const router = useRouter();
 
@@ -94,17 +92,6 @@ export default function Footer(){
               {lang._footer_add_song}
             </a>
           </div>
-          {/* Remove Ads CTA — mobile only, non-premium only */}
-          {!isPremium && (
-            <div className={`${styles.removeAdsBanner} md:hidden`}>
-              <Link href="/remove-ads" className={styles.removeAdsBtn}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10" /><line x1="4.93" y1="4.93" x2="19.07" y2="19.07" />
-                </svg>
-                რეკლამის გათიშვა · 3₾/თვეში
-              </Link>
-            </div>
-          )}
           <div className={`${styles.feedback}`}>
             <div className="mt-12 text-center text-[#a09898] text-[0.8rem]">
               <p className="flex items-center justify-center gap-2">{lang.price.questions} <MessengerButton text={lang.price.contact_us} size="sm" inline /></p>

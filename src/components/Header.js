@@ -94,16 +94,6 @@ export default function Header(){
                 >
                     {lang.prices || "ფასები"}
                 </Link> */}
-                {!isPremium && (
-                    <Link
-                        href="/remove-ads"
-                        className={`nav-link ${router.pathname === '/remove-ads' ? 'active' : ''}`}
-                        onClick={() => setIsMenuOpen(false)}
-                        style={{ color: '#60a5fa' }}
-                    >
-                        რეკლამის გათიშვა
-                    </Link>
-                )}
                 <Link
                     href="/teachers"
                     className={`nav-link ${isActive("teachers") ? "active" : ""}`}
