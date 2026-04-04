@@ -85,6 +85,7 @@ export default function SearchPage() {
         <>
             <Head>
                 <title>ძებნა · akordebi.ge</title>
+                <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
             </Head>
 
             <Header />
@@ -104,7 +105,7 @@ export default function SearchPage() {
                             <input
                                 ref={inputRef}
                                 type="text"
-                                className="flex-1 h-12 bg-transparent text-white placeholder-slate-500 focus:outline-none text-sm font-[Noto_Sans_Georgian]"
+                                className="flex-1 h-12 bg-transparent text-white placeholder-slate-500 focus:outline-none text-base font-[Noto_Sans_Georgian]"
                                 placeholder="სიმღერა, ავტორი..."
                                 value={searchText}
                                 onChange={e => setSearchText(e.target.value)}
