@@ -1,32 +1,64 @@
-import Script from 'next/script';
+import { useEffect } from 'react';
 import { useUser } from '@/utils/useUser';
 
+const SW_AD_SCOPE = '/';
+
+async function unregisterAdServiceWorkers() {
+    if (!('serviceWorker' in navigator)) return;
+    try {
+        const registrations = await navigator.serviceWorker.getRegistrations();
+        for (const reg of registrations) {
+            const swUrl = reg.active?.scriptURL || reg.installing?.scriptURL || reg.waiting?.scriptURL || '';
+            if (swUrl.includes('3nbf4') || swUrl.includes('sw.js') || swUrl.includes('monetag')) {
+                await reg.unregister();
+            }
+        }
+    } catch {}
+}
+
+function removeAdScripts() {
+    ['monetag-inpage', 'monetag-vignette'].forEach(id => {
+        document.getElementById(id)?.remove();
+    });
+    document.querySelectorAll('script[src*="nap5k.com"], script[src*="n6wxm.com"], script[src*="3nbf4.com"]').forEach(el => el.remove());
+}
+
+function injectAdScripts() {
+    if (document.getElementById('monetag-inpage')) return;
+
+    const s1 = document.createElement('script');
+    s1.id = 'monetag-inpage';
+    s1.dataset.zone = '10830371';
+    s1.src = 'https://nap5k.com/tag.min.js';
+    document.body.appendChild(s1);
+
+    const s2 = document.createElement('script');
+    s2.id = 'monetag-vignette';
+    s2.dataset.zone = '10830377';
+    s2.src = 'https://n6wxm.com/vignette.min.js';
+    document.body.appendChild(s2);
+}
+
+function registerAdServiceWorker() {
+    if (!('serviceWorker' in navigator)) return;
+    navigator.serviceWorker.register('/sw.js', { scope: SW_AD_SCOPE }).catch(() => {});
+}
+
 export default function Monetag() {
-    const { isPremium, isLoading } = useUser();
+    const { isPremium, hasResolved } = useUser();
 
+    useEffect(() => {
+        // Only act once user status is fully resolved (one-way latch — never fires during race window)
+        if (!hasResolved) return;
 
-    // Wait until user status is resolved, then hide for premium users
-    if (isLoading) return null;
-    if (isPremium) return null;
+        if (isPremium) {
+            removeAdScripts();
+            unregisterAdServiceWorkers();
+        } else {
+            injectAdScripts();
+            registerAdServiceWorker();
+        }
+    }, [hasResolved, isPremium]);
 
-    return (
-        <>
-            {/* In-Page Push */}
-            <Script
-                id="monetag-inpage"
-                strategy="afterInteractive"
-                dangerouslySetInnerHTML={{
-                    __html: `(function(s){s.dataset.zone='10830371',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`,
-                }}
-            />
-            {/* Vignette */}
-            <Script
-                id="monetag-vignette"
-                strategy="afterInteractive"
-                dangerouslySetInnerHTML={{
-                    __html: `(function(s){s.dataset.zone='10830377',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`,
-                }}
-            />
-        </>
-    );
+    return null;
 }

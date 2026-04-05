@@ -10,6 +10,7 @@ export const MyUserContextProvider = ({ children }) => {
   const supabaseUser = useSupaUser();
   const accessToken = session?.access_token ?? null;
   const [isLoadingData, setIsloadingData] = useState(false);
+  const [hasResolved, setHasResolved] = useState(false);
   const [user, setUser] = useState(null);
   const [authOpenedFrom, setAuthOpenedFrom] = useState(null);
   const [isPremium, setIsPremium] = useState(false);
@@ -47,9 +48,11 @@ export const MyUserContextProvider = ({ children }) => {
         setIsloadingData(true);
         await refreshUser();
         setIsloadingData(false);
+        setHasResolved(true);
       } else if (!supabaseUser && !isLoadingUser && !isLoadingData) {
         setUser(null);
         setIsPremium(false);
+        setHasResolved(true);
       }
     };
 
@@ -66,6 +69,7 @@ export const MyUserContextProvider = ({ children }) => {
     accessToken,
     user,
     isLoading: isLoadingUser || isLoadingData,
+    hasResolved,
     authOpenedFrom,
     setAuthOpenedFrom,
     isPremium,

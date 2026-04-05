@@ -256,7 +256,7 @@ export default function ChordsList({ initialSongs }){
             onNotationFormatChange={handleNotationFormatChange}
         />
 
-        {!isPremium && (
+        {/* {!isPremium (
             <a
                 href="/remove-ads"
                 className="flex items-center justify-between gap-3 mx-[10px] mt-3 mb-1 px-4 py-2.5 bg-blue-500/8 border border-blue-500/20 rounded-xl hover:bg-blue-500/15 hover:border-blue-500/35 transition-all group"
@@ -269,7 +269,7 @@ export default function ChordsList({ initialSongs }){
                 </div>
                 <span className="text-blue-500/70 text-xs font-bold mxedruli whitespace-nowrap">3₾ / თვეში →</span>
             </a>
-        )}
+        )} */}
 
         <main className={"songsList"}>
             {
