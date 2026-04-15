@@ -256,21 +256,6 @@ export default function ChordsList({ initialSongs }){
             onNotationFormatChange={handleNotationFormatChange}
         />
 
-        {!isPremium && (
-            <a
-                href="/remove-ads"
-                className="flex items-center justify-between gap-3 mx-[10px] mt-3 mb-1 px-4 py-2.5 bg-blue-500/8 border border-blue-500/20 rounded-xl hover:bg-blue-500/15 hover:border-blue-500/35 transition-all group"
-            >
-                <div className="flex items-center gap-2.5">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0">
-                        <circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/>
-                    </svg>
-                    <span className="text-blue-400 text-sm font-semibold mxedruli">რეკლამების გათიშვა</span>
-                </div>
-                <span className="text-blue-500/70 text-xs font-bold mxedruli whitespace-nowrap">3₾ / თვეში →</span>
-            </a>
-        )}
-
         <main className={"songsList"}>
             {
                 displayedSongs.map(song => {

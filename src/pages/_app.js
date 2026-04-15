@@ -10,7 +10,6 @@ import TeachersNews from '@/components/TeachersNews';
 import { LanguageProvider } from '@/context/LanguageContext';
 import GoogleAdSense from '@/components/GoogleAdSense';
 import { ShoppingCartProvider } from '@/context/ShoppingCartContext';
-import Monetag from '@/components/Monetag';
 import MobileBottomNav from '@/components/MobileBottomNav';
 
 export default function App({ Component, pageProps }) {
@@ -40,7 +39,6 @@ export default function App({ Component, pageProps }) {
             )}
           </NewsModal> */}
           <GoogleAdSense />
-          <Monetag />
           <MobileBottomNav />
         </LanguageProvider>
       </MyUserContextProvider>
