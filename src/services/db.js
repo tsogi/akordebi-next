@@ -93,6 +93,34 @@ class Db{
         return userDetails;
     }
 
+    async createUser(user){
+        const { id, email, full_name } = user;
+
+        await this.pool.execute(
+            `INSERT INTO users (id, email, full_name) VALUES (?, ?, ?)`,
+            [id, email ?? null, full_name ?? null]
+        );
+
+        return this.getUserByID(id);
+    }
+
+    async getAppleUserBySub(appleSub){
+        const [rows] = await this.pool.execute(
+            `SELECT * FROM apple_users WHERE apple_sub = ?`,
+            [appleSub]
+        );
+
+        return rows.length ? rows[0] : null;
+    }
+
+    async linkAppleUser({ userId, appleSub, email, isPrivateEmail, fullName }){
+        await this.pool.execute(
+            `INSERT INTO apple_users (user_id, apple_sub, email, is_private_email, full_name)
+             VALUES (?, ?, ?, ?, ?)`,
+            [userId, appleSub, email ?? null, isPrivateEmail ? 1 : 0, fullName ?? null]
+        );
+    }
+
     async addSongToFavorites(songId, userId){
         const [rows,fields] = await this.pool.execute(`
             insert into favorite_songs (song_id, user_id)
