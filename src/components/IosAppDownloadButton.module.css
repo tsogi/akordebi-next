@@ -1,0 +1,13 @@
+.badgeLink {
+  display: inline-block;
+  /* Clear space around the official badge (Apple guidelines). */
+  margin: 0 0 20px;
+  line-height: 0;
+  text-decoration: none;
+}
+
+.badge {
+  display: block;
+  width: 148px;
+  height: auto;
+}

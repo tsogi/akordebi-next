@@ -6,6 +6,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import Link from "next/link";
 import { useRouter } from 'next/router';
 import MessengerButton from "./MessengerButton";
+import IosAppDownloadButton from "./IosAppDownloadButton";
 
 export default function Footer(){
   const { lang } = useLanguage();
@@ -35,6 +36,7 @@ export default function Footer(){
     <div className={`${styles.topGeWrapper} page_container flex flex-col items-center`}>
       <div className="w-[100%] flex items-center px-[10px] flex-wrap">
         <div className={styles.linksAndCopyright}>
+          <IosAppDownloadButton />
           <div className={`${styles.quickLinks} text-[#98b9fa] text-[0.8rem] flex flex-wrap items-center mb-[10px]`}>
             {/* <a className={styles.quickLink} href="/prices">
               {lang.prices}

@@ -1,71 +1,50 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/router';
 import styles from './SmartAppBanner.module.css';
+import { APP_STORE_URL, isIosDevice, isStandalone, isTestingMode } from '@/utils/iosApp';
 
-const APP_STORE_URL = 'https://apps.apple.com/app/id6776807977';
-const STORAGE_KEY = 'ios_app_banner_dismissed';
+const COUNT_KEY = 'ios_app_banner_pageviews';
+const SHOW_EVERY = 4; // show on the first page view, then every 4th after
 const LOGO_SRC = '/akordebige_logo.svg';
-
-function todayKey() {
-  return new Date().toISOString().slice(0, 10); // YYYY-MM-DD
-}
-
-function isIosDevice() {
-  if (typeof navigator === 'undefined') return false;
-  const ua = navigator.userAgent || '';
-  const iOS = /iPad|iPhone|iPod/.test(ua);
-  // iPadOS 13+ reports as MacIntel but is touch-capable
-  const iPadOS = navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
-  return iOS || iPadOS;
-}
-
-function isStandalone() {
-  // Already added to home screen — don't promote the app.
-  if (typeof window === 'undefined') return false;
-  return (
-    window.navigator.standalone === true ||
-    (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches)
-  );
-}
 
 export default function SmartAppBanner() {
   // Start hidden so SSR and first client render match (avoids hydration mismatch).
   const [visible, setVisible] = useState(false);
+  const router = useRouter();
+  // Last path we counted, so a single page view is never counted twice — guards
+  // against React Strict Mode's double-invoked effects and any re-render that
+  // doesn't actually change the page.
+  const lastCountedPath = useRef(null);
 
+  // Runs on initial load and again whenever the path changes (any client-side
+  // navigation), since this component lives in _app and re-renders on route
+  // changes. Each distinct page view is counted exactly once.
   useEffect(() => {
-    // Dev/QA override: ?testing=1 forces the banner on any device, ignoring
-    // the iOS check and the once-per-day suppression. No effect for real users.
-    const isTesting = new URLSearchParams(window.location.search).get('testing') === '1';
-
-    if (isTesting) {
+    // Dev/QA override: ?testing=1 forces the banner on. No effect for real users.
+    if (isTestingMode()) {
       setVisible(true);
       return;
     }
 
     if (!isIosDevice() || isStandalone()) return;
 
-    let dismissedOn = null;
+    const path = router.asPath;
+    if (path === lastCountedPath.current) return;
+    lastCountedPath.current = path;
+
+    let count;
     try {
-      dismissedOn = window.localStorage.getItem(STORAGE_KEY);
+      count = (parseInt(window.localStorage.getItem(COUNT_KEY), 10) || 0) + 1;
+      window.localStorage.setItem(COUNT_KEY, String(count));
     } catch {
-      // localStorage may be unavailable (private mode); fail open and show.
+      // localStorage unavailable (private mode); never show.
+      return;
     }
-
-    // "Once per day": suppress only if dismissed earlier today.
-    if (dismissedOn === todayKey()) return;
-
-    setVisible(true);
-  }, []);
-
-  function recordDismiss() {
-    try {
-      window.localStorage.setItem(STORAGE_KEY, todayKey());
-    } catch {
-      // ignore
-    }
-  }
+    // count 1, 5, 9, … → first visit, then every 4th page view.
+    setVisible(count % SHOW_EVERY === 1);
+  }, [router.asPath]);
 
   function dismiss() {
-    recordDismiss();
     setVisible(false);
   }
 
@@ -96,7 +75,7 @@ export default function SmartAppBanner() {
         href={APP_STORE_URL}
         target="_blank"
         rel="noopener noreferrer"
-        onClick={recordDismiss}
+        onClick={dismiss}
       >
         ნახვა App Store-ში
       </a>
