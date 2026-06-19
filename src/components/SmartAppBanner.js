@@ -11,12 +11,15 @@ export default function SmartAppBanner() {
   // Start hidden so SSR and first client render match (avoids hydration mismatch).
   const [visible, setVisible] = useState(false);
   const router = useRouter();
-  // Last path we counted, so a single page view is never counted twice — guards
-  // against React Strict Mode's double-invoked effects and any re-render that
-  // doesn't actually change the page.
+  // The page path WITHOUT query/hash. We key page views off this so that
+  // in-page URL updates — e.g. filter state on the homepage or tonality on a
+  // chord page (router.replace with new query) — are NOT counted as new views.
+  const pagePath = router.asPath.split('?')[0].split('#')[0];
+  // Last path we counted, so a single page view is never counted twice (guards
+  // against React Strict Mode's double-invoked effects in dev too).
   const lastCountedPath = useRef(null);
 
-  // Runs on initial load and again whenever the path changes (any client-side
+  // Runs on initial load and again whenever the page path changes (a real
   // navigation), since this component lives in _app and re-renders on route
   // changes. Each distinct page view is counted exactly once.
   useEffect(() => {
@@ -28,9 +31,8 @@ export default function SmartAppBanner() {
 
     if (!isIosDevice() || isStandalone()) return;
 
-    const path = router.asPath;
-    if (path === lastCountedPath.current) return;
-    lastCountedPath.current = path;
+    if (pagePath === lastCountedPath.current) return;
+    lastCountedPath.current = pagePath;
 
     let count;
     try {
@@ -42,7 +44,7 @@ export default function SmartAppBanner() {
     }
     // count 1, 5, 9, … → first visit, then every 4th page view.
     setVisible(count % SHOW_EVERY === 1);
-  }, [router.asPath]);
+  }, [pagePath]);
 
   function dismiss() {
     setVisible(false);
